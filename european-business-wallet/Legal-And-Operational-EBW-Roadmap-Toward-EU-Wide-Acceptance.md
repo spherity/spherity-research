@@ -2,6 +2,8 @@
 
 **Authors:** Dr. Carsten Stöcker (CEO Spherity GmbH), Ricky Thiermann (Head of Products Spherity GmbH) 
 
+**Key Words:** European Business Wallet, EBW, eIDAS 2.0, Legal Person Identity, Verifiable Credentials, Qualified Attributes, B2G Access, Data Spaces, KYC, KYB, KYS, Trusted AI, Digital Product Passport (DPP), Supply Chain Compliance, eSeals, Trusted Infrastructure, ARF, EBW-Ready, Fast-Track Adoption, EU Digital Identity, EBW Regulation, Qualified Attestation, Conformity Assessment, eGovernment Interoperability, Business Case, Roadmap
+
 ### Abstract
 
 The [European Business Wallet (EBW)](https://digital-strategy.ec.europa.eu/en/policies/business-wallets), proposed by the [European Commission on 19 November 2025 (COM(2025) 838)](https://digital-strategy.ec.europa.eu/en/library/proposal-regulation-establishment-european-business-wallets), is a key element of the EU’s digital trust infrastructure under eIDAS 2.0. It introduces a secure and standardised wallet for legal persons, enabling trusted identification, authentication, qualified signatures and seals, and access to digital services across borders.
