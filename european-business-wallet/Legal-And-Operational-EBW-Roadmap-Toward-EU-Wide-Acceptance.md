@@ -1,6 +1,6 @@
 # European Business Wallet (EBW): Legal & Operational Roadmap Toward EU-Wide Acceptance by 2029 — with EBW-Ready Field Tests Starting in 2026
 
-**Authors:** Dr. Carsten Stöcker (CEO [Spherity GmbH](https://www.spherity.com)), Ricky Thiermann (Head of Products[Spherity GmbH](https://www.spherity.com)) 
+**Authors:** Dr. Carsten Stöcker (CEO [Spherity GmbH](https://www.spherity.com)), Ricky Thiermann (Head of Products [Spherity GmbH](https://www.spherity.com)) 
 
 **Key Words:** European Business Wallet, EBW, eIDAS 2.0, Legal Person Identity, Verifiable Credentials, Qualified Attributes, B2G Access, Data Spaces, KYC, KYB, KYS, Trusted AI, Digital Product Passport (DPP), Supply Chain Compliance, eSeals, Trusted Infrastructure, ARF, EBW-Ready, Fast-Track Adoption, EU Digital Identity, EBW Regulation, Qualified Attestation, Conformity Assessment, eGovernment Interoperability, Business Case, Roadmap
 
@@ -14,7 +14,7 @@ This roadmap outlines the legal, technical, and operational milestones required 
 
 #### Fast-Track Adoption and Early EBW-Ready Solutions
 
-To unlock business value early, industry actors and some government bodies are expected to start field deployment of **EBW-ready solutions** from 2026 onwards. These solutions will build on existing **eIDAS 2.0 trust infrastructure**, qualified attributes, and interoperable credential formats. Stakeholders are encouraged **not to wait** until final regulations and standards are complete, but to pilot and adopt early solutions where legal and technical elements are mature. This fast-track path supports real-world use, accelerates market feedback, and de-risks future compliance.
+To [unlock business value](https://medium.com/spherity/digital-identity-real-world-impact-the-industrial-upside-of-the-european-business-wallet-eubw-d9e0c4e96aae) early, industry actors and some government bodies are expected to start field deployment of **EBW-ready solutions** from 2026 onwards. These solutions will build on existing **eIDAS 2.0 trust infrastructure**, qualified attributes, and interoperable credential formats. Stakeholders are encouraged **not to wait** until final regulations and standards are complete, but to pilot and adopt early solutions where legal and technical elements are mature. This fast-track path supports real-world use, accelerates market feedback, and de-risks future compliance.
 
 #### Key Use Cases of the EBW
 
@@ -37,8 +37,6 @@ To unlock business value early, industry actors and some government bodies are e
 * **G2G Integration**: Supports trusted data exchange between authorities across Member States, enabling mutual recognition of business attributes and once-only reporting.
 
 The EBW is essential for digital sovereignty, process automation, and compliance in the EU’s digital economy. Fast-track adoption by public and private stakeholders in 2026 will be key to demonstrating readiness, shaping standards, and ensuring operational maturity well before mandatory deadlines.
-
-
 
 ### Key Milestones to Mandatory EBW Acceptance (Legal, Operational, Conformance)
 
