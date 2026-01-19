@@ -32,7 +32,7 @@ To [unlock business value](https://medium.com/spherity/digital-identity-real-wor
 
 * **Trusted AI**: Supports traceable and verifiable information about AI system developers, providers, and operators in compliance with the AI Act; establishes Power of Attorney (PoA) for agent delegation and the AI Service Passport (AISP), enables registration in High-Risk AI registries and audit chains using EBW credentials, positioning Europe with a modern trust infrastructure in the global race for secure, regulated industrial AI.
 
-* **B2G Reporting and Registry Access**: Provides standardised authentication for EU portals such as EPRL, DPP registries, Customs, High-Risk AI registry, NIS2, and MiFIR/MiFID II.
+* **B2G Reporting and Registry Access**: Provides standardised authentication for EU portals such as EPRL, DPP registries, Customs, AgriFood Subsidies & Reporting (CAP Process), Tendering & Procurement, High-Risk AI registry, NIS2, and MiFIR/MiFID II.
 
 * **G2G Integration**: Supports trusted data exchange between authorities across Member States, enabling mutual recognition of business attributes and once-only reporting.
 
