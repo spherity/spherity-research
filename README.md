@@ -1,2 +1,3 @@
-# spherity-research
+# Spherity Research
+
 This repository collects Spherity research articles. It provides references and supporting material on digital identity, organizational wallets, the European Business Wallet (EBW), 'Legal & Operational EBW Roadmap Toward EU-Wide Acceptance by 2029', verifiable credentials, Digital Product Passports (DPPs), data spaces, trust infrastructure, use cases, adoption strategies and business cases.
