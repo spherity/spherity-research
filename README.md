@@ -4,8 +4,7 @@ This repository collects Spherity research articles and supporting material on d
 
 ### Start here
 
-- **EBW Roadmap: Legal & Operational Roadmap Toward EU-Wide Acceptance by 2029**  
-  [Read the roadmap](./european-business-wallet/Legal-And-Operational-EBW-Roadmap-Toward-EU-Wide-Acceptance.md)
+- **EBW Roadmap: Legal & Operational Roadmap Toward EU-Wide Acceptance by 2029**, [Read the roadmap](./european-business-wallet/Legal-And-Operational-EBW-Roadmap-Toward-EU-Wide-Acceptance.md)
 
 ### Research areas
 
@@ -16,14 +15,3 @@ This repository collects Spherity research articles and supporting material on d
 ### Repository structure
 
 - `european-business-wallet/` EBW-focused research and roadmap documents
-
-### Conventions for new documents
-
-Each document should start with:
-- Title (H1)
-- Status (draft / stable)
-- Last updated (YYYY-MM-DD)
-- Scope (in / out)
-- Sources (links or references)
-
-Use relative links between documents.
