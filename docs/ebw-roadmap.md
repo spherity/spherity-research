@@ -8,7 +8,7 @@ title: Legal and Operational EBW Roadmap Toward EU-Wide Acceptance
 
 # European Business Wallet (EBW): Legal & Operational Roadmap Toward EU-Wide Acceptance by 2029 — with EBW-Ready Field Tests Starting in 2026
 
-**Authors:** Dr. Carsten Stöcker (CEO), Ronald Koenit (Head of Development), Ricky Thiermann (Head of Products), Martin Westerkamp (EBW Product Manager). [Spherity GmbH](https://www.spherity.com). 
+**Authors:** Dr. Carsten Stöcker (CEO), Ronald Koenig (Head of Development), Ricky Thiermann (Head of Products), Dr. Martin Westerkamp (EBW Product Manager). [Spherity GmbH](https://www.spherity.com). 
 
 **Key Words:** European Business Wallet, EBW, eIDAS 2.0, Legal Person Identity, Verifiable Credentials, Qualified Attributes, B2G Access, Data Spaces, KYC, KYB, KYS, Trusted AI, Digital Product Passport (DPP), Supply Chain Compliance, eSeals, Trusted Infrastructure, ARF, EBW-Ready, Fast-Track Adoption, EU Digital Identity, EBW Regulation, Qualified Attestation, Conformity Assessment, eGovernment Interoperability, Business Case, Roadmap
 
