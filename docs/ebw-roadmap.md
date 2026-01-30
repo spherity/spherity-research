@@ -2,6 +2,10 @@
 title: Legal and Operational EBW Roadmap Toward EU-Wide Acceptance
 ---
 
+<div style="display:flex; align-items:center; gap:16px; margin-bottom:2rem;">
+  <img src="assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="120">
+</div>
+
 # European Business Wallet (EBW): Legal & Operational Roadmap Toward EU-Wide Acceptance by 2029 — with EBW-Ready Field Tests Starting in 2026
 
 **Authors:** Dr. Carsten Stöcker (CEO [Spherity GmbH](https://www.spherity.com)), Ricky Thiermann (Head of Products [Spherity GmbH](https://www.spherity.com)) 
