@@ -21,5 +21,4 @@ The European Business Wallet (EBW) is a core building block for
 organisational identity, verifiable credentials, and compliance-driven
 data exchange under eIDAS 2.0.
 
-- **Legal and Operational EBW Roadmap Toward EU-Wide Acceptance**  
-  https://spherity.github.io/spherity-research/ebw-roadmap.html
+- [Legal and Operational EBW Roadmap Toward EU-Wide Acceptance](./ebw-roadmap.html)
