@@ -1,5 +1,5 @@
 <div style="display:flex; align-items:center; gap:16px; margin-bottom:2rem;">
-  <img src="../assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="120">
+  <img src="./assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="120">
   <h1 style="margin:0;">Spherity Research</h1>
 </div>
 
