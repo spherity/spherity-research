@@ -1,3 +1,7 @@
+---
+title: Spherity Research
+---
+
 # Spherity Research
 
 ## European Business Wallet (EBW)
