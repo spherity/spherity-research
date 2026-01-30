@@ -3,8 +3,6 @@
   <h1 style="margin:0;">Spherity Research</h1>
 </div>
 
-# Spherity Research
-
 This site publishes selected research papers and roadmaps developed by
 Spherity on digital identity, trust infrastructure, and regulated
 digital ecosystems.
