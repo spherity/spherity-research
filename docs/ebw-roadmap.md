@@ -22,7 +22,6 @@ This roadmap outlines the legal, technical, and operational milestones required 
 
 <figure style="text-align:center; margin:2rem 0;">
   <img src="./assets/Europen Business Wallet (EBW) Roadmap - Spherity GmbH.png"
-       alt="Figure: European Business Wallet (EBW) timeline showing legal, regulatory, and operational milestones from 2026 to 2029, including eIDAS 2.0 adoption, EBW regulation, ETSI and CEN-CENELEC standardisation, Architectural Reference Framework (ARF) updates, Large-Scale Pilots (LSPs), WE BUILD, Qualified Trust Service Providers (QTSPs), and phased industry and public-sector rollout across EU Member States. Source: Spherity GmbH."
        style="max-width:100%; height:auto;">
   <figcaption style="font-size:0.9em; color:#555; margin-top:0.5rem;">
     Figure 1: European Business Wallet (EBW) timeline showing legal, regulatory, and operational milestones from 2026 to 2029, including eIDAS 2.0 adoption, EBW regulation, ETSI and CEN-CENELEC standardisation, Architectural Reference Framework (ARF) updates, Large-Scale Pilots (LSPs), <a href="https://www.webuildconsortium.eu/" target="_blank" rel="noopener">WE BUILD</a>, Qualified Trust Service Providers (QTSPs), and phased industry and public-sector rollout across EU Member States. Source:  <a href="https://www.spherity.com" target="_blank" rel="noopener">Spherity GmbH</a>.
