@@ -20,6 +20,15 @@ The EBW enables legally valid digital interaction with public and private actors
 
 This roadmap outlines the legal, technical, and operational milestones required for full EU-wide acceptance by 2028–2029 and highlights early adoption opportunities starting already in 2026.
 
+<figure style="text-align:center; margin:2rem 0;">
+  <img src="../assets/ebw-roadmap-overview.png"
+       alt="Figure: European Business Wallet (EBW) timeline showing legal, regulatory, and operational milestones from 2026 to 2029, including eIDAS 2.0 adoption, EBW regulation, ETSI and CEN-CENELEC standardisation, Architectural Reference Framework (ARF) updates, Large-Scale Pilots (LSPs), [WE BUILD](https://www.webuildconsortium.eu/), Qualified Trust Service Providers (QTSPs), and phased industry and public-sector rollout across EU Member States. Source: [Spherity GmbH](https://www.spherity.com)."
+       style="max-width:100%; height:auto;">
+  <figcaption style="font-size:0.9em; color:#555; margin-top:0.5rem;">
+    Figure 1: Legal and operational roadmap toward EU-wide acceptance of the European Business Wallet.
+  </figcaption>
+</figure>
+
 #### Fast-Track Adoption and Early EBW-Ready Solutions
 
 To [unlock business value](https://medium.com/spherity/digital-identity-real-world-impact-the-industrial-upside-of-the-european-business-wallet-eubw-d9e0c4e96aae) early, industry actors and some government bodies are expected to start field deployment of **EBW-ready solutions** from 2026 onwards. These solutions will build on existing **eIDAS 2.0 trust infrastructure**, qualified attributes, and interoperable credential formats. Stakeholders are encouraged **not to wait** until final regulations and standards are complete, but to pilot and adopt early solutions where legal and technical elements are mature. This fast-track path supports real-world use, accelerates market feedback, and de-risks future compliance.
