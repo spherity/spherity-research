@@ -3,7 +3,7 @@ title: Legal and Operational EBW Roadmap Toward EU-Wide Acceptance
 ---
 
 <div style="display:flex; align-items:center; gap:16px; margin-bottom:2rem;">
-  <img src="../assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="120">
+  <img src="./assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="120">
 </div>
 
 # European Business Wallet (EBW): Legal & Operational Roadmap Toward EU-Wide Acceptance by 2029 — with EBW-Ready Field Tests Starting in 2026
@@ -21,7 +21,7 @@ The EBW enables legally valid digital interaction with public and private actors
 This roadmap outlines the legal, technical, and operational milestones required for full EU-wide acceptance by 2028–2029 and highlights early adoption opportunities starting already in 2026.
 
 <figure style="text-align:center; margin:2rem 0;">
-  <img src="../assets/European_Business_Wallet_(EBW)_Roadmap_-_Spherity_Research.png"
+  <img src="./assets/Europen Business Wallet (EBW) Roadmap - Spherity GmbH.png"
        alt="Figure: European Business Wallet (EBW) timeline showing legal, regulatory, and operational milestones from 2026 to 2029, including eIDAS 2.0 adoption, EBW regulation, ETSI and CEN-CENELEC standardisation, Architectural Reference Framework (ARF) updates, Large-Scale Pilots (LSPs), WE BUILD, Qualified Trust Service Providers (QTSPs), and phased industry and public-sector rollout across EU Member States. Source: Spherity GmbH."
        style="max-width:100%; height:auto;">
   <figcaption style="font-size:0.9em; color:#555; margin-top:0.5rem;">
