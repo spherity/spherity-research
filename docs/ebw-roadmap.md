@@ -1,6 +1,6 @@
 ---
 title: Legal & Operational EBW Roadmap Toward EU-Wide Acceptance
-description: Legal and operational timeline for the European Business Wallet under eIDAS 2.0, covering regulation, standardisation, pilots, and EU-wide adoption.
+description: Legal and operational timeline for the European Business Wallet (EBW) under eIDAS 2.0, covering regulation, standardisation, pilots, and EU-wide adoption. Spherity GmbH.
 image: https://spherity.github.io/spherity-research/assets/Europen%20Business%20Wallet%20(EBW)%20Roadmap%20-%20Spherity%20GmbH.png
 author:
   - Dr. Carsten Stöcker, CEO Spherity GmbH
