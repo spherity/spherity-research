@@ -8,3 +8,8 @@
 <meta name="twitter:title" content="{{ page.title }}">
 <meta name="twitter:description" content="{{ page.description }}">
 <meta name="twitter:image" content="{{ page.image }}">
+
+{% if page.author %}
+<meta name="author" content="{{ page.author | join: ', ' }}">
+{% endif %}
+
