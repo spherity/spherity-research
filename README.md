@@ -7,5 +7,8 @@ for stable linking and search engine indexing.
 
 #### European Business Wallet (EBW)
 
-- **Legal and Operational EBW Roadmap Toward EU-Wide Acceptance**  
-  👉 https://spherity.github.io/spherity-research/ebw-roadmap.html
+- **Legal and Operational EBW Roadmap Toward EU-Wide Acceptance**:  
+  https://spherity.github.io/spherity-research/ebw-roadmap.html
+
+- **Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities**:
+  https://spherity.github.io/spherity-research/Securing-Digital-Identity-Quantum-Vulnerabilities.html
