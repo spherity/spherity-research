@@ -19,3 +19,9 @@ organisational identity, verifiable credentials, and compliance-driven
 data exchange under eIDAS 2.0.
 
 - [Legal and Operational EBW Roadmap Toward EU-Wide Acceptance](./ebw-roadmap.html)
+
+## Digitale Identities and against Quantum Vulnerabilities
+
+The quantum risk highlighted for elliptic-curve cryptocurrencies is a special case of a broader public-key exposure problem. Digital identity wallets, verifiable credentials, verifiable presentations, trust lists, status registries, VDRs, DNSSEC, WebPKI, and semantic registries form a public-key trust fabric that supports legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI. This fabric needs post-quantum migration corridors before it becomes too large to migrate safely.
+
+- [Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities](./Securing-Digital-Identity-Quantum-Vulnerabilities.html)
