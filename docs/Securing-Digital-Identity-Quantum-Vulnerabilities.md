@@ -22,87 +22,163 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
 ---
 
 <style>
-  .paper-header {
-    margin: 0 0 2rem 0;
-    padding: 0 0 1.5rem 0;
-    border-bottom: 1px solid #d8dee4;
+.paper-page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.paper-header {
+  margin: 0 0 2rem 0;
+  padding: 0 0 1.5rem 0;
+  border-bottom: 1px solid #d8dee4;
+}
+
+.paper-logo {
+  display: block;
+  margin: 0 0 1.25rem 0;
+  max-width: 180px;
+  height: auto;
+}
+
+.paper-kicker {
+  margin: 0 0 0.35rem 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #57606a;
+}
+
+.paper-title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 2.35rem;
+  font-weight: 700;
+}
+
+.paper-subtitle {
+  margin: 0.8rem 0 1.25rem 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #57606a;
+}
+
+.paper-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.paper-meta-card {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #d8dee4;
+  border-radius: 8px;
+  background: #f6f8fa;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.paper-meta-card strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #24292f;
+}
+
+.paper-thesis {
+  margin: 1.5rem 0 2rem 0;
+  padding: 1rem 1.1rem;
+  border-left: 4px solid #0969da;
+  background: #f6f8fa;
+  border-radius: 6px;
+  line-height: 1.55;
+}
+
+.paper-thesis strong {
+  color: #24292f;
+}
+
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  vertical-align: top;
+}
+
+code {
+  white-space: pre-wrap;
+}
+
+@media (max-width: 700px) {
+  .paper-page {
+    padding: 0 1.25rem;
   }
-  .paper-logo {
-    display: block;
-    margin: 0 0 1.25rem 0;
-    max-width: 180px;
-    height: auto;
-  }
-  .paper-kicker {
-    margin: 0 0 0.35rem 0;
-    font-size: 0.9rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #57606a;
-  }
+
   .paper-title {
-    margin: 0;
-    line-height: 1.15;
+    font-size: 1.75rem;
   }
+
   .paper-subtitle {
-    margin: 0.8rem 0 1.25rem 0;
-    font-size: 1.1rem;
-    color: #57606a;
+    font-size: 1rem;
   }
-  .paper-meta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 0.75rem;
-    margin-top: 1rem;
-  }
-  .paper-meta-card {
-    padding: 0.75rem 0.85rem;
-    border: 1px solid #d8dee4;
-    border-radius: 8px;
-    background: #f6f8fa;
-    font-size: 0.95rem;
-  }
-  .paper-thesis {
-    margin: 1.5rem 0 2rem 0;
-    padding: 1rem 1.1rem;
-    border-left: 4px solid #0969da;
-    background: #f6f8fa;
-    border-radius: 6px;
-  }
-  table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    border-collapse: collapse;
-  }
-  th, td {
-    vertical-align: top;
-  }
-  code {
-    white-space: pre-wrap;
-  }
-  @media (max-width: 700px) {
-    .paper-title { font-size: 1.75rem; }
-    .paper-subtitle { font-size: 1rem; }
-  }
+}
 </style>
 
+<main class="paper-page" markdown="1">
+
 <header class="paper-header">
-  <img class="paper-logo" src="./assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity logo" width="160">
-  <p class="paper-kicker">Review paper</p>
-  <h1 class="paper-title">Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities</h1>
-  <p class="paper-subtitle"><strong>Attack taxonomy, macro-economic risk, and post-quantum migration corridors</strong></p>
+  <img
+    class="paper-logo"
+    src="./assets/Spherity-logo-horiz-blue-rgb.png"
+    alt="Spherity"
+  >
+
+  <p class="paper-kicker">Review Paper</p>
+
+  <h1 class="paper-title">
+    Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities
+  </h1>
+
+  <p class="paper-subtitle">
+    Why post-quantum migration must move beyond Bitcoin and blockchains toward digital identity,
+    legal person wallets, verifiable credentials, trust lists, VDRs, supply chains,
+    Industry 4.0, critical infrastructure, and Trusted AI.
+  </p>
+
   <div class="paper-meta-grid">
-    <div class="paper-meta-card"><strong>Prepared by</strong><br>Dr. Carsten Stöcker<br>Spherity GmbH</div>
-    <div class="paper-meta-card"><strong>Draft date</strong><br>12 May 2026</div>
-    <div class="paper-meta-card"><strong>Status</strong><br>Independent draft</div>
-    <div class="paper-meta-card"><strong>Audience</strong><br>Technical discussion with technical and standards stakeholders</div>
+    <div class="paper-meta-card">
+      <strong>Author</strong>
+      Dr. Carsten Stöcker<br>
+      CEO, Spherity GmbH
+    </div>
+    <div class="paper-meta-card">
+      <strong>Document type</strong>
+      Academic review paper
+    </div>
+    <div class="paper-meta-card">
+      <strong>Focus</strong>
+      Digital identity, VCs, VPs, wallets, PQC corridors
+    </div>
+    <div class="paper-meta-card">
+      <strong>Status</strong>
+      Working draft for expert discussion
+    </div>
   </div>
 </header>
 
-<div class="paper-thesis">
-  <strong>Central thesis.</strong> The quantum risk highlighted for elliptic-curve cryptocurrencies is a special case of a broader public-key exposure problem. Digital identity wallets, verifiable credentials, verifiable presentations, trust lists, status registries, VDRs, DNSSEC, WebPKI, and semantic registries form a public-key trust fabric that supports legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI. This fabric needs post-quantum migration corridors before it becomes too large to migrate safely.
-</div>
+<section class="paper-thesis">
+  <strong>Central thesis:</strong>
+  Quantum risk is not only a cryptocurrency problem. It is a public-key exposure problem.
+  Digital identity systems expose issuer keys, holder-binding keys, verifier keys, trust-list keys,
+  status-service keys, VDR keys, DNSSEC/WebPKI dependencies, and semantic registry keys.
+  Therefore, verifiable credentials and identity wallets require post-quantum migration planning
+  at the level of complete trust chains, not only at the level of transport encryption.
+</section>
 
 # Abstract
 
