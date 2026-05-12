@@ -201,7 +201,9 @@ Recent quantum resource estimates for elliptic-curve discrete logarithms have ch
 11. Outlook
 
 Appendix A. Cryptographic asset inventory template
+
 Appendix B. Minimal PQC corridor checklist
+
 References
 
 # 1. Introduction
