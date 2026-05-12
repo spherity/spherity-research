@@ -9,5 +9,7 @@ for stable linking and search engine indexing.
 
 - **Legal and Operational EBW Roadmap Toward EU-Wide Acceptance**: https://spherity.github.io/spherity-research/ebw-roadmap.html
 
+#### Digital Business Identity & PQC Research
+
 - **Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities**:
   https://spherity.github.io/spherity-research/Securing-Digital-Identity-Quantum-Vulnerabilities.html
