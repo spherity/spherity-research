@@ -6,7 +6,6 @@ description: "This review paper analyses how quantum risks to elliptic-curve cry
 author: "Dr. Carsten Stöcker"
 affiliation: "Spherity GmbH"
 date: "2026-05-12"
-status: "Independent draft; not a statement by Google"
 lang: "en"
 toc: true
 tags:
@@ -96,27 +95,25 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   color: #57606a;
 }
 
-.paper-meta-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 0.75rem;
-  margin-top: 1.25rem;
+.paper-author-block {
+  margin: 1.35rem 0 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #24292f;
 }
 
-.paper-meta-card {
-  padding: 0.8rem 0.9rem;
-  border: 1px solid #d8dee4;
-  border-radius: 8px;
-  background: #f6f8fa;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.92rem;
+.paper-author {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
   line-height: 1.45;
 }
 
-.paper-meta-card strong {
-  display: block;
-  margin-bottom: 0.2rem;
-  color: #24292f;
+.paper-affiliation {
+  margin: 0.15rem 0 0 0;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.45;
+  color: #57606a;
 }
 
 .paper-thesis {
@@ -164,13 +161,19 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   font-size: 1.05rem;
 }
 
-.toc-box ol {
+.toc-list {
   margin: 0;
-  padding-left: 1.35rem;
+  padding-left: 0;
+  list-style: none;
 }
 
-.toc-box li {
-  margin: 0.25rem 0;
+.toc-list li {
+  margin: 0.35rem 0;
+}
+
+.toc-list a {
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
 }
 
 .paper-figure {
@@ -368,11 +371,9 @@ code { white-space: pre-wrap; }
   <p class="paper-kicker">Review paper</p>
   <h1 class="paper-title">Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities</h1>
   <p class="paper-subtitle"><strong>Attack taxonomy, macro-economic risk, and post-quantum migration corridors</strong></p>
-  <div class="paper-meta-grid">
-    <div class="paper-meta-card"><strong>Prepared by</strong><br>Dr. Carsten Stöcker<br>Spherity GmbH</div>
-    <div class="paper-meta-card"><strong>Draft date</strong><br>12 May 2026</div>
-    <div class="paper-meta-card"><strong>Status</strong><br>Independent draft; not a statement by Google</div>
-    <div class="paper-meta-card"><strong>Audience</strong><br>Technical discussion with Google and standards stakeholders</div>
+  <div class="paper-author-block">
+    <p class="paper-author">Dr. Carsten Stöcker</p>
+    <p class="paper-affiliation">Spherity GmbH</p>
   </div>
 </header>
 
@@ -382,7 +383,7 @@ code { white-space: pre-wrap; }
 
 <section class="abstract-box" markdown="1">
 
-## Abstract {#abstract}
+<h2 id="abstract">Abstract</h2>
 
 Recent quantum resource estimates for elliptic-curve discrete logarithms have changed the risk posture for systems that expose long-lived public keys. The public debate has focused on Bitcoin and other cryptocurrencies, where a cryptographically relevant quantum computer could derive private keys from exposed elliptic-curve public keys and enable at-rest or on-spend attacks. This review paper argues that the same class of risk is broader and, in macro-economic terms, more material for digital identity. Verifiable credentials (VCs), verifiable presentations (VPs), identity wallets, issuer keys, holder-binding keys, verifier authentication keys, trust-list keys, status-list keys, decentralized identifiers, DNSSEC, WebPKI, and semantic registries all depend on public-key assumptions. A break of those assumptions could create forged identity evidence, false legal-person credentials, compromised supply-chain authority, unauthorized access to critical infrastructure, and misattributed actions by AI agents. The paper maps the cryptocurrency attack taxonomy into a digital identity taxonomy: at-rest identity attacks, on-presentation attacks, on-issuance attacks, on-registry attacks, trust-list attacks, status attacks, semantic supply-chain attacks, and on-setup attacks against privacy-preserving proof systems. It further argues that legal-person identity is a macro-economic control point. It supports onboarding, contracting, procurement, customs, AML/KYC, regulated supply chains, digital product passports, industrial automation, and Trusted AI. The exposure is therefore not limited to one asset class; it touches the transaction layer of the real economy. The main recommendation is to start work on post-quantum identity corridors: bounded, testable, end-to-end identity exchange paths in which issuance, presentation, wallet key storage, verifier authentication, trust lists, status lists, VDR resolution, semantic registries, transport security, and long-term validation are made hybrid or post-quantum-ready together.
 
@@ -390,9 +391,10 @@ Recent quantum resource estimates for elliptic-curve discrete logarithms have ch
 
 </section>
 
-<nav class="toc-box">
-  <h2>Contents</h2>
-  <ol>
+<nav class="toc-box" aria-labelledby="contents-heading">
+  <h2 id="contents-heading">Contents</h2>
+
+  <ul class="toc-list">
     <li><a href="#abstract">Abstract</a></li>
     <li><a href="#1-introduction">1. Introduction</a></li>
     <li><a href="#2-quantum-risk-as-a-public-key-exposure-problem">2. Quantum risk as a public-key exposure problem</a></li>
@@ -408,10 +410,10 @@ Recent quantum resource estimates for elliptic-curve discrete logarithms have ch
     <li><a href="#appendix-a-cryptographic-asset-inventory-template">Appendix A. Cryptographic asset inventory template</a></li>
     <li><a href="#appendix-b-minimal-pqc-corridor-checklist">Appendix B. Minimal PQC corridor checklist</a></li>
     <li><a href="#references">References</a></li>
-  </ol>
+  </ul>
 </nav>
 
-## 1. Introduction {#1-introduction}
+<h2 id="1-introduction">1. Introduction</h2>
 
 The paper by Babbush et al. estimates that breaking 256-bit ECDLP over secp256k1 can be done with fewer than 1,200 logical qubits and fewer than 90 million Toffoli gates, or with fewer than 1,450 logical qubits and fewer than 70 million Toffoli gates. Under their superconducting architecture assumptions, the runtime can fall to minutes with fewer than half a million physical qubits [1]. The paper also distinguishes fast-clock and slow-clock quantum architectures and uses this distinction to analyze on-spend, at-rest, and on-setup attacks [1].
 
@@ -423,7 +425,7 @@ The paper therefore reviews quantum risk for digital identity wallets and VC/VP 
 
 The main recommendation is to start work on PQC identity corridors. A corridor is a bounded identity flow, such as legal-person onboarding or digital product passport signing, in which all public-key dependencies are inventoried and moved to hybrid or post-quantum operation together. This is more realistic than a big-bang migration, and more useful than upgrading transport security alone.
 
-## 2. Quantum risk as a public-key exposure problem {#2-quantum-risk-as-a-public-key-exposure-problem}
+<h2 id="2-quantum-risk-as-a-public-key-exposure-problem">2. Quantum risk as a public-key exposure problem</h2>
 
 The Babbush et al. analysis is framed around cryptocurrency signatures. Its deeper lesson is that systems can no longer treat exposed ECC public keys as harmless long-term data. In classical security models, a public key can be public for decades. In a post-quantum threat model, the same public key may become a route to the private key. The practical risk depends on three factors: the algorithm, the public-key exposure surface, and the time window in which the attacker can use the recovered private key.
 
@@ -473,7 +475,7 @@ Transport-layer PQC is necessary but not sufficient. Hybrid ML-KEM in TLS helps 
   </div>
 </figure>
 
-## 3. Digital identity system model {#3-digital-identity-system-model}
+<h2 id="3-digital-identity-system-model">3. Digital identity system model</h2>
 
 The W3C Verifiable Credentials Data Model defines a model in which issuers create credentials, holders store and present them, and verifiers check them. Verifiable presentations can include credentials and proofs, and verifiable data registries can mediate identifiers, verification material, schemas, and revocation registries [6]. OpenID4VCI defines issuance flows and holder binding. OpenID4VP defines presentation flows using a VP token and can run through HTTPS redirects or the W3C Digital Credentials API [9,10,11].
 
@@ -512,7 +514,7 @@ A second layer is the semantic supply chain. A credential does not carry value o
   <figcaption><strong>Figure 1.</strong> SSI triangle extended with trust control plane and semantic supply chain.</figcaption>
 </figure>
 
-## 4. Attack taxonomy for VCs, VPs, wallets, and trust infrastructure {#4-attack-taxonomy-for-vcs-vps-wallets-and-trust-infrastructure}
+<h2 id="4-attack-taxonomy-for-vcs-vps-wallets-and-trust-infrastructure">4. Attack taxonomy for VCs, VPs, wallets, and trust infrastructure</h2>
 
 A quantum attacker does not need to attack every part of an identity ecosystem. It is enough to compromise the weakest public-key dependency on the verification path. In identity systems, this path can be longer than in a blockchain transaction. A verifier may depend on the credential proof, the holder-binding proof, the issuer DID or certificate, a trust list, a status list, a DNS name, a schema, a policy registry, and a timestamping or audit service.
 
@@ -594,57 +596,57 @@ A quantum attacker does not need to attack every part of an identity ecosystem. 
   </div>
 </figure>
 
-## 5. Identity-specific quantum attack scenarios {#5-identity-specific-quantum-attack-scenarios}
+<h2 id="5-identity-specific-quantum-attack-scenarios">5. Identity-specific quantum attack scenarios</h2>
 
-### 5.1 Issuer key compromise
+<h3 id="5-1-issuer-key-compromise">5.1 Issuer key compromise</h3>
 
 Issuer key compromise is the most direct high-impact case. If a public issuer key is exposed in a DID document, certificate, trust list, or metadata service, a CRQC may derive the matching private key. The attacker could then issue forged credentials. For a government PID issuer, the damage is identity fraud. For a legal-person issuer, the damage can include false corporate authority, fraudulent onboarding, and supply-chain access. For a DPP issuer, the damage can include false product data and fake compliance records.
 
 DID Core recognizes that DID documents express verification methods such as public keys, and that these methods are used for authentication, assertion, and other verification relationships [8]. This makes DID documents useful, but also makes them long-lived public-key exposure points. Post-quantum identity design must therefore treat issuer keys as high-value public assets, not only as key material in a wallet.
 
-### 5.2 On-presentation attacks
+<h3 id="5-2-on-presentation-attacks">5.2 On-presentation attacks</h3>
 
 An on-presentation attack is the identity analogue of an on-spend attack. A holder presents a credential to a verifier. The VP includes a proof, a nonce, an audience, a holder-binding key, or a reference to verification material. A fast attacker who sees the relevant public key might derive the private key during the presentation window or shortly after a first presentation. The attacker could then create a valid-looking VP for the same session or for another verifier.
 
 The analogy to Bitcoin is not exact. Most VP flows are not broadcast to a public mempool. They are usually mediated by HTTPS, mobile wallets, browsers, or enterprise APIs. This reduces broad public exposure. It does not remove the risk. Malicious verifiers, compromised relying parties, browser logs, gateway logs, mobile telemetry, support dumps, and archived presentations can expose public keys and proof material. High-value relying parties may also be targeted directly. The right mitigation is not to assume that presentation material is private; it is to use nonce-bound, audience-bound, short-lived, and eventually PQC or hybrid holder proofs.
 
-### 5.3 On-issuance attacks
+<h3 id="5-3-on-issuance-attacks">5.3 On-issuance attacks</h3>
 
 OpenID4VCI supports credential issuance flows in which the issuer binds a credential to holder key material. The holder later proves control of the same key during presentation [9]. This mechanism is central to wallet security. It is also a quantum exposure point. If a wallet proof-of-possession key or attestation key is quantum-vulnerable and visible during issuance, an attacker may be able to bind the credential to a key that the attacker can use or derive.
 
 The most sensitive on-issuance targets are high-assurance credentials: national PID, legal-person identity, professional roles, regulated supply-chain roles, pharma trading partner credentials, financial KYC credentials, customs credentials, product-passport issuer rights, and AI-agent delegation credentials. In these cases, a false issuance event can have a longer lifetime than a fraudulent login. It can become a signed input to downstream trust decisions.
 
-### 5.4 Trust-list and access-certificate attacks
+<h3 id="5-4-trust-list-and-access-certificate-attacks">5.4 Trust-list and access-certificate attacks</h3>
 
 Trust lists are systemic trust objects. The EUDI Wallet Architecture and Reference Framework defines trusted lists that contain trust anchors. It also describes access certificate authorities, wallet provider trust anchors, and trust lists used by wallets and relying parties [13]. A quantum break of a trust-list signing key or access CA key could enable a rogue issuer, verifier, wallet provider, or service endpoint to appear legitimate. This attack can scale across an ecosystem because many verifiers may rely on the same list.
 
 Trust-list migration should therefore be prioritized earlier than ordinary low-value credential migration. The trust-list layer should be hybrid or PQC-signed, monitored, timestamped, and designed for emergency key rollover. Threshold signing and key ceremonies are also relevant, but they do not remove the need for quantum-safe primitives.
 
-### 5.5 VDR, DNSSEC, WebPKI, and registry attacks
+<h3 id="5-5-vdr-dnssec-webpki-and-registry-attacks">5.5 VDR, DNSSEC, WebPKI, and registry attacks</h3>
 
 VC ecosystems often rely on VDRs to resolve identifiers and verification material [6]. A VDR can be a blockchain, a database, a trusted registry, a decentralized file system, or another authoritative data source. DNSSEC can also act as identity infrastructure when domains are used to discover issuer metadata, verifier metadata, service endpoints, or DID records. DNSSEC authenticates DNS data through digital signatures over DNS resource record sets [27]. If DNSSEC or WebPKI remains quantum-vulnerable while credentials are upgraded, the verification path remains vulnerable.
 
 There is active IETF discussion on PQC DNSSEC strategy, including the operational effect of larger PQC signatures and the need for conservative as well as lower-impact algorithm options [28]. Identity architectures that use DNS as a VDR or discovery layer should track this work closely. A credential is not quantum-safe if the resolver path that supplies its issuer keys is not safe.
 
-### 5.6 Status, revocation, and long-term validity
+<h3 id="5-6-status-revocation-and-long-term-validity">5.6 Status, revocation, and long-term validity</h3>
 
 Status is a core identity control. The W3C Bitstring Status List specification provides a compact mechanism for expressing credential status, including suspension and revocation [14]. Yet a status list is still a signed object. If the status signing key is compromised, an attacker can make revoked credentials appear valid or can deny service by marking valid credentials as revoked.
 
 Long-term validity is harder. A credential might be valid at the time of presentation but later unverifiable because the algorithm is broken. Identity ecosystems need rules for timestamping, archival validation, transparency logs, reissuance, and evidence preservation. This is especially important for legal-person credentials, compliance certificates, product passports, audit logs, and AI-agent actions that may be reviewed years later.
 
-### 5.7 On-setup attacks against privacy-preserving credentials
+<h3 id="5-7-on-setup-attacks-against-privacy-preserving-credentials">5.7 On-setup attacks against privacy-preserving credentials</h3>
 
 Privacy-preserving identity systems often use selective disclosure, anonymous credentials, accumulators, pairings, or zero-knowledge proofs. BBS-based VC cryptosuites, for example, are designed to support selective disclosure and unlinkability [15]. Other systems may use RSA-based CL signatures, pairing-based signatures, or SNARKs. These techniques are important for privacy, but many of their current constructions depend on quantum-vulnerable hardness assumptions or setup assumptions.
 
 A PQC migration that only replaces ECDSA issuer signatures is incomplete. The identity community also needs PQC-ready privacy-preserving credentials. This is an open research area. It requires attention to proof size, mobile verification, offline use, unlinkability, issuer privacy, revocation privacy, QR-code limits, and formal security models.
 
-### 5.8 Agentic AI and Trusted AI
+<h3 id="5-8-agentic-ai-and-trusted-ai">5.8 Agentic AI and Trusted AI</h3>
 
 Trusted AI requires traceability, accountability, and controlled authority. OECD AI principles call for traceability across datasets, processes, and decisions, and the EU AI Act imposes requirements such as logging, documentation, robustness, cybersecurity, and human oversight for high-risk AI systems [24,26]. NIST has also framed Trustworthy AI for critical infrastructure as a risk-management problem [25].
 
 AI agents will increasingly sign API calls, procurement events, data-access requests, software actions, payments, and operational commands. Their authority will often be delegated through credentials from legal persons. A quantum break of legal-person identity or agent delegation credentials could create false authority at machine speed. PQC identity corridors for AI should therefore combine short-lived delegation, policy-limited VCs, revocation, device or workload attestation, and PQC/hybrid signatures.
 
-## 6. Macro-economic exposure: why legal-person identity is larger than Bitcoin {#6-macro-economic-exposure-why-legal-person-identity-is-larger-than-bitcoin}
+<h2 id="6-macro-economic-exposure-why-legal-person-identity-is-larger-than-bitcoin">6. Macro-economic exposure: why legal-person identity is larger than Bitcoin</h2>
 
 The claim that digital identity is more important than Bitcoin should be made with care. It is not a claim that any single identity credential has more market value than Bitcoin. It is a claim about dependency scope, substitution cost, and contagion channels. Bitcoin is a large but sector-specific asset system. Legal-person identity is a horizontal control layer for the real economy. It is used to establish who a company is, what it is allowed to do, which person or machine may act for it, and which data or product event can be trusted.
 
@@ -704,7 +706,7 @@ Digital product passports make the same point in a concrete way. The EU Ecodesig
 
 The macro-economic argument therefore has a simple form: cryptocurrency signatures protect asset ownership in a specific network; legal-person identity protects authority and accountability across many networks. The latter is a larger dependency surface. It should receive at least the same public attention in post-quantum migration planning.
 
-## 7. Standards and readiness gaps {#7-standards-and-readiness-gaps}
+<h2 id="7-standards-and-readiness-gaps">7. Standards and readiness gaps</h2>
 
 There is no single identity standard that can solve the PQC migration. The identity stack is multi-layered. W3C VC Data Integrity secures credentials and constrained digital documents through signatures and related proofs [7]. W3C VC JOSE/COSE secures credentials and presentations with JOSE, SD-JWT, and COSE [12]. DID Core defines identifiers and verification methods [8]. OpenID4VCI and OpenID4VP define issuance and presentation flows [9,10]. The Digital Credentials API adds browser and user-agent mediation [11]. EUDI Wallet architectures add trusted lists, access certificates, and regulated ecosystem roles [13]. Each layer must be assessed.
 
@@ -774,7 +776,7 @@ Google has made relevant platform moves. Chrome moved toward standardized ML-KEM
 
 A narrow algorithm substitution model will fail. Identity migration must account for key lifecycle, credential lifetime, presentation frequency, user experience, offline use, QR size, mobile hardware, trust-list governance, compliance rules, and audit requirements. It must also handle legacy credentials and dormant identity records that cannot be reissued quickly.
 
-## 8. Post-quantum identity corridors {#8-post-quantum-identity-corridors}
+<h2 id="8-post-quantum-identity-corridors">8. Post-quantum identity corridors</h2>
 
 A post-quantum identity corridor is a governed, end-to-end identity exchange path in which all public-key dependencies are inventoried and moved to hybrid or post-quantum readiness together. A corridor is not only a credential format. It is a full path: issuer signature, wallet key storage, holder binding, verifier authentication, issuance channel, presentation channel, trust-list signing, status-list signing, VDR resolution, DID or certificate chain, DNSSEC/WebPKI dependency, schema/context integrity, policy validation, timestamping, audit, and reissuance.
 
@@ -831,7 +833,7 @@ Candidate corridors should be chosen by risk and leverage. Initial corridors sho
 
 A practical corridor should define at least four artefact classes: a threat model, a cryptographic profile, test vectors, and operational runbooks. The runbooks should include key rollover, emergency revocation, reissuance, downgrade prevention, audit evidence, and fallback rules for offline verification.
 
-## 9. Recommendations for Google and the wider ecosystem {#9-recommendations-for-google-and-the-wider-ecosystem}
+<h2 id="9-recommendations-for-google-and-the-wider-ecosystem">9. Recommendations for Google and the wider ecosystem</h2>
 
 Google is well positioned to help reframe the public discourse. It has quantum research, cryptography engineering, Chrome, Android, Cloud KMS, identity systems, browser mediation, and developer reach. Google has also already stated that authentication services and digital signatures should be prioritized in PQC migration [2]. The next step is to make digital identity a first-class post-quantum migration topic.
 
@@ -884,7 +886,7 @@ Google is well positioned to help reframe the public discourse. It has quantum r
 
 The most valuable near-term outcome would be a short public position paper and a technical work plan. The position paper should state that identity is a primary PQC risk surface. The work plan should define two or three concrete corridors and publish early interoperability artefacts.
 
-## 10. Limitations and research agenda {#10-limitations-and-research-agenda}
+<h2 id="10-limitations-and-research-agenda">10. Limitations and research agenda</h2>
 
 This paper does not claim that a CRQC exists today. The resource estimates in [1] depend on architecture assumptions, error correction, timing, and scale-up assumptions. It also does not claim that every identity presentation is as exposed as a public blockchain transaction. Many VP flows are private, authenticated, and short-lived. The risk argument is about high-value exposure points, reuse, logging, malicious verifiers, public registries, and long-term trust objects.
 
@@ -906,13 +908,13 @@ Several identity standards are still evolving. PQC algorithm identifiers, hybrid
 
 8. How should legal-person credentials delegate authority to AI agents in a way that is short-lived, revocable, auditable, and quantum-safe?
 
-## 11. Outlook {#11-outlook}
+<h2 id="11-outlook">11. Outlook</h2>
 
 The cryptocurrency analysis in [1] is a useful warning because it turns an abstract quantum concern into an operational attack model. Digital identity needs the same shift. The key question is not only when a quantum computer will break a curve. The key question is whether identity ecosystems will have already built migration paths for the public keys, trust anchors, registries, and semantics that they publish today.
 
 The priority should be calm and concrete engineering: inventory public-key dependencies, avoid unnecessary long-lived key exposure, add crypto agility, pilot PQC corridors in high-risk legal-person and supply-chain flows, and define rules for reissuance and long-term evidence. This work should begin before identity wallets, DPPs, and AI-agent authority systems reach full scale.
 
-## Appendix A. Cryptographic asset inventory template {#appendix-a-cryptographic-asset-inventory-template}
+<h2 id="appendix-a-cryptographic-asset-inventory-template">Appendix A. Cryptographic asset inventory template</h2>
 
 <figure class="table-figure">
   <figcaption><strong>Table A1.</strong> Cryptographic asset inventory template.</figcaption>
@@ -978,7 +980,7 @@ The priority should be calm and concrete engineering: inventory public-key depen
   </div>
 </figure>
 
-## Appendix B. Minimal PQC corridor checklist {#appendix-b-minimal-pqc-corridor-checklist}
+<h2 id="appendix-b-minimal-pqc-corridor-checklist">Appendix B. Minimal PQC corridor checklist</h2>
 
 1. Issuer signatures are hybrid or PQC-ready, and algorithm identifiers are unambiguous.
 
@@ -1006,7 +1008,7 @@ The priority should be calm and concrete engineering: inventory public-key depen
 
 <section class="references" markdown="1">
 
-## References {#references}
+<h2 id="references">References</h2>
 
 **[1]** Babbush, R., Zalcman, A., Gidney, C., Broughton, M., Khattar, T., Neven, H., Bergamaschi, T., Drake, J., and Boneh, D. "Securing Elliptic Curve Cryptocurrencies against Quantum Vulnerabilities: Resource Estimates and Mitigations." arXiv:2603.28846, 2026. [https://arxiv.org/abs/2603.28846](https://arxiv.org/abs/2603.28846)
 
