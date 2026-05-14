@@ -1048,6 +1048,8 @@ The corridor could also support PQC-ready end-to-end communication between authe
 
 Google is well positioned to help reframe the public discourse. It has quantum research, cryptography engineering, Chrome, Android, Cloud KMS, identity systems, browser mediation, and developer reach. Google has also already stated that authentication services and digital signatures should be prioritized in PQC migration [2]. The next step is to make digital identity a first-class post-quantum migration topic.
 
+The work should not be Google-centric. The relevant ecosystem also includes the European Commission, ENISA, BSI, ETSI, CEN/CENELEC, W3C, OpenID Foundation, IETF, NIST, EUDI Wallet implementers, European Business Wallet stakeholders, international business wallet and data space projects, qualified trust service providers, business registers, wallet vendors, regulated industry issuers, cloud providers, mobile platform providers, and critical-infrastructure operators.
+
 <figure class="table-figure">
   <figcaption><strong>Table 9.</strong> Recommendations for a PQC digital identity work program.</figcaption>
   <div class="table-scroll">
@@ -1068,7 +1070,7 @@ Google is well positioned to help reframe the public discourse. It has quantum r
         <tr>
           <td>2</td>
           <td>Start a PQC Identity Corridors initiative.</td>
-          <td>Google could convene a focused technical group with Google Quantum AI, Google Security, Android, Chrome, Cloud KMS, W3C VC groups, OpenID Foundation, IETF, NIST, ENISA, BSI, EUDI Wallet stakeholders, wallet vendors, regulated issuers, and critical-infrastructure operators.</td>
+          <td>Convene a focused technical group with Google Quantum AI, Google Security, Android, Chrome, Cloud KMS, W3C VC groups, OpenID Foundation, IETF, NIST, ENISA, BSI, EUDI Wallet stakeholders, EBW stakeholders, wallet vendors, regulated issuers, business registers, and critical-infrastructure operators.</td>
         </tr>
         <tr>
           <td>3</td>
@@ -1078,7 +1080,7 @@ Google is well positioned to help reframe the public discourse. It has quantum r
         <tr>
           <td>4</td>
           <td>Separate channel security from object security.</td>
-          <td>Hybrid TLS protects the session. It does not make a credential, presentation, trust list, status list, or DID document safe after storage, logging, offline presentation, or archival review. Google messaging should make this distinction explicit.</td>
+          <td>Hybrid TLS protects the session. It does not make a credential, presentation, trust list, status list, DID document, schema, or audit artefact safe after storage, logging, offline presentation, or archival review.</td>
         </tr>
         <tr>
           <td>5</td>
@@ -1088,7 +1090,17 @@ Google is well positioned to help reframe the public discourse. It has quantum r
         <tr>
           <td>6</td>
           <td>Publish a joint threat model and test suite.</td>
-          <td>A shared threat model should define on-presentation, on-issuance, on-registry, trust-list, semantic, and on-setup attacks. Test suites should include downgrade attempts, key rollover, expired trust anchors, status forgery, and mixed classical/PQC chains.</td>
+          <td>A shared threat model should define on-presentation, on-issuance, on-registry, trust-list, status-list, semantic, and on-setup attacks. Test suites should include downgrade attempts, key rollover, expired trust anchors, status forgery, schema replacement, and mixed classical/PQC chains.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Define a semantic registry protection profile.</td>
+          <td>JSON-LD contexts, schemas, vocabularies, namespaces, product identifiers, and policy registries should be signed, pinned, versioned, monitored, and prepared for PQC migration.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Create an open research track for PQC privacy.</td>
+          <td>Anonymous credentials, selective disclosure, unlinkability, and privacy-preserving revocation need new PQC-ready constructions with mobile, QR-code, and offline constraints.</td>
         </tr>
       </tbody>
     </table>
@@ -1193,29 +1205,133 @@ The priority should be calm and concrete engineering: inventory public-key depen
 
 <h2 id="appendix-b-minimal-pqc-corridor-checklist">Appendix B. Minimal PQC corridor checklist</h2>
 
-1. Issuer signatures are hybrid or PQC-ready, and algorithm identifiers are unambiguous.
+The following checklist prioritizes the minimum viable controls for a PQC-ready legal-person onboarding and data-sharing corridor, using MoSCoW levels to separate essential launch requirements from later hardening steps.
 
-2. Holder-binding proofs are hybrid or PQC-ready, nonce-bound, audience-bound, and not reusable across contexts.
+<figure class="table-figure">
+  <figcaption><strong>Table X.</strong> MoSCoW-prioritized checklist for a minimum viable PQC-ready onboarding and data-sharing corridor.</figcaption>
+  <div class="table-scroll">
+    <table class="academic-table recommendation-table">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Checklist item</th>
+          <th scope="col">MoSCoW level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Issuer signatures are hybrid or PQC-ready, and algorithm identifiers are unambiguous.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Holder-binding proofs are hybrid or PQC-ready, nonce-bound, audience-bound, and not reusable across contexts.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Verifier request signatures and verifier access certificates are hybrid or PQC-ready.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Wallet keys are protected in secure hardware where possible, have attestation paths, and support controlled key rotation.</td>
+          <td>Should-have</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Trust lists, access CA chains, and qualified or sectoral trust anchors are hybrid or PQC-ready, monitored, and prepared for emergency rollover.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Status lists and revocation services are hybrid or PQC-ready, highly available, and resilient to denial of service.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>DID methods, VDRs, resolver infrastructure, and identifier registries have explicit PQC migration paths.</td>
+          <td>Should-have</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>DNSSEC, WebPKI, certificate transparency, and endpoint authentication dependencies are identified and have migration or fallback paths.</td>
+          <td>Should-have</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Schemas, JSON-LD contexts, namespaces, vocabularies, product identifiers, and policy registries are signed, pinned, versioned, and monitored.</td>
+          <td>Should-have</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Authorization policies are machine-readable, versioned, and bound to verified legal-person identity, role credentials, delegation credentials, and transaction context.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Transport channels use hybrid or PQC key establishment where available, for example TLS 1.3 with hybrid ECDHE/ML-KEM or PQC-ready key establishment profiles.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>End-to-end encryption between authenticated legal persons is supported where data is exchanged beyond a single transport session, for example wallet-to-wallet, connector-to-connector, or DIDComm-based communication.</td>
+          <td>Should-have</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>PQC-ready encryption or key-agreement material can be discovered through DID documents, certificate-bound DIDs, wallet metadata, or equivalent authenticated discovery records.</td>
+          <td>Should-have</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>A participant discovery mechanism exists for the corridor, for example a simple directory or “yellow pages” service that lists PQC-ready issuers, wallets, verifiers, trust anchors, supported algorithms, endpoints, roles, and assurance levels.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>The discovery mechanism is authenticated, signed, versioned, monitored, and protected against downgrade, spoofing, stale metadata, unauthorized endpoint substitution, and unauthorized role claims.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>Downgrade prevention and mixed classical/PQC verification rules are defined and tested across issuance, presentation, verification, discovery, revocation, and communication flows.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>Long-term validation, timestamping, archival evidence, and audit evidence can be revalidated after algorithm deprecation.</td>
+          <td>Should-have</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>Logging rules minimize stored presentation material, proof artefacts, encryption metadata, key-agreement artefacts, and unnecessary personal or business-sensitive data.</td>
+          <td>Should-have</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>Incident runbooks cover trust-list compromise, issuer-key compromise, holder-key compromise, verifier-key compromise, status-list compromise, semantic-registry compromise, discovery-service compromise, and endpoint-key compromise.</td>
+          <td>Must-have</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Reissuance and rollover procedures are tested for individual credentials, wallet keys, trust anchors, status lists, semantic registries, discovery records, and ecosystem-wide migration events.</td>
+          <td>Must-have</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</figure>
 
-3. Verifier request signatures and access certificates are hybrid or PQC-ready.
+<p><strong>MoSCoW levels:</strong></p>
+<ul>
+  <li><strong>Must-have:</strong> essential for a minimum viable PQC-ready onboarding and data-sharing corridor.</li>
+  <li><strong>Should-have:</strong> important for resilience, assurance, and long-term operation, but not blocking the first controlled corridor pilot.</li>
+  <li><strong>Could-have:</strong> useful hardening or usability feature that can be added after the first corridor is stable.</li>
+  <li><strong>Won’t-have:</strong> not needed for the minimum viable corridor and should be kept out of the first implementation scope.</li>
+</ul>
 
-4. Wallet keys are protected in secure hardware where possible and have attestation paths.
-
-5. Trust lists and access CA chains are hybrid or PQC-ready and monitored.
-
-6. Status lists and revocation services are hybrid or PQC-ready and resilient to denial of service.
-
-7. DID methods, VDRs, DNSSEC, and WebPKI dependencies have migration paths.
-
-8. Schemas, contexts, namespaces, and policy registries are signed, pinned, versioned, and monitored.
-
-9. Transport channels use hybrid/PQC key establishment where available.
-
-10. Long-term validation, timestamping, archival evidence, emergency rollover, and reissuance policies are defined.
-
-11. Privacy-preserving presentation mechanisms have a quantum-safe roadmap.
-
-12. Downgrade prevention and mixed classical/PQC verification rules are tested.
 
 <section class="references" markdown="1">
 
