@@ -1208,7 +1208,7 @@ The priority should be calm and concrete engineering: inventory public-key depen
 The following checklist prioritizes the minimum viable controls for a PQC-ready legal-person onboarding and data-sharing corridor, using MoSCoW levels to separate essential launch requirements from later hardening steps.
 
 <figure class="table-figure">
-  <figcaption><strong>Table X.</strong> MoSCoW-prioritized checklist for a minimum viable PQC-ready onboarding and data-sharing corridor.</figcaption>
+  <figcaption><strong>Table B.1</strong> MoSCoW-prioritized checklist for a minimum viable PQC-ready onboarding and data-sharing corridor.</figcaption>
   <div class="table-scroll">
     <table class="academic-table recommendation-table">
       <thead>
