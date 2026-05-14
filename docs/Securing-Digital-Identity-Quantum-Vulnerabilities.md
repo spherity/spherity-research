@@ -954,12 +954,102 @@ Candidate corridors should be chosen by risk and leverage. Initial corridors sho
 
 A practical corridor should define at least four artefact classes: a threat model, a cryptographic profile, test vectors, and operational runbooks. The runbooks should include key rollover, emergency revocation, reissuance, downgrade prevention, audit evidence, and fallback rules for offline verification.
 
+<h3 id="8-1-minimum-viable-design-PQC-legal-person-onboarding-and-data-sharing-corridor">8.1 Minimum viable design: PQC legal-person onboarding and data sharing corridor</h3>
+
+A concrete legal-person onboarding corridor could be implemented as follows:
+
+1. A business register or authorized legal-person identity issuer issues a legal-person credential using a hybrid or PQC-ready issuer signature. 
+2. The enterprise wallet stores the credential and uses hybrid or PQC-ready holder binding.
+3. The verifier authenticates with a PQC-ready access certificate or verifier credential.
+4. The relevant trust list is hybrid or PQC-signed and supports emergency rollover.
+5. The relevant status list is hybrid or PQC-signed and supports suspension, revocation, and long-term evidence.
+6. DID, VDR, DNSSEC, or certificate-chain dependencies have an explicit migration path.
+7. The presentation is nonce-bound, audience-bound, short-lived, and protected against downgrade.
+8. Audit evidence is timestamped and can be revalidated or reissued after algorithm deprecation.
+9. Schema, context, and vocabulary versions are signed, pinned, and monitored.
+10. Emergency procedures define key rollover, verifier fallback, mass reissuance, and public incident communication.
+11. E2E data sharing protocol
+
+This corridor is narrow enough to test, but broad enough to expose the main end-to-end dependencies that matter for enterprise identity, EBW, regulated supply chains, and Trusted AI.
+
+<h3 id="8-2-example-a-transatlantic-legal-person-onboardin-and-data-sharing-corridor">8.2 Example: A Transatlantic Legal-Person Onboarding and Data Sharing Corridor</h3>
+
+A concrete implementation could start with a transatlantic legal-person identity and data sharing corridor between European and U.S. company identity sources.
+
+On the European side, the corridor could use the European Unique Identifier (EUID) and national business-register data as the authoritative basis for a legal-person credential. The EUID is used in the Business Registers Interconnection System (BRIS), through which EU Member State business registers have been interconnected and searchable since June 2017. For Germany, the Bundesanzeiger Verlag operates the Unternehmensregister, the German Company Register, and is the German member of the European Business Register network. The Unternehmensregister is the central platform for company data in Germany. The Bundesanzeiger Verlag platform also links to the Company Register, Transparency Register, Federal Law Gazette, eBilanz-Online, Legal Entity Identifier Register, and European Business Register.
+
+For the U.S. side, the corridor should not rely on a single federal company-register identifier. The U.S. does not have one national company register comparable to BRIS or the German Unternehmensregister. Legal entities are generally formed and registered at state level, for example through Secretary of State business registries. A U.S. legal-person credential should therefore bind the company’s legal name, jurisdiction of formation, state registry identifier or file number, registered status, registered agent information where available, and source evidence from the relevant state registry. The Employer Identification Number (EIN) may be added as a corroborating tax identifier issued by the IRS, but it should not be treated as proof of legal existence or good standing. If a private or sectoral aggregation service is used, it should preserve the original state source, timestamp, evidence chain, and update status rather than replacing them with an opaque aggregated identifier.
+
+A U.S. register-derived company identifier could be constructed in a way that is functionally similar to the EUID pattern, while remaining clearly distinct from an official national U.S. company identifier. The EUID combines the country code, register identifier, national registration number, and, where applicable, a verification digit. In the U.S., a comparable credential-internal composite identifier could combine: country = US, state or jurisdiction code, state registry authority, state entity ID or file number, and optional checksum, version, or source reference. This creates a stable, machine-readable anchor for verification while preserving the original state registry as the authoritative source.
+
+<figure class="table-figure">
+  <figcaption><strong>Table 8.</strong> Comparison of EU EUID and a U.S. state-registry-derived company identifier.</figcaption>
+  <div class="table-scroll">
+    <table class="academic-table taxonomy-table">
+      <thead>
+        <tr>
+          <th scope="col">Aspect</th>
+          <th scope="col">EU EUID</th>
+          <th scope="col">U.S. state-registry-derived company identifier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Legal status</td>
+          <td>Official European identifier used in BRIS for companies and branches across Member State registers.</td>
+          <td>Not an official national U.S. identifier. It would be a credential-internal composite identifier derived from state registry evidence.</td>
+        </tr>
+        <tr>
+          <td>Registry model</td>
+          <td>Member State business registers are interconnected through BRIS and the European Central Platform.</td>
+          <td>Company formation and registration are mainly state-level processes, usually handled by Secretary of State or equivalent state registries.</td>
+        </tr>
+        <tr>
+          <td>Identifier structure</td>
+          <td>Country code + register identifier + registration number + optional verification digit.</td>
+          <td>US + state or jurisdiction code + state registry authority + state entity ID, file number, or registration number + optional checksum or source reference.</td>
+        </tr>
+        <tr>
+          <td>Example pattern</td>
+          <td>DE + register code + German commercial register number, for example a Hamburg HRB number encoded in an EUID.</td>
+          <td>US-DE + Delaware Division of Corporations + Delaware file number, or US-CA + California Secretary of State + California entity number.</td>
+        </tr>
+        <tr>
+          <td>Cross-border / cross-jurisdiction function</td>
+          <td>Designed for cross-border identification within the EU business register system.</td>
+          <td>Can support cross-state and cross-border verification only if the credential includes jurisdiction, registry source, timestamp, and evidence chain.</td>
+        </tr>
+        <tr>
+          <td>Use in verifiable credentials</td>
+          <td>Can be used as a strong anchor for EU legal-person credentials.</td>
+          <td>Can be used as a strong anchor for U.S. legal-person credentials if it remains linked to the original state registry record.</td>
+        </tr>
+        <tr>
+          <td>Relation to EIN</td>
+          <td>Separate from tax identifiers.</td>
+          <td>EIN can be added as a corroborating federal tax identifier, but it does not replace the state registry identifier.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</figure>
+
+In such a corridor, a German GmbH receives a verifiable legal-person credential containing its EUID and national register evidence from the Unternehmensregister. This credential could be represented as an EU Company Certificate (EUCC) credential or as an European Business Wallet Owner ID (EBWOID) credential. Here, EUCC refers to a verifiable company credential that contains selected register-derived claims about a legal person, such as legal name, legal form, register number, registered address, status, and representatives. EBWOID refers to a wallet-owner identifier credential for the legal person that binds the enterprise wallet to the organization it represents. The EUCC describes the legal person. The EBWOID binds the wallet instance or wallet owner to that legal person. Together, they support machine-verifiable company authentication, wallet binding, and authorization.
+
+A U.S. corporation or LLC could receive a comparable verifiable credential containing its state of formation, Secretary of State file number or entity ID, legal name, registered status, registered agent information where legally available, and source reference to the relevant state registry. The credential could also include the constructed U.S. state-registry-derived company identifier as a machine-readable anchor. These credentials would not replace the underlying registers. They would make selected register facts machine-verifiable for authentication, onboarding, KYC/KYB, procurement, data-space participation, customs submission, supply chain data charing, and AI-agent delegation.
+
+For PQC-ready Business Wallet use cases, the European credential can be anchored in the EUID and national business-register evidence. For U.S. use cases, the credential can be anchored in the relevant state registry identifier and strengthened through additional corroboration, for example EIN, LEI reference data, beneficial-ownership information where legally accessible, sectoral licenses, tax-status evidence, or regulated-industry registrations. A verifier would then authenticate the company by checking the credential signature, issuer trust status, register evidence, current status or revocation information, and policy rules for the specific transaction.
+
+The same corridor would also test the post-quantum dependencies end to end. The legal-person issuer would use hybrid or PQC-ready issuer signatures. The enterprise wallet would use hybrid or PQC-ready holder binding. Verifiers would authenticate with PQC-ready verifier credentials or access certificates. Trust lists, status lists, schema registries, vocabulary registries, and audit records would be signed, versioned, monitored, and prepared for emergency rollover. This makes the corridor useful not only for legal-person onboarding, but also for cross-border B2B authentication, regulated supply-chain access, digital product passport workflows, and Trusted AI delegation.
+
+The corridor could also support PQC-ready end-to-end communication between authenticated and authorized legal persons. If for instance encryption keys or key-agreement material are registered in a DID document, certificate-bound DID, or equivalent wallet-controlled discovery record, the parties can establish a PQC-ready secure communication channel after mutual authentication and authorization. In an early implementation, this could support encrypted API communication for a digital data-sharing corridor. In a later implementation, the same trust model could support a DIDComm-based persistent channel between enterprise wallets or wallet-connected systems. The important point is that the communication channel would not be established between anonymous endpoints. It would be established between verified legal persons whose credentials, wallet bindings, roles, authorization policies, and key material can be checked before data is exchanged.
+
 <h2 id="9-recommendations-for-google-and-the-wider-ecosystem">9. Recommendations for Google and the wider ecosystem</h2>
 
 Google is well positioned to help reframe the public discourse. It has quantum research, cryptography engineering, Chrome, Android, Cloud KMS, identity systems, browser mediation, and developer reach. Google has also already stated that authentication services and digital signatures should be prioritized in PQC migration [2]. The next step is to make digital identity a first-class post-quantum migration topic.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 8.</strong> Recommendations for a PQC digital identity work program.</figcaption>
+  <figcaption><strong>Table 9.</strong> Recommendations for a PQC digital identity work program.</figcaption>
   <div class="table-scroll">
     <table class="academic-table recommendation-table">
       <thead>
