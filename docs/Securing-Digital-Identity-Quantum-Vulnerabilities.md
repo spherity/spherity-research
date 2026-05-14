@@ -387,20 +387,6 @@ code { white-space: pre-wrap; }
 
 <div class="paper-thesis">
   <strong>Central thesis.</strong> The quantum risk highlighted for elliptic-curve cryptocurrencies is a special case of a broader public-key exposure problem. Digital identity wallets, verifiable credentials, verifiable presentations, trust lists, status registries, VDRs, DNSSEC, WebPKI, and semantic registries form a public-key trust fabric that supports legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI. This fabric needs post-quantum migration corridors before it becomes too large to migrate safely.
-<br>
-<br>
-<strong>Key findings</strong>
-<br>
-<br>  
-1. Quantum risk for digital identity is primarily a "public-key trust fabric risk, not only a data-confidentiality risk.
-<br>
-2. Hybrid TLS and other channel-level upgrades are necessary, but do not protect stored credentials, presentations, trust lists, status lists, DID documents, schemas, or audit evidence.
-<br>
-3. Legal-person identity is a macro-economic control layer for trade, supply chains, DPPs, regulated data spaces, critical infrastructure, and Trusted AI.
-<br>
-4. Identity migration should start with bounded post-quantum identity corridors, not with a single big-bang migration.
-<br>
-5. Privacy-preserving credentials, selective disclosure, unlinkability, and revocation privacy remain major open research areas for PQC migration.
 </div>
 
 <section class="abstract-box" markdown="1">
@@ -411,6 +397,13 @@ code { white-space: pre-wrap; }
 <h2 id="abstract">Abstract</h2>
 
 Recent quantum resource estimates for elliptic-curve discrete logarithms have changed the risk posture for systems that expose long-lived public keys. The public debate has focused on Bitcoin and other cryptocurrencies, where a cryptographically relevant quantum computer (CRQC) could derive private keys from exposed elliptic-curve public keys and enable at-rest or on-spend attacks. This review paper argues that the same class of risk is broader and, in macro-economic terms, more material for digital identity. Verifiable credentials (VCs), verifiable presentations (VPs), identity wallets, issuer keys, holder-binding keys, verifier authentication keys, trust-list keys, status-list keys, decentralized identifiers, DNSSEC, WebPKI, and semantic registries all depend on public-key assumptions. A break of those assumptions could create forged identity evidence, false legal-person credentials, compromised supply-chain authority, unauthorized access to critical infrastructure, and misattributed actions by AI agents. The paper maps the cryptocurrency attack taxonomy into a digital identity taxonomy: at-rest identity attacks, on-presentation attacks, on-issuance attacks, on-registry attacks, trust-list attacks, status attacks, semantic supply-chain attacks, and on-setup attacks against privacy-preserving proof systems. It further argues that legal-person identity is a macro-economic control point. It supports onboarding, contracting, procurement, customs, AML/KYC, regulated supply chains, digital product passports, industrial automation, and Trusted AI. The exposure is therefore not limited to one asset class; it touches the transaction layer of the real economy. The main recommendation is to start work on post-quantum identity corridors: bounded, testable, end-to-end identity exchange paths in which issuance, presentation, wallet key storage, verifier authentication, trust lists, status lists, VDR resolution, semantic registries, transport security, and long-term validation are made hybrid or post-quantum-ready together.
+
+<strong>Key findings</strong>
+1. Quantum risk for digital identity is primarily a "public-key trust fabric risk, not only a data-confidentiality risk.
+2. Hybrid TLS and other channel-level upgrades are necessary, but do not protect stored credentials, presentations, trust lists, status lists, DID documents, schemas, or audit evidence.
+3. Legal-person identity is a macro-economic control layer for trade, supply chains, DPPs, regulated data spaces, critical infrastructure, and Trusted AI.
+4. Identity migration should start with bounded post-quantum identity corridors, not with a single big-bang migration.
+5. Privacy-preserving credentials, selective disclosure, unlinkability, and revocation privacy remain major open research areas for PQC migration.
 
 <p class="keywords"><strong>Keywords:</strong> post-quantum cryptography; cryptographically relevant quantum computer (CRQC); verifiable credentials; identity wallets; legal person identity; trust lists; VDRs; DNSSEC; digital product passports (DPP); Trusted AI; supply chain trust; regulated data space; European Business Wallet (EBW); Bitcoin; macro-economic risk analysis</p>
 
