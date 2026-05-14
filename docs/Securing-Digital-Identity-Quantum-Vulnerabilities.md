@@ -387,9 +387,9 @@ code { white-space: pre-wrap; }
 
 <div class="paper-thesis">
   <strong>Central thesis.</strong> The quantum risk highlighted for elliptic-curve cryptocurrencies is a special case of a broader public-key exposure problem. Digital identity wallets, verifiable credentials, verifiable presentations, trust lists, status registries, VDRs, DNSSEC, WebPKI, and semantic registries form a public-key trust fabric that supports legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI. This fabric needs post-quantum migration corridors before it becomes too large to migrate safely.
-  
-Key findings
-
+<br>
+<strong>Key findings</strong>
+<br>
 1. Quantum risk for digital identity is primarily a **public-key trust fabric risk**, not only a data-confidentiality risk.
 2. Hybrid TLS and other channel-level upgrades are necessary, but do not protect stored credentials, presentations, trust lists, status lists, DID documents, schemas, or audit evidence.
 3. Legal-person identity is a macro-economic control layer for trade, supply chains, DPPs, regulated data spaces, critical infrastructure, and Trusted AI.
