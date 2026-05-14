@@ -704,13 +704,21 @@ Status is a core identity control. The W3C Bitstring Status List specification p
 
 Long-term validity is harder. A credential might be valid at the time of presentation but later unverifiable because the algorithm is broken. Identity ecosystems need rules for timestamping, archival validation, transparency logs, reissuance, and evidence preservation. This is especially important for legal-person credentials, compliance certificates, product passports, audit logs, and AI-agent actions that may be reviewed years later.
 
-<h3 id="5-7-on-setup-attacks-against-privacy-preserving-credentials">5.7 On-setup attacks against privacy-preserving credentials</h3>
+<h3 id="5-8-semantic-supply-chain-attacks">5.8 Semantic supply-chain attacks</h3>
+
+The semantic layer is a security dependency. A signed credential may remain cryptographically valid while the meaning of a claim changes because a schema, JSON-LD context, namespace, product identifier, vocabulary, or policy authority is replaced, downgraded, or reinterpreted.
+
+A DPP credential may contain a signed claim about recycled content, carbon footprint, due-diligence status, repair instructions, or material composition. If the vocabulary, schema version, or policy authority behind that claim is replaced or downgraded, the surface form of the credential may remain unchanged while the business meaning changes. In this case the verifier sees a valid signature, but the claim no longer has the same governed meaning.
+
+Mitigations include signed and pinned JSON-LD contexts, immutable schema versions, governed vocabulary IRIs, transparent change logs, registry signatures, policy versioning, and explicit rules for deprecation. In a post-quantum setting, these registries and semantic authority records also need hybrid or PQC protection.
+
+<h3 id="5-8-on-setup-attacks-against-privacy-preserving-credentials">5.8 On-setup attacks against privacy-preserving credentials</h3>
 
 Privacy-preserving identity systems often use selective disclosure, anonymous credentials, accumulators, pairings, or zero-knowledge proofs. BBS-based VC cryptosuites, for example, are designed to support selective disclosure and unlinkability [15]. Other systems may use RSA-based CL signatures, pairing-based signatures, or SNARKs. These techniques are important for privacy, but many of their current constructions depend on quantum-vulnerable hardness assumptions or setup assumptions.
 
 A PQC migration that only replaces ECDSA issuer signatures is incomplete. The identity community also needs PQC-ready privacy-preserving credentials. This is an open research area. It requires attention to proof size, mobile verification, offline use, unlinkability, issuer privacy, revocation privacy, QR-code limits, and formal security models.
 
-<h3 id="5-8-agentic-ai-and-trusted-ai">5.8 Agentic AI and Trusted AI</h3>
+<h3 id="5-9-agentic-ai-and-trusted-ai">5.9 Agentic AI and Trusted AI</h3>
 
 Trusted AI requires traceability, accountability, and controlled authority. OECD AI principles call for traceability across datasets, processes, and decisions, and the EU AI Act imposes requirements such as logging, documentation, robustness, cybersecurity, and human oversight for high-risk AI systems [24,26]. NIST has also framed Trustworthy AI for critical infrastructure as a risk-management problem [25].
 
@@ -783,7 +791,50 @@ There is no single identity standard that can solve the PQC migration. The ident
 Google has made relevant platform moves. Chrome moved toward standardized ML-KEM for hybrid key exchange in BoringSSL and Chrome [30]. Android 17 adds ML-DSA support in Android Keystore and related PQC work for hardware-backed identity and authentication paths [29]. Google Cloud KMS has introduced quantum-safe signatures, including ML-DSA and SLH-DSA capabilities [31]. These are important foundations. They do not by themselves define end-to-end PQC identity profiles for VCs, VPs, trust lists, status lists, DID methods, or semantic registries.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 5.</strong> Standards readiness gap for PQC digital identity.</figcaption>
+  <figcaption><strong>Table 5.</strong> Standards readiness categories for PQC digital identity.</figcaption>
+  <div class="table-scroll">
+    <table class="academic-table taxonomy-table">
+      <thead>
+        <tr>
+          <th scope="col">Category</th>
+          <th scope="col">Examples</th>
+          <th scope="col">Role in migration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Existing identity standards</td>
+          <td>W3C VCDM, W3C Data Integrity, W3C VC JOSE/COSE, DID Core, OpenID4VCI, OpenID4VP, Digital Credentials API</td>
+          <td>Define the current identity object, issuance, presentation, and resolution layers.</td>
+        </tr>
+        <tr>
+          <td>Existing PQC standards</td>
+          <td>ML-KEM, ML-DSA, SLH-DSA</td>
+          <td>Provide standardized cryptographic building blocks.</td>
+        </tr>
+        <tr>
+          <td>Platform movement</td>
+          <td>Chrome/BoringSSL hybrid key exchange, Android Keystore / KeyMint PQC work, Google Cloud KMS quantum-safe signatures</td>
+          <td>Provides implementation substrate, especially for transport, mobile wallets, and cloud signing.</td>
+        </tr>
+        <tr>
+          <td>Missing identity profiles</td>
+          <td>PQC VC signatures, PQC holder binding, PQC verifier request signing, PQC trust lists, PQC status lists, PQC DID methods, PQC semantic registries</td>
+          <td>Needs standard profiles, test vectors, algorithm identifiers, governance rules, and interoperability testing.</td>
+        </tr>
+        <tr>
+          <td>Open research</td>
+          <td>PQC anonymous credentials, selective disclosure, unlinkability, revocation privacy, mobile proof sizes, QR-code constraints</td>
+          <td>Needs research before production-grade privacy-preserving wallet migration.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</figure>
+
+
+<figure class="table-figure">
+  <figcaption><strong>Table 6.</strong> Standards readiness gap for PQC digital identity.</figcaption>
   <div class="table-scroll">
     <table class="academic-table standards-table">
       <thead>
@@ -853,7 +904,7 @@ A post-quantum identity corridor is a governed, end-to-end identity exchange pat
 Corridors are useful because identity ecosystems are too fragmented for a single migration event. They allow high-risk flows to move first, while preserving interoperability. They also create test beds for standards work and give platform teams clear requirements. A legal-person onboarding corridor, for example, can test issuer signatures, holder binding, trust-list verification, status checks, and verifier authorization without waiting for every consumer identity use case to migrate.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 6.</strong> Maturity levels for PQC identity corridors.</figcaption>
+  <figcaption><strong>Table 7.</strong> Maturity levels for PQC identity corridors.</figcaption>
   <div class="table-scroll">
     <table class="academic-table maturity-table">
       <thead>
@@ -908,7 +959,7 @@ A practical corridor should define at least four artefact classes: a threat mode
 Google is well positioned to help reframe the public discourse. It has quantum research, cryptography engineering, Chrome, Android, Cloud KMS, identity systems, browser mediation, and developer reach. Google has also already stated that authentication services and digital signatures should be prioritized in PQC migration [2]. The next step is to make digital identity a first-class post-quantum migration topic.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 7.</strong> Recommendations for a PQC digital identity work program.</figcaption>
+  <figcaption><strong>Table 8.</strong> Recommendations for a PQC digital identity work program.</figcaption>
   <div class="table-scroll">
     <table class="academic-table recommendation-table">
       <thead>
