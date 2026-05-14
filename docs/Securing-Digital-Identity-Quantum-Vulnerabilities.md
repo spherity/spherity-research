@@ -27,9 +27,10 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
 }
 
 .paper-page {
-  width: min(100% - 2.5rem, 1100px);
-  margin-inline: auto;
-  padding-inline: clamp(1.25rem, 2vw, 2rem);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-inline: clamp(1rem, 2.5vw, 2.5rem);
   padding-block: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 17px;
