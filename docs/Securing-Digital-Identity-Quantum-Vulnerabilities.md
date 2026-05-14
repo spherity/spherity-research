@@ -445,7 +445,7 @@ The Babbush et al. analysis is framed around cryptocurrency signatures. Its deep
 
 <strong>Public-key exposure</strong> means that a public key, verification method, certificate, DID document, trust-list entry, resolver record, registry entry, signed schema, or cryptographic parameter becomes available to an attacker long enough to support quantum-assisted private-key recovery, forgery, impersonation, or registry manipulation.
 
-This creates <strong>Public-Key Trust Fabric Risk<//strong>: the systemic risk that identity, authorization, registry, semantic, and audit systems lose integrity because their public verification material becomes usable for quantum-assisted private-key recovery or forgery.
+This creates <strong>Public-Key Trust Fabric Risk</strong>: the systemic risk that identity, authorization, registry, semantic, and audit systems lose integrity because their public verification material becomes usable for quantum-assisted private-key recovery or forgery.
 
 NIST finalized ML-KEM, ML-DSA, and SLH-DSA in 2024 as the first three post-quantum standards. NIST also states that organizations should begin migration and that many quantum-vulnerable algorithms are expected to be deprecated or disallowed by 2035, with high-risk use cases moving earlier [3,4,5]. Google has publicly set a 2029 timeline for PQC migration and has called out authentication services and digital signatures as priority areas [2].
 
@@ -1459,7 +1459,7 @@ The following checklist prioritizes the minimum viable controls for a PQC-ready 
 
 **[31]** Google Cloud. "Post-quantum cryptography (PQC)." [https://cloud.google.com/security/resources/post-quantum-cryptography](https://cloud.google.com/security/resources/post-quantum-cryptography)
 
-*All web references accessed on 12 May 2026. Market data is time-sensitive and should be refreshed before publication.*
+*All web references accessed on 12 May 2026. Market data is time-sensitive.*
 
 </section>
 
