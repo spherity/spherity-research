@@ -390,16 +390,12 @@ code { white-space: pre-wrap; }
 </div>
 
 <section class="abstract-box" markdown="1">
-
-
-
-
 <h2 id="abstract">Abstract</h2>
 
 Recent quantum resource estimates for elliptic-curve discrete logarithms have changed the risk posture for systems that expose long-lived public keys. The public debate has focused on Bitcoin and other cryptocurrencies, where a cryptographically relevant quantum computer (CRQC) could derive private keys from exposed elliptic-curve public keys and enable at-rest or on-spend attacks. This review paper argues that the same class of risk is broader and, in macro-economic terms, more material for digital identity. Verifiable credentials (VCs), verifiable presentations (VPs), identity wallets, issuer keys, holder-binding keys, verifier authentication keys, trust-list keys, status-list keys, decentralized identifiers, DNSSEC, WebPKI, and semantic registries all depend on public-key assumptions. A break of those assumptions could create forged identity evidence, false legal-person credentials, compromised supply-chain authority, unauthorized access to critical infrastructure, and misattributed actions by AI agents. The paper maps the cryptocurrency attack taxonomy into a digital identity taxonomy: at-rest identity attacks, on-presentation attacks, on-issuance attacks, on-registry attacks, trust-list attacks, status attacks, semantic supply-chain attacks, and on-setup attacks against privacy-preserving proof systems. It further argues that legal-person identity is a macro-economic control point. It supports onboarding, contracting, procurement, customs, AML/KYC, regulated supply chains, digital product passports, industrial automation, and Trusted AI. The exposure is therefore not limited to one asset class; it touches the transaction layer of the real economy. The main recommendation is to start work on post-quantum identity corridors: bounded, testable, end-to-end identity exchange paths in which issuance, presentation, wallet key storage, verifier authentication, trust lists, status lists, VDR resolution, semantic registries, transport security, and long-term validation are made hybrid or post-quantum-ready together.
 
 <strong>Key findings</strong>
-1. Quantum risk for digital identity is primarily a "public-key trust fabric risk, not only a data-confidentiality risk.
+1. Quantum risk for digital identity is primarily a 'public-key trust fabric risk', not only a data-confidentiality risk.
 2. Hybrid TLS and other channel-level upgrades are necessary, but do not protect stored credentials, presentations, trust lists, status lists, DID documents, schemas, or audit evidence.
 3. Legal-person identity is a macro-economic control layer for trade, supply chains, DPPs, regulated data spaces, critical infrastructure, and Trusted AI.
 4. Identity migration should start with bounded post-quantum identity corridors, not with a single big-bang migration.
@@ -446,6 +442,10 @@ The main recommendation is to start work on PQC identity corridors. A corridor i
 <h2 id="2-quantum-risk-as-a-public-key-exposure-problem">2. Quantum risk as a public-key exposure problem</h2>
 
 The Babbush et al. analysis is framed around cryptocurrency signatures. Its deeper lesson is that systems can no longer treat exposed ECC public keys as harmless long-term data. In classical security models, a public key can be public for decades. In a post-quantum threat model, the same public key may become a route to the private key. The practical risk depends on three factors: the algorithm, the public-key exposure surface, and the time window in which the attacker can use the recovered private key.
+
+<strong>Public-key exposure</strong> means that a public key, verification method, certificate, DID document, trust-list entry, resolver record, registry entry, signed schema, or cryptographic parameter becomes available to an attacker long enough to support quantum-assisted private-key recovery, forgery, impersonation, or registry manipulation.
+
+This creates <strong>Public-Key Trust Fabric Risk<//strong>: the systemic risk that identity, authorization, registry, semantic, and audit systems lose integrity because their public verification material becomes usable for quantum-assisted private-key recovery or forgery.
 
 NIST finalized ML-KEM, ML-DSA, and SLH-DSA in 2024 as the first three post-quantum standards. NIST also states that organizations should begin migration and that many quantum-vulnerable algorithms are expected to be deprecated or disallowed by 2035, with high-risk use cases moving earlier [3,4,5]. Google has publicly set a 2029 timeline for PQC migration and has called out authentication services and digital signatures as priority areas [2].
 
@@ -614,6 +614,58 @@ A quantum attacker does not need to attack every part of an identity ecosystem. 
   </div>
 </figure>
 
+<figure class="table-figure">
+  <figcaption><strong>Table 3.</strong> Risk priority by asset class.</figcaption>
+  <div class="table-scroll">
+    <table class="academic-table taxonomy-table">
+      <thead>
+        <tr>
+          <th scope="col">Priority</th>
+          <th scope="col">Asset class</th>
+          <th scope="col">Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Very high</td>
+          <td>Trust lists, access CAs, issuer root keys</td>
+          <td>Ecosystem-wide impact. One compromise can affect many wallets, issuers, and verifiers.</td>
+        </tr>
+        <tr>
+          <td>Very high</td>
+          <td>Legal-person identity credentials</td>
+          <td>Broad dependency across onboarding, contracting, procurement, KYC/KYB, data spaces, DPPs, and AI delegation.</td>
+        </tr>
+        <tr>
+          <td>High</td>
+          <td>Status and revocation services</td>
+          <td>Controls whether a credential is accepted, suspended, or revoked.</td>
+        </tr>
+        <tr>
+          <td>High</td>
+          <td>DPP issuer and product-event credentials</td>
+          <td>Supply-chain compliance, product provenance, and market surveillance impact.</td>
+        </tr>
+        <tr>
+          <td>High</td>
+          <td>AI-agent delegation credentials</td>
+          <td>False authority can be executed at machine speed.</td>
+        </tr>
+        <tr>
+          <td>Medium</td>
+          <td>Short-lived low-value VPs</td>
+          <td>Lower lifetime and smaller scope, provided nonce, audience, and session controls are strong.</td>
+        </tr>
+        <tr>
+          <td>Research priority</td>
+          <td>Anonymous credentials, selective disclosure, ZK systems, accumulators</td>
+          <td>PQC replacements remain immature and require new privacy, size, and mobile-performance analysis.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</figure>
+
 <h2 id="5-identity-specific-quantum-attack-scenarios">5. Identity-specific quantum attack scenarios</h2>
 
 <h3 id="5-1-issuer-key-compromise">5.1 Issuer key compromise</h3>
@@ -673,7 +725,7 @@ The scale difference is visible in macro-economic data. Bitcoin market capitaliz
 Legal-person identity sits under many of these flows. It supports enterprise onboarding, beneficial ownership checks, KYC/AML, sanctions screening, procurement, customs, supply-chain due diligence, supplier qualification, electronic seals, product-passport data, industrial IoT authorization, critical infrastructure access, and accountable AI delegation. A broad loss of trust in this layer would not only cause theft. It could raise transaction costs, delay trade, increase manual verification, break automated compliance, create false provenance, disrupt just-in-time operations, and weaken AI accountability.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 3.</strong> Macro-economic dependency surfaces for post-quantum identity risk.</figcaption>
+  <figcaption><strong>Table 4.</strong> Macro-economic dependency surfaces for post-quantum identity risk.</figcaption>
   <div class="table-scroll">
     <table class="academic-table macro-table">
       <thead>
@@ -731,7 +783,7 @@ There is no single identity standard that can solve the PQC migration. The ident
 Google has made relevant platform moves. Chrome moved toward standardized ML-KEM for hybrid key exchange in BoringSSL and Chrome [30]. Android 17 adds ML-DSA support in Android Keystore and related PQC work for hardware-backed identity and authentication paths [29]. Google Cloud KMS has introduced quantum-safe signatures, including ML-DSA and SLH-DSA capabilities [31]. These are important foundations. They do not by themselves define end-to-end PQC identity profiles for VCs, VPs, trust lists, status lists, DID methods, or semantic registries.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 4.</strong> Standards readiness gap for PQC digital identity.</figcaption>
+  <figcaption><strong>Table 5.</strong> Standards readiness gap for PQC digital identity.</figcaption>
   <div class="table-scroll">
     <table class="academic-table standards-table">
       <thead>
@@ -801,7 +853,7 @@ A post-quantum identity corridor is a governed, end-to-end identity exchange pat
 Corridors are useful because identity ecosystems are too fragmented for a single migration event. They allow high-risk flows to move first, while preserving interoperability. They also create test beds for standards work and give platform teams clear requirements. A legal-person onboarding corridor, for example, can test issuer signatures, holder binding, trust-list verification, status checks, and verifier authorization without waiting for every consumer identity use case to migrate.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 5.</strong> Maturity levels for PQC identity corridors.</figcaption>
+  <figcaption><strong>Table 6.</strong> Maturity levels for PQC identity corridors.</figcaption>
   <div class="table-scroll">
     <table class="academic-table maturity-table">
       <thead>
@@ -856,7 +908,7 @@ A practical corridor should define at least four artefact classes: a threat mode
 Google is well positioned to help reframe the public discourse. It has quantum research, cryptography engineering, Chrome, Android, Cloud KMS, identity systems, browser mediation, and developer reach. Google has also already stated that authentication services and digital signatures should be prioritized in PQC migration [2]. The next step is to make digital identity a first-class post-quantum migration topic.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 6.</strong> Recommendations for a PQC digital identity work program.</figcaption>
+  <figcaption><strong>Table 7.</strong> Recommendations for a PQC digital identity work program.</figcaption>
   <div class="table-scroll">
     <table class="academic-table recommendation-table">
       <thead>
