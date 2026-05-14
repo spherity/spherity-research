@@ -390,10 +390,15 @@ code { white-space: pre-wrap; }
 <br>
 <strong>Key findings</strong>
 <br>
+  
 1. Quantum risk for digital identity is primarily a **public-key trust fabric risk**, not only a data-confidentiality risk.
+
 2. Hybrid TLS and other channel-level upgrades are necessary, but do not protect stored credentials, presentations, trust lists, status lists, DID documents, schemas, or audit evidence.
+
 3. Legal-person identity is a macro-economic control layer for trade, supply chains, DPPs, regulated data spaces, critical infrastructure, and Trusted AI.
+
 4. Identity migration should start with bounded post-quantum identity corridors, not with a single big-bang migration.
+
 5. Privacy-preserving credentials, selective disclosure, unlinkability, and revocation privacy remain major open research areas for PQC migration.
 </div>
 
