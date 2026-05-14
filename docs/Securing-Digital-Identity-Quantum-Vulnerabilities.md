@@ -21,15 +21,23 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
 ---
 
 <style>
+.paper-page,
+.paper-page * {
+  box-sizing: border-box;
+}
+
 .paper-page {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 3rem;
+  width: min(100% - 2.5rem, 1100px);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 2vw, 2rem);
+  padding-block: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 17px;
   line-height: 1.7;
   color: #24292f;
 }
+
+/* Headings and text */
 
 .paper-page h1,
 .paper-page h2,
@@ -41,8 +49,8 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
 }
 
 .paper-page h1 {
-  font-size: 2.45rem;
   margin-top: 0;
+  font-size: 2.45rem;
 }
 
 .paper-page h2 {
@@ -59,6 +67,12 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   margin: 0.95rem 0;
 }
 
+code {
+  white-space: pre-wrap;
+}
+
+/* Header */
+
 .paper-header {
   margin: 0 0 2.5rem 0;
   padding: 0 0 1.75rem 0;
@@ -67,9 +81,9 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
 
 .paper-logo {
   display: block;
-  margin: 0 0 1.25rem 0;
   max-width: 180px;
   height: auto;
+  margin: 0 0 1.25rem 0;
 }
 
 .paper-kicker {
@@ -83,9 +97,9 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
 
 .paper-title {
   margin: 0;
-  line-height: 1.15;
   font-size: 2.45rem;
   font-weight: 700;
+  line-height: 1.15;
 }
 
 .paper-subtitle {
@@ -97,7 +111,6 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
 
 .paper-author-block {
   margin: 1.35rem 0 0 0;
-  font-family: Georgia, "Times New Roman", serif;
   color: #24292f;
 }
 
@@ -108,27 +121,26 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   line-height: 1.45;
 }
 
-.paper-affiliation {
-  margin: 0.15rem 0 0 0;
-  font-size: 1rem;
-  font-style: italic;
-  line-height: 1.45;
-  color: #57606a;
-}
-
+.paper-affiliation,
 .paper-date {
   margin: 0.15rem 0 0 0;
   font-size: 1rem;
   line-height: 1.45;
   color: #57606a;
 }
-  
+
+.paper-affiliation {
+  font-style: italic;
+}
+
+/* Highlight boxes */
+
 .paper-thesis {
   margin: 1.75rem 0 2.25rem 0;
   padding: 1.1rem 1.25rem;
   border-left: 4px solid #0969da;
-  background: #f6f8fa;
   border-radius: 6px;
+  background: #f6f8fa;
   line-height: 1.6;
 }
 
@@ -151,6 +163,8 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   font-size: 0.92rem;
   color: #57606a;
 }
+
+/* Table of contents */
 
 .toc-box {
   margin: 2rem 0 2.5rem 0;
@@ -183,6 +197,8 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   text-underline-offset: 0.16em;
 }
 
+/* Figures */
+
 .paper-figure {
   margin: 2rem 0 2.4rem 0;
 }
@@ -195,20 +211,22 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   color: #57606a;
 }
 
+/* SSI figure */
+
 .ssi-figure {
+  padding: 1rem;
   border: 1px solid #d8dee4;
   border-radius: 10px;
   background: #ffffff;
-  padding: 1rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .trust-plane,
 .semantic-plane {
   padding: 0.75rem 0.85rem;
-  background: #f6f8fa;
   border: 1px solid #d8dee4;
   border-radius: 8px;
+  background: #f6f8fa;
   font-size: 0.92rem;
   color: #24292f;
 }
@@ -240,6 +258,8 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   line-height: 1.45;
   color: #57606a;
 }
+
+/* Tables */
 
 .table-figure {
   margin: 2rem 0 2.4rem 0;
@@ -274,9 +294,9 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   padding: 0.85rem 0.9rem;
   text-align: left;
   vertical-align: bottom;
-  font-weight: 650;
-  background: #f6f8fa;
   border-bottom: 2px solid #d0d7de;
+  background: #f6f8fa;
+  font-weight: 650;
   color: #24292f;
 }
 
@@ -290,8 +310,8 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   background: #fbfbfc;
 }
 
-.academic-table td:first-child,
-.academic-table th:first-child {
+.academic-table th:first-child,
+.academic-table td:first-child {
   font-weight: 600;
   color: #111827;
 }
@@ -312,36 +332,51 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   color: #57606a;
 }
 
+/* References */
+
 .references p,
 .references li {
+  margin: 0.65rem 0;
   padding-left: 1.75rem;
   text-indent: -1.75rem;
-  margin: 0.65rem 0;
 }
 
-code { white-space: pre-wrap; }
+/* Responsive layout */
 
 @media (max-width: 800px) {
-  .ssi-grid { grid-template-columns: 1fr; }
+  .ssi-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 700px) {
   .paper-page {
-    padding: 0 1.25rem;
+    width: auto;
+    padding-inline: 1.25rem;
     font-size: 16px;
   }
 
-  .paper-title { font-size: 1.75rem; }
-  .paper-subtitle { font-size: 1rem; }
+  .paper-title {
+    font-size: 1.75rem;
+  }
+
+  .paper-subtitle {
+    font-size: 1rem;
+  }
+
   .academic-table {
-    font-size: 0.86rem;
     min-width: 760px;
+    font-size: 0.86rem;
   }
 }
 
+/* Print layout */
+
 @media print {
   .paper-page {
+    width: auto;
     max-width: none;
+    margin: 0;
     padding: 0;
     font-size: 11pt;
     line-height: 1.45;
