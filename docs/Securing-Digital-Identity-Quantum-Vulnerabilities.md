@@ -116,6 +116,13 @@ image: "./assets/Spherity-logo-horiz-blue-rgb.png"
   color: #57606a;
 }
 
+.paper-date {
+  margin: 0.15rem 0 0 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #57606a;
+}
+  
 .paper-thesis {
   margin: 1.75rem 0 2.25rem 0;
   padding: 1.1rem 1.25rem;
@@ -368,20 +375,32 @@ code { white-space: pre-wrap; }
 <main class="paper-page" markdown="1">
 <header class="paper-header">
   <img class="paper-logo" src="./assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="160">
-  <p class="paper-kicker">Review paper</p>
+  <p class="paper-kicker">Spherity Research Paper</p>
   <h1 class="paper-title">Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities</h1>
-  <p class="paper-subtitle"><strong>Attack taxonomy, macro-economic risk, and post-quantum migration corridors</strong></p>
+  <p class="paper-subtitle"><strong>Public-key trust fabric risk, attack taxonomy, macro-economic exposure, and post-quantum identity corridors</strong></p>
   <div class="paper-author-block">
     <p class="paper-author">Dr. Carsten Stöcker</p>
     <p class="paper-affiliation">Spherity GmbH</p>
+    <p class="date"> 2026-05-14 </p>
   </div>
 </header>
 
 <div class="paper-thesis">
   <strong>Central thesis.</strong> The quantum risk highlighted for elliptic-curve cryptocurrencies is a special case of a broader public-key exposure problem. Digital identity wallets, verifiable credentials, verifiable presentations, trust lists, status registries, VDRs, DNSSEC, WebPKI, and semantic registries form a public-key trust fabric that supports legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI. This fabric needs post-quantum migration corridors before it becomes too large to migrate safely.
+  
+Key findings
+
+1. Quantum risk for digital identity is primarily a **public-key trust fabric risk**, not only a data-confidentiality risk.
+2. Hybrid TLS and other channel-level upgrades are necessary, but do not protect stored credentials, presentations, trust lists, status lists, DID documents, schemas, or audit evidence.
+3. Legal-person identity is a macro-economic control layer for trade, supply chains, DPPs, regulated data spaces, critical infrastructure, and Trusted AI.
+4. Identity migration should start with bounded post-quantum identity corridors, not with a single big-bang migration.
+5. Privacy-preserving credentials, selective disclosure, unlinkability, and revocation privacy remain major open research areas for PQC migration.
 </div>
 
 <section class="abstract-box" markdown="1">
+
+
+
 
 <h2 id="abstract">Abstract</h2>
 
