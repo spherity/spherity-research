@@ -408,6 +408,36 @@ code {
     text-decoration: none;
   }
 }
+  .paper-figure.centered-figure {
+  margin: 2.2rem auto 2.6rem auto;
+  text-align: center;
+}
+
+.paper-figure.centered-figure img,
+.paper-figure.centered-figure svg {
+  display: block;
+  max-width: min(100%, 980px);
+  height: auto;
+  margin-inline: auto;
+  border: 1px solid #d8dee4;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.paper-figure.centered-figure figcaption {
+  max-width: 980px;
+  margin: 0.75rem auto 0 auto;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #57606a;
+}
+
+.paper-figure.centered-figure figcaption strong {
+  color: #24292f;
+  font-weight: 650;
+}
 </style>
 
 <main class="paper-page" markdown="1">
@@ -476,6 +506,14 @@ The current public debate is too narrow when it frames the problem as whether qu
 The paper therefore reviews quantum risk for digital identity wallets and VC/VP ecosystems. It uses the SSI triangle as the starting model, but extends it to a trust control plane and a semantic supply chain. This is necessary because a verifier does not only check a digital signature. It checks whether the issuer is trusted, whether the credential is current, whether the wallet is acceptable, whether the verifier is authorized, whether the VDR data is correct, and whether the meaning of the claims is stable.
 
 The main recommendation is to start work on PQC identity corridors. A corridor is a bounded identity flow, such as legal-person onboarding or digital product passport signing, in which all public-key dependencies are inventoried and moved to hybrid or post-quantum operation together. This is more realistic than a big-bang migration, and more useful than upgrading transport security alone.
+
+<figure class="paper-figure centered-figure">
+  <img src="./assets/docs/assets/Infochart-Securing-Legal-Person-Digital-Identity-Against-Quantum-Vulnerabilities-Spherity-GmbH-05-2026.png"
+       alt="Infochart showing how quantum-risk preparation shifts from HNDL and Bitcoin to legal person identity, with migration urgency, a US–Germany PQC-resilient digital corridor, crypto-agile identity infrastructure, and the regulatory role of Business Wallets and the European Business Wallet.">
+  <figcaption>
+     <strong>Figure X.</strong> Securing legal person digital identity against quantum vulnerabilities. The chart reframes quantum risk as a public-key exposure problem for organizational identity, supply chains, Industry 4.0, critical infrastructure, and Trusted AI. It shows the lead-time problem of identity migration, a bounded US–Germany PQC-resilient digital corridor using hybrid-encrypted communication, and the supporting crypto-agile infrastructure for issuers, wallets, verifiers, trust lists, status services, VDRs, DNSSEC/WebPKI, and key management. The regulatory frame links Business Wallets and the European Business Wallet to interoperable, auditable, and post-quantum-ready identity infrastructure.
+  </figcaption>
+</figure>
 
 <h2 id="2-quantum-risk-as-a-public-key-exposure-problem">2. Quantum risk as a public-key exposure problem</h2>
 
