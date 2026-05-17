@@ -1,13 +1,22 @@
----
 layout: default
 title: "Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities"
 subtitle: "Attack taxonomy, macro-economic risk, and post-quantum migration corridors"
 description: "This review paper analyses how quantum risks to elliptic-curve cryptography extend beyond Bitcoin and blockchains to digital identity systems, including VCs, VPs, wallets, trust lists, VDRs, status services, semantic registries, legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI."
 author: "Dr. Carsten Stöcker"
 affiliation: "Spherity GmbH"
-date: "2026-05-12"
+date: "2026-05-14"
+last_modified_at: "2026-05-16"
 lang: "en"
 toc: true
+
+permalink: /Securing-Digital-Identity-Quantum-Vulnerabilities.html
+canonical_url: "https://spherity.github.io/spherity-research/Securing-Digital-Identity-Quantum-Vulnerabilities.html"
+
+robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+
+image: "/assets/Infochart-Securing-Legal-Person-Digital-Identity-Against-Quantum-Vulnerabilities-Spherity-GmbH-05-2026.png"
+image_alt: "Infochart showing how quantum-risk preparation shifts from HNDL and Bitcoin to legal person identity, with migration urgency, a US–Germany PQC-resilient digital corridor, crypto-agile identity infrastructure, and the regulatory role of Business Wallets and the European Business Wallet."
+
 tags:
   - post-quantum-cryptography
   - digital-identity
@@ -17,8 +26,8 @@ tags:
   - trust-lists
   - digital-product-passports
   - trusted-ai
-image: "./assets/Spherity-logo-horiz-blue-rgb.png"
 ---
+
 
 <style>
 .paper-page,
