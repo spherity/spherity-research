@@ -1,27 +1,97 @@
-<div style="display:flex; align-items:center; gap:16px; margin-bottom:2rem;">
-  <img src="./assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="120">
-</div>
+---
+layout: default
+title: "Spherity Research"
+description: "Research papers by Spherity GmbH on decentralized identity, verifiable credentials, trust infrastructure, and regulated data ecosystems."
+permalink: /
+robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+image: "/assets/Spherity-logo-horiz-blue-rgb.png"
+image_alt: "Spherity logo."
+---
 
-This site publishes selected research papers and roadmaps developed by
-Spherity on digital identity, trust infrastructure, and regulated
-digital ecosystems.
+<main class="paper-page research-index">
+  <header class="paper-header">
+    <img class="paper-logo"
+         src="{{ '/assets/Spherity-logo-horiz-blue-rgb.png' | relative_url }}"
+         alt="Spherity"
+         width="160">
 
-The HTML versions published here are the **canonical references**
-for citation and external linking.  
+    <p class="paper-kicker">Spherity Research</p>
+    <h1 class="paper-title">Spherity Research Papers</h1>
+    <p class="paper-subtitle">
+      Research on decentralized identity, verifiable credentials, trust infrastructure,
+      regulated data ecosystems, and post-quantum migration.
+    </p>
+  </header>
 
-Markdown sources remain available in the repository for transparency
-and collaboration.
+  <section aria-labelledby="post-quantum-heading">
+    <h2 id="post-quantum-heading">Post-Quantum Digital Identity</h2>
 
-## European Business Wallet (EBW)
+    <div class="research-list">
+      <article class="research-card">
+        <div>
+          <h2>
+            <a href="{{ '/Securing-Digital-Identity-Quantum-Vulnerabilities.html' | relative_url }}">
+              Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities
+            </a>
+          </h2>
 
-The European Business Wallet (EBW) is a core building block for
-organisational identity, verifiable credentials, and compliance-driven
-data exchange under eIDAS 2.0.
+          <p>
+            Public-key trust fabric risk, attack taxonomy, macro-economic exposure,
+            and post-quantum identity corridors.
+          </p>
 
-- [Legal and Operational EBW Roadmap Toward EU-Wide Acceptance](./ebw-roadmap.html)
+          <p class="research-card-meta">
+            Dr. Carsten Stöcker, Spherity GmbH ·
+            <time datetime="2026-05-14">2026-05-14</time>
+          </p>
+        </div>
 
-## Digitale Identities and against Quantum Vulnerabilities
+        <a href="{{ '/Securing-Digital-Identity-Quantum-Vulnerabilities.html' | relative_url }}"
+           aria-label="Open research paper: Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities">
+          <img src="{{ '/assets/Infochart-Securing-Legal-Person-Digital-Identity-Against-Quantum-Vulnerabilities-Spherity-GmbH-05-2026.png' | relative_url }}"
+               alt="Preview of the infochart about legal person digital identity and post-quantum cryptography."
+               loading="lazy">
+        </a>
+      </article>
+    </div>
+  </section>
 
-The quantum risk highlighted for elliptic-curve cryptocurrencies is a special case of a broader public-key exposure problem. Digital identity wallets, verifiable credentials, verifiable presentations, trust lists, status registries, VDRs, DNSSEC, WebPKI, and semantic registries form a public-key trust fabric that supports legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI. This fabric needs post-quantum migration corridors before it becomes too large to migrate safely.
+  <section aria-labelledby="ebw-heading">
+    <h2 id="ebw-heading">European Business Wallet (EBW)</h2>
 
-- [Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities](./Securing-Digital-Identity-Quantum-Vulnerabilities.html)
+    <p>
+      The European Business Wallet (EBW) is a core building block for
+      organisational identity, verifiable credentials, and compliance-driven
+      data exchange under eIDAS 2.0.
+    </p>
+
+    <div class="research-list">
+      <article class="research-card">
+        <div>
+          <h2>
+            <a href="{{ '/ebw-roadmap.html' | relative_url }}">
+              Legal and Operational EBW Roadmap Toward EU-Wide Acceptance
+            </a>
+          </h2>
+
+          <p>
+            A roadmap for legal, operational, and ecosystem acceptance of the
+            European Business Wallet across EU member states and regulated
+            business processes.
+          </p>
+
+          <p class="research-card-meta">
+            Spherity GmbH · European Business Wallet
+          </p>
+        </div>
+
+        <a href="{{ '/ebw-roadmap.html' | relative_url }}"
+           aria-label="Open research paper: Legal and Operational EBW Roadmap Toward EU-Wide Acceptance">
+          <img src="{{ '/assets/Spherity-logo-horiz-blue-rgb.png' | relative_url }}"
+               alt="Spherity logo."
+               loading="lazy">
+        </a>
+      </article>
+    </div>
+  </section>
+</main>
