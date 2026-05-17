@@ -1,3 +1,4 @@
+---
 layout: default
 title: "Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities"
 subtitle: "Attack taxonomy, macro-economic risk, and post-quantum migration corridors"
