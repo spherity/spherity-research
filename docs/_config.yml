@@ -1,2 +1,12 @@
-theme: minima
-title: Spherity Research
+url: "https://spherity.github.io"
+baseurl: "/spherity-research"
+
+title: "Spherity Research"
+description: "Research papers by Spherity GmbH on decentralized identity, verifiable credentials, cyber-security, trust infrastructure, PQC, standardisation, adoption strategies, regulated data ecosystems and trusted AI."
+
+author:
+  name: "Dr. Carsten Stöcker"
+  email: "carsten.stoecker@spherity.com"
+
+logo: "/assets/Spherity-logo-horiz-blue-rgb.png"
+timezone: "Europe/Berlin"
