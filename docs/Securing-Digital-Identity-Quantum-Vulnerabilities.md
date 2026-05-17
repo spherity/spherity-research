@@ -448,9 +448,108 @@ code {
   color: #24292f;
   font-weight: 650;
 }
+
+
+/* Research article metadata */
+
+.research-article {
+  max-width: 100%;
+}
+
+.paper-date,
+.paper-meta,
+.paper-updated {
+  margin: 0.2rem 0 0 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #57606a;
+}
+
+.paper-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.7rem;
+}
+
+.paper-meta a {
+  color: #0969da;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+.paper-canonical {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d8dee4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: #57606a;
+  overflow-wrap: anywhere;
+}
+
+/* Research index page */
+
+.research-index {
+  max-width: 1100px;
+}
+
+.research-list {
+  display: grid;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.research-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 1rem;
+  padding: 1.1rem;
+  border: 1px solid #d8dee4;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.research-card h2 {
+  margin: 0 0 0.4rem 0;
+  padding: 0;
+  border: none;
+  font-size: 1.25rem;
+}
+
+.research-card p {
+  margin: 0.45rem 0;
+}
+
+.research-card img {
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #d8dee4;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.research-card-meta {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: #57606a;
+}
+
+@media (max-width: 700px) {
+  .research-card {
+    grid-template-columns: 1fr;
+  }
+
+  .research-card img {
+    width: 100%;
+  }
+}
+  
 </style>
 
 <main class="paper-page" markdown="1">
+<article class="research-article" itemscope itemtype="https://schema.org/ScholarlyArticle" markdown="1">
 <header class="paper-header">
   <img class="paper-logo" src="./assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="160">
   <p class="paper-kicker">Spherity Research Paper</p>
@@ -459,7 +558,11 @@ code {
   <div class="paper-author-block">
     <p class="paper-author">Dr. Carsten Stöcker</p>
     <p class="paper-affiliation">Spherity GmbH</p>
-    <p class="date"> 2026-05-14 </p>
+   <p class="paper-date">
+  <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+    {{ page.date | date: "%Y-%m-%d" }}
+  </time>
+</p>
   </div>
 </header>
 
@@ -1549,4 +1652,5 @@ The following checklist prioritizes the minimum viable controls for a PQC-ready 
 
 </section>
 
+</article>
 </main>
