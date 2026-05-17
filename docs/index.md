@@ -11,7 +11,7 @@ image_alt: "Spherity logo."
 <main class="paper-page research-index">
   <header class="paper-header">
     <img class="paper-logo"
-         src="{{ '/assets/Spherity-logo-horiz-blue-rgb.png' | relative_url }}"
+         src="{{ './assets/Spherity-logo-horiz-blue-rgb.png' | relative_url }}"
          alt="Spherity"
          width="160">
 
