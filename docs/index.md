@@ -48,7 +48,7 @@ image_alt: "Spherity logo."
 
         <a href="{{ '/Securing-Digital-Identity-Quantum-Vulnerabilities.html' | relative_url }}"
            aria-label="Open research paper: Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities">
-          <img src="{{ '/assets/Infochart-Securing-Legal-Person-Digital-Identity-Against-Quantum-Vulnerabilities-Spherity-GmbH-05-2026.png' | relative_url }}"
+        //   <img src="{{ '/assets/Infochart-Securing-Legal-Person-Digital-Identity-Against-Quantum-Vulnerabilities-Spherity-GmbH-05-2026.png' | relative_url }}"
                alt="Preview of the infochart about legal person digital identity and post-quantum cryptography."
                loading="lazy">
         </a>
