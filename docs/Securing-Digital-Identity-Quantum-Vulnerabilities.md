@@ -43,7 +43,7 @@ tags:
   padding-inline: clamp(1rem, 1.5vw, 2rem);
   padding-block: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 17px;
+  font-size: 20px;
   line-height: 1.7;
   color: #24292f;
 }
