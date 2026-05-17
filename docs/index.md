@@ -4,7 +4,7 @@ title: "Spherity Research"
 description: "Research papers by Spherity GmbH on decentralized identity, verifiable credentials, trust infrastructure, and regulated data ecosystems."
 permalink: /
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-image: "/assets/Spherity-logo-horiz-blue-rgb.png"
+image: "./assets/Spherity-logo-horiz-blue-rgb.png" 
 image_alt: "Spherity logo."
 ---
 
