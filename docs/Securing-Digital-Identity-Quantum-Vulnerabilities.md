@@ -197,7 +197,7 @@ A second layer is the semantic supply chain. A credential does not carry value o
     </div>
   </div>
 
-  <figcaption><strong>Figure 1.</strong> SSI triangle extended with trust control plane and semantic supply chain.</figcaption>
+  <figcaption><strong>Figure 2.</strong> SSI triangle extended with trust control plane and semantic supply chain.</figcaption>
 </figure>
 
 <h2 id="4-attack-taxonomy-for-vcs-vps-wallets-and-trust-infrastructure">4. Attack taxonomy for VCs, VPs, wallets, and trust infrastructure</h2>
