@@ -123,6 +123,9 @@
   "isAccessibleForFree": true
 }
 </script>
+  {% if page.css %}
+<link rel="stylesheet" href="{{ page.css | relative_url }}">
+{% endif %}
 </head>
 <body>
   {{ content }}
