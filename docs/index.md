@@ -395,6 +395,7 @@ image_alt: "Spherity logo."
           <li class="research-tag">AI risk</li>
           <li class="research-tag">Superintelligent AI</li>
           <li class="research-tag">Hybrid warfare</li>
+          <li class="research-tag">Quantum Threat</li>
           <li class="research-tag">PQC</li>
           <li class="research-tag">Trust infrastructure</li>
           <li class="research-tag">Germany and EU</li>
