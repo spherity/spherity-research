@@ -1130,5 +1130,3 @@ The following checklist prioritizes the minimum viable controls for a PQC-ready 
 *All web references accessed on 12 May 2026. Market data is time-sensitive.*
 
 </section>
-
-</main>
