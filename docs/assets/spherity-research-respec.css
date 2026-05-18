@@ -550,3 +550,41 @@ body {
     text-decoration: none;
   }
 }
+
+/* Markdown tables */
+
+.srespec-main table:not(.academic-table) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.srespec-main table:not(.academic-table) thead {
+  background: var(--bg-soft);
+}
+
+.srespec-main table:not(.academic-table) th,
+.srespec-main table:not(.academic-table) td {
+  padding: 0.8rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid var(--border-soft);
+}
+
+.srespec-main table:not(.academic-table) th {
+  font-weight: 650;
+  color: var(--text-main);
+  background: var(--bg-soft);
+}
+
+.srespec-main table:not(.academic-table) tbody tr:nth-child(even) {
+  background: var(--bg-soft);
+}
