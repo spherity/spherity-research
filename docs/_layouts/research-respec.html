@@ -1,0 +1,116 @@
+---
+layout: default
+---
+
+{% assign logo_path = page.logo | default: "/assets/Spherity-logo-horiz-blue-rgb.png" %}
+{% assign paper_status = page.paper_status | default: "Spherity Research Paper" %}
+{% assign this_version = page.canonical_url | default: page.url %}
+{% assign latest_version = page.latest_version | default: page.canonical_url %}
+{% assign author_name = page.author | default: "Dr. Carsten Stöcker" %}
+{% assign affiliation = page.affiliation | default: "Spherity GmbH" %}
+
+<main class="srespec-page">
+  <aside class="srespec-sidebar" aria-label="Document navigation">
+    <a class="srespec-logo-link" href="{{ '/' | relative_url }}" aria-label="Spherity Research home">
+      <img class="srespec-logo"
+           src="{{ logo_path | relative_url }}"
+           alt="Spherity"
+           width="170">
+    </a>
+
+    <nav class="srespec-toc" aria-labelledby="srespec-toc-heading">
+      <h2 id="srespec-toc-heading">Contents</h2>
+
+      {% if page.toc_items %}
+      <ol>
+        {% for item in page.toc_items %}
+        <li>
+          <a href="{{ item.href }}">{{ item.title }}</a>
+        </li>
+        {% endfor %}
+      </ol>
+      {% endif %}
+    </nav>
+  </aside>
+
+  <article class="srespec-main research-article"
+           itemscope
+           itemtype="https://schema.org/ScholarlyArticle">
+
+    <header class="srespec-header">
+      <div class="srespec-header-top">
+        <img class="srespec-header-logo"
+             src="{{ logo_path | relative_url }}"
+             alt="Spherity"
+             width="160">
+
+        <p class="srespec-kicker">{{ paper_status }}</p>
+      </div>
+
+      <h1 class="srespec-title" itemprop="headline">
+        {{ page.title }}
+      </h1>
+
+      {% if page.subtitle %}
+      <p class="srespec-subtitle">
+        {{ page.subtitle }}
+      </p>
+      {% endif %}
+
+      <dl class="srespec-meta">
+        <div>
+          <dt>Author</dt>
+          <dd itemprop="author">{{ author_name }}</dd>
+        </div>
+
+        <div>
+          <dt>Affiliation</dt>
+          <dd>{{ affiliation }}</dd>
+        </div>
+
+        {% if page.date %}
+        <div>
+          <dt>Published</dt>
+          <dd>
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+              {{ page.date | date: "%Y-%m-%d" }}
+            </time>
+          </dd>
+        </div>
+        {% endif %}
+
+        {% if page.last_modified_at %}
+        <div>
+          <dt>Updated</dt>
+          <dd>
+            <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">
+              {{ page.last_modified_at | date: "%Y-%m-%d" }}
+            </time>
+          </dd>
+        </div>
+        {% endif %}
+
+        {% if this_version %}
+        <div>
+          <dt>This version</dt>
+          <dd>
+            <a href="{{ this_version }}">{{ this_version }}</a>
+          </dd>
+        </div>
+        {% endif %}
+
+        {% if latest_version %}
+        <div>
+          <dt>Latest version</dt>
+          <dd>
+            <a href="{{ latest_version }}">{{ latest_version }}</a>
+          </dd>
+        </div>
+        {% endif %}
+      </dl>
+    </header>
+
+    {{ content }}
+
+  </article>
+</main>
