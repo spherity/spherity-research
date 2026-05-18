@@ -660,7 +660,7 @@ A likely objection is that the EU already has laws covering most of the domains 
 <td>Coverage of critical financial entities and ICT providers in threat-led testing and joint crisis exercises.</td>
 </tr>
 <tr>
-<td>eIDAS 2.0 and EUDI Wallet</td>
+<td>eIDAS 2.0, EUDI and Business Wallet</td>
 <td>Digital identity, wallets, trust services, signatures, credentials.</td>
 <td>Strong identity, qualified trust services, wallet trust frameworks, revocation, selective disclosure, cross-border assurance.</td>
 <td>Wallet and trust-service coverage for citizens, public authorities, legal persons, and high-value services.</td>
