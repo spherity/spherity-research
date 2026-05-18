@@ -692,7 +692,7 @@ Third, digital identity and authorisation are not yet treated as a unified sover
 
 Fourth, Physical AI and cyber-physical risk remain too separated from AI policy. AI safety, machinery safety, product liability, operational technology, and cyber-security must be planned together.
 
-<h3 id="8-4-execution-gap">8.4 Execution gap</h3>
+<h3 id="8-4-capability-execution-gap">8.4 Capability & execution gap</h3>
 
 Table 6 summarises Germany’s execution gap across core areas.
 
