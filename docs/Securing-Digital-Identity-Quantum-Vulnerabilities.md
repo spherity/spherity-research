@@ -1,22 +1,59 @@
 ---
-layout: default
+layout: research-respec
+css: "/assets/spherity-research-respec.css"
+
 title: "Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities"
 subtitle: "Attack taxonomy, macro-economic risk, and post-quantum migration corridors"
 description: "This review paper analyses how quantum risks to elliptic-curve cryptography extend beyond Bitcoin and blockchains to digital identity systems, including VCs, VPs, wallets, trust lists, VDRs, status services, semantic registries, legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI."
+
+paper_status: "Spherity Research Paper"
 author: "Dr. Carsten Stöcker"
 affiliation: "Spherity GmbH"
 date: "2026-05-14"
 last_modified_at: "2026-05-16"
 lang: "en"
-toc: true
 
 permalink: /Securing-Digital-Identity-Quantum-Vulnerabilities.html
 canonical_url: "https://spherity.github.io/spherity-research/Securing-Digital-Identity-Quantum-Vulnerabilities.html"
+latest_version: "https://spherity.github.io/spherity-research/Securing-Digital-Identity-Quantum-Vulnerabilities.html"
 
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
 
+logo: "/assets/Spherity-logo-horiz-blue-rgb.png"
 image: "/assets/Infochart-Securing-Legal-Person-Digital-Identity-Against-Quantum-Vulnerabilities-Spherity-GmbH-05-2026.png"
 image_alt: "Infochart showing how quantum-risk preparation shifts from HNDL and Bitcoin to legal person identity, with migration urgency, a US–Germany PQC-resilient digital corridor, crypto-agile identity infrastructure, and the regulatory role of Business Wallets and the European Business Wallet."
+
+toc_items:
+  - title: "Abstract"
+    href: "#abstract"
+  - title: "1. Introduction"
+    href: "#1-introduction"
+  - title: "2. Quantum risk as a public-key exposure problem"
+    href: "#2-quantum-risk-as-a-public-key-exposure-problem"
+  - title: "3. Digital identity system model"
+    href: "#3-digital-identity-system-model"
+  - title: "4. Attack taxonomy for VCs, VPs, wallets, and trust infrastructure"
+    href: "#4-attack-taxonomy-for-vcs-vps-wallets-and-trust-infrastructure"
+  - title: "5. Identity-specific quantum attack scenarios"
+    href: "#5-identity-specific-quantum-attack-scenarios"
+  - title: "6. Macro-economic exposure"
+    href: "#6-macro-economic-exposure-why-legal-person-identity-is-larger-than-bitcoin"
+  - title: "7. Standards and readiness gaps"
+    href: "#7-standards-and-readiness-gaps"
+  - title: "8. Post-quantum identity corridors"
+    href: "#8-post-quantum-identity-corridors"
+  - title: "9. Recommendations"
+    href: "#9-recommendations-for-google-and-the-wider-ecosystem"
+  - title: "10. Limitations and research agenda"
+    href: "#10-limitations-and-research-agenda"
+  - title: "11. Outlook"
+    href: "#11-outlook"
+  - title: "Appendix A"
+    href: "#appendix-a-cryptographic-asset-inventory-template"
+  - title: "Appendix B"
+    href: "#appendix-b-minimal-pqc-corridor-checklist"
+  - title: "References"
+    href: "#references"
 
 tags:
   - post-quantum-cryptography
@@ -28,543 +65,6 @@ tags:
   - digital-product-passports
   - trusted-ai
 ---
-
-
-<style>
-.paper-page,
-.paper-page * {
-  box-sizing: border-box;
-}
-
-.paper-page {
-  width: calc(100vw - 3rem);
-  max-width: 1500px;
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 1.5vw, 2rem);
-  padding-block: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
-  line-height: 1.7;
-  color: #24292f;
-}
-
-/* Headings and text */
-
-.paper-page h1,
-.paper-page h2,
-.paper-page h3,
-.paper-page h4 {
-  font-family: Georgia, "Times New Roman", serif;
-  line-height: 1.25;
-  color: #111827;
-}
-
-.paper-page h1 {
-  margin-top: 0;
-  font-size: 2.45rem;
-}
-
-.paper-page h2 {
-  margin-top: 2.5rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid #d8dee4;
-}
-
-.paper-page h3 {
-  margin-top: 2rem;
-}
-
-.paper-page p {
-  margin: 0.95rem 0;
-}
-
-code {
-  white-space: pre-wrap;
-}
-
-/* Header */
-
-.paper-header {
-  margin: 0 0 2.5rem 0;
-  padding: 0 0 1.75rem 0;
-  border-bottom: 1px solid #d8dee4;
-}
-
-.paper-logo {
-  display: block;
-  max-width: 180px;
-  height: auto;
-  margin: 0 0 1.25rem 0;
-}
-
-.paper-kicker {
-  margin: 0 0 0.35rem 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #57606a;
-}
-
-.paper-title {
-  margin: 0;
-  font-size: 2.45rem;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.paper-subtitle {
-  margin: 0.9rem 0 1.35rem 0;
-  font-size: 1.1rem;
-  line-height: 1.55;
-  color: #57606a;
-}
-
-.paper-author-block {
-  margin: 1.35rem 0 0 0;
-  color: #24292f;
-}
-
-.paper-author {
-  margin: 0;
-  font-size: 1.08rem;
-  font-weight: 600;
-  line-height: 1.45;
-}
-
-.paper-affiliation,
-.paper-date {
-  margin: 0.15rem 0 0 0;
-  font-size: 1rem;
-  line-height: 1.45;
-  color: #57606a;
-}
-
-.paper-affiliation {
-  font-style: italic;
-}
-
-/* Highlight boxes */
-
-.paper-thesis {
-  margin: 1.75rem 0 2.25rem 0;
-  padding: 1.1rem 1.25rem;
-  border-left: 4px solid #0969da;
-  border-radius: 6px;
-  background: #f6f8fa;
-  line-height: 1.6;
-}
-
-.abstract-box {
-  margin: 2rem 0;
-  padding: 1.35rem 1.5rem;
-  border: 1px solid #d8dee4;
-  border-radius: 10px;
-  background: #fbfbfc;
-}
-
-.abstract-box h2 {
-  margin-top: 0;
-  border-bottom: none;
-}
-
-.keywords {
-  margin-top: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.92rem;
-  color: #57606a;
-}
-
-/* Table of contents */
-
-.toc-box {
-  margin: 2rem 0 2.5rem 0;
-  padding: 1rem 1.25rem;
-  border: 1px solid #d8dee4;
-  border-radius: 10px;
-  background: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-.toc-box h2 {
-  margin: 0 0 0.75rem 0;
-  padding: 0;
-  border: none;
-  font-size: 1.05rem;
-}
-
-.toc-list {
-  margin: 0;
-  padding-left: 0;
-  list-style: none;
-}
-
-.toc-list li {
-  margin: 0.35rem 0;
-}
-
-.toc-list a {
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.16em;
-}
-
-/* Figures */
-
-.paper-figure {
-  margin: 2rem 0 2.4rem 0;
-}
-
-.paper-figure figcaption {
-  margin-top: 0.65rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.45;
-  color: #57606a;
-}
-
-/* SSI figure */
-
-.ssi-figure {
-  padding: 1rem;
-  border: 1px solid #d8dee4;
-  border-radius: 10px;
-  background: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-.trust-plane,
-.semantic-plane {
-  padding: 0.75rem 0.85rem;
-  border: 1px solid #d8dee4;
-  border-radius: 8px;
-  background: #f6f8fa;
-  font-size: 0.92rem;
-  color: #24292f;
-}
-
-.ssi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.85rem;
-  margin: 0.9rem 0;
-}
-
-.ssi-node {
-  min-height: 115px;
-  padding: 0.9rem;
-  border: 1px solid #0969da;
-  border-radius: 10px;
-  background: #f6f8ff;
-}
-
-.ssi-node strong {
-  display: block;
-  margin-bottom: 0.45rem;
-  font-size: 1rem;
-}
-
-.ssi-node span {
-  display: block;
-  font-size: 0.92rem;
-  line-height: 1.45;
-  color: #57606a;
-}
-
-/* Tables */
-
-.table-figure {
-  margin: 2rem 0 2.4rem 0;
-}
-
-.table-figure figcaption {
-  margin-bottom: 0.55rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.45;
-  color: #24292f;
-}
-
-.table-scroll {
-  width: 100%;
-  overflow-x: auto;
-  border: 1px solid #d8dee4;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.academic-table {
-  width: 100%;
-  min-width: 780px;
-  border-collapse: collapse;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.92rem;
-  line-height: 1.45;
-}
-
-.academic-table thead th {
-  padding: 0.85rem 0.9rem;
-  text-align: left;
-  vertical-align: bottom;
-  border-bottom: 2px solid #d0d7de;
-  background: #f6f8fa;
-  font-weight: 650;
-  color: #24292f;
-}
-
-.academic-table tbody td {
-  padding: 0.8rem 0.9rem;
-  vertical-align: top;
-  border-top: 1px solid #d8dee4;
-}
-
-.academic-table tbody tr:nth-child(even) {
-  background: #fbfbfc;
-}
-
-.academic-table th:first-child,
-.academic-table td:first-child {
-  font-weight: 600;
-  color: #111827;
-}
-
-.translation-table { min-width: 840px; }
-.taxonomy-table { min-width: 1120px; }
-.macro-table { min-width: 980px; }
-.standards-table { min-width: 960px; }
-.maturity-table { min-width: 840px; }
-.recommendation-table { min-width: 1120px; }
-.inventory-table { min-width: 880px; }
-
-.table-note {
-  margin-top: 0.45rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.86rem;
-  line-height: 1.45;
-  color: #57606a;
-}
-
-/* References */
-
-.references p,
-.references li {
-  margin: 0.65rem 0;
-  padding-left: 1.75rem;
-  text-indent: -1.75rem;
-}
-
-/* Responsive layout */
-
-@media (max-width: 800px) {
-  .ssi-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 700px) {
-  .paper-page {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding-inline: 1rem;
-    font-size: 16px;
-  }
-
-  .paper-title {
-    font-size: 1.75rem;
-  }
-
-  .paper-subtitle {
-    font-size: 1rem;
-  }
-
-  .academic-table {
-    min-width: 760px;
-    font-size: 0.86rem;
-  }
-}
-
-/* Print layout */
-
-@media print {
-  .paper-page {
-    width: auto;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    font-size: 11pt;
-    line-height: 1.45;
-  }
-
-  .paper-header,
-  .paper-thesis,
-  .abstract-box,
-  .table-figure,
-  .paper-figure {
-    break-inside: avoid;
-  }
-
-  .table-scroll {
-    overflow: visible;
-    border: none;
-  }
-
-  .academic-table {
-    min-width: 0;
-    font-size: 9pt;
-  }
-
-  a {
-    color: #000;
-    text-decoration: none;
-  }
-}
-  .paper-figure.centered-figure {
-  margin: 2.2rem auto 2.6rem auto;
-  text-align: center;
-}
-
-.paper-figure.centered-figure img,
-.paper-figure.centered-figure svg {
-  display: block;
-  max-width: min(100%, 980px);
-  height: auto;
-  margin-inline: auto;
-  border: 1px solid #d8dee4;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.paper-figure.centered-figure figcaption {
-  max-width: 980px;
-  margin: 0.75rem auto 0 auto;
-  text-align: left;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #57606a;
-}
-
-.paper-figure.centered-figure figcaption strong {
-  color: #24292f;
-  font-weight: 650;
-}
-
-
-/* Research article metadata */
-
-.research-article {
-  max-width: 100%;
-}
-
-.paper-date,
-.paper-meta,
-.paper-updated {
-  margin: 0.2rem 0 0 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.45;
-  color: #57606a;
-}
-
-.paper-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 0.7rem;
-}
-
-.paper-meta a {
-  color: #0969da;
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.16em;
-}
-
-.paper-canonical {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #d8dee4;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.9rem;
-  color: #57606a;
-  overflow-wrap: anywhere;
-}
-
-/* Research index page */
-
-.research-index {
-  max-width: 1100px;
-}
-
-.research-list {
-  display: grid;
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.research-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 180px;
-  gap: 1rem;
-  padding: 1.1rem;
-  border: 1px solid #d8dee4;
-  border-radius: 10px;
-  background: #ffffff;
-}
-
-.research-card h2 {
-  margin: 0 0 0.4rem 0;
-  padding: 0;
-  border: none;
-  font-size: 1.25rem;
-}
-
-.research-card p {
-  margin: 0.45rem 0;
-}
-
-.research-card img {
-  width: 180px;
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #d8dee4;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.research-card-meta {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.9rem;
-  color: #57606a;
-}
-
-@media (max-width: 700px) {
-  .research-card {
-    grid-template-columns: 1fr;
-  }
-
-  .research-card img {
-    width: 100%;
-  }
-}
-  
-</style>
-
-<main class="paper-page" markdown="1">
-<article class="research-article" itemscope itemtype="https://schema.org/ScholarlyArticle" markdown="1">
-<header class="paper-header">
-  <img class="paper-logo" src="./assets/Spherity-logo-horiz-blue-rgb.png" alt="Spherity" width="160">
-  <p class="paper-kicker">Spherity Research Paper</p>
-  <h1 class="paper-title">Securing Digital Identity and Verifiable Credential Wallets against Quantum Vulnerabilities</h1>
-  <p class="paper-subtitle"><strong>Public-key trust fabric risk, attack taxonomy, macro-economic exposure, and post-quantum identity corridors</strong></p>
-  <div class="paper-author-block">
-    <p class="paper-author">Dr. Carsten Stöcker</p>
-    <p class="paper-affiliation">Spherity GmbH</p>
-   <p class="paper-date">
-  <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-    {{ page.date | date: "%Y-%m-%d" }}
-  </time>
-</p>
-  </div>
-</header>
 
 <div class="paper-thesis">
   <strong>Central thesis.</strong> The quantum risk highlighted for elliptic-curve cryptocurrencies is a special case of a broader public-key exposure problem. Digital identity wallets, verifiable credentials, verifiable presentations, trust lists, status registries, VDRs, DNSSEC, WebPKI, and semantic registries form a public-key trust fabric that supports legal persons, supply chains, Industry 4.0, critical infrastructure, and Trusted AI. This fabric needs post-quantum migration corridors before it becomes too large to migrate safely.
@@ -586,27 +86,6 @@ Recent quantum resource estimates for elliptic-curve discrete logarithms have ch
 
 </section>
 
-<nav class="toc-box" aria-labelledby="contents-heading">
-  <h2 id="contents-heading">Contents</h2>
-
-  <ul class="toc-list">
-    <li><a href="#abstract">Abstract</a></li>
-    <li><a href="#1-introduction">1. Introduction</a></li>
-    <li><a href="#2-quantum-risk-as-a-public-key-exposure-problem">2. Quantum risk as a public-key exposure problem</a></li>
-    <li><a href="#3-digital-identity-system-model">3. Digital identity system model</a></li>
-    <li><a href="#4-attack-taxonomy-for-vcs-vps-wallets-and-trust-infrastructure">4. Attack taxonomy for VCs, VPs, wallets, and trust infrastructure</a></li>
-    <li><a href="#5-identity-specific-quantum-attack-scenarios">5. Identity-specific quantum attack scenarios</a></li>
-    <li><a href="#6-macro-economic-exposure-why-legal-person-identity-is-larger-than-bitcoin">6. Macro-economic exposure: why legal-person identity is larger than Bitcoin</a></li>
-    <li><a href="#7-standards-and-readiness-gaps">7. Standards and readiness gaps</a></li>
-    <li><a href="#8-post-quantum-identity-corridors">8. Post-quantum identity corridors</a></li>
-    <li><a href="#9-recommendations-for-google-and-the-wider-ecosystem">9. Recommendations for Google and the wider ecosystem</a></li>
-    <li><a href="#10-limitations-and-research-agenda">10. Limitations and research agenda</a></li>
-    <li><a href="#11-outlook">11. Outlook</a></li>
-    <li><a href="#appendix-a-cryptographic-asset-inventory-template">Appendix A. Cryptographic asset inventory template</a></li>
-    <li><a href="#appendix-b-minimal-pqc-corridor-checklist">Appendix B. Minimal PQC corridor checklist</a></li>
-    <li><a href="#references">References</a></li>
-  </ul>
-</nav>
 
 <h2 id="1-introduction">1. Introduction</h2>
 
@@ -1652,5 +1131,4 @@ The following checklist prioritizes the minimum viable controls for a PQC-ready 
 
 </section>
 
-</article>
 </main>
