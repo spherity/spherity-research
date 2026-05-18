@@ -641,7 +641,7 @@ NIST finalized ML-KEM, ML-DSA, and SLH-DSA in 2024 as the first three post-quant
 Transport-layer PQC is necessary but not sufficient. Hybrid ML-KEM in TLS helps protect network sessions against harvest-now-decrypt-later attacks. It does not protect a VC signature, a VP holder-binding proof, a trust list, a status list, a DID document, or a signed schema once the object is copied, archived, logged, audited, or presented offline. Identity systems need object-level PQC and registry-level PQC, not only channel-level PQC.
 
 <figure class="table-figure">
-  <figcaption><strong>Table 1.</strong> Translation of cryptocurrency attack terms into digital identity terms.</figcaption>
+  <figcaption><strong>Table 2.</strong> Translation of cryptocurrency attack terms into digital identity terms.</figcaption>
   <div class="table-scroll">
     <table class="academic-table translation-table">
       <thead>
@@ -893,7 +893,7 @@ Status is a core identity control. The W3C Bitstring Status List specification p
 
 Long-term validity is harder. A credential might be valid at the time of presentation but later unverifiable because the algorithm is broken. Identity ecosystems need rules for timestamping, archival validation, transparency logs, reissuance, and evidence preservation. This is especially important for legal-person credentials, compliance certificates, product passports, audit logs, and AI-agent actions that may be reviewed years later.
 
-<h3 id="5-8-semantic-supply-chain-attacks">5.8 Semantic supply-chain attacks</h3>
+<h3 id="5-7-semantic-supply-chain-attacks">5.7 Semantic supply-chain attacks</h3>
 
 The semantic layer is a security dependency. A signed credential may remain cryptographically valid while the meaning of a claim changes because a schema, JSON-LD context, namespace, product identifier, vocabulary, or policy authority is replaced, downgraded, or reinterpreted.
 
