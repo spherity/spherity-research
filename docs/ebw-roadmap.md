@@ -19,7 +19,6 @@ latest_version: "https://spherity.github.io/spherity-research/ebw-roadmap.html"
 
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
 
-logo: "/assets/Spherity-logo-horiz-blue-rgb.png"
 image: "/assets/Europen%20Business%20Wallet%20%28EBW%29%20Roadmap%20-%20Spherity%20GmbH.png"
 image_alt: "European Business Wallet roadmap timeline showing legal, regulatory, standardisation, conformance, pilot, and adoption milestones from 2026 to 2029."
 
