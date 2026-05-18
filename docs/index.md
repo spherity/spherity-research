@@ -359,4 +359,55 @@ image_alt: "Spherity logo."
       </article>
     </div>
   </section>
+  <section class="research-section" aria-labelledby="policy-risk-heading">
+  <div class="research-section-header">
+    <h2 class="research-section-title" id="policy-risk-heading">
+      Policy, Technology and Risk
+    </h2>
+
+    <p class="research-section-intro">
+      Research on systemic technology risk, digital sovereignty, trust infrastructure,
+      AI-enabled cyber operations, hybrid warfare, and resilience policy.
+    </p>
+  </div>
+
+  <div class="research-list">
+    <article class="research-card">
+      <div class="research-card-content">
+        <h3 class="research-card-title">
+          <a href="{{ '/threat-escalation-model-germany-eu.html' | relative_url }}">
+            Superintelligent AI, Quantum Risk, Hybrid Warfare, and Robotic Autonomy
+          </a>
+        </h3>
+
+        <p class="research-card-description">
+          A threat escalation and scenario planning model for Germany and Europe,
+          covering AI-enabled cyber operations, post-quantum cryptography,
+          trust infrastructure, hybrid warfare, robotic autonomy, and frontier AI risk.
+        </p>
+
+        <p class="research-card-meta">
+          Dr. Carsten Stöcker, Spherity GmbH ·
+          <time datetime="2026-05-18">2026-05-18</time>
+        </p>
+
+        <ul class="research-tags" aria-label="Topics">
+          <li class="research-tag">AI risk</li>
+          <li class="research-tag">Hybrid warfare</li>
+          <li class="research-tag">PQC</li>
+          <li class="research-tag">Trust infrastructure</li>
+          <li class="research-tag">Germany and EU</li>
+        </ul>
+      </div>
+
+      <a class="research-card-image-link"
+         href="{{ '/threat-escalation-model-germany-eu.html' | relative_url }}"
+         aria-label="Open research paper: Superintelligent AI, Quantum Risk, Hybrid Warfare, and Robotic Autonomy">
+        <img src="{{ '/assets/Spherity-logo-horiz-blue-rgb.png' | relative_url }}"
+             alt="Spherity logo."
+             loading="lazy">
+      </a>
+    </article>
+  </div>
+</section>
 </main>
