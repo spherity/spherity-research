@@ -19,7 +19,6 @@ latest_version: "https://spherity.github.io/spherity-research/Securing-Digital-I
 
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
 
-logo: "/assets/Spherity-logo-horiz-blue-rgb.png"
 image: "/assets/Infochart-Securing-Legal-Person-Digital-Identity-Against-Quantum-Vulnerabilities-Spherity-GmbH-05-2026.png"
 image_alt: "Infochart showing how quantum-risk preparation shifts from HNDL and Bitcoin to legal person identity, with migration urgency, a US–Germany PQC-resilient digital corridor, crypto-agile identity infrastructure, and the regulatory role of Business Wallets and the European Business Wallet."
 
