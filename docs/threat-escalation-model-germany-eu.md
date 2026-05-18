@@ -694,7 +694,7 @@ Fourth, Physical AI and cyber-physical risk remain too separated from AI policy.
 
 <h3 id="8-4-capability-execution-gap">8.4 Capability & execution gap</h3>
 
-Table 6 summarises Germany’s cyber-security capability gaps and execution improvement domains across core areas that need to be prioritised by the Government.
+Table 6 summarises Germany’s cyber-security capability gaps and execution improvement domains across core areas that need to be prioritised by the government.
 
 <div class="table-scroll">
 <table class="academic-table recommendation-table">
