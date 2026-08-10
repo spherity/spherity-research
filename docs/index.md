@@ -155,7 +155,7 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
   <section class="market-position-spotlight portal-shell" aria-labelledby="market-position-title">
     <div class="market-position-heading">
       <p class="eyebrow eyebrow-dark"><span></span>Market position</p>
-      <h2 id="market-position-title">Spherity in the Gartner Digital Product Passport Emerging Market Quadrant</h2>
+      <h2 id="market-position-title">Spherity in the Gartner® Emerging Market Quadrant for Digital Product Passport — Established Vendors</h2>
       <a href="{{ '/spherity-dpp-dbp-strategy-market-positioning.html' | relative_url }}">Read the strategy paper <span aria-hidden="true">→</span></a>
     </div>
     <div class="market-position-copy">
@@ -163,6 +163,8 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
       <p>At Spherity, we see our identity-first strategy as the foundation for a wider trust architecture that extends from physical-product DPPs to AI Service Passports for AI systems and services. This extension reflects our own strategic outlook and was not part of Gartner's DPP evaluation.</p>
       <p>Spherity treats the Gartner placement as one independent market perspective. Spherity's own view is that its technology leadership in identity-first and cyber-secure DPP infrastructure rests on its architecture, regulated production experience and partner ecosystem. The strategic objective is to make product data trustworthy, usable across company boundaries and suitable for automated decisions.</p>
       <p class="market-position-source">[1] <a href="https://www.gartner.com/en/documents/8098797" rel="external"><em>Emerging Market Quadrant for Digital Product Passport — Established Vendors</em></a>, 6 July 2026, Gartner document 8098797.</p>
+      <p class="market-position-disclaimer">Gartner does not endorse any company, vendor, product or service depicted in its publications, and does not advise technology users to select only those vendors with the highest ratings or other designation. Gartner publications consist of the opinions of Gartner’s business and technology insights organization and should not be construed as statements of fact. Gartner disclaims all warranties, expressed or implied, with respect to this publication, including any warranties of merchantability or fitness for a particular purpose.</p>
+      <p class="market-position-disclaimer">GARTNER is a trademark of Gartner, Inc. and/or its affiliates.</p>
     </div>
   </section>
 
