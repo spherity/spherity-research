@@ -517,6 +517,11 @@ a {
   color: var(--navy-950);
 }
 
+.market-position-copy .market-position-disclaimer {
+  color: var(--ink-500);
+  font-size: 0.78rem;
+}
+
 .trust-planes {
   padding-block: clamp(3.5rem, 7vw, 6rem);
   border-bottom: 1px solid var(--line);
