@@ -14,7 +14,7 @@ authors:
   - "Dr. Carsten Stöcker"
 affiliation: "Spherity GmbH"
 date: "2026-08-05"
-last_modified_at: "2026-08-05"
+last_modified_at: "2026-08-10"
 research_cutoff: "2026-08-05"
 research_cutoff_label: "market and regulatory facts reviewed to this date"
 lang: "en"
@@ -33,10 +33,10 @@ image_alt: "Spherity strategy paper on its Gartner Pioneers position for Digital
 cover_image: "/assets/dpp-dbp-strategy-market-positioning-cover.png"
 cover_image_alt: "First page of Spherity Strategy and Market Positioning Update."
 
-answer_summary: "Gartner published the Emerging Market Quadrant for Digital Product Passport — Established Vendors on 6 July 2026 and positioned Spherity as the sole vendor in the Pioneers quadrant. The paper treats that placement as one independent market perspective, then sets out Spherity's own identity-first strategy: batteries first, horizontal DPP and DBP scale, European Business Wallet control-plane convergence, cyber-secure evidence, and a longer-term AI Service Passport outlook."
+answer_summary: "Gartner® published the Emerging Market Quadrant for Digital Product Passport — Established Vendors on 6 July 2026 and positioned Spherity as the sole vendor in the Pioneers quadrant. The paper treats that placement as one independent market perspective, then sets out Spherity's own identity-first strategy: batteries first, horizontal DPP and DBP scale, European Business Wallet control-plane convergence, cyber-secure evidence, and a longer-term AI Service Passport outlook."
 key_takeaways:
   - "Gartner positioned Spherity as the sole vendor in the Pioneers quadrant of its 2026 Emerging Market Quadrant for Digital Product Passport — Established Vendors."
-  - "Spherity treats the Gartner placement as one independent market perspective; its own leadership claim rests on identity-first architecture, regulated production experience, and its partner ecosystem."
+  - "Spherity treats the Gartner placement as one independent market perspective; to Spherity, its own leadership claim rests on identity-first architecture, regulated production experience, and its partner ecosystem."
   - "VERA provides the Digital Product Passport data plane, EIDA provides reusable European Business Wallet identity and access-control capabilities, and CARO demonstrates regulated production delivery."
   - "Execution begins with traction batteries, commercial vehicles, public-transport fleets, BESS, and light-means-of-transport batteries before horizontal expansion across industrial sectors."
   - "The same two-plane trust architecture can support product DPPs and DBPs, the EU DPP Registry, cross-company lifecycle workflows, and future AI Service Passports."
@@ -306,9 +306,11 @@ The paper distinguishes external market research, enacted law, deployed Spherity
 
 The third-party Gartner material cited or reproduced in the paper is excluded from the paper-level CC BY 4.0 license and remains subject to Gartner's rights. GARTNER is a trademark of Gartner, Inc. and/or its affiliates. Other trademarks remain the property of their respective owners.
 
+Gartner does not endorse any company, vendor, product or service depicted in its publications, and does not advise technology users to select only those vendors with the highest ratings or other designation. Gartner publications consist of the opinions of Gartner’s business and technology insights organization and should not be construed as statements of fact. Gartner disclaims all warranties, expressed or implied, with respect to this publication, including any warranties of merchantability or fitness for a particular purpose.
+
 <h2 id="references">References</h2>
 
-1. Gartner. [<em>Emerging Market Quadrant for Digital Product Passport — Established Vendors</em>](https://www.gartner.com/en/documents/8098797). Kevin Lawrence, Marta Muñoz, and Rajan Saini. 6 July 2026. Gartner document 8098797.
+1. Gartner. [<em>Emerging Market Quadrant for Digital Product Passport — Established Vendors</em>](https://www.gartner.com/en/documents/8098797). Kevin Lawrence, Marta Muñoz, and Rajan Saini. 6 July 2026.
 2. European Commission. [The Digital Product Passport Registry is now live](https://single-market-economy.ec.europa.eu/news/digital-product-passport-registry-now-live-2026-07-20_en). 20 July 2026.
 3. European Union. [Regulation (EU) 2024/1781 establishing a framework for ecodesign requirements for sustainable products](https://eur-lex.europa.eu/eli/reg/2024/1781/oj/eng).
 4. European Union. [Regulation (EU) 2023/1542 concerning batteries and waste batteries](https://eur-lex.europa.eu/eli/reg/2023/1542/oj/eng).
