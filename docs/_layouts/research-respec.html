@@ -73,8 +73,22 @@ layout: default
         </div>
         <div>
           <dt>Affiliation</dt>
-          <dd>{{ affiliation }}</dd>
+          <dd>
+            {% if page.author_affiliations %}
+              {% for author_affiliation in page.author_affiliations %}
+                {{ author_affiliation }}{% unless forloop.last %}<br>{% endunless %}
+              {% endfor %}
+            {% else %}
+              {{ affiliation }}
+            {% endif %}
+          </dd>
         </div>
+        {% if page.journal_title %}
+        <div>
+          <dt>Original source</dt>
+          <dd><cite>{{ page.journal_title }}</cite>{% if page.volume %} {{ page.volume }}{% endif %}{% if page.issue %}, Issue {{ page.issue }}{% endif %}{% if page.page_start %}, pp. {{ page.page_start }}–{{ page.page_end }}{% endif %}</dd>
+        </div>
+        {% endif %}
         {% if page.date %}
         <div>
           <dt>Published</dt>

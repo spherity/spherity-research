@@ -1,3 +1,29 @@
+- title: "European Business Wallet and Market Role Credentials for DPP Access Control: The energy data-X Reference Case"
+  type: "Journal article"
+  date_label: "11 August 2026"
+  date_iso: "2026-08-11"
+  description: "An energy data-X case study showing how European Business Wallets, governed market roles, and policy engines enable controlled DPP, DBP, and BESS data access."
+  topics:
+    - "European Business Wallet"
+    - "energy data-X"
+    - "DPP & DBP"
+  filters: "dpp identity wallets ai infrastructure"
+  search: "energy data-x energy data space european business wallet european business wallets ebw market role credential market role credentials market partner id mp-id digital product passport digital product passports dpp digital battery passport digital battery passports dbp battery passport battery energy storage system bess dpp access control persons with a legitimate interest pli market surveillance authority notified body customs authority policy engine odrl attribute based access control abac policy based access control pbac zero trust verifiable credential verifiable credentials authentic source authorised issuer authorized issuer identity trust data sovereignty sector coupling common european energy data space ceeds catena-x manufacturing-x cirpass-2 smart metering pki imbalance settlement quality flexibility aggregator grid operator data provenance ai agent delegation trusted ai"
+  image: "/assets/preview-energy-data-x-ebw-market-role-credentials.webp"
+  image_alt: "Social preview for the energy data-X journal article on European Business Wallets, market-role credentials, BESS data exchange, and controlled DPP access."
+  image_width: 1200
+  image_height: 630
+  media_class: "card-media-wide"
+  format: "HTML + PDF"
+  links:
+    - label: "Read analysis"
+      url: "/energy-data-x-ebw-market-role-credentials-dpp-access-control.html"
+      arrow: "→"
+    - label: "Read original PDF"
+      url: "/energy-data-X-European-Business-Wallet-market-role-credentials-BESS-2026.pdf"
+      arrow: "↓"
+      secondary: true
+
 - title: "Spherity Strategy and Market Positioning Update"
   type: "Strategy paper"
   date_label: "5 August 2026"

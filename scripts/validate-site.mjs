@@ -79,6 +79,33 @@ const imageDimensions = async (file) => {
     }
   }
 
+  if (buffer.length >= 4 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+    const startOfFrameMarkers = new Set([
+      0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf
+    ]);
+    let offset = 2;
+    while (offset + 8 < buffer.length) {
+      if (buffer[offset] !== 0xff) {
+        offset += 1;
+        continue;
+      }
+      const marker = buffer[offset + 1];
+      if (startOfFrameMarkers.has(marker)) {
+        return {
+          width: buffer.readUInt16BE(offset + 7),
+          height: buffer.readUInt16BE(offset + 5)
+        };
+      }
+      if (marker === 0xd8 || marker === 0xd9 || marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) {
+        offset += 2;
+        continue;
+      }
+      const segmentLength = buffer.readUInt16BE(offset + 2);
+      if (segmentLength < 2) break;
+      offset += segmentLength + 2;
+    }
+  }
+
   return null;
 };
 
