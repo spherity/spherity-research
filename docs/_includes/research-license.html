@@ -27,7 +27,7 @@
     </div>
   </div>
   <p>
-    <strong>{{ page.title }}</strong> is licensed by its named author{% if page.authors and page.authors.size > 1 %}s{% endif %}
+    <strong>{{ page.license_scope | default: page.title }}</strong> is licensed by its named author{% if page.authors and page.authors.size > 1 %}s{% endif %}
     under the <a href="{{ content_license }}" rel="license external">Creative Commons Attribution 4.0 International License (CC BY 4.0)</a>{% if page.license_exclusions %}, except for the third-party material identified below{% endif %}.
     Reuse must credit every named author, link to this canonical version and the
     license, and indicate whether changes were made.
