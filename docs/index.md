@@ -142,6 +142,7 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
         <li><a href="{{ '/spherity-dpp-dbp-strategy-market-positioning.html' | relative_url }}">How does Spherity connect its Gartner Pioneers position to DPP, DBP, EBW, and Trusted AI execution?</a></li>
         <li><a href="{{ '/top-german-technology-companies-industrial-ai-agentic-commerce-2026.html' | relative_url }}">Which German companies form a strategic stack for Industrial AI, Physical AI, and trusted agentic commerce?</a></li>
         <li><a href="{{ '/verifiable-access-controlled-digital-product-passports.html' | relative_url }}">How can DPP and DBP transactions verify both product evidence and the legal authority to act?</a></li>
+        <li><a href="{{ '/energy-data-x-ebw-market-role-credentials-dpp-access-control.html' | relative_url }}">How can European Business Wallets and governed market-role credentials control DPP, DBP, and BESS data access?</a></li>
         <li><a href="{{ '/evidence-graphs-industrial-ai-data-plane.html' | relative_url }}">How can Industrial AI trace provenance, validation, freshness, and conflicting evidence across organizations?</a></li>
         <li><a href="{{ '/ebw-zero-trust-ai-agents.html' | relative_url }}">How can an enterprise prove an AI agent’s legal authority for a specific action?</a></li>
         <li><a href="{{ '/quantum-resilient-organizational-identity.html' | relative_url }}">How can organizations establish a governed, PQC-resilient digital corridor?</a></li>

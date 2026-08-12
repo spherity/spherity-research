@@ -35,7 +35,7 @@ author_affiliations:
   - "Carsten Stöcker — Spherity GmbH"
 affiliation: "Amprion GmbH; Westnetz GmbH; TenneT TSO GmbH; Fraunhofer IOSB-AST; Spherity GmbH"
 date: "2026-08-11"
-last_modified_at: "2026-08-11"
+last_modified_at: "2026-08-12"
 research_cutoff: "2026-08-11"
 research_cutoff_label: "Regulatory and project status verified to this date"
 lang: "en"
@@ -62,7 +62,7 @@ image_mime: "image/jpeg"
 image_alt: "Social preview of the energy data-X article on European Business Wallets, market-role credentials, BESS data exchange, and controlled Digital Product Passport access."
 image_width: 1200
 image_height: 630
-cover_image: "/assets/energy-data-x-ebw-market-role-credentials-cover.jpg"
+cover_image: "/assets/energy-data-x-ebw-market-role-credentials-cover-v2.jpg"
 cover_image_alt: "First page of the published energy data-X journal article in ENERGIEWIRTSCHAFTLICHE TAGESFRAGEN."
 
 answer_summary: "European Business Wallets and market-role credentials address different questions in restricted Digital Product Passport access. Legal-person authentication establishes which organisation is requesting access. A governed market-role credential establishes the capacity in which that organisation acts, who issued the evidence and whether it remains valid. A policy engine then evaluates those verified attributes, credential status, purpose, product scope and machine-readable access rules before a connector or DPP application permits an operation. This distinction matters when information is not public and access depends on statutory authority, a Person with a Legitimate Interest, contractual authority, consent or ecosystem governance. The energy data-X prototype provides a practical reference: authentic sources and authorised issuers supply verifiable evidence to a business wallet, while connector-side policy enforcement turns that evidence into an auditable access decision."
@@ -203,12 +203,12 @@ tags:
        alt="{{ page.cover_image_alt }}"
        width="893"
        height="1263">
-  <figcaption><strong>Original publication.</strong> The web title corrects the obvious English/German typo “Wallet und market role credentials” to “Wallet and market role credentials”; the bibliographic citation below preserves the published wording.</figcaption>
+  <figcaption><strong>Original publication.</strong> First page of the journal article, with the published title “The energy data-X data ecosystem: Cross-sector and BESS data exchange enabled by the European Business Wallet and market role credentials.”</figcaption>
 </figure>
 
 <h2 id="original-publication">Original publication and academic attribution</h2>
 
-<p><strong>Published citation.</strong> Gößling, Jan-Niklas; Hoffmann, René; Kießling, Axel; Rohrbach, Daniel; and Stöcker, Carsten (2026). “The energy data-X data ecosystem: Cross-sector and BESS data exchange enabled by the European Business Wallet und market role credentials.” <cite>ENERGIEWIRTSCHAFTLICHE TAGESFRAGEN</cite>, Vol. 76, Issue 7-8, pp. 19–22.</p>
+<p><strong>Published citation.</strong> Gößling, Jan-Niklas; Hoffmann, René; Kießling, Axel; Rohrbach, Daniel; and Stöcker, Carsten (2026). “The energy data-X data ecosystem: Cross-sector and BESS data exchange enabled by the European Business Wallet and market role credentials.” <cite>ENERGIEWIRTSCHAFTLICHE TAGESFRAGEN</cite>, Vol. 76, Issue 7-8, pp. 19–22.</p>
 
 <p>The paper is a five-author industry and academic publication. It is not presented as a single-author Spherity paper. Its primary contribution is an implemented trust architecture for federated energy-data exchange, including legal-person identity, Market Partner IDs, governed market roles, connector-side policy checks and compatibility with existing technical trust infrastructures.</p>
 
@@ -422,7 +422,7 @@ tags:
 <h2 id="primary-sources">Primary sources</h2>
 
 <div class="references">
-  <p>[1] Gößling, J.-N.; Hoffmann, R.; Kießling, A.; Rohrbach, D.; Stöcker, C. (2026). “The energy data-X data ecosystem: Cross-sector and BESS data exchange enabled by the European Business Wallet und market role credentials.” <cite>ENERGIEWIRTSCHAFTLICHE TAGESFRAGEN</cite> 76, Issue 7-8, pp. 19–22. <a href="{{ page.pdf_url | relative_url }}">Original PDF</a>.</p>
+  <p>[1] Gößling, J.-N.; Hoffmann, R.; Kießling, A.; Rohrbach, D.; Stöcker, C. (2026). “The energy data-X data ecosystem: Cross-sector and BESS data exchange enabled by the European Business Wallet and market role credentials.” <cite>ENERGIEWIRTSCHAFTLICHE TAGESFRAGEN</cite> 76, Issue 7-8, pp. 19–22. <a href="{{ page.pdf_url | relative_url }}">Original PDF</a>.</p>
   <p>[2] energy data-X. <a href="https://energydata-x.eu/">Official project website</a> and <a href="https://www.energydata-x.eu/wp-content/uploads/2025/03/OnePager_06_Identity_Trust_03-2025.pdf">Identity &amp; Trust federated-service brief</a>.</p>
   <p>[3] German Energy Agency. <a href="https://github.com/Re4DE">Reference System for Data Exchange in the Energy Sector (Re4DE)</a>.</p>
   <p>[4] European Parliament and Council. <a href="https://eur-lex.europa.eu/eli/reg/2023/1542/oj/eng">Regulation (EU) 2023/1542 concerning batteries and waste batteries</a>, especially Articles 77–78 and Annex XIII.</p>
