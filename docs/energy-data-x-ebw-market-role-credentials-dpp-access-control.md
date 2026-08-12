@@ -62,7 +62,7 @@ image_mime: "image/jpeg"
 image_alt: "Social preview of the energy data-X article on European Business Wallets, market-role credentials, BESS data exchange, and controlled Digital Product Passport access."
 image_width: 1200
 image_height: 630
-cover_image: "/assets/energy-data-x-ebw-market-role-credentials-cover.jpg"
+cover_image: "/assets/energy-data-x-ebw-market-role-credentials-cover-v2.jpg"
 cover_image_alt: "First page of the published energy data-X journal article in ENERGIEWIRTSCHAFTLICHE TAGESFRAGEN."
 
 answer_summary: "European Business Wallets and market-role credentials address different questions in restricted Digital Product Passport access. Legal-person authentication establishes which organisation is requesting access. A governed market-role credential establishes the capacity in which that organisation acts, who issued the evidence and whether it remains valid. A policy engine then evaluates those verified attributes, credential status, purpose, product scope and machine-readable access rules before a connector or DPP application permits an operation. This distinction matters when information is not public and access depends on statutory authority, a Person with a Legitimate Interest, contractual authority, consent or ecosystem governance. The energy data-X prototype provides a practical reference: authentic sources and authorised issuers supply verifiable evidence to a business wallet, while connector-side policy enforcement turns that evidence into an auditable access decision."
@@ -203,7 +203,7 @@ tags:
        alt="{{ page.cover_image_alt }}"
        width="893"
        height="1263">
-  <figcaption><strong>Original publication.</strong> First page of the corrected journal article, with the published title “The energy data-X data ecosystem: Cross-sector and BESS data exchange enabled by the European Business Wallet and market role credentials.”</figcaption>
+  <figcaption><strong>Original publication.</strong> First page of the journal article, with the published title “The energy data-X data ecosystem: Cross-sector and BESS data exchange enabled by the European Business Wallet and market role credentials.”</figcaption>
 </figure>
 
 <h2 id="original-publication">Original publication and academic attribution</h2>
