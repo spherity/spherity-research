@@ -91,7 +91,7 @@ await cp(path.join(sourceDirectory, "assets"), path.join(outputDirectory, "asset
   recursive: true
 });
 
-const passthroughFiles = await glob("*.{html,pdf}", {
+const passthroughFiles = await glob("*.{html,pdf,txt}", {
   cwd: sourceDirectory,
   nodir: true,
   windowsPathsNoEscape: true

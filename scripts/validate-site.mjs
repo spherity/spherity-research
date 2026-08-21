@@ -14,6 +14,7 @@ const siteDirectory = path.resolve(getArgument("--site-dir", "_site"));
 const sourceDirectory = path.resolve(getArgument("--source-dir", "docs"));
 const basePath = "/spherity-research";
 const canonicalOrigin = "https://spherity.github.io/spherity-research";
+const indexNowKey = "ae12be17912040a1bceb67f0efcc1cf3";
 const errors = [];
 
 const exists = async (target) => {
@@ -114,6 +115,7 @@ const requiredInfrastructureFiles = [
   "robots.txt",
   "sitemap.xml",
   ".well-known/security.txt",
+  `${indexNowKey}.txt`,
   "llms.txt",
   "assets/site.css",
   "assets/research-portal.js",
@@ -162,6 +164,19 @@ const requiredFiles = [
 for (const requiredFile of requiredFiles) {
   if (!(await exists(path.join(siteDirectory, requiredFile)))) {
     errors.push(`Missing required build output: ${requiredFile}`);
+  }
+}
+
+if (await exists(path.join(siteDirectory, `${indexNowKey}.txt`))) {
+  const indexNowKeyProof = await readFile(
+    path.join(siteDirectory, `${indexNowKey}.txt`),
+    "utf8"
+  );
+  if (indexNowKeyProof.trim() !== indexNowKey) {
+    errors.push(`${indexNowKey}.txt: IndexNow key proof must contain the key exactly once.`);
+  }
+  if (indexNowKeyProof.charCodeAt(0) === 0xfeff || indexNowKeyProof.includes("\u00a0")) {
+    errors.push(`${indexNowKey}.txt: remove the UTF-8 BOM and non-breaking spaces.`);
   }
 }
 
