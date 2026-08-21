@@ -63,8 +63,10 @@ jobs:
         run: |
           if [ -n "$INDEXNOW_KEY" ]; then
             printf '%s' "$INDEXNOW_KEY" > "_site/${INDEXNOW_KEY}.txt"
+          elif [ -f "docs/ae12be17912040a1bceb67f0efcc1cf3.txt" ]; then
+            cp "docs/ae12be17912040a1bceb67f0efcc1cf3.txt" "_site/ae12be17912040a1bceb67f0efcc1cf3.txt"
           else
-            echo "INDEXNOW_KEY is not configured; key proof and notification will be skipped."
+            echo "No IndexNow key is configured; key proof and notification will be skipped."
           fi
 
       - name: Upload IndexNow sitemap manifest
@@ -127,4 +129,4 @@ jobs:
         env:
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
           SITE_URL: https://spherity.github.io/spherity-research
-        run: node scripts/notify-indexnow.mjs --sitemap _indexnow/sitemap.xml
+        run: node scripts/notify-indexnow.mjs --sitemap _indexnow/sitemap.xml --key-file docs/ae12be17912040a1bceb67f0efcc1cf3.txt

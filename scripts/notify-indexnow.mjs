@@ -8,9 +8,13 @@ const getArgument = (name, fallback) => {
 };
 
 const sitemapFile = path.resolve(getArgument("--sitemap", "_site/sitemap.xml"));
+const keyFile = getArgument("--key-file", "");
 const dryRun = process.argv.includes("--dry-run");
 const siteUrl = (process.env.SITE_URL || "https://spherity.github.io/spherity-research").replace(/\/+$/, "");
-const key = String(process.env.INDEXNOW_KEY || "").trim();
+const key = String(
+  process.env.INDEXNOW_KEY ||
+    (keyFile ? await readFile(path.resolve(keyFile), "utf8").catch(() => "") : "")
+).trim();
 
 if (!key) {
   console.log("INDEXNOW_KEY is not configured; skipping IndexNow notification.");

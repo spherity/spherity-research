@@ -17,7 +17,7 @@
     "sitemap": "node scripts/generate-sitemap.mjs --site-dir _site",
     "optimize": "node scripts/optimize-site.mjs --site-dir _site",
     "check": "node scripts/validate-site.mjs --site-dir _site",
-    "indexnow:dry-run": "node scripts/notify-indexnow.mjs --sitemap _site/sitemap.xml --dry-run",
+    "indexnow:dry-run": "node scripts/notify-indexnow.mjs --sitemap _site/sitemap.xml --key-file docs/ae12be17912040a1bceb67f0efcc1cf3.txt --dry-run",
     "test": "pnpm run build && pnpm run sitemap && pnpm run optimize && pnpm run check",
     "test:preview": "pnpm run build:preview && pnpm run sitemap && pnpm run optimize && pnpm run check"
   },
