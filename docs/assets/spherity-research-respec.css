@@ -693,6 +693,25 @@ body {
   line-height: 1.5;
 }
 
+.paper-download-grid,
+.paper-cover-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2.25rem;
+}
+
+.paper-download-grid .paper-download,
+.paper-cover-grid .paper-figure {
+  margin: 0;
+}
+
+.paper-download-grid h2 {
+  flex: 1 0 100%;
+  margin: 0;
+  font-size: 1.15rem;
+}
+
 .evidence-callout {
   margin: 1.5rem 0;
   padding: 1.15rem 1.25rem;
@@ -824,6 +843,13 @@ body {
 @media (max-width: 1150px) {
   .mobile-article-nav {
     display: block;
+  }
+}
+
+@media (max-width: 760px) {
+  .paper-download-grid,
+  .paper-cover-grid {
+    grid-template-columns: 1fr;
   }
 }
 
