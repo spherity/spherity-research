@@ -52,11 +52,26 @@ keywords:
   - "Gartner Digital Product Passport Established Vendors"
   - "Spherity sole vendor Pioneers quadrant"
   - "Gartner document 8098797"
+  - "CRA DPP"
+  - "CRA-capable Digital Product Passport"
+  - "CRA-enabled Digital Product Passport"
+  - "Cyber Resilience Act"
+  - "CRA-capable DPP"
+  - "Access-controlled CRA DPP"
+  - "Product Evidence Infrastructure"
+  - "SBOM"
+  - "VEX"
+  - "Continuous Conformity"
+  - "Continuous Cyber Assurance"
+  - "Functional Safety"
+  - "Product Lifecycle Assurance"
+  - "ETSI CRA Standards"
+  - "Product Security Leadership"
 permalink: /
 schema_type: "CollectionPage"
 og_type: "website"
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-last_modified_at: "2026-08-10"
+last_modified_at: "2026-08-24"
 image: "/assets/spherity-research-og.png"
 image_alt: "Spherity Research — research for the systems we need to trust, with the portal's orbital trust-system motif."
 ---
@@ -139,6 +154,7 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
         resilience.
       </p>
       <ul>
+        <li><a href="{{ '/cra-capable-digital-product-passports.html' | relative_url }}">How can CRA-capable Digital Product Passports turn static compliance into continuous cyber assurance?</a></li>
         <li><a href="{{ '/spherity-dpp-dbp-strategy-market-positioning.html' | relative_url }}">How does Spherity connect its Gartner Pioneers position to DPP, DBP, EBW, and Trusted AI execution?</a></li>
         <li><a href="{{ '/top-german-technology-companies-industrial-ai-agentic-commerce-2026.html' | relative_url }}">Which German companies form a strategic stack for Industrial AI, Physical AI, and trusted agentic commerce?</a></li>
         <li><a href="{{ '/verifiable-access-controlled-digital-product-passports.html' | relative_url }}">How can DPP and DBP transactions verify both product evidence and the legal authority to act?</a></li>

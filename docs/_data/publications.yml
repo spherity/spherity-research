@@ -1,3 +1,30 @@
+- title: "CRA-Capable Digital Product Passports"
+  type: "Research topic"
+  date_label: "23 August 2026"
+  date_iso: "2026-08-23"
+  description: "A management brief and full research paper on CRA-capable DPPs for SBOM, VEX, evidence graphs, cyber assurance, and product lifecycle evidence."
+  topics:
+    - "Identity"
+    - "DPP & DBP"
+    - "Resilience"
+  filters: "dpp identity resilience infrastructure"
+  search: "cra dpp cra and dpp cra-capable dpp cra enabled dpp cra-capable digital product passports cyber resilience act digital product passport digital product passports product evidence infrastructure sbom vex software bill of materials vulnerability exploitability exchange continuous conformity continuous cyber assurance evidence graph verifiable evidence graph architecture access controlled cra dpp access-controlled cra dpps european business wallet ebw eidas 2.0 zero trust functional safety product lifecycle assurance product lifecycle evidence risk mitigation regulatory milestones article 14 reporting obligations etsi cra standards connected products critical infrastructure resilient supply chains product security leadership manufacturers oem customer communication cyber assurance"
+  image: "/assets/preview-cra-capable-digital-product-passports.webp"
+  image_alt: "CRA-capable Digital Product Passports research preview based on the management brief From Static Compliance to Continuous Cyber Assurance."
+  image_width: 1200
+  image_height: 630
+  media_class: "card-media-wide"
+  format: "HTML + PDF"
+  featured: true
+  links:
+    - label: "Read topic page"
+      url: "/cra-capable-digital-product-passports.html"
+      arrow: "→"
+    - label: "Download full research"
+      url: "/CRA-Capable-Digital-Product-Passports-Full-Research.pdf"
+      arrow: "↓"
+      secondary: true
+
 - title: "European Business Wallet and Market Role Credentials for DPP Access Control: The energy data-X Reference Case"
   type: "Journal article"
   date_label: "11 August 2026"
