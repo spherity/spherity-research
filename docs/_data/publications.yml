@@ -1,3 +1,31 @@
+- title: "From Trustworthy AI to Trusted, Operational Agentic Systems"
+  type: "Academic paper"
+  date_label: "26 August 2026"
+  date_iso: "2026-08-26"
+  description: "A China-EU-US comparative analysis of Trusted AI, agentic AI deployment capability, legal authority, provenance, TEVV, and action evidence."
+  topics:
+    - "Trusted AI"
+    - "Agentic AI"
+    - "Identity"
+    - "Resilience"
+  filters: "ai identity resilience wallets infrastructure"
+  search: "trusted agentic ai trusted ai trustworthy ai ai governance china eu us comparative analysis china artificial intelligence european union ai united states ai agentic ai deployment capability ai service passport ai system bom legal person identity legal-person identity agent identity workload identity european business wallet ebw eidas 2.0 verifiable credentials verifiable evidence graph evidence graphs action receipts runtime attestation dynamic authorization dynamic authorisation provenance tevv test evaluation verification validation zero trust industrial ai physical ai agentic commerce critical infrastructure powers of attorney for agents trusted autonomy"
+  image: "/assets/preview-trusted-agentic-ai-china-eu-us.webp"
+  image_alt: "Spherity Research preview for Trusted Agentic AI comparing China, the European Union, and the United States."
+  image_width: 1200
+  image_height: 630
+  media_class: "card-media-wide"
+  format: "HTML + PDF"
+  featured: true
+  links:
+    - label: "Read analysis"
+      url: "/trusted-agentic-ai-china-eu-us-comparative-analysis.html"
+      arrow: "→"
+    - label: "Download PDF"
+      url: "/Spherity-Research-Trusted-Agentic-AI-China-EU-US-Comparative-Analysis.pdf"
+      arrow: "↓"
+      secondary: true
+
 - title: "CRA-Capable Digital Product Passports"
   type: "Research topic"
   date_label: "23 August 2026"

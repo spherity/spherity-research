@@ -67,11 +67,22 @@ keywords:
   - "Product Lifecycle Assurance"
   - "ETSI CRA Standards"
   - "Product Security Leadership"
+  - "Trusted Agentic AI"
+  - "China EU US AI Comparison"
+  - "Agentic AI Deployment Capability"
+  - "AI Governance"
+  - "Trustworthy AI"
+  - "AI Service Passport"
+  - "Agent Identity"
+  - "Runtime Attestation"
+  - "Action Receipts"
+  - "TEVV"
+  - "Trusted Autonomy"
 permalink: /
 schema_type: "CollectionPage"
 og_type: "website"
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-last_modified_at: "2026-08-24"
+last_modified_at: "2026-08-26"
 image: "/assets/spherity-research-og.png"
 image_alt: "Spherity Research — research for the systems we need to trust, with the portal's orbital trust-system motif."
 ---
@@ -154,6 +165,7 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
         resilience.
       </p>
       <ul>
+        <li><a href="{{ '/trusted-agentic-ai-china-eu-us-comparative-analysis.html' | relative_url }}">How do China, Europe, and the United States compare in trusted agentic AI deployment capability?</a></li>
         <li><a href="{{ '/cra-capable-digital-product-passports.html' | relative_url }}">How can CRA-capable Digital Product Passports turn static compliance into continuous cyber assurance?</a></li>
         <li><a href="{{ '/spherity-dpp-dbp-strategy-market-positioning.html' | relative_url }}">How does Spherity connect its Gartner Pioneers position to DPP, DBP, EBW, and Trusted AI execution?</a></li>
         <li><a href="{{ '/top-german-technology-companies-industrial-ai-agentic-commerce-2026.html' | relative_url }}">Which German companies form a strategic stack for Industrial AI, Physical AI, and trusted agentic commerce?</a></li>
