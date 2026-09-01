@@ -1,3 +1,30 @@
+- title: "Deutschland AG 2.0"
+  type: "Policy and strategy paper"
+  date_label: "1 September 2026"
+  date_iso: "2026-09-01"
+  description: "A federated transformation architecture for Industrial AI, sustainable industry, security, resilience, metropolitan regions, and European competitiveness."
+  topics:
+    - "Trusted AI"
+    - "Resilience"
+    - "Industrial AI"
+  filters: "ai resilience"
+  search: "deutschland ag deutschland ag 2.0 deutschland-ag industriestandort deutschland wirtschaftsstandort deutschland zukunft der deutschen industrie industriepolitik deutschland industrielle transformation wettbewerbsfähigkeit deutschland europäische wettbewerbsfähigkeit technologische souveränität digitale souveränität künstliche intelligenz industrie industrielle ki industrial ai germany physical ai germany industrie 4.0 mittelstand digitalisierung mittelstand ki metropolregionen deutschland föderierte transformationsarchitektur kooperative führung high performance cooperative leadership resiliente lieferketten cyberresilienz industrie nachhaltige industrie dekarbonisierung industrie standortpolitik zukunftsindustrien hightech agenda deutschland german metropolitan regions agentic manufacturing trusted agentic economy sustainability security resilience europe china us eu"
+  image: "/assets/preview-deutschland-ag-2-0.webp"
+  image_alt: "Deutschland AG 2.0 research preview on federated transformation, Industrial AI, resilience, and Germany's metropolitan regions."
+  image_width: 1200
+  image_height: 630
+  media_class: "card-media-wide"
+  format: "HTML + PDF"
+  featured: true
+  links:
+    - label: "Read the paper"
+      url: "/deutschland-ag-2-0-industrial-ai-federated-transformation.html"
+      arrow: "→"
+    - label: "Download PDF"
+      url: "/Spherity-Research-Deutschland-AG-2.0.pdf"
+      arrow: "↓"
+      secondary: true
+
 - title: "From Trustworthy AI to Trusted, Operational Agentic Systems"
   type: "Academic paper"
   date_label: "26 August 2026"

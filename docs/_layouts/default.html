@@ -256,7 +256,16 @@
         "headline": {{ page_title | jsonify }},
         {% if page.seo_title %}"alternativeHeadline": {{ page.seo_title | jsonify }},{% endif %}
         "description": {{ page_description | jsonify }},
-        "abstract": {{ page.answer_summary | default: page_description | jsonify }},
+        {% if page.abstract_de %}"abstract": [
+          {
+            "@value": {{ page.answer_summary | default: page_description | jsonify }},
+            "@language": {{ page.lang | default: "en" | jsonify }}
+          },
+          {
+            "@value": {{ page.abstract_de | jsonify }},
+            "@language": "de"
+          }
+        ],{% else %}"abstract": {{ page.answer_summary | default: page_description | jsonify }},{% endif %}
         "image": [
           {
             "@type": "ImageObject",
@@ -312,9 +321,21 @@
         ]{% else %}{ "@id": "{{ '/' | absolute_url }}#website" }{% endif %},
         {% if page.page_start %}"pageStart": {{ page.page_start | jsonify }},{% endif %}
         {% if page.page_end %}"pageEnd": {{ page.page_end | jsonify }},{% endif %}
-        "inLanguage": {{ page.lang | default: "en" | jsonify }},
+        {% if page.secondary_language %}"inLanguage": [{{ page.lang | default: "en" | jsonify }}, {{ page.secondary_language | jsonify }}],{% else %}"inLanguage": {{ page.lang | default: "en" | jsonify }},{% endif %}
         "keywords": {{ page.tags | join: ", " | jsonify }},
         "genre": {{ page.paper_status | default: "Spherity Research Paper" | jsonify }},
+        {% if page.audiences %}"audience": [
+          {% for audience in page.audiences %}{
+            "@type": "Audience",
+            "audienceType": {{ audience | jsonify }}
+          }{% unless forloop.last %},{% endunless %}{% endfor %}
+        ],{% endif %}
+        {% if page.spatial_coverage %}"spatialCoverage": [
+          {% for place in page.spatial_coverage %}{
+            "@type": "Place",
+            "name": {{ place | jsonify }}
+          }{% unless forloop.last %},{% endunless %}{% endfor %}
+        ],{% endif %}
         "encodingFormat": "text/html",
         "isAccessibleForFree": true,
         "license": {{ content_license | jsonify }},

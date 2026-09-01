@@ -78,11 +78,29 @@ keywords:
   - "Action Receipts"
   - "TEVV"
   - "Trusted Autonomy"
+  - "Deutschland AG"
+  - "Deutschland AG 2.0"
+  - "Industriestandort Deutschland"
+  - "Wirtschaftsstandort Deutschland"
+  - "Zukunft der deutschen Industrie"
+  - "Industriepolitik Deutschland"
+  - "Industrielle Transformation"
+  - "Industrielle KI"
+  - "Industrial AI Germany"
+  - "Physical AI Germany"
+  - "Mittelstand KI"
+  - "Metropolregionen Deutschland"
+  - "Technologische Souveränität"
+  - "Europäische Wettbewerbsfähigkeit"
+  - "High-Performance Cooperative Leadership"
+  - "Federated Transformation Architecture"
+  - "Agentic Manufacturing"
+  - "Trusted Agentic Economy"
 permalink: /
 schema_type: "CollectionPage"
 og_type: "website"
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-last_modified_at: "2026-08-26"
+last_modified_at: "2026-09-01"
 image: "/assets/spherity-research-og.png"
 image_alt: "Spherity Research — research for the systems we need to trust, with the portal's orbital trust-system motif."
 ---
@@ -165,6 +183,7 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
         resilience.
       </p>
       <ul>
+        <li><a href="{{ '/deutschland-ag-2-0-industrial-ai-federated-transformation.html' | relative_url }}">How can Deutschland AG 2.0 connect Germany's metropolitan regions, Industrial AI, sustainability, security, and resilience into a federated European transformation system?</a></li>
         <li><a href="{{ '/trusted-agentic-ai-china-eu-us-comparative-analysis.html' | relative_url }}">How do China, Europe, and the United States compare in trusted agentic AI deployment capability?</a></li>
         <li><a href="{{ '/cra-capable-digital-product-passports.html' | relative_url }}">How can CRA-capable Digital Product Passports turn static compliance into continuous cyber assurance?</a></li>
         <li><a href="{{ '/spherity-dpp-dbp-strategy-market-positioning.html' | relative_url }}">How does Spherity connect its Gartner Pioneers position to DPP, DBP, EBW, and Trusted AI execution?</a></li>
