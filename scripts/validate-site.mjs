@@ -716,6 +716,36 @@ if (await exists(path.join(siteDirectory, "index.html"))) {
     }
   }
 
+  const homepageSchemas = [];
+  for (const script of indexHtml.matchAll(
+    /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
+  )) {
+    try {
+      homepageSchemas.push(JSON.parse(script[1]));
+    } catch {
+      // The generic JSON-LD validation above reports the parse error with its details.
+    }
+  }
+
+  const topLevelSchemaTypes = new Set(
+    homepageSchemas.flatMap((schema) => {
+      const type = schema?.["@type"];
+      return Array.isArray(type) ? type : type ? [type] : [];
+    })
+  );
+  for (const type of ["WebSite", "CollectionPage", "ResearchProject", "ItemList", "FAQPage"]) {
+    if (!topLevelSchemaTypes.has(type)) {
+      errors.push(`index.html: ${type} must be exposed as a top-level JSON-LD block.`);
+    }
+  }
+
+  const faqSchema = homepageSchemas.find((schema) => schema?.["@type"] === "FAQPage");
+  if (faqSchema && faqSchema.mainEntity?.length !== faqItems.length) {
+    errors.push(
+      `index.html: FAQPage schema contains ${faqSchema.mainEntity?.length || 0} questions; expected ${faqItems.length}.`
+    );
+  }
+
   const renderedFaqItems = [...indexHtml.matchAll(/class=["'][^"']*faq-item[^"']*["']/gi)].length;
   if (renderedFaqItems !== faqItems.length) {
     errors.push(
