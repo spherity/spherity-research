@@ -978,6 +978,14 @@ a {
   line-height: 1.65;
 }
 
+.card-body > .card-byline {
+  margin-top: 0.75rem;
+  color: var(--ink-700);
+  font-size: 0.76rem;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
 .topic-tags {
   display: flex;
   flex-wrap: wrap;
