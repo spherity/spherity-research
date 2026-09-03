@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Spherity Research"
-description: "Open-access Spherity research by Dr. Carsten Stöcker on DPPs, DBPs, European Business Wallets, Trusted AI, data sharing, and quantum-resilient trust."
+description: "Open-access Spherity research by Dr. Carsten Stöcker on DPPs, DBPs, European Business Wallets, Industrial and Trusted AI, data sharing, and resilient trust."
 author: "Dr. Carsten Stöcker"
 affiliation: "Spherity GmbH"
 keywords:
@@ -101,12 +101,16 @@ keywords:
   - "Trusted Execution Capital"
   - "Economics of Transformation Speed"
   - "AI in Europe"
+  - "AI Europe"
   - "European AI Competitiveness"
   - "AI Productivity"
   - "Industrial Renewal"
   - "Corporate Resource Reassignment"
   - "Bo Harald"
   - "Why Advisory Oy"
+  - "Künstliche Intelligenz"
+  - "Digitaler Produktpass"
+  - "Cyberresilienz"
 permalink: /
 schema_type: "CollectionPage"
 og_type: "website"
@@ -126,7 +130,8 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
     </a>
     <nav aria-label="Primary navigation">
       <a href="#publications">Publications</a>
-      <a href="#topics">Topics</a>
+      <a href="#research-scope">Research scope</a>
+      <a href="#faq">FAQ</a>
       <a class="nav-cta" href="https://www.spherity.com/" rel="external">Spherity.com <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
@@ -176,41 +181,27 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
     </div>
   </section>
 
-  <section class="portal-explainer portal-shell" aria-labelledby="research-answers-title">
+  <section class="portal-explainer portal-shell" id="research-scope" aria-labelledby="research-scope-title">
     <div>
       <p class="eyebrow eyebrow-dark"><span></span>Research scope</p>
-      <h2 id="research-answers-title">What questions does Spherity Research answer?</h2>
+      <h2 id="research-scope-title">Identity, evidence and trusted execution across the real economy.</h2>
     </div>
     <div class="portal-explainer-copy">
       <p>
-        Spherity Research examines how organizations and products can establish
-        identity, authority, provenance, and trustworthy evidence across
-        regulated digital systems. The research agenda includes Digital Product
-        Passports (DPPs), Digital Battery Passports (DBPs), trusted data sharing
-        across Data Spaces and Digital Data Sharing Corridors, European Business
-        Wallet (EBW) policy, Trusted AI, AI-agent authorization, AI Service
-        Passports (AISP), Industrial AI evidence graphs, Physical AI,
-        post-quantum organizational-identity corridors, and operational
-        resilience.
+        Spherity Research examines how organizations, products, AI agents and
+        machines can establish identity, authority, provenance and trustworthy
+        evidence across regulated digital systems. The current agenda spans
+        Digital Product Passports (DPPs), Digital Battery Passports (DBPs) and
+        Cyber Resilience Act (CRA) product-evidence infrastructure; European
+        Business Wallets (EBW), Data Spaces and governed data sharing; Trusted
+        AI, Industrial AI and Physical AI; post-quantum resilience; and European
+        AI competitiveness through trusted execution and industrial renewal.
       </p>
-      <ul>
-        <li><a href="{{ '/europes-fundamental-ai-opportunity.html' | relative_url }}">How can Europe turn trust into a production factor and trusted execution capital for faster AI productivity and industrial renewal?</a></li>
-        <li><a href="{{ '/deutschland-ag-2-0-industrial-ai-federated-transformation.html' | relative_url }}">How can Deutschland AG 2.0 connect Germany's metropolitan regions, Industrial AI, sustainability, security, and resilience into a federated European transformation system?</a></li>
-        <li><a href="{{ '/trusted-agentic-ai-china-eu-us-comparative-analysis.html' | relative_url }}">How do China, Europe, and the United States compare in trusted agentic AI deployment capability?</a></li>
-        <li><a href="{{ '/cra-capable-digital-product-passports.html' | relative_url }}">How can CRA-capable Digital Product Passports turn static compliance into continuous cyber assurance?</a></li>
-        <li><a href="{{ '/spherity-dpp-dbp-strategy-market-positioning.html' | relative_url }}">How does Spherity connect its Gartner Pioneers position to DPP, DBP, EBW, and Trusted AI execution?</a></li>
-        <li><a href="{{ '/top-german-technology-companies-industrial-ai-agentic-commerce-2026.html' | relative_url }}">Which German companies form a strategic stack for Industrial AI, Physical AI, and trusted agentic commerce?</a></li>
-        <li><a href="{{ '/verifiable-access-controlled-digital-product-passports.html' | relative_url }}">How can DPP and DBP transactions verify both product evidence and the legal authority to act?</a></li>
-        <li><a href="{{ '/energy-data-x-ebw-market-role-credentials-dpp-access-control.html' | relative_url }}">How can European Business Wallets and governed market-role credentials control DPP, DBP, and BESS data access?</a></li>
-        <li><a href="{{ '/evidence-graphs-industrial-ai-data-plane.html' | relative_url }}">How can Industrial AI trace provenance, validation, freshness, and conflicting evidence across organizations?</a></li>
-        <li><a href="{{ '/ebw-zero-trust-ai-agents.html' | relative_url }}">How can an enterprise prove an AI agent’s legal authority for a specific action?</a></li>
-        <li><a href="{{ '/quantum-resilient-organizational-identity.html' | relative_url }}">How can organizations establish a governed, PQC-resilient digital corridor?</a></li>
-        <li><a href="{{ '/Securing-Digital-Identity-Quantum-Vulnerabilities.html' | relative_url }}">Which digital-identity dependencies must migrate for post-quantum readiness?</a></li>
-        <li><a href="{{ '/ebw-roadmap.html' | relative_url }}">Which legal and operational gates shape European Business Wallet adoption?</a></li>
-        <li><a href="{{ '/threat-escalation-model-germany-eu.html' | relative_url }}">How can Germany and the EU test readiness across coupled technology risks?</a></li>
-      </ul>
+      <p class="scope-audience">Open-access papers, executive briefs and policy roadmaps connect architecture, regulation and operating models for policy makers, industry leaders, researchers and technology teams.</p>
     </div>
   </section>
+
+  {% include publication-library.html %}
 
   <section class="market-position-spotlight portal-shell" aria-labelledby="market-position-title">
     <div class="market-position-heading">
@@ -225,6 +216,32 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
       <p class="market-position-source">[1] <a href="https://www.gartner.com/en/documents/8098797" rel="external"><em>Emerging Market Quadrant for Digital Product Passport — Established Vendors</em></a>, 6 July 2026, Gartner document 8098797.</p>
       <p class="market-position-disclaimer">Gartner does not endorse any company, vendor, product or service depicted in its publications, and does not advise technology users to select only those vendors with the highest ratings or other designation. Gartner publications consist of the opinions of Gartner’s business and technology insights organization and should not be construed as statements of fact. Gartner disclaims all warranties, expressed or implied, with respect to this publication, including any warranties of merchantability or fitness for a particular purpose.</p>
       <p class="market-position-disclaimer">GARTNER is a trademark of Gartner, Inc. and/or its affiliates.</p>
+    </div>
+  </section>
+
+  <section class="dpp-dbp-spotlight portal-shell" id="dpp-dbp" aria-labelledby="dpp-dbp-title">
+    <div class="dpp-dbp-heading">
+      <p class="eyebrow eyebrow-dark"><span></span>DPP &amp; DBP infrastructure</p>
+      <h2 id="dpp-dbp-title">Product evidence is useful only when access and authority are verifiable.</h2>
+      <p>Digital Product Passports and Digital Battery Passports need more than a product record. They need trustworthy evidence, governed disclosure and accountable actors across the product lifecycle.</p>
+      <a href="{{ '/verifiable-access-controlled-digital-product-passports.html' | relative_url }}">Read <em>Verifiable, Access-Controlled Digital Product Passports</em> <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="dpp-dbp-grid" aria-label="DPP and DBP trust architecture">
+      <article>
+        <span class="dpp-dbp-number">01 · Product plane</span>
+        <h3>Verify the product and its evidence.</h3>
+        <p>Product-linked identity connects identifiers, provenance, lifecycle claims, conformity data, SBOM and VEX records, and evidence-graph relationships.</p>
+      </article>
+      <article>
+        <span class="dpp-dbp-number">02 · Authority plane</span>
+        <h3>Verify the organization and its right to act.</h3>
+        <p>European Business Wallets connect legal-person identity, roles, mandates, authorization policies and action evidence to each disclosure or transaction.</p>
+      </article>
+      <article>
+        <span class="dpp-dbp-number">03 · Controlled exchange</span>
+        <h3>Release the right evidence to the right party.</h3>
+        <p>Machine-readable policy evaluates role, purpose, context and current status before product data crosses company, sector or jurisdictional boundaries.</p>
+      </article>
     </div>
   </section>
 
@@ -286,132 +303,41 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
     </div>
   </section>
 
-  <section class="publication-section portal-shell" id="publications" aria-labelledby="publications-title">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow eyebrow-dark"><span></span>Research library</p>
-        <h2 id="publications-title">Current publications</h2>
-      </div>
-      <p>
-        Long-form papers, roadmaps, and visual explainers for decision-makers
-        building trustworthy digital ecosystems.
-      </p>
-    </div>
-
-    <div class="publication-tools" role="search" aria-label="Filter publications">
-      <label class="search-field">
-        <span class="sr-only">Search publications</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
-          <circle cx="11" cy="11" r="7"></circle>
-          <path d="m20 20-4-4"></path>
-        </svg>
-        <input type="search" id="publication-search" placeholder="Search titles, themes, or keywords" autocomplete="off">
-      </label>
-      <div class="filter-list" role="group" aria-label="Filter by topic">
-        <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter-button" type="button" data-filter="identity" aria-pressed="false">Identity</button>
-        <button class="filter-button" type="button" data-filter="dpp" aria-pressed="false">DPP &amp; DBP</button>
-        <button class="filter-button" type="button" data-filter="wallets" aria-pressed="false">Wallets &amp; data sharing</button>
-        <button class="filter-button" type="button" data-filter="resilience" aria-pressed="false">Resilience</button>
-        <button class="filter-button" type="button" data-filter="ai" aria-pressed="false">Trusted AI</button>
-      </div>
-    </div>
-
-    <div class="publication-grid" id="publication-grid">
-      {% for publication in site.data.publications %}
-      {% assign primary_link = publication.links | first %}
-      <article class="publication-card{% if publication.featured %} publication-card-featured{% endif %}"
-               data-topics="{{ publication.filters }}"
-               data-search="{{ publication.search }}">
-        <a class="card-media {{ publication.media_class }}"
-           href="{{ primary_link.url | relative_url }}"
-           aria-label="{{ primary_link.label }}: {{ publication.title }}">
-          {% if publication.image %}
-          <img src="{{ publication.image | relative_url }}"
-               alt="{{ publication.image_alt }}"
-               width="{{ publication.image_width }}"
-               height="{{ publication.image_height }}"
-               loading="{% if publication.featured %}eager{% else %}lazy{% endif %}"
-               decoding="async"
-               {% if publication.featured %}fetchpriority="high"{% endif %}>
-          {% else %}
-          <span class="graphic-grid" aria-hidden="true"></span>
-          <span class="graphic-kicker">{{ publication.graphic_kicker }}</span>
-          <strong>{{ publication.graphic_title }}</strong>
-          <span class="graphic-caption">{{ publication.graphic_caption }}</span>
-          {% endif %}
-          <span class="media-format">{{ publication.format }}</span>
-        </a>
-        <div class="card-body">
-          <div class="card-topline">
-            <span class="card-type">{{ publication.type }}</span>
-            <time datetime="{{ publication.date_iso }}">{{ publication.date_label }}</time>
-          </div>
-          <h3>{{ publication.title }}</h3>
-          <p>{{ publication.description }}</p>
-          {% if publication.byline %}<p class="card-byline">By {{ publication.byline }}</p>{% endif %}
-          <ul class="topic-tags" aria-label="Topics">
-            {% for topic in publication.topics %}
-            <li>{{ topic }}</li>
-            {% endfor %}
-          </ul>
-          <div class="card-actions{% if publication.links.size > 1 %} card-actions-split{% endif %}">
-            {% for link in publication.links %}
-            <a class="{% if link.secondary %}secondary-link{% else %}text-link{% endif %}"
-               href="{{ link.url | relative_url }}">
-              {{ link.label }} {% if link.arrow %}<span aria-hidden="true">{{ link.arrow }}</span>{% endif %}
-            </a>
-            {% endfor %}
-          </div>
-        </div>
-      </article>
-      {% endfor %}
-    </div>
-
-    <p class="no-results" id="no-results" role="status" aria-live="polite" hidden>
-      No publications match this search. Try a broader topic or clear the search field.
-    </p>
-  </section>
-
-  <section class="topics-section" id="topics" aria-labelledby="topics-title">
+  <section class="homepage-faq" id="faq" aria-labelledby="faq-title">
     <div class="portal-shell">
-      <div class="section-heading section-heading-light">
+      <div class="faq-heading">
         <div>
-          <p class="eyebrow"><span></span>Research agenda</p>
-          <h2 id="topics-title">One trust layer. Five perspectives.</h2>
+          <p class="eyebrow"><span></span>Research FAQ</p>
+          <h2 id="faq-title">What questions does Spherity Research answer?</h2>
         </div>
-        <p>
-          The agenda connects product data, identity, data sharing, technology,
-          law, policy, and operations instead of treating them as separate
-          systems.
-        </p>
+        <p>Concise answers with direct links to the underlying open-access research, executive briefs and policy roadmaps.</p>
       </div>
-      <div class="topic-grid">
-        <article>
-          <span class="topic-number">01</span>
-          <h3>Digital Product Passports</h3>
-          <p>Trust architectures for DPPs and Digital Battery Passports (DBPs), including identifiers, provenance, lifecycle claims, access rights, and compliance evidence.</p>
-        </article>
-        <article>
-          <span class="topic-number">02</span>
-          <h3>Organizational identity</h3>
-          <p>Verifiable legal existence, representation, mandates, and accountability for companies, machines, and autonomous agents.</p>
-        </article>
-        <article>
-          <span class="topic-number">03</span>
-          <h3>Business Wallets &amp; Data Sharing</h3>
-          <p>Legal and operational infrastructure for trusted cross-border processes, interoperable Data Spaces, and Digital Data Sharing Corridors.</p>
-        </article>
-        <article>
-          <span class="topic-number">04</span>
-          <h3>Cryptographic resilience</h3>
-          <p>PQC Corridors and crypto-agile migration paths for identity, trust anchors, registries, and long-lived evidence.</p>
-        </article>
-        <article>
-          <span class="topic-number">05</span>
-          <h3>Trusted AI</h3>
-          <p>Legal authorization, evidence provenance, and accountable action receipts for governed Industrial AI, Physical AI, and agentic commerce.</p>
-        </article>
+      <nav class="faq-index" aria-label="FAQ topics">
+        {% for group in site.data.homepage_faq.groups %}
+        <a href="#faq-group-{{ forloop.index }}">{{ group.title }}</a>
+        {% endfor %}
+      </nav>
+      <div class="faq-groups">
+        {% for group in site.data.homepage_faq.groups %}
+        <section class="faq-group" id="faq-group-{{ forloop.index }}" aria-labelledby="faq-group-title-{{ forloop.index }}">
+          <div class="faq-group-heading">
+            <span>{{ forloop.index | prepend: '0' }}</span>
+            <div>
+              <h3 id="faq-group-title-{{ forloop.index }}">{{ group.title }}</h3>
+              <p>{{ group.description }}</p>
+            </div>
+          </div>
+          <div class="faq-list">
+            {% for item in group.items %}
+            <article class="faq-item" id="{{ item.id }}">
+              <h4>{{ item.question }}</h4>
+              <p>{{ item.answer }}</p>
+              <a href="{{ item.url | relative_url }}">{{ item.link_label }} <span aria-hidden="true">→</span></a>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+        {% endfor %}
       </div>
     </div>
   </section>
