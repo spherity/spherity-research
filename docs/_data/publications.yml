@@ -1,3 +1,31 @@
+- title: "Europe’s Fundamental AI Opportunity"
+  type: "Executive brief and academic paper"
+  date_label: "4 September 2026"
+  date_iso: "2026-09-04"
+  description: "How trust becomes a production factor and trusted execution capital for European AI productivity, industrial renewal, and transformation speed."
+  byline: "Carsten Stöcker, Spherity GmbH · Bo Harald, Why Advisory Oy"
+  topics:
+    - "Wallets & Data Sharing"
+    - "Resilience"
+    - "Trusted AI"
+  filters: "wallets resilience ai"
+  search: "europe fundamental ai opportunity europe's fundamental ai opportunity trust as a production factor production factor trust trusted execution capital industrial renewal economics of transformation speed transformation speed ai in europe europe ai european ai ai europe european ai competitiveness ai productivity industrial ai physical ai agentic ai european business wallet european business wallets ebw trusted ai trustworthy ai ai governance zero trust trust algorithms verifiable authority corporate leadership risk taking corporate resource reassignment transformation portfolio carsten stöcker carsten stoecker spherity gmbh bo harald why advisory oy wallets data sharing resilience"
+  image: "/assets/preview-europes-fundamental-ai-opportunity.webp"
+  image_alt: "Europe’s Fundamental AI Opportunity research preview using the executive brief cover, by Carsten Stöcker and Bo Harald."
+  image_width: 1200
+  image_height: 630
+  media_class: "card-media-wide"
+  format: "HTML + 2 PDFs"
+  featured: true
+  links:
+    - label: "Read the topic page"
+      url: "/europes-fundamental-ai-opportunity.html"
+      arrow: "→"
+    - label: "Download long version"
+      url: "/Spherity-Why-Advisory-Research-Europes-Fundamental-AI-Opportunity-Long-Version.pdf"
+      arrow: "↓"
+      secondary: true
+
 - title: "Deutschland AG 2.0"
   type: "Policy and strategy paper"
   date_label: "1 September 2026"

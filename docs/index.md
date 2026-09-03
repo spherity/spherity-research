@@ -96,11 +96,22 @@ keywords:
   - "Federated Transformation Architecture"
   - "Agentic Manufacturing"
   - "Trusted Agentic Economy"
+  - "Europe’s Fundamental AI Opportunity"
+  - "Trust as a Production Factor"
+  - "Trusted Execution Capital"
+  - "Economics of Transformation Speed"
+  - "AI in Europe"
+  - "European AI Competitiveness"
+  - "AI Productivity"
+  - "Industrial Renewal"
+  - "Corporate Resource Reassignment"
+  - "Bo Harald"
+  - "Why Advisory Oy"
 permalink: /
 schema_type: "CollectionPage"
 og_type: "website"
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-last_modified_at: "2026-09-01"
+last_modified_at: "2026-09-04"
 image: "/assets/spherity-research-og.png"
 image_alt: "Spherity Research — research for the systems we need to trust, with the portal's orbital trust-system motif."
 ---
@@ -183,6 +194,7 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
         resilience.
       </p>
       <ul>
+        <li><a href="{{ '/europes-fundamental-ai-opportunity.html' | relative_url }}">How can Europe turn trust into a production factor and trusted execution capital for faster AI productivity and industrial renewal?</a></li>
         <li><a href="{{ '/deutschland-ag-2-0-industrial-ai-federated-transformation.html' | relative_url }}">How can Deutschland AG 2.0 connect Germany's metropolitan regions, Industrial AI, sustainability, security, and resilience into a federated European transformation system?</a></li>
         <li><a href="{{ '/trusted-agentic-ai-china-eu-us-comparative-analysis.html' | relative_url }}">How do China, Europe, and the United States compare in trusted agentic AI deployment capability?</a></li>
         <li><a href="{{ '/cra-capable-digital-product-passports.html' | relative_url }}">How can CRA-capable Digital Product Passports turn static compliance into continuous cyber assurance?</a></li>
@@ -337,6 +349,7 @@ image_alt: "Spherity Research — research for the systems we need to trust, wit
           </div>
           <h3>{{ publication.title }}</h3>
           <p>{{ publication.description }}</p>
+          {% if publication.byline %}<p class="card-byline">By {{ publication.byline }}</p>{% endif %}
           <ul class="topic-tags" aria-label="Topics">
             {% for topic in publication.topics %}
             <li>{{ topic }}</li>
