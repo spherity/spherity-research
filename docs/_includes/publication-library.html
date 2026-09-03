@@ -1,0 +1,86 @@
+<section class="publication-section portal-shell" id="publications" aria-labelledby="publications-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow eyebrow-dark"><span></span>Research library</p>
+      <h2 id="publications-title">Current publications</h2>
+    </div>
+    <p>
+      Long-form papers, executive briefs, roadmaps and visual explainers for
+      decision-makers building trustworthy digital ecosystems.
+    </p>
+  </div>
+
+  <div class="publication-tools" role="search" aria-label="Filter publications">
+    <label class="search-field">
+      <span class="sr-only">Search publications</span>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-4-4"></path>
+      </svg>
+      <input type="search" id="publication-search" placeholder="Search titles, themes, or keywords" autocomplete="off">
+    </label>
+    <div class="filter-list" role="group" aria-label="Filter by topic">
+      <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-button" type="button" data-filter="identity" aria-pressed="false">Identity</button>
+      <button class="filter-button" type="button" data-filter="dpp" aria-pressed="false">DPP &amp; DBP</button>
+      <button class="filter-button" type="button" data-filter="wallets" aria-pressed="false">Wallets &amp; data sharing</button>
+      <button class="filter-button" type="button" data-filter="resilience" aria-pressed="false">Resilience</button>
+      <button class="filter-button" type="button" data-filter="ai" aria-pressed="false">Trusted AI</button>
+    </div>
+  </div>
+
+  <div class="publication-grid" id="publication-grid">
+    {% for publication in site.data.publications %}
+    {% assign primary_link = publication.links | first %}
+    <article class="publication-card{% if publication.featured %} publication-card-featured{% endif %}"
+             data-topics="{{ publication.filters }}"
+             data-search="{{ publication.search }}">
+      <a class="card-media {{ publication.media_class }}"
+         href="{{ primary_link.url | relative_url }}"
+         aria-label="{{ primary_link.label }}: {{ publication.title }}">
+        {% if publication.image %}
+        <img src="{{ publication.image | relative_url }}"
+             alt="{{ publication.image_alt }}"
+             width="{{ publication.image_width }}"
+             height="{{ publication.image_height }}"
+             loading="{% if publication.featured %}eager{% else %}lazy{% endif %}"
+             decoding="async"
+             {% if publication.featured %}fetchpriority="high"{% endif %}>
+        {% else %}
+        <span class="graphic-grid" aria-hidden="true"></span>
+        <span class="graphic-kicker">{{ publication.graphic_kicker }}</span>
+        <strong>{{ publication.graphic_title }}</strong>
+        <span class="graphic-caption">{{ publication.graphic_caption }}</span>
+        {% endif %}
+        <span class="media-format">{{ publication.format }}</span>
+      </a>
+      <div class="card-body">
+        <div class="card-topline">
+          <span class="card-type">{{ publication.type }}</span>
+          <time datetime="{{ publication.date_iso }}">{{ publication.date_label }}</time>
+        </div>
+        <h3>{{ publication.title }}</h3>
+        <p>{{ publication.description }}</p>
+        {% if publication.byline %}<p class="card-byline">By {{ publication.byline }}</p>{% endif %}
+        <ul class="topic-tags" aria-label="Topics">
+          {% for topic in publication.topics %}
+          <li>{{ topic }}</li>
+          {% endfor %}
+        </ul>
+        <div class="card-actions{% if publication.links.size > 1 %} card-actions-split{% endif %}">
+          {% for link in publication.links %}
+          <a class="{% if link.secondary %}secondary-link{% else %}text-link{% endif %}"
+             href="{{ link.url | relative_url }}">
+            {{ link.label }} {% if link.arrow %}<span aria-hidden="true">{{ link.arrow }}</span>{% endif %}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  <p class="no-results" id="no-results" role="status" aria-live="polite" hidden>
+    No publications match this search. Try a broader topic or clear the search field.
+  </p>
+</section>

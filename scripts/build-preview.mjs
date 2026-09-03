@@ -26,10 +26,13 @@ const config = parseYaml(await readFile(path.join(sourceDirectory, "_config.yml"
 const publications = parseYaml(
   await readFile(path.join(sourceDirectory, "_data", "publications.yml"), "utf8")
 );
+const homepageFaq = parseYaml(
+  await readFile(path.join(sourceDirectory, "_data", "homepage_faq.yml"), "utf8")
+);
 
 const site = {
   ...config,
-  data: { publications },
+  data: { publications, homepage_faq: homepageFaq },
   time: new Date(),
   url: config.url,
   baseurl: config.baseurl

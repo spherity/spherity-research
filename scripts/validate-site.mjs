@@ -141,6 +141,31 @@ if (!Array.isArray(config.include) || !config.include.includes(".well-known")) {
 const publications = parseYaml(
   await readFile(path.join(sourceDirectory, "_data", "publications.yml"), "utf8")
 );
+const homepageFaq = parseYaml(
+  await readFile(path.join(sourceDirectory, "_data", "homepage_faq.yml"), "utf8")
+);
+const faqGroups = homepageFaq?.groups || [];
+const faqItems = faqGroups.flatMap((group) => group?.items || []);
+const faqIds = new Set();
+
+if (faqGroups.length < 3) {
+  errors.push("Homepage FAQ: organize questions into at least three reader-oriented groups.");
+}
+
+for (const [index, item] of faqItems.entries()) {
+  for (const field of ["id", "question", "answer", "link_label", "url"]) {
+    if (!item?.[field]) {
+      errors.push(`Homepage FAQ: item ${index + 1} is missing ${field}.`);
+    }
+  }
+  if (faqIds.has(item?.id)) {
+    errors.push(`Homepage FAQ: duplicate id "${item.id}".`);
+  }
+  faqIds.add(item?.id);
+  if (String(item?.answer || "").length < 100) {
+    errors.push(`Homepage FAQ: answer "${item?.question || index + 1}" is too short to stand alone.`);
+  }
+}
 const requiredPublicationOutputs = [
   ...new Set(
     publications.flatMap((publication) =>
@@ -156,9 +181,23 @@ const requiredPublicationOutputs = [
     )
   )
 ];
+const requiredFaqOutputs = [
+  ...new Set(
+    faqItems
+      .map((item) => item?.url)
+      .filter(
+        (url) =>
+          typeof url === "string" &&
+          url.startsWith("/") &&
+          /\.html$/i.test(url)
+      )
+      .map((url) => decodeURIComponent(url.replace(/^\/+/, "")))
+  )
+];
 const requiredFiles = [
   ...requiredInfrastructureFiles,
-  ...requiredPublicationOutputs
+  ...requiredPublicationOutputs,
+  ...requiredFaqOutputs
 ];
 
 for (const requiredFile of requiredFiles) {
@@ -664,7 +703,10 @@ if (await exists(path.join(siteDirectory, "index.html"))) {
     ['data-share-link="threads"', "Threads share action"],
     ['data-share-link="reddit"', "Reddit share action"],
     ["assets/cc-by.svg", "CC BY 4.0 vector badge"],
-    ['id="research-answers-title"', "question-led research summary"],
+    ['id="research-scope-title"', "research scope summary"],
+    ['id="faq-title"', "visible research FAQ"],
+    ['"@type":"FAQPage"', "FAQPage structured data"],
+    ['"@type":"ResearchProject"', "ResearchProject structured data"],
     ["publication-card", "publication cards"]
   ];
 
@@ -672,6 +714,32 @@ if (await exists(path.join(siteDirectory, "index.html"))) {
     if (!indexHtml.replace(/\s+/g, "").includes(needle.replace(/\s+/g, ""))) {
       errors.push(`index.html: missing ${label}.`);
     }
+  }
+
+  const renderedFaqItems = [...indexHtml.matchAll(/class=["'][^"']*faq-item[^"']*["']/gi)].length;
+  if (renderedFaqItems !== faqItems.length) {
+    errors.push(
+      `index.html: rendered ${renderedFaqItems} FAQ answers; expected ${faqItems.length}.`
+    );
+  }
+
+  const homepageSectionOrder = [
+    'id="research-scope"',
+    'id="publications"',
+    'class="market-position-spotlight',
+    'id="dpp-dbp"',
+    'class="trust-planes',
+    'class="corridor-section',
+    'id="faq"'
+  ];
+  let previousPosition = -1;
+  for (const marker of homepageSectionOrder) {
+    const markerPosition = indexHtml.indexOf(marker);
+    if (markerPosition < 0 || markerPosition <= previousPosition) {
+      errors.push("index.html: homepage editorial sections are missing or out of order.");
+      break;
+    }
+    previousPosition = markerPosition;
   }
 }
 

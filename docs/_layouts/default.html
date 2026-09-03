@@ -140,10 +140,19 @@
         "@id": "https://www.spherity.com/#organization",
         "name": "Spherity GmbH",
         "url": "https://www.spherity.com/",
+        "sameAs": ["https://github.com/spherity"],
         "logo": {
           "@type": "ImageObject",
           "url": "{{ logo_url | escape }}"
-        }
+        },
+        "knowsAbout": [
+          "Digital Product Passports",
+          "European Business Wallets",
+          "Organizational identity",
+          "Verifiable credentials",
+          "Trusted AI",
+          "Post-quantum cryptography"
+        ]
       },
       {
         "@type": "Person",
@@ -154,7 +163,14 @@
         "familyName": "Stöcker",
         "url": "{{ '/' | absolute_url }}#dr-carsten-stoecker",
         "affiliation": { "@id": "https://www.spherity.com/#organization" },
-        "worksFor": { "@id": "https://www.spherity.com/#organization" }
+        "worksFor": { "@id": "https://www.spherity.com/#organization" },
+        "knowsAbout": [
+          "Digital Product Passports",
+          "European Business Wallets",
+          "Organizational identity",
+          "Trusted Industrial AI",
+          "Quantum-resilient trust"
+        ]
       },
       {
         "@type": "WebSite",
@@ -165,7 +181,9 @@
         "author": { "@id": "{{ '/' | absolute_url }}#dr-carsten-stoecker" },
         "creator": { "@id": "{{ '/' | absolute_url }}#dr-carsten-stoecker" },
         "publisher": { "@id": "https://www.spherity.com/#organization" },
-        "inLanguage": "en"
+        "inLanguage": ["en", "de"],
+        "license": {{ content_license | jsonify }},
+        "hasPart": { "@id": "{{ canonical_url | escape }}#collection" }
       },
       {
         "@type": "CollectionPage",
@@ -181,6 +199,20 @@
         "isAccessibleForFree": true,
         "keywords": {{ page.keywords | jsonify }},
         "isPartOf": { "@id": "{{ '/' | absolute_url }}#website" },
+        "inLanguage": ["en", "de"],
+        "genre": [
+          "Open-access research",
+          "Research papers",
+          "Executive briefs",
+          "Policy recommendations",
+          "Best-practice architecture"
+        ],
+        "audience": [
+          { "@type": "Audience", "audienceType": "Policy makers" },
+          { "@type": "Audience", "audienceType": "Industry leaders" },
+          { "@type": "Audience", "audienceType": "Researchers" },
+          { "@type": "Audience", "audienceType": "Technology and compliance teams" }
+        ],
         "about": [
           "Digital Product Passports",
           "DPP",
@@ -202,23 +234,111 @@
           "AI agent authorization",
           "Post-quantum cryptography",
           "Trusted AI",
-          "Physical AI"
+          "Industrial AI",
+          "Physical AI",
+          "Cyber Resilience Act",
+          "Trust as a Production Factor",
+          "Trusted Execution Capital",
+          "European AI competitiveness"
         ],
-        "mainEntity": {
-          "@type": "ItemList",
-          "numberOfItems": {{ site.data.publications | size }},
-          "itemListElement": [
-            {% for publication in site.data.publications %}
-            {% assign primary_link = publication.links | first %}
+        "mainEntity": [
+          { "@id": "{{ canonical_url | escape }}#research-agenda" },
+          { "@id": "{{ canonical_url | escape }}#publication-list" },
+          { "@id": "{{ canonical_url | escape }}#faq" }
+        ],
+        "hasPart": [
+          { "@id": "{{ canonical_url | escape }}#publication-list" },
+          { "@id": "{{ canonical_url | escape }}#faq" }
+        ]
+      },
+      {
+        "@type": "ResearchProject",
+        "@id": "{{ canonical_url | escape }}#research-agenda",
+        "name": "Spherity Research agenda",
+        "url": "{{ canonical_url | escape }}#research-scope",
+        "description": "Open research connecting product evidence, organizational and agent identity, governed data sharing, cryptographic resilience, Trusted AI and Europe’s industrial transformation.",
+        "sponsor": { "@id": "https://www.spherity.com/#organization" },
+        "parentOrganization": { "@id": "https://www.spherity.com/#organization" },
+        "subjectOf": { "@id": "{{ canonical_url | escape }}#collection" },
+        "knowsAbout": [
+          "DPP and DBP infrastructure",
+          "European Business Wallets and data sharing",
+          "Trusted Industrial AI and Physical AI",
+          "Post-quantum organizational identity",
+          "European AI competitiveness and industrial renewal"
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "{{ canonical_url | escape }}#publication-list",
+        "name": "Spherity Research publications",
+        "description": "Open-access research papers, executive briefs, policy roadmaps and visual explainers.",
+        "numberOfItems": {{ site.data.publications | size }},
+        "itemListOrder": "https://schema.org/ItemListOrderDescending",
+        "itemListElement": [
+          {% for publication in site.data.publications %}
+          {% assign primary_link = publication.links | first %}
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.index }},
+            "url": {{ primary_link.url | absolute_url | jsonify }},
+            "item": {
+              "@type": "CreativeWork",
+              "@id": "{{ primary_link.url | absolute_url }}#creative-work",
+              "url": {{ primary_link.url | absolute_url | jsonify }},
+              "name": {{ publication.title | jsonify }},
+              "headline": {{ publication.title | jsonify }},
+              "description": {{ publication.description | jsonify }},
+              "datePublished": {{ publication.date_iso | jsonify }},
+              "genre": {{ publication.type | jsonify }},
+              "keywords": {{ publication.topics | jsonify }},
+              {% if publication.byline %}"creditText": {{ publication.byline | jsonify }},{% endif %}
+              {% if publication.image %}"image": {
+                "@type": "ImageObject",
+                "url": {{ publication.image | absolute_url | jsonify }},
+                "caption": {{ publication.image_alt | jsonify }},
+                "width": {{ publication.image_width }},
+                "height": {{ publication.image_height }}
+              },{% endif %}
+              "encodingFormat": "text/html",
+              "isAccessibleForFree": true,
+              "license": {{ content_license | jsonify }},
+              "publisher": { "@id": "https://www.spherity.com/#organization" },
+              "isPartOf": { "@id": "{{ canonical_url | escape }}#collection" }
+            }
+          }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "{{ canonical_url | escape }}#faq",
+        "url": "{{ canonical_url | escape }}#faq",
+        "name": "Spherity Research frequently asked questions",
+        "description": "Concise answers to the research questions covered by the Spherity Research library.",
+        "isPartOf": { "@id": "{{ '/' | absolute_url }}#website" },
+        "inLanguage": "en",
+        "mainEntity": [
+          {% assign faq_item_first = true %}
+          {% for group in site.data.homepage_faq.groups %}
+            {% for item in group.items %}
+            {% unless faq_item_first %},{% endunless %}
             {
-              "@type": "ListItem",
-              "position": {{ forloop.index }},
-              "url": "{{ primary_link.url | absolute_url }}",
-              "name": {{ publication.title | jsonify }}
-            }{% unless forloop.last %},{% endunless %}
+              "@type": "Question",
+              "@id": "{{ canonical_url | escape }}#{{ item.id }}",
+              "url": "{{ canonical_url | escape }}#{{ item.id }}",
+              "name": {{ item.question | jsonify }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ item.answer | jsonify }},
+                "url": "{{ canonical_url | escape }}#{{ item.id }}",
+                "citation": {{ item.url | absolute_url | jsonify }}
+              }
+            }
+            {% assign faq_item_first = false %}
             {% endfor %}
-          ]
-        }
+          {% endfor %}
+        ]
       }
     ]
   }
