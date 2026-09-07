@@ -12,7 +12,7 @@ authors:
   - "Dr. Carsten Stöcker"
 affiliation: "Spherity GmbH"
 date: "2026-08-23"
-last_modified_at: "2026-08-24"
+last_modified_at: "2026-09-07"
 research_cutoff: "2026-08-23"
 research_cutoff_label: "Management brief status checked to this date; full research evidence cut-off: 2026-08-15"
 lang: "en"
@@ -22,6 +22,11 @@ canonical_url: "https://spherity.github.io/spherity-research/cra-capable-digital
 latest_version: "https://spherity.github.io/spherity-research/cra-capable-digital-product-passports.html"
 pdf_url: "/CRA-Capable-Digital-Product-Passports-Full-Research.pdf"
 management_brief_pdf_url: "/CRA-Capable-Digital-Product-Passports-Management-Brief.pdf"
+associated_media:
+  - name: "From Static Compliance to Continuous Cyber Assurance — Management Brief"
+    url: "/CRA-Capable-Digital-Product-Passports-Management-Brief.pdf"
+  - name: "CRA-Capable Digital Product Passports — Full Research"
+    url: "/CRA-Capable-Digital-Product-Passports-Full-Research.pdf"
 
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
 license: "https://creativecommons.org/licenses/by/4.0/"

@@ -29,10 +29,13 @@ const publications = parseYaml(
 const homepageFaq = parseYaml(
   await readFile(path.join(sourceDirectory, "_data", "homepage_faq.yml"), "utf8")
 );
+const authors = parseYaml(
+  await readFile(path.join(sourceDirectory, "_data", "authors.yml"), "utf8")
+);
 
 const site = {
   ...config,
-  data: { publications, homepage_faq: homepageFaq },
+  data: { publications, homepage_faq: homepageFaq, authors },
   time: new Date(),
   url: config.url,
   baseurl: config.baseurl
@@ -109,6 +112,14 @@ const markdownFiles = await glob("*.md", {
   nodir: true,
   windowsPathsNoEscape: true
 });
+
+site.pages = [];
+for (const file of markdownFiles) {
+  const source = await readFile(path.join(sourceDirectory, file), "utf8");
+  const { data } = splitFrontMatter(source);
+  const permalink = data.permalink || `/${file.replace(/\.md$/i, ".html")}`;
+  site.pages.push({ ...data, url: permalink });
+}
 
 for (const file of markdownFiles) {
   const source = await readFile(path.join(sourceDirectory, file), "utf8");

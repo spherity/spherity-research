@@ -13,10 +13,29 @@ The publication cards on the homepage are generated from one catalog:
 `docs/_data/publications.yml`. This prevents homepage content and publication
 metadata from drifting apart.
 
+Social-card art direction is recorded in `docs/_data/social_cards.yml` and
+rendered by `scripts/generate-social-cards.mjs`. The shared 1200 × 630 research
+grid style is regenerated before local checks and deployment. A mandatory
+preflight measures every title, subtitle, description, byline, and topic row
+against the left-column safe area; generation and deployment fail if text
+enters the 60-pixel gutter before the document visual. Portable line-length
+limits and a conservative non-Linux serif-width allowance also prevent
+operating-system font substitutions from passing locally but overflowing in
+GitHub Actions. The Gartner-
+approved strategy card is a checksum-protected exception and must not be
+changed without a new approval.
+
+Verified author identities are maintained in `docs/_data/authors.yml`. The
+shared page layout reuses those profiles on future papers, while a publication
+can supply an author-specific `url` or `same_as` value when necessary. Reviewed
+ORCID identifiers are emitted in `sameAs`, JSON-LD identifiers, and scholarly
+citation metadata; the build validates the ORCID format and check digit.
+
 Every pull request is built and checked for broken local links, missing assets,
 unrendered template code, incomplete SEO/AEO/GEO metadata, invalid JSON-LD,
 inconsistent catalog data, missing answer content, absent PDF landing pages,
-and oversized homepage previews. A merge to `main` creates a fresh sitemap and
+unreviewed version 2 search research, author-identity omissions, and oversized
+homepage previews. A merge to `main` creates a fresh sitemap and
 deploys the verified site through GitHub Pages. The workflow enforces these
 requirements deterministically; it does not use AI to rewrite research claims
 or silently change approved copy. See `AEO-GEO-IMPLEMENTATION.md` for the
@@ -25,14 +44,24 @@ evidence and editorial policy.
 ## Add a new HTML research paper
 
 1. Copy `templates/publication.md` to `docs/publication-slug.md`.
-2. Replace every example value in the front matter at the top of the new file.
-3. Add the paper text below the front matter. Keep every heading `id` aligned
+2. Complete the Google Trends and semantic-language review described in
+   `SEO-AEO-GEO-RESEARCH.md`, then replace every example value in the version 2
+   front matter.
+3. Add every author to `author_entities` and to the reviewed
+   `docs/_data/authors.yml` registry. A publication may provide a verified HTTPS
+   `url` or `same_as` override, but it does not replace the registry review.
+4. Add the paper text below the front matter. Keep every heading `id` aligned
    with its matching entry in `toc_items`.
-4. Export a WebP thumbnail, ideally 1200 × 630 pixels and no larger than
-   250 KB, and save it in `docs/assets/` using a short, descriptive filename.
-5. Add one entry to `docs/_data/publications.yml`. Copy a nearby entry and
+5. Add a `research-grid-v1` entry to `docs/_data/social_cards.yml`, using short,
+   pre-wrapped title and description lines plus a suitable paper cover or
+   code-native subject visual. Run `pnpm run social-cards`; it measures the
+   complete left column, rejects overflow into the document gutter, and exports
+   the WebP card at 1200 × 630 pixels.
+6. Add one entry to `docs/_data/publications.yml`. Copy a nearby entry and
    update its title, description, topics, image, dates, search terms, and links.
-6. Run the local checks described below, then open a pull request.
+7. Add a homepage FAQ entry only when the paper answers a distinct research
+   question that is not already represented.
+8. Run the local checks described below, then open a pull request.
 
 Use meaningful alt text that explains the thumbnail’s content. Do not begin
 with “image of.” Keep the search description specific and roughly 150–160
@@ -46,14 +75,31 @@ characters.
    `docs/assets/`.
 3. Create a concise HTML landing page that faithfully states the paper's
    answer, authorship, findings, boundaries, and citation.
-4. Add an entry to `docs/_data/publications.yml`. Put the canonical HTML page
+4. Declare the primary PDF in `pdf_url` and every PDF edition in
+   `associated_media`; add the first-page cover image and descriptive alt text.
+5. Add an entry to `docs/_data/publications.yml`. Put the canonical HTML page
    first and the PDF download second; use `format: "HTML + PDF"`.
-5. Open both links in the local preview and confirm that the HTML page does not
+6. Open both links in the local preview and confirm that the HTML page does not
    present itself as the full paper.
 
 If an HTML version is available, list “Read paper” first and “Download PDF”
 second in the publication’s `links` block. Search engines should see the HTML
 page as the canonical research page and the PDF as an alternate format.
+
+## SEO, AEO and GEO research
+
+Every publication created from template version 2 records a structured search
+review in its `search_research` front-matter block. Follow
+[`SEO-AEO-GEO-RESEARCH.md`](SEO-AEO-GEO-RESEARCH.md) to compare exact terms and
+topics across appropriate geographies, 12-month and five-year periods, and Web
+or News search. Google Trends is used as relative language evidence, not as
+absolute volume or an automated content generator.
+
+The build verifies that the review is complete and that the chosen authority
+terms appear in the publication metadata. It intentionally does not scrape
+Google Trends during deployment, because niche results can be sampled,
+normalized, insufficient and unstable. Search Console remains the source for
+post-publication query and indexing evidence.
 
 ## Local preview
 
@@ -164,6 +210,14 @@ continues through `sitemap.xml`, internal links, and Search Console.
 - Thumbnail is legible at small size and has useful alt text.
 - HTML and PDF links work in the staging site.
 - Open Graph and X previews use the intended image.
+- The publication page and homepage catalog use the same generated social card;
+  approved exceptions remain checksum-identical.
+- Every social-card text line and topic row clears the document visual by the
+  enforced 60-pixel safety gutter; no text is clipped or hidden behind imagery.
+- Version 2 search research records the Google Trends filters, findings,
+  authority terms, discovery terms, and resulting editorial decisions.
+- Every author has an `identity_reviewed` profile in `docs/_data/authors.yml`;
+  any publication-specific HTTPS `url`/`same_as` override is also verified.
 - The page works at mobile, tablet, and desktop widths.
 - Heading order is logical and tables are usable by keyboard.
 - No draft notes, placeholders, or private references remain.

@@ -33,6 +33,9 @@ jobs:
       - name: Install build dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Generate and preflight social-card safe areas
+        run: pnpm run social-cards
+
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
@@ -52,7 +55,7 @@ jobs:
       - name: Minify HTML and CSS
         run: pnpm run optimize
 
-      - name: Enforce SEO, AEO, GEO, performance, links, and asset requirements
+      - name: Enforce SEO, AEO, GEO, author identity, search research, links, and assets
         run: pnpm run check
 
       - name: Publish IndexNow key proof

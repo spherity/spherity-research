@@ -1,4 +1,5 @@
 import { access, readFile, stat } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import process from "node:process";
 import { glob } from "glob";
@@ -16,6 +17,25 @@ const basePath = "/spherity-research";
 const canonicalOrigin = "https://spherity.github.io/spherity-research";
 const indexNowKey = "ae12be17912040a1bceb67f0efcc1cf3";
 const errors = [];
+// These pages predate publication template v2. Any new research-page filename
+// must opt into v2, so copying an older paper cannot silently bypass the new
+// author-identity and search-research checks.
+const legacyPublicationFiles = new Set([
+  "cra-capable-digital-product-passports.md",
+  "deutschland-ag-2-0-industrial-ai-federated-transformation.md",
+  "ebw-roadmap.md",
+  "ebw-zero-trust-ai-agents.md",
+  "energy-data-x-ebw-market-role-credentials-dpp-access-control.md",
+  "europes-fundamental-ai-opportunity.md",
+  "evidence-graphs-industrial-ai-data-plane.md",
+  "quantum-resilient-organizational-identity.md",
+  "Securing-Digital-Identity-Quantum-Vulnerabilities.md",
+  "spherity-dpp-dbp-strategy-market-positioning.md",
+  "threat-escalation-model-germany-eu.md",
+  "top-german-technology-companies-industrial-ai-agentic-commerce-2026.md",
+  "trusted-agentic-ai-china-eu-us-comparative-analysis.md",
+  "verifiable-access-controlled-digital-product-passports.md"
+]);
 
 const exists = async (target) => {
   try {
@@ -34,6 +54,32 @@ const splitFrontMatter = (source) => {
     content: match[2],
     raw: match[1]
   };
+};
+
+const asArray = (value) =>
+  Array.isArray(value) ? value : value === undefined || value === null || value === "" ? [] : [value];
+
+const isHttpsUrl = (value) => {
+  try {
+    return new URL(String(value)).protocol === "https:";
+  } catch {
+    return false;
+  }
+};
+
+const isValidOrcidUrl = (value) => {
+  const match = String(value || "").match(
+    /^https:\/\/orcid\.org\/(\d{4})-(\d{4})-(\d{4})-(\d{3}[\dX])$/
+  );
+  if (!match) return false;
+  const identifier = match.slice(1).join("");
+  let total = 0;
+  for (const character of identifier.slice(0, 15)) {
+    total = (total + Number(character)) * 2;
+  }
+  const remainder = (12 - (total % 11)) % 11;
+  const expectedCheckDigit = remainder === 10 ? "X" : String(remainder);
+  return identifier.at(-1) === expectedCheckDigit;
 };
 
 const sourcePathFromPublicUrl = (url) => {
@@ -144,6 +190,146 @@ const publications = parseYaml(
 const homepageFaq = parseYaml(
   await readFile(path.join(sourceDirectory, "_data", "homepage_faq.yml"), "utf8")
 );
+const socialCards = parseYaml(
+  await readFile(path.join(sourceDirectory, "_data", "social_cards.yml"), "utf8")
+);
+const authorProfiles = parseYaml(
+  await readFile(path.join(sourceDirectory, "_data", "authors.yml"), "utf8")
+);
+
+for (const [name, profile] of Object.entries(authorProfiles || {})) {
+  if (!profile?.identity_reviewed) {
+    errors.push(`Author registry: ${name} must explicitly record identity_reviewed: true.`);
+  }
+  if (!profile?.affiliation) {
+    errors.push(`Author registry: ${name} is missing an affiliation.`);
+  }
+  const identityUrls = [profile?.url, ...asArray(profile?.same_as)].filter(Boolean);
+  if (identityUrls.length === 0) {
+    errors.push(`Author registry: ${name} requires a verified url or same_as identity.`);
+  }
+  for (const identityUrl of identityUrls) {
+    if (!isHttpsUrl(identityUrl)) {
+      errors.push(`Author registry: ${name} has a non-HTTPS identity URL: ${identityUrl}.`);
+    }
+  }
+  if (profile?.orcid) {
+    if (!isValidOrcidUrl(profile.orcid)) {
+      errors.push(`Author registry: ${name} has an invalid ORCID URL or check digit.`);
+    }
+    if (!asArray(profile.same_as).includes(profile.orcid)) {
+      errors.push(`Author registry: ${name} must include its ORCID URL in same_as.`);
+    }
+  }
+}
+
+const publicationTemplateSource = await readFile(
+  path.join(projectDirectory, "templates", "publication.md"),
+  "utf8"
+);
+const publicationTemplate = splitFrontMatter(publicationTemplateSource);
+const requiredTemplateFields = [
+  "publication_template_version",
+  "seo_title",
+  "og_title",
+  "og_description",
+  "author_entities",
+  "author_affiliations",
+  "keywords",
+  "associated_media",
+  "cover_image",
+  "cover_image_alt",
+  "image_mime",
+  "image_width",
+  "image_height",
+  "search_research",
+  "questions_answered"
+];
+const searchResearchRequirements = [
+  ["reviewed_on", 1],
+  ["source", 1],
+  ["source_url", 1],
+  ["geographies", 2],
+  ["time_ranges", 2],
+  ["search_types", 1],
+  ["authority_terms", 2],
+  ["discovery_terms", 3],
+  ["audience_questions", 2],
+  ["evidence", 1],
+  ["editorial_decisions", 2]
+];
+const searchEvidenceFields = [
+  "comparison",
+  "input_type",
+  "geography",
+  "time_range",
+  "search_type",
+  "result"
+];
+if (Number(publicationTemplate.data?.publication_template_version) !== 2) {
+  errors.push("Publication template: publication_template_version must be 2.");
+}
+for (const field of requiredTemplateFields) {
+  if (publicationTemplate.data?.[field] === undefined) {
+    errors.push(`Publication template: missing future-publication field "${field}".`);
+  }
+}
+for (const [field, minimum] of searchResearchRequirements) {
+  if (asArray(publicationTemplate.data?.search_research?.[field]).length < minimum) {
+    errors.push(
+      `Publication template: search_research.${field} requires at least ${minimum} ` +
+        `${minimum === 1 ? "entry" : "entries"}.`
+    );
+  }
+}
+if (publicationTemplate.data?.search_research?.source !== "Google Trends") {
+  errors.push('Publication template: search_research.source must be "Google Trends".');
+}
+if (
+  publicationTemplate.data?.search_research?.source_url !==
+  "https://trends.google.com/trends/explore"
+) {
+  errors.push("Publication template: search_research.source_url must use Google Trends Explore.");
+}
+if (
+  Number(publicationTemplate.data?.image_width) !== 1200 ||
+  Number(publicationTemplate.data?.image_height) !== 630
+) {
+  errors.push("Publication template: social image dimensions must be 1200×630.");
+}
+const templateKeywords = new Set(
+  asArray(publicationTemplate.data?.keywords).map((keyword) =>
+    String(keyword).trim().toLocaleLowerCase("en")
+  )
+);
+for (const authorityTerm of asArray(
+  publicationTemplate.data?.search_research?.authority_terms
+)) {
+  if (!templateKeywords.has(String(authorityTerm).trim().toLocaleLowerCase("en"))) {
+    errors.push(
+      `Publication template: authority term "${authorityTerm}" must also appear in keywords.`
+    );
+  }
+}
+for (const [index, author] of asArray(publicationTemplate.data?.author_entities).entries()) {
+  const identityUrls = [author?.url, ...asArray(author?.same_as)].filter(Boolean);
+  if (!author?.name || !author?.affiliation || identityUrls.length === 0) {
+    errors.push(
+      `Publication template: author_entities item ${index + 1} requires name, affiliation and identity URL.`
+    );
+  }
+}
+for (const [index, evidence] of asArray(
+  publicationTemplate.data?.search_research?.evidence
+).entries()) {
+  for (const field of searchEvidenceFields) {
+    if (!evidence?.[field]) {
+      errors.push(
+        `Publication template: search_research evidence ${index + 1} requires ${field}.`
+      );
+    }
+  }
+}
 const faqGroups = homepageFaq?.groups || [];
 const faqItems = faqGroups.flatMap((group) => group?.items || []);
 const faqIds = new Set();
@@ -247,6 +433,16 @@ for (const markdownFile of markdownFiles) {
 
   if (data.layout !== "research-respec") continue;
 
+  const publicationTemplateVersion = Number(data.publication_template_version);
+  if (
+    (!Number.isFinite(publicationTemplateVersion) || publicationTemplateVersion < 2) &&
+    !legacyPublicationFiles.has(markdownFile)
+  ) {
+    errors.push(
+      `${markdownFile}: new research pages must use publication_template_version: 2.`
+    );
+  }
+
   researchPages.push({ file: markdownFile, data, content });
 
   const requiredFields = [
@@ -287,6 +483,124 @@ for (const markdownFile of markdownFiles) {
 
   if (!data.author && (!Array.isArray(data.authors) || data.authors.length === 0)) {
     errors.push(`${markdownFile}: requires author or authors metadata.`);
+  }
+
+  if (Number.isFinite(publicationTemplateVersion) && publicationTemplateVersion >= 2) {
+    const versionTwoFields = [
+      "seo_title",
+      "og_title",
+      "og_description",
+      "author_entities",
+      "author_affiliations",
+      "keywords",
+      "image_mime",
+      "image_width",
+      "image_height",
+      "search_research"
+    ];
+    for (const field of versionTwoFields) {
+      const value = data[field];
+      if (
+        value === undefined ||
+        value === null ||
+        value === "" ||
+        (Array.isArray(value) && value.length === 0)
+      ) {
+        errors.push(`${markdownFile}: template v2 requires "${field}".`);
+      }
+    }
+
+    const authors = asArray(data.authors || data.author);
+    const authorEntities = asArray(data.author_entities);
+    const entityByName = new Map(authorEntities.map((author) => [author?.name, author]));
+    if (authors.length !== authorEntities.length) {
+      errors.push(`${markdownFile}: authors and author_entities must contain the same number of people.`);
+    }
+    if (entityByName.size !== authorEntities.length || new Set(authors).size !== authors.length) {
+      errors.push(`${markdownFile}: authors and author_entities must not contain duplicate names.`);
+    }
+    if (asArray(data.author_affiliations).length !== authors.length) {
+      errors.push(`${markdownFile}: author_affiliations must contain one entry for every author.`);
+    }
+    for (const authorName of authors) {
+      const authorEntity = entityByName.get(authorName);
+      if (!authorEntity?.affiliation) {
+        errors.push(`${markdownFile}: ${authorName} requires an author_entities affiliation.`);
+        continue;
+      }
+      const registeredProfile = authorProfiles?.[authorName];
+      if (!registeredProfile?.identity_reviewed) {
+        errors.push(
+          `${markdownFile}: ${authorName} must have an identity_reviewed profile in ` +
+            "docs/_data/authors.yml."
+        );
+      }
+      const identityUrls = [
+        authorEntity.url,
+        ...asArray(authorEntity.same_as),
+        registeredProfile?.url,
+        ...asArray(registeredProfile?.same_as)
+      ].filter(Boolean);
+      if (identityUrls.length === 0) {
+        errors.push(
+          `${markdownFile}: ${authorName} requires a verified author URL or same_as identity; ` +
+            "add it to author_entities or docs/_data/authors.yml."
+        );
+      }
+      for (const identityUrl of identityUrls) {
+        if (!isHttpsUrl(identityUrl)) {
+          errors.push(`${markdownFile}: ${authorName} has a non-HTTPS identity URL: ${identityUrl}.`);
+        }
+      }
+    }
+
+    const searchResearch = data.search_research || {};
+    for (const [field, minimum] of searchResearchRequirements) {
+      const value = searchResearch[field];
+      const count = asArray(value).length;
+      if (count < minimum) {
+        errors.push(
+          `${markdownFile}: search_research.${field} requires at least ${minimum} ` +
+            `${minimum === 1 ? "entry" : "entries"}.`
+        );
+      }
+    }
+    if (searchResearch.source !== "Google Trends") {
+      errors.push(`${markdownFile}: search_research.source must be "Google Trends".`);
+    }
+    if (searchResearch.source_url !== "https://trends.google.com/trends/explore") {
+      errors.push(`${markdownFile}: search_research.source_url must use the official Google Trends Explore URL.`);
+    }
+    const searchReviewDate = Date.parse(searchResearch.reviewed_on);
+    if (Number.isNaN(searchReviewDate)) {
+      errors.push(`${markdownFile}: search_research.reviewed_on must be a valid date.`);
+    } else {
+      const lastModifiedDate = Date.parse(data.last_modified_at);
+      if (!Number.isNaN(lastModifiedDate) && searchReviewDate > lastModifiedDate) {
+        errors.push(
+          `${markdownFile}: search_research.reviewed_on cannot be later than last_modified_at.`
+        );
+      }
+    }
+    for (const [index, evidence] of asArray(searchResearch.evidence).entries()) {
+      for (const field of searchEvidenceFields) {
+        if (!evidence?.[field]) {
+          errors.push(
+            `${markdownFile}: search_research evidence ${index + 1} requires ${field}.`
+          );
+        }
+      }
+    }
+    const normalizedKeywords = new Set(
+      asArray(data.keywords).map((keyword) => String(keyword).trim().toLocaleLowerCase("en"))
+    );
+    for (const authorityTerm of asArray(searchResearch.authority_terms)) {
+      if (!normalizedKeywords.has(String(authorityTerm).trim().toLocaleLowerCase("en"))) {
+        errors.push(
+          `${markdownFile}: authority term "${authorityTerm}" must also appear in keywords.`
+        );
+      }
+    }
   }
 
   if (String(data.description || "").length < 100 || String(data.description || "").length > 180) {
@@ -358,6 +672,30 @@ for (const markdownFile of markdownFiles) {
     }
   }
 
+  if (data.associated_media !== undefined) {
+    if (!Array.isArray(data.associated_media) || data.associated_media.length === 0) {
+      errors.push(`${markdownFile}: associated_media must be a non-empty list.`);
+    } else {
+      const mediaUrls = new Set();
+      for (const [index, media] of data.associated_media.entries()) {
+        if (!media?.name || !media?.url || !/\.pdf$/i.test(media.url)) {
+          errors.push(`${markdownFile}: associated_media item ${index + 1} requires a name and PDF URL.`);
+          continue;
+        }
+        if (mediaUrls.has(media.url)) {
+          errors.push(`${markdownFile}: duplicate associated PDF ${media.url}.`);
+        }
+        mediaUrls.add(media.url);
+        if (!(await exists(sourcePathFromPublicUrl(media.url)))) {
+          errors.push(`${markdownFile}: associated PDF does not exist: ${media.url}`);
+        }
+      }
+      if (data.pdf_url && !mediaUrls.has(data.pdf_url)) {
+        errors.push(`${markdownFile}: associated_media must include the primary pdf_url.`);
+      }
+    }
+  }
+
   if (!content.includes('id="questions-answered"')) {
     const tocHasQuestions = data.toc_items?.some(
       (item) => item.href === "#questions-answered"
@@ -387,6 +725,106 @@ for (const markdownFile of markdownFiles) {
       );
     } else {
       uniqueFields[field].set(value, markdownFile);
+    }
+  }
+}
+
+const declaredPdfUrls = new Set(
+  researchPages.flatMap(({ data }) => {
+    if (Array.isArray(data.associated_media)) {
+      return data.associated_media.map((media) => media?.url).filter(Boolean);
+    }
+    return data.pdf_url ? [data.pdf_url] : [];
+  })
+);
+const sourcePdfFiles = await glob("*.pdf", {
+  cwd: sourceDirectory,
+  nodir: true,
+  windowsPathsNoEscape: true
+});
+for (const pdfFile of sourcePdfFiles) {
+  const publicUrl = `/${pdfFile.split(path.sep).join("/")}`;
+  if (!declaredPdfUrls.has(publicUrl)) {
+    errors.push(`${pdfFile}: PDF has no research landing-page MediaObject declaration.`);
+  }
+}
+
+const approvedSocialCardUrl = "/spherity-dpp-dbp-strategy-market-positioning.html";
+const preservedSocialCardUrls = new Set([
+  "/europes-fundamental-ai-opportunity.html",
+  "/deutschland-ag-2-0-industrial-ai-federated-transformation.html",
+  "/trusted-agentic-ai-china-eu-us-comparative-analysis.html"
+]);
+const socialCardsByUrl = new Map();
+const socialCardOutputs = new Set();
+for (const card of asArray(socialCards)) {
+  if (!card?.publication_url || socialCardsByUrl.has(card.publication_url)) {
+    errors.push(`Social cards: duplicate or missing publication_url ${card?.publication_url || "(missing)"}.`);
+    continue;
+  }
+  socialCardsByUrl.set(card.publication_url, card);
+  if (!card.output || socialCardOutputs.has(card.output)) {
+    errors.push(`Social cards: duplicate or missing output for ${card.publication_url}.`);
+  } else {
+    socialCardOutputs.add(card.output);
+  }
+
+  if (card.publication_url === approvedSocialCardUrl) {
+    if (card.style !== "approved-gartner-2026" || card.mode !== "approved-exception") {
+      errors.push("Social cards: the Gartner-approved strategy card must remain an approved exception.");
+    }
+  } else if (card.style !== "research-grid-v1") {
+    errors.push(`${card.publication_url}: social-card style must be research-grid-v1.`);
+  }
+
+  if (card.mode === "preserve" && !preservedSocialCardUrls.has(card.publication_url)) {
+    errors.push(`${card.publication_url}: only the reviewed legacy cards may use preserve mode.`);
+  }
+  if (
+    !["generated", "preserve", "approved-exception"].includes(card.mode)
+  ) {
+    errors.push(`${card.publication_url}: unsupported social-card mode ${card.mode}.`);
+  }
+  if (card.mode === "generated") {
+    for (const field of ["format_label", "title_lines", "deck_lines", "byline"]) {
+      const value = card[field];
+      if (!value || (Array.isArray(value) && value.length === 0)) {
+        errors.push(`${card.publication_url}: generated social card requires ${field}.`);
+      }
+    }
+    if (!card.visual && !card.visual_type) {
+      errors.push(`${card.publication_url}: generated social card requires visual or visual_type.`);
+    }
+    if (card.visual && !(await exists(sourcePathFromPublicUrl(card.visual)))) {
+      errors.push(`${card.publication_url}: social-card visual does not exist: ${card.visual}.`);
+    }
+  }
+
+  if (card.output) {
+    const outputPath = sourcePathFromPublicUrl(card.output);
+    if (!(await exists(outputPath))) {
+      errors.push(`${card.publication_url}: social-card output does not exist: ${card.output}.`);
+    } else {
+      const dimensions = await imageDimensions(outputPath);
+      if (!dimensions || dimensions.width !== 1200 || dimensions.height !== 630) {
+        errors.push(`${card.publication_url}: social card must be exactly 1200×630 pixels.`);
+      }
+      const outputStats = await stat(outputPath);
+      if (outputStats.size > 250 * 1024) {
+        errors.push(`${card.publication_url}: social card exceeds 250 KB.`);
+      }
+    }
+  }
+
+  for (const asset of asArray(card.protected_assets)) {
+    const protectedPath = sourcePathFromPublicUrl(asset?.path || "");
+    if (!asset?.path || !asset?.sha256 || !(await exists(protectedPath))) {
+      errors.push(`${card.publication_url}: incomplete protected social-card asset declaration.`);
+      continue;
+    }
+    const hash = createHash("sha256").update(await readFile(protectedPath)).digest("hex");
+    if (hash !== String(asset.sha256).toLowerCase()) {
+      errors.push(`${asset.path}: approved social-card asset changed unexpectedly.`);
     }
   }
 }
@@ -447,6 +885,13 @@ for (const publication of publications) {
   const primaryLink = publication.links?.[0]?.url;
   if (!primaryLink) continue;
 
+  const socialCard = socialCardsByUrl.get(primaryLink);
+  if (!socialCard) {
+    errors.push(`Publication catalog: "${publication.title}" has no social-card manifest entry.`);
+  } else if (publication.image !== socialCard.output) {
+    errors.push(`Publication catalog: "${publication.title}" must use ${socialCard.output}.`);
+  }
+
   if (publicationPrimaryLinks.has(primaryLink)) {
     errors.push(
       `Publication catalog: primary link ${primaryLink} is shared by "${publication.title}" and "${publicationPrimaryLinks.get(primaryLink)}".`
@@ -473,6 +918,15 @@ for (const publication of publications) {
   if (matchingPage && matchingPage.data.title !== publication.title) {
     errors.push(
       `Publication catalog: title differs from ${matchingPage.file}: "${publication.title}".`
+    );
+  }
+  if (
+    matchingPage &&
+    primaryLink !== approvedSocialCardUrl &&
+    matchingPage.data.image !== publication.image
+  ) {
+    errors.push(
+      `Publication catalog: ${matchingPage.file} and its homepage card must use the same social image.`
     );
   }
 
@@ -519,6 +973,12 @@ for (const publication of publications) {
       );
     }
   }
+}
+
+if (socialCardsByUrl.size !== publications.length) {
+  errors.push(
+    `Social cards: found ${socialCardsByUrl.size} manifest entries for ${publications.length} publications.`
+  );
 }
 
 const favicon = path.join(
@@ -610,11 +1070,12 @@ for (const htmlFile of htmlFiles) {
     }
   }
 
+  const parsedSchemas = [];
   for (const script of html.matchAll(
     /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
   )) {
     try {
-      JSON.parse(script[1]);
+      parsedSchemas.push(JSON.parse(script[1]));
     } catch (error) {
       errors.push(`${htmlFile}: invalid JSON-LD (${error.message}).`);
     }
@@ -644,7 +1105,7 @@ for (const htmlFile of htmlFiles) {
     }
   }
 
-  if (html.includes('class="research-article"')) {
+  if (/<article\b[^>]*class=["'][^"']*\bresearch-article\b[^"']*["'][^>]*>/i.test(html)) {
     const checks = [
       ['class="answer-summary"', "answer-first summary"],
       ['id="questions-answered"', "direct questions and answers"],
@@ -664,6 +1125,143 @@ for (const htmlFile of htmlFiles) {
     for (const [needle, label] of checks) {
       if (!html.includes(needle)) {
         errors.push(`${htmlFile}: missing ${label}.`);
+      }
+    }
+
+    const topLevelSchemaTypes = new Set(
+      parsedSchemas.flatMap((schema) => {
+        const type = schema?.["@type"];
+        return Array.isArray(type) ? type : type ? [type] : [];
+      })
+    );
+    for (const type of ["WebSite", "ScholarlyArticle", "BreadcrumbList", "FAQPage"]) {
+      if (!topLevelSchemaTypes.has(type)) {
+        errors.push(`${htmlFile}: ${type} must be exposed as a top-level JSON-LD block.`);
+      }
+    }
+
+    const questionsSection = html.match(
+      /<section\b[^>]*class=["'][^"']*questions-answered[^"']*["'][^>]*>([\s\S]*?)<\/section>/i
+    )?.[1];
+    const renderedQuestionCount = questionsSection
+      ? [...questionsSection.matchAll(/<h3\b/gi)].length
+      : 0;
+    const faqSchema = parsedSchemas.find((schema) => schema?.["@type"] === "FAQPage");
+    if (faqSchema && faqSchema.mainEntity?.length !== renderedQuestionCount) {
+      errors.push(
+        `${htmlFile}: FAQPage schema contains ${faqSchema.mainEntity?.length || 0} questions; ` +
+          `the visible direct-answer section contains ${renderedQuestionCount}.`
+      );
+    }
+
+    const pdfAlternates = [
+      ...html.matchAll(
+        /<link\b[^>]*rel=["']alternate["'][^>]*type=["']application\/pdf["'][^>]*href=["']([^"']+)["'][^>]*>/gi
+      )
+    ].map((match) => match[1]);
+    const pdfMediaUrls = new Set(
+      parsedSchemas
+        .filter((schema) => schema?.["@type"] === "MediaObject")
+        .map((schema) => schema.contentUrl)
+    );
+    const pdfMediaSchemas = parsedSchemas.filter(
+      (schema) => schema?.["@type"] === "MediaObject"
+    );
+    for (const media of pdfMediaSchemas) {
+      if (
+        !media?.["@id"] ||
+        !media?.contentUrl ||
+        !/\.pdf$/i.test(media.contentUrl) ||
+        media.encodingFormat !== "application/pdf" ||
+        media.isAccessibleForFree !== true
+      ) {
+        errors.push(`${htmlFile}: incomplete PDF MediaObject structured data.`);
+      }
+      if (media.license && media.copyrightNotice) {
+        errors.push(`${htmlFile}: PDF MediaObject must not mix a license with an exclusion notice.`);
+      }
+    }
+    for (const pdfUrl of pdfAlternates) {
+      if (!pdfMediaUrls.has(pdfUrl)) {
+        errors.push(`${htmlFile}: PDF alternate ${pdfUrl} has no top-level MediaObject schema.`);
+      }
+    }
+    if (pdfAlternates.length !== pdfMediaUrls.size) {
+      errors.push(
+        `${htmlFile}: PDF alternate links and top-level MediaObject declarations must match one-to-one.`
+      );
+    }
+
+    const articleSchema = parsedSchemas.find(
+      (schema) => schema?.["@type"] === "ScholarlyArticle"
+    );
+    const sourcePage = researchPages.find(({ data }) => data.canonical_url === canonical);
+    const sourceAuthorEntities = new Map(
+      asArray(sourcePage?.data?.author_entities).map((author) => [author?.name, author])
+    );
+    const articleAuthors = Array.isArray(articleSchema?.author)
+      ? articleSchema.author
+      : articleSchema?.author
+        ? [articleSchema.author]
+        : [];
+    for (const author of articleAuthors) {
+      const registeredProfile = authorProfiles?.[author?.name];
+      if (!registeredProfile) continue;
+      const sourceAuthor = sourceAuthorEntities.get(author.name);
+      const expectedSameAs = [
+        ...new Set([
+          ...asArray(sourceAuthor?.same_as),
+          ...asArray(registeredProfile.same_as)
+        ])
+      ];
+      const expectedUrl = sourceAuthor?.url || registeredProfile.url;
+      const expectedOrcid = sourceAuthor?.orcid || registeredProfile.orcid;
+      const sameAs = Array.isArray(author.sameAs)
+        ? author.sameAs
+        : author.sameAs
+          ? [author.sameAs]
+          : [];
+      for (const expectedIdentityUrl of expectedSameAs) {
+        if (!sameAs.includes(expectedIdentityUrl)) {
+          errors.push(
+            `${htmlFile}: author ${author.name} must include ${expectedIdentityUrl} in sameAs.`
+          );
+        }
+      }
+      if (expectedUrl && author.url !== expectedUrl) {
+        errors.push(
+          `${htmlFile}: author ${author.name} must use the expected author.url ${expectedUrl}.`
+        );
+      }
+      if (expectedOrcid && author.identifier !== expectedOrcid) {
+        errors.push(
+          `${htmlFile}: author ${author.name} must expose ${expectedOrcid} as its ORCID identifier.`
+        );
+      }
+      if (expectedOrcid && !html.includes(`name="citation_author_orcid" content="${expectedOrcid}"`)) {
+        errors.push(
+          `${htmlFile}: author ${author.name} must expose ${expectedOrcid} in citation metadata.`
+        );
+      }
+    }
+    const articleMediaReferences = [
+      ...(Array.isArray(articleSchema?.encoding)
+        ? articleSchema.encoding
+        : articleSchema?.encoding
+          ? [articleSchema.encoding]
+          : []),
+      ...(Array.isArray(articleSchema?.associatedMedia)
+        ? articleSchema.associatedMedia
+        : articleSchema?.associatedMedia
+          ? [articleSchema.associatedMedia]
+          : [])
+    ];
+    const referencedMediaIds = new Set(
+      articleMediaReferences.map((media) => media?.["@id"]).filter(Boolean)
+    );
+    for (const media of pdfMediaSchemas) {
+      if (!referencedMediaIds.has(media["@id"])) {
+        errors.push(`${htmlFile}: PDF MediaObject is not linked from the ScholarlyArticle.`);
       }
     }
 
@@ -736,6 +1334,28 @@ if (await exists(path.join(siteDirectory, "index.html"))) {
   for (const type of ["WebSite", "CollectionPage", "ResearchProject", "ItemList", "FAQPage"]) {
     if (!topLevelSchemaTypes.has(type)) {
       errors.push(`index.html: ${type} must be exposed as a top-level JSON-LD block.`);
+    }
+  }
+
+  const homepageWebsite = homepageSchemas.find((schema) => schema?.["@type"] === "WebSite");
+  const homepageAuthorProfile = authorProfiles?.["Dr. Carsten Stöcker"];
+  const homepageAuthorSameAs = Array.isArray(homepageWebsite?.author?.sameAs)
+    ? homepageWebsite.author.sameAs
+    : homepageWebsite?.author?.sameAs
+      ? [homepageWebsite.author.sameAs]
+      : [];
+  if (homepageWebsite?.author?.url !== homepageAuthorProfile?.url) {
+    errors.push("index.html: Carsten Stöcker must retain the homepage profile as author.url.");
+  }
+  if (
+    homepageAuthorProfile?.orcid &&
+    homepageWebsite?.author?.identifier !== homepageAuthorProfile.orcid
+  ) {
+    errors.push("index.html: Carsten Stöcker must expose the registered ORCID identifier.");
+  }
+  for (const expectedIdentityUrl of asArray(homepageAuthorProfile?.same_as)) {
+    if (!homepageAuthorSameAs.includes(expectedIdentityUrl)) {
+      errors.push(`index.html: Carsten Stöcker must include ${expectedIdentityUrl} in sameAs.`);
     }
   }
 
