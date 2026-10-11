@@ -144,7 +144,7 @@ permalink: /
 schema_type: "CollectionPage"
 og_type: "website"
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-last_modified_at: "2026-09-28"
+last_modified_at: "2026-10-11"
 image: "/assets/spherity-research-og.png"
 image_alt: "Spherity Research — research for the systems we need to trust, with the portal's orbital trust-system motif."
 ---

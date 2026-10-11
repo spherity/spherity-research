@@ -118,7 +118,7 @@
   <meta name="twitter:image:alt" content="{{ page.image_alt | default: page_title | escape }}">
 
   {% if page.layout == "research-respec" %}
-  <meta name="citation_title" content="{{ page_title | escape }}">
+  <meta name="citation_title" content="{{ page.citation_title | default: page_title | escape }}">
   {% if page.author_entities %}
     {% for author in page.author_entities %}
     {% assign citation_author_profile = site.data.authors[author.name] %}
@@ -844,7 +844,7 @@
     "encodingFormat": "image/svg+xml",
     "inLanguage": {{ page.lang | default: "en" | jsonify }},
     "isAccessibleForFree": true,
-    "license": {{ content_license | jsonify }},
+    "license": {{ figure.license | default: content_license | jsonify }},
     "acquireLicensePage": {% if figure.acquire_license_page %}{{ figure.acquire_license_page | jsonify }}{% else %}{{ image_acquire_license_page | strip | jsonify }}{% endif %},
     "creditText": {{ figure.credit_text | default: "Source: Spherity GmbH" | jsonify }},
     "copyrightNotice": {{ figure.copyright_notice | default: site.image_copyright_notice | default: "© 2026 Spherity GmbH" | jsonify }},
@@ -853,7 +853,11 @@
       "name": {{ figure.creator_name | default: site.image_creator_name | default: "Spherity GmbH" | jsonify }},
       "url": {{ figure.creator_url | default: site.image_creator_url | default: "https://www.spherity.com/" | jsonify }}
     },
-    "copyrightHolder": { "@id": "https://www.spherity.com/#organization" },
+    "copyrightHolder": {% if figure.copyright_holder %}{
+      "@type": {{ figure.copyright_holder.type | jsonify }},
+      "name": {{ figure.copyright_holder.name | jsonify }},
+      "url": {{ figure.copyright_holder.url | jsonify }}
+    }{% else %}{ "@id": "https://www.spherity.com/#organization" }{% endif %},
     "keywords": {{ figure.keywords | default: page.keywords | jsonify }},
     "isPartOf": { "@id": "{{ canonical_url | escape }}#article" }{% if page.date %},
     "datePublished": "{{ page.date | date_to_xmlschema }}"{% endif %}{% if modified_date %},

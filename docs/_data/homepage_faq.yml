@@ -55,6 +55,11 @@ groups:
   - title: "Identity, evidence and resilience"
     description: "Architecture questions about accountable AI, provenance and migration of the trust fabric."
     items:
+      - id: "ai-agent-revocation-containment"
+        question: "How can AI agent revocation contain effects across multi-agent systems?"
+        answer: "A protected receiving boundary reevaluates the exact operation after installing a withdrawal and stops ordinary effects when authority or evidence freshness no longer supports them. Unresolved remote work remains accounted for until valid execution or cancellation evidence arrives. The research develops conditional architecture and model results, not an instantaneous global stop."
+        link_label: "Read the revocation and containment research series"
+        url: "/ai-agent-revocation-containment-multi-agent-systems.html"
       - id: "governing-ai-across-companies"
         question: "How can leaders govern AI agents that act across companies?"
         answer: "Leaders can combine protected execution at each resource boundary with current mandates, action-bound runtime assurance, persistent episode-risk accounting and privacy-preserving eligibility checks. This enables more useful delegation while preserving local authority, aggregate limits and accountable outcome evidence."

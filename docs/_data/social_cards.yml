@@ -1,3 +1,17 @@
+- publication_url: "/ai-agent-revocation-containment-multi-agent-systems.html"
+  output: "/assets/preview-ai-agent-revocation-containment.webp"
+  style: "research-grid-v1"
+  mode: "generated"
+  format_label: "EXECUTIVE BRIEF + TWO PAPERS · 3 PDFs"
+  title_size: 46
+  title_lines: ["AI Agent Revocation", "& Containment"]
+  subtitle_size: 27
+  subtitle_lines: ["Multi-agent systems across companies"]
+  deck_lines: ["Verifiable authority, runtime control", "and credential-status privacy."]
+  byline: "Dr. Carsten Stöcker · Spherity GmbH"
+  visual: "/assets/ai-agent-revocation-mas-executive-brief-cover.jpg"
+  visual_fit: "contain"
+
 - publication_url: "/governing-ai-that-acts-across-companies.html"
   output: "/assets/preview-governing-ai-that-acts-across-companies.webp"
   style: "research-grid-v1"

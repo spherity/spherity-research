@@ -1,3 +1,27 @@
+- title: "AI Agent Revocation and Containment in Multi-Agent Systems"
+  type: "Executive brief and two-paper research series"
+  date_label: "11 October 2026"
+  date_iso: "2026-10-11"
+  description: "Revocation, status propagation and bounded containment in multi-agent systems—not a complete wallet or self-sovereign identity (SSI) architecture design."
+  byline: "Dr. Carsten Stöcker · Spherity GmbH"
+  topics: ["Trusted AI", "Identity", "Resilience"]
+  filters: "ai identity resilience infrastructure"
+  search: "ai agent revocation runtime revocation status propagation bounded containment cascading trust failures ai agents agentic ai multi-agent systems multi agent systems mas security credential status privacy verifiable credentials verifiable authority zero trust protected execution business wallets bitstring status list w3c openid caep shared signals framework anoncreds decoys masking source freshness finite leases persistent operation accounting cross company engineering file release ki agenten widerruf berechtigungen multiagentensysteme eindämmung vertrauensausfälle carsten stöcker carsten stoecker spherity"
+  image: "/assets/preview-ai-agent-revocation-containment.webp"
+  image_alt: "AI Agent Revocation and Containment preview with the executive brief cover and a three-PDF research series label."
+  image_width: 1200
+  image_height: 630
+  media_class: "card-media-wide"
+  format: "HTML overview + 3 PDFs"
+  links:
+    - label: "Explore the research"
+      url: "/ai-agent-revocation-containment-multi-agent-systems.html"
+      arrow: "→"
+    - label: "Download executive brief"
+      url: "/Spherity-Reseach-AI-Agent-Revocation-in-MAS-Executive-Brief.pdf"
+      arrow: "↓"
+      secondary: true
+
 - title: "Governing AI That Acts Across Companies"
   type: "Executive brief and three-paper AI Safety series"
   date_label: "28 September 2026"

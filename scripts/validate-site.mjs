@@ -781,6 +781,25 @@ for (const markdownFile of markdownFiles) {
         if (!Array.isArray(figure?.keywords) || figure.keywords.length < 3) {
           errors.push(`${label} requires at least three discovery keywords.`);
         }
+        if (figure?.license !== undefined && (typeof figure.license !== "string" || !isHttpsUrl(figure.license))) {
+          errors.push(`${label}: license must be an absolute HTTPS URL.`);
+        }
+        if (figure?.copyright_holder !== undefined) {
+          const holder = figure.copyright_holder;
+          if (!holder || typeof holder !== "object" || Array.isArray(holder)) {
+            errors.push(`${label}: copyright_holder must be an object with type, name and url.`);
+          } else {
+            if (!["Person", "Organization"].includes(holder.type)) {
+              errors.push(`${label}: copyright_holder.type must be Person or Organization.`);
+            }
+            if (typeof holder.name !== "string" || !holder.name.trim()) {
+              errors.push(`${label}: copyright_holder.name must be a non-empty name.`);
+            }
+            if (typeof holder.url !== "string" || !isHttpsUrl(holder.url)) {
+              errors.push(`${label}: copyright_holder.url must be an absolute HTTPS URL.`);
+            }
+          }
+        }
         if (figure?.id && figureIds.has(figure.id)) {
           errors.push(`${markdownFile}: duplicate figure id ${figure.id}.`);
         }
@@ -1493,6 +1512,40 @@ for (const htmlFile of htmlFiles) {
       !imageObject.creator.name
     ) {
       errors.push(`${label} creator must be a named Person or Organization object.`);
+    }
+  }
+
+  const figureSourcePage = researchPages.find(({ data }) =>
+    data.permalink === `/${htmlFile.split(path.sep).join("/")}`
+  );
+  for (const figure of asArray(figureSourcePage?.data.figure_objects)) {
+    const figureUrl = `${config.url}${config.baseurl}${figure.content_url}`;
+    const matches = imageObjects.filter((imageObject) => imageObject.contentUrl === figureUrl);
+    if (matches.length !== 1) {
+      errors.push(`${htmlFile}: figure ${figure.id} requires exactly one matching ImageObject.`);
+      continue;
+    }
+    const [imageObject] = matches;
+    const expectedLicense = figure.license || figureSourcePage.data.license || config.content_license;
+    if (imageObject.license !== expectedLicense) {
+      errors.push(`${htmlFile}: figure ${figure.id} JSON-LD license must match its declared figure/page license.`);
+    }
+    const expectedNotice = figure.copyright_notice || config.image_copyright_notice || "© 2026 Spherity GmbH";
+    if (imageObject.copyrightNotice !== expectedNotice) {
+      errors.push(`${htmlFile}: figure ${figure.id} JSON-LD copyright notice must match its declared rights.`);
+    }
+    if (figure.copyright_holder) {
+      const holder = imageObject.copyrightHolder;
+      if (
+        holder?.["@type"] !== figure.copyright_holder.type ||
+        holder?.name !== figure.copyright_holder.name ||
+        holder?.url !== figure.copyright_holder.url ||
+        holder?.["@id"] === "https://www.spherity.com/#organization"
+      ) {
+        errors.push(`${htmlFile}: figure ${figure.id} JSON-LD copyright holder must match its declared holder.`);
+      }
+    } else if (imageObject.copyrightHolder?.["@id"] !== "https://www.spherity.com/#organization") {
+      errors.push(`${htmlFile}: figure ${figure.id} must retain the default Spherity copyright holder.`);
     }
   }
 
