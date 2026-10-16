@@ -248,7 +248,7 @@ questions_answered:
   - question: "What has this research demonstrated, and what remains to be tested?"
     answer: "The series provides conditional mathematical results, finite protocol exploration, deterministic byte fixtures and synthetic revocation and privacy experiments. It does not benchmark a production agent network, certify complete software conformance or demonstrate universal containment. Receiver implementation, realistic timing, continuous issuance privacy and independently calibrated harm assumptions remain to be validated."
 related_publications:
-  - title: "Governing AI That Acts Across Companies"
+  - title: "Governing Safe AI That Acts Across Companies"
     url: "/governing-ai-that-acts-across-companies.html"
     context: "The separate three-paper AI Safety series provides the broader protected-execution, runtime-assurance and private-verification context."
   - title: "Beyond Single-Enterprise Zero Trust: Multi-Trust Architectures"
