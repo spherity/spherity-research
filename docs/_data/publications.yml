@@ -1,3 +1,27 @@
+- title: "Governed Memory for Physical AI"
+  type: "Research paper · Robot memory and supply chain security"
+  date_label: "20 October 2026"
+  date_iso: "2026-10-20"
+  description: "Govern robot memory from experience to action: trace its supply chain, assess configuration-specific reuse and enforce current evidence and authority."
+  byline: "Dr. Carsten Stöcker · Spherity GmbH"
+  topics: ["Trusted AI", "Identity", "Resilience"]
+  filters: "ai identity resilience infrastructure"
+  search: "governed robot memory physical ai embodied ai robot learning memory supply chain security memory bill of materials mbom robot bom robot bill of materials memory poisoning verifiable evidence graphs evidence roles revocation runtime assurance european business wallet ebw legal person identity delegated authority calibration revalidation robotergedächtnis robotik erfahrungswissen sichere robotik roboterlernen industrielles ki gedächtnis carsten stöcker carsten stoecker spherity"
+  image: "/assets/preview-governed-robot-memory-physical-ai.webp"
+  image_alt: "Governed Memory for Physical AI social preview with the research paper's first page and memory supply chain security theme."
+  image_width: 1200
+  image_height: 630
+  media_class: "card-media-wide"
+  format: "HTML overview + PDF"
+  links:
+    - label: "Explore the research"
+      url: "/governed-robot-memory-physical-ai.html"
+      arrow: "→"
+    - label: "Download full paper"
+      url: "/Spherity-Research-Governed-Robot-Memory-for-Physical-AI.pdf"
+      arrow: "↓"
+      secondary: true
+
 - title: "AI Agent Revocation and Containment in Multi-Agent Systems"
   type: "Executive brief and two-paper research series"
   date_label: "11 October 2026"

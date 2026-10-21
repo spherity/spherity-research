@@ -1,3 +1,17 @@
+- publication_url: "/governed-robot-memory-physical-ai.html"
+  output: "/assets/preview-governed-robot-memory-physical-ai.webp"
+  style: "research-grid-v1"
+  mode: "generated"
+  format_label: "RESEARCH PAPER · OPEN ACCESS PDF"
+  title_size: 46
+  title_lines: ["Governed Memory", "for Physical AI"]
+  subtitle_size: 26
+  subtitle_lines: ["From experience to action"]
+  deck_lines: ["Memory supply chain security,", "evidence roles and runtime revocation."]
+  byline: "Dr. Carsten Stöcker · Spherity GmbH"
+  visual: "/assets/governed-robot-memory-cover.jpg"
+  visual_fit: "contain"
+
 - publication_url: "/ai-agent-revocation-containment-multi-agent-systems.html"
   output: "/assets/preview-ai-agent-revocation-containment.webp"
   style: "research-grid-v1"
