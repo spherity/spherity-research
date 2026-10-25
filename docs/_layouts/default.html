@@ -101,7 +101,7 @@
   <meta property="og:image:height" content="{{ page.image_height | default: 630 }}">
   <meta property="og:image:alt" content="{{ page.image_alt | default: page_title | escape }}">
 
-  {% if page.date %}
+  {% if page.date and page.publication_state != "draft" %}
   <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
   {% endif %}
   {% if modified_date %}
@@ -117,7 +117,7 @@
   <meta name="twitter:image" content="{{ image_url | escape }}">
   <meta name="twitter:image:alt" content="{{ page.image_alt | default: page_title | escape }}">
 
-  {% if page.layout == "research-respec" %}
+  {% if page.layout == "research-respec" and page.publication_type != "atlas" %}
   <meta name="citation_title" content="{{ page.citation_title | default: page_title | escape }}">
   {% if page.author_entities %}
     {% for author in page.author_entities %}
@@ -364,7 +364,7 @@
           "name": {{ publication.title | jsonify }},
           "headline": {{ publication.title | jsonify }},
           "description": {{ publication.description | jsonify }},
-          "datePublished": {{ publication.date_iso | jsonify }},
+          {% if publication.publication_state == "draft" %}"dateCreated": {{ publication.date_iso | jsonify }},"creativeWorkStatus": "Draft preview",{% else %}"datePublished": {{ publication.date_iso | jsonify }},{% endif %}
           "genre": {{ publication.type | jsonify }},
           "keywords": {{ publication.topics | jsonify }},
           {% if publication.byline %}"creditText": {{ publication.byline | jsonify }},{% endif %}
@@ -447,7 +447,7 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
+    "@type": {{ page.schema_type | default: "ScholarlyArticle" | jsonify }},
     "@id": "{{ canonical_url | escape }}#article",
     "url": "{{ canonical_url | escape }}",
     "identifier": "{{ canonical_url | escape }}",
@@ -489,7 +489,7 @@
         "url": {{ image_creator_url | jsonify }}
       }
     },
-    {% if page.date %}"datePublished": "{{ page.date | date_to_xmlschema }}",{% endif %}
+    {% if page.date and page.publication_state != "draft" %}"datePublished": "{{ page.date | date_to_xmlschema }}",{% endif %}
     {% if modified_date %}"dateModified": "{{ modified_date | date_to_xmlschema }}",{% endif %}
     "author": [
       {% if page.author_entities %}
@@ -586,6 +586,7 @@
     {% if page.page_end %}"pageEnd": {{ page.page_end | jsonify }},{% endif %}
     {% if page.secondary_language %}"inLanguage": [{{ page.lang | default: "en" | jsonify }}, {{ page.secondary_language | jsonify }}],{% else %}"inLanguage": {{ page.lang | default: "en" | jsonify }},{% endif %}
     "keywords": {{ page_keywords | join: ", " | jsonify }},
+    {% if page.publication_state == "draft" %}"creativeWorkStatus": "Draft preview; qualified human review pending",{% endif %}
     "genre": {{ page.paper_status | default: "Spherity Research Paper" | jsonify }},
     {% if page.audiences %}"audience": [
       {% for audience in page.audiences %}{
@@ -801,7 +802,7 @@
     "isAccessibleForFree": true,
     {% if media.license %}"license": {{ media.license | jsonify }},{% elsif page.license_exclusions %}"copyrightNotice": {{ page.license_exclusions | jsonify }},{% else %}"license": {{ content_license | jsonify }},{% endif %}
     "inLanguage": {{ page.lang | default: "en" | jsonify }},
-    {% if page.date %}"datePublished": "{{ page.date | date_to_xmlschema }}",{% endif %}
+    {% if page.date and page.publication_state != "draft" %}"datePublished": "{{ page.date | date_to_xmlschema }}",{% endif %}
     "thumbnailUrl": {{ media.cover_image | default: page.cover_image | default: page_image | absolute_url | jsonify }},
     {% if media.publisher %}"publisher": { "@type": "Organization", "name": {{ media.publisher | jsonify }} },{% elsif page.license_exclusions %}{% else %}"publisher": { "@id": "https://www.spherity.com/#organization" },{% endif %}
     "isPartOf": { "@id": "{{ canonical_url | escape }}#article" }
@@ -822,7 +823,7 @@
     "isAccessibleForFree": true,
     {% if page.pdf_license %}"license": {{ page.pdf_license | jsonify }},{% elsif page.license_exclusions %}"copyrightNotice": {{ page.license_exclusions | jsonify }},{% else %}"license": {{ content_license | jsonify }},{% endif %}
     "inLanguage": {{ page.lang | default: "en" | jsonify }},
-    {% if page.date %}"datePublished": "{{ page.date | date_to_xmlschema }}",{% endif %}
+    {% if page.date and page.publication_state != "draft" %}"datePublished": "{{ page.date | date_to_xmlschema }}",{% endif %}
     "thumbnailUrl": {{ page.cover_image | default: page_image | absolute_url | jsonify }},
     {% if page.pdf_publisher %}"publisher": { "@type": "Organization", "name": {{ page.pdf_publisher | jsonify }} },{% elsif page.license_exclusions %}{% else %}"publisher": { "@id": "https://www.spherity.com/#organization" },{% endif %}
     "isPartOf": { "@id": "{{ canonical_url | escape }}#article" }
@@ -859,7 +860,7 @@
       "url": {{ figure.copyright_holder.url | jsonify }}
     }{% else %}{ "@id": "https://www.spherity.com/#organization" }{% endif %},
     "keywords": {{ figure.keywords | default: page.keywords | jsonify }},
-    "isPartOf": { "@id": "{{ canonical_url | escape }}#article" }{% if page.date %},
+    "isPartOf": { "@id": "{{ canonical_url | escape }}#article" }{% if page.date and page.publication_state != "draft" %},
     "datePublished": "{{ page.date | date_to_xmlschema }}"{% endif %}{% if modified_date %},
     "dateModified": "{{ modified_date | date_to_xmlschema }}"{% endif %}
   }
@@ -871,6 +872,10 @@
   {% if page.css %}
   <link rel="stylesheet" href="{{ page.css | relative_url }}">
   {% endif %}
+  {% for stylesheet in page.extra_css %}
+  <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
+  {% endfor %}
+{% if page.dataset %}{% include research-dataset.html %}{% endif %}
 </head>
 <body class="{% if page.schema_type == 'CollectionPage' %}portal-body{% else %}article-body{% endif %}">
   <a class="skip-link" href="#main-content">Skip to main content</a>

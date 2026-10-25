@@ -1,3 +1,22 @@
+- publication_url: /global-digital-product-passport-regulation.html
+  output: /assets/preview-global-digital-product-passports-atlas.webp
+  style: research-grid-v1
+  mode: generated
+  format_label: WHITEPAPER + INTERACTIVE WORLD ATLAS
+  title_size: 49
+  title_lines:
+    - Global Digital
+    - Product Passports
+  subtitle_size: 25
+  subtitle_lines: []
+  deck_lines:
+    - Regulation · Interoperability
+  byline: Dr. Carsten Stöcker · Version 1.0 · 25 October 2026
+  visual: /assets/dpp-global/whitepaper-v1/paper-cover.jpg
+  visual_fit: contain
+  map_visual: /assets/dpp-global/whitepaper-v1/regulatory-social-map.png
+  map_label: DPP Atlas
+
 - publication_url: "/governed-robot-memory-physical-ai.html"
   output: "/assets/preview-governed-robot-memory-physical-ai.webp"
   style: "research-grid-v1"

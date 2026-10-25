@@ -2,6 +2,7 @@ import { readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { glob } from "glob";
+import { loadPdfShares } from "./lib/pdf-sharing.mjs";
 
 const DEFAULT_SITE_URL = "https://spherity.github.io/spherity-research";
 
@@ -88,7 +89,14 @@ const assertCanonicalSiteUrl = (location) => {
 const files = await glob("**/*.{html,pdf}", {
   cwd: siteDirectory,
   nodir: true,
-  ignore: ["404.html", "google*.html"],
+  ignore: [
+    "404.html",
+    "google*.html",
+    // These directories contain source downloads, not canonical HTML pages.
+    // Also guard against aliases produced by optional Jekyll Markdown plugins.
+    "dpp-explorer/{releases,candidates,data,vendor}/**/*.html",
+    "assets/dpp-global/**/*.html"
+  ],
   windowsPathsNoEscape: true
 });
 
@@ -106,8 +114,11 @@ for (const file of files.filter((candidate) => candidate.toLowerCase().endsWith(
   if (metadata.pdfUrl) lastModifiedByUrl.set(metadata.pdfUrl, date.slice(0, 10));
 }
 
+// Registered figure PDFs and draft placeholders are not paper destinations for indexing.
+const { figureDownloads, placeholderDownloads } = await loadPdfShares(getArgument("--source-dir", "docs"));
 const entriesByLocation = new Map();
 for (const file of files) {
+  if (figureDownloads.has(toPublicPath(file)) || placeholderDownloads.has(toPublicPath(file))) continue;
   const pathname = encodePublicPath(toPublicPath(file));
   const htmlMetadata = htmlMetadataByFile.get(file);
   if (htmlMetadata && /(?:^|,)\s*noindex\b/i.test(htmlMetadata.robots)) continue;

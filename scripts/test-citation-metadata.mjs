@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { Liquid } from "liquidjs";
 import { parse as parseYaml } from "yaml";
@@ -16,6 +16,31 @@ engine.registerFilter("absolute_url", (value) => `${origin}${value}`);
 const render = (page = {}) => engine.parseAndRender(citationTag, {
   page_title: "Existing publication title",
   page
+});
+
+test("publication dates remain sortable ISO strings under Jekyll's YAML interpretation", async () => {
+  const docsDirectory = new URL("../docs/", import.meta.url);
+  for (const filename of await readdir(docsDirectory)) {
+    if (!filename.endsWith(".md")) continue;
+    const source = await readFile(new URL(filename, docsDirectory), "utf8");
+    const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+    if (!frontmatter) continue;
+    // Ruby/Psych resolves unquoted YAML dates; the Node preview's YAML 1.2
+    // default does not. Mixed Date/String values break Jekyll's date sort.
+    const page = parseYaml(frontmatter[1], { version: "1.1" });
+    if (page.layout !== "research-respec") continue;
+    for (const field of ["date", "last_modified_at", "research_cutoff"]) {
+      if (page[field] === undefined) continue;
+      assert.equal(typeof page[field], "string", `${filename}: quote ${field} so Jekyll can sort it consistently`);
+      assert.match(page[field], /^\d{4}-\d{2}-\d{2}$/, `${filename}: ${field} must use an ISO date`);
+    }
+  }
+  const publications = parseYaml(await readFile(new URL("_data/publications.yml", docsDirectory), "utf8"), { version: "1.1" });
+  for (const publication of publications) {
+    if (publication.date_iso === undefined) continue;
+    assert.equal(typeof publication.date_iso, "string", `${publication.title}: quote date_iso consistently`);
+    assert.match(publication.date_iso, /^\d{4}-\d{2}-\d{2}$/, `${publication.title}: date_iso must use an ISO date`);
+  }
 });
 
 test("citation title defaults to the existing page title", async () => {

@@ -1,0 +1,3 @@
+# Preserve the exact bytes covered by the research archive manifests.
+dpp-research/releases/** -text
+dpp-research/candidates/** -text
