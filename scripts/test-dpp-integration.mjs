@@ -131,18 +131,46 @@ test('the finished paper is discoverable while the candidate atlas remains a rev
   assert.doesNotMatch(sitemap, /dpp-explorer|assets\/dpp-global|\/share\//);
 });
 
-test('supplied manuscript has byte-identical download and its own cover-sharing page', async () => {
+test('metadata-enriched manuscript preserves the supplied PDF and has its own cover-sharing page', async () => {
   const pdfPath='/Spherity-Research-Global-DPP-Whitepaper.pdf';
   const {records,placeholderDownloads}=await loadPdfShares(path.join(root,'docs'));
   assert.ok(records.some(r=>r.pdfPath===pdfPath));
   assert.ok(!placeholderDownloads.has('/assets/dpp-global/Global-DPP-Standards-Paper-Placeholder.pdf'));
   const bytes=await readFile(path.join(site,pdfPath.slice(1)));
-  assert.equal(hash(bytes),'92e535b89ba11b2c3ca2d20835d06dfad0c8a1401d6e00084c54607aa3fc3d87');
+  const provenance=await json(path.join(root,'scripts/data/dpp-pdf-metadata-provenance.json'));
+  const paper=provenance.files.find(file=>file.file===`docs${pdfPath}`);
+  assert.ok(paper, 'The authorized metadata revision must retain source provenance');
+  assert.equal(paper.source_sha256,'92e535b89ba11b2c3ca2d20835d06dfad0c8a1401d6e00084c54607aa3fc3d87');
+  assert.equal(hash(bytes.subarray(0,paper.source_bytes)),paper.source_sha256);
+  assert.equal(hash(bytes),paper.output_sha256);
   const html=await read(path.join(site,'global-digital-product-passport-regulation.html'));
   assert.match(html,/Read the paper/);assert.match(html,/Download PDF/);
   assert.doesNotMatch(html,/Global-DPP-Standards-Paper-Placeholder/);
   assert.ok((await stat(path.join(site,'share/Spherity-Research-Global-DPP-Whitepaper.html'))).isFile());
   assert.ok((await stat(path.join(site,'assets/pdf-share/Spherity-Research-Global-DPP-Whitepaper.jpg'))).isFile());
+});
+
+test('all published DPP PDFs match audited metadata revisions and preserve every original byte', async () => {
+  const provenance=await json(path.join(root,'scripts/data/dpp-pdf-metadata-provenance.json'));
+  assert.equal(provenance.version,1);
+  const expectedFiles=[
+    'docs/Spherity-Research-Global-DPP-Whitepaper.pdf',
+    ...['fig01_world_map','fig02_regulatory_calendar','fig03_registry_services','fig04_wallet_evidence','fig05_interoperability_evidence','fig06_product_ai_continuum','fig07_convergence_scenarios']
+      .map(name=>`docs/assets/dpp-global/whitepaper-v1/${name}.pdf`)
+  ];
+  assert.deepEqual(provenance.files.map(file=>file.file).sort(),expectedFiles.sort());
+  for (const file of provenance.files) {
+    const source=await readFile(path.join(root,file.file));
+    const delivered=await readFile(path.join(site,file.file.slice('docs/'.length)));
+    assert.deepEqual(delivered,source,`${file.file}: delivery must retain embedded metadata`);
+    assert.equal(source.length,file.output_bytes,file.file);
+    assert.equal(hash(source),file.output_sha256,`${file.file}: audited revision changed`);
+    assert.equal(hash(source.subarray(0,file.source_bytes)),file.source_sha256,`${file.file}: original PDF prefix changed`);
+    assert.ok(source.length>file.source_bytes,`${file.file}: metadata must be an incremental update`);
+    assert.equal(file.info.author,'Dr. Carsten Stöcker');
+    assert.ok(file.info.title && file.info.subject && file.info.keywords);
+    assert.equal(file.rights.License,'https://creativecommons.org/licenses/by/4.0/');
+  }
 });
 
 test('all seven paper figures, all thirteen timeline rows and checkpoint boundaries are visible',async()=>{

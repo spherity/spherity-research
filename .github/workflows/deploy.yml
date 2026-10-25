@@ -61,6 +61,12 @@ jobs:
       - name: Minify HTML and CSS
         run: pnpm run optimize
 
+      # Exercise the review candidate against the real Jekyll output even while
+      # the unchanged production gate below rejects an unsealed Atlas release.
+      - name: Validate PR preview, media metadata, and Atlas integrity
+        if: github.event_name == 'pull_request'
+        run: pnpm run check:atlas-preview
+
       - name: Enforce SEO, AEO, GEO, author identity, search research, links, and assets
         run: pnpm run check
 

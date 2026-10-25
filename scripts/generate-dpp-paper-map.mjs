@@ -1,6 +1,8 @@
 import fs from 'node:fs/promises';
 import vm from 'node:vm';
 import sharp from 'sharp';
+import {embedImageXmp, embedSvgMetadata} from './lib/image-metadata.mjs';
+import {loadDppImageMetadata} from './lib/dpp-image-metadata.mjs';
 const read=async p=>JSON.parse(await fs.readFile(p,'utf8'));
 const base='dpp-explorer/src/';
 const world=await read(base+'vendor/world.geojson');
@@ -21,6 +23,9 @@ for(const f of world.features){const p=f.properties;const code=[p.ISO_A3_EH,p.IS
  if(profile?.scope_kind==='territorial')paths+=`<path d="${geoPath(f)}" fill="url(#scope-stripe)"/>`;
 }
 const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="610" viewBox="0 0 1200 610"><title>Selected DPP regulatory phases, 25 October 2026</title><desc>Country colours represent specific sourced measures, not national readiness. Stripes indicate territorial scope. Grey means unassessed; the UK needs separate GB and Northern Ireland details.</desc><defs><pattern id="scope-stripe" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="2" height="7" fill="#fff" opacity=".55"/></pattern></defs><rect width="1200" height="610" fill="#ffffff"/><path d="${geoPath({type:'Sphere'})}" fill="#f6f8fa" stroke="#dce4e9"/>${paths}<g font-family="Arial,sans-serif" font-size="18" fill="#365064"><rect x="28" y="579" width="15" height="15" rx="3" fill="${palette.applying}"/><text x="53" y="593">Applying</text><rect x="200" y="579" width="15" height="15" rx="3" fill="${palette.adopted}"/><text x="225" y="593">Adopted framework</text><rect x="450" y="579" width="15" height="15" rx="3" fill="${palette.proposal}"/><text x="475" y="593">Proposal</text><rect x="615" y="579" width="15" height="15" rx="3" fill="${palette.early}"/><text x="640" y="593">Early activity</text><text x="1172" y="593" text-anchor="end" font-size="16">Selected evidence · 25 Oct 2026</text></g></svg>`;
-await fs.writeFile('docs/assets/dpp-global/whitepaper-v1/regulatory-social-map.svg',svg);
-await sharp(Buffer.from(svg)).png().toFile('docs/assets/dpp-global/whitepaper-v1/regulatory-social-map.png');
+const metadata = await loadDppImageMetadata();
+const svgPath = '/assets/dpp-global/whitepaper-v1/regulatory-social-map.svg';
+const pngPath = '/assets/dpp-global/whitepaper-v1/regulatory-social-map.png';
+await fs.writeFile(`docs${svgPath}`,embedSvgMetadata(svg,metadata[svgPath]));
+await fs.writeFile(`docs${pngPath}`,embedImageXmp(await sharp(Buffer.from(svg)).png().toBuffer(),metadata[pngPath]));
 console.log('Generated source-qualified social map from Atlas geometry and phase data.');
