@@ -52,6 +52,31 @@ test('full export preserves the complete evidence dataset and original provenanc
   verifyReferences(result);
 });
 
+test('publishing a schema 0.2.0 snapshot retains wrapper 1.1 and its qualified assertion history', async () => {
+  const candidate = JSON.parse(await readFile(new URL('../../dpp-research/candidates/0.2.0/dataset.json', import.meta.url), 'utf8'));
+  const before = createGraphExport(candidate, { exportedAt });
+  const published = structuredClone(candidate);
+  published.metadata.release_status = 'research_seed';
+  const after = createGraphExport(published, { exportedAt });
+  assert.equal(after.schema_version, '1.1.0');
+  assert.deepEqual(after.scope, before.scope);
+  for (const field of ['nodes', 'edges', 'assertions', 'sources', 'context_entities']) {
+    assert.deepEqual(after[field], before[field], `${field} must not change on publication`);
+  }
+  assert.equal(after.scope.counts.active_assertions, 361);
+  assert.ok(after.assertions.some(assertion => assertion.curation?.status === 'superseded'));
+  assert.ok(after.edges.every(edge => edge.curation?.status !== 'superseded'));
+  assert.ok(after.assertions.every(assertion => assertion.review_status === 'machine_assisted_unreviewed'));
+  const oldAssertion = published.assertions.find(assertion => assertion.curation?.status === 'superseded');
+  const focused = createGraphExport(published, { records: [oldAssertion.subject], exportedAt });
+  assert.equal(focused.schema_version, '1.1.0');
+  assert.ok(focused.assertions.some(assertion => assertion.id === oldAssertion.id));
+  for (const id of oldAssertion.curation.replacement_ids) assert.ok(focused.assertions.some(assertion => assertion.id === id));
+  assert.equal(focused.scope.counts.active_assertions, focused.assertions.filter(assertion => assertion.curation?.status !== 'superseded').length);
+  verifyReferences(after);
+  verifyReferences(focused);
+});
+
 test('each exported graph edge retains every qualified assertion field', () => {
   const result = exportGraph();
   for (const edge of result.edges) {

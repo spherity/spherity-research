@@ -396,7 +396,7 @@ search_research:
   prior_attempt: The 24 October web-tool retrieval was inaccessible. A direct browser review on 25 October completed the comparisons; retained evidence is in qa/whitepaper-review/trends-*.
 questions_answered:
   - question: What is the difference between the paper and the Atlas?
-    answer: The 63-page version 1.0 whitepaper is a fixed manuscript prepared on 25 October 2026. Its Figure 1 and baseline counts refer to frozen dataset 0.1.0, dated 23 October. The interactive Atlas includes separately documented updates and a reviewable 0.2.0 candidate. Its current counts should not be substituted into the paper’s frozen results.
+    answer: The 63-page version 1.0 whitepaper is a fixed manuscript prepared on 25 October 2026. Its Figure 1 and baseline counts refer to frozen dataset 0.1.0, dated 23 October. The interactive Atlas uses research release 0.2.0, which preserves separately documented updates and correction history. Its technical seal fixes a reproducible snapshot; independent qualified review remains pending. Its current counts should not be substituted into the paper’s frozen results.
   - question: Do the map colours show whether every product needs a passport?
     answer: "No. Colours summarise the phase of a specifically evidenced measure: applying sector duties, an adopted framework with future or conditional rollout, a proposal, or early public activity. Sector, territory, dates and exceptions remain essential. Grey means unassessed or excluded by the current filters."
   - question: Are the EU product-measure dates compliance deadlines?
@@ -468,7 +468,8 @@ associated_media:
     cover_image: /assets/dpp-global/whitepaper-v1/paper-cover.jpg
     cover_image_alt: Complete first page of Global Digital Product Passports, version 1.0, by Dr. Carsten Stöcker, prepared 25 October 2026.
     license: https://creativecommons.org/licenses/by/4.0/
-atlas_release_state: candidate
+atlas_release_state: released_research_snapshot
+atlas_release_version: "0.2.0"
 ---
 <section class="dpp-paper-thesis" id="paper-thesis" aria-labelledby="dpp-thesis-heading">
 <p class="dpp-thesis-kicker">The paper’s architectural proposition</p>
@@ -487,7 +488,7 @@ atlas_release_state: candidate
 {% include dpp-paper-calendar.html %}
 
 <h2 id="product-timelines">Product measures and regulatory milestones</h2>
-<p><strong>Table 3 from the whitepaper, in an accessible web format.</strong> The thirteen rows preserve the paper’s 25 October 2026 observation and its qualifications. In particular, planned adoption of an ESPR measure is not the date on which every product must carry a passport. Open a linked Atlas record to inspect the current candidate’s evidence.</p>
+<p><strong>Table 3 from the whitepaper, in an accessible web format.</strong> The thirteen rows preserve the paper’s 25 October 2026 observation and its qualifications. In particular, planned adoption of an ESPR measure is not the date on which every product must carry a passport. Open a linked Atlas record to inspect the current research release’s evidence.</p>
 {% include dpp-paper-timelines.html %}
 <p class="dpp-evidence-note">The service-provider planning quarter remains unresolved where Commission materials give Q2 and Q3. The normal ESPR transition is measured from a delegated act’s entry into force, with exceptions; do not add eighteen months mechanically to a planning quarter. Sources and later observations remain distinguishable from the fixed manuscript.</p>
 
@@ -501,7 +502,7 @@ atlas_release_state: candidate
 <p><a class="dpp-inline-action" href="{{ '/dpp-explorer/?view=graph' | relative_url }}">Explore the knowledge graph →</a></p>
 
 <h2 id="static-map">The paper’s frozen evidence map</h2>
-<p>The interactive map above shows the candidate Atlas and regulatory phases. The research figure below retains the paper’s original <strong>0.1.0 snapshot dated 23 October 2026</strong>. Its colours describe geographic evidence coverage. They are not a regulatory ranking, and they should not be compared with the interactive map as if they used the same categories.</p>
+<p>The interactive map above shows Atlas research release 0.2.0 and regulatory phases. The research figure below retains the paper’s original <strong>0.1.0 snapshot dated 23 October 2026</strong>. Its colours describe geographic evidence coverage. They are not a regulatory ranking, and they should not be compared with the interactive map as if they used the same categories.</p>
 {% assign coverage_figure = page.figure_objects[0] %}
 {% include research-figure.html figure=coverage_figure number=1 %}
 <p class="dpp-figure-download"><a href="{{ '/assets/dpp-global/whitepaper-v1/fig01_world_map.pdf' | relative_url }}">Download Figure 1 as a vector PDF ↓</a> · <a href="{{ '/dpp-explorer/coverage.html' | relative_url }}">Accessible geographic coverage table →</a></p>
@@ -552,9 +553,10 @@ atlas_release_state: candidate
 <div class="dpp-version-grid">
 <article><h3>Whitepaper 1.0</h3><p>63 pages · prepared 25 October 2026 · seven figures · ten tables · 116 cited references. Final author version, not peer reviewed.</p><a href="{{ page.pdf_url | relative_url }}" download>Download the supplied PDF ↓</a></article>
 <article><h3>Frozen dataset 0.1.0</h3><p>23 October 2026 · 203 entities · 128 substantive records · 224 qualified assertions · 112 sources. The original corpus and Figure 1 remain reproducible.</p><a href="{{ '/dpp-explorer/data/dataset.json' | relative_url }}">Open the frozen research JSON →</a></article>
-<article><h3>Atlas candidate {{ site.data.dpp_candidate.version | default: '0.2.0' }}</h3><p>{{ site.data.dpp_candidate.substantive_records }} substantive records · {{ site.data.dpp_candidate.graph_edges }} graph connections · {{ site.data.dpp_candidate.sources }} sources. Later observations and correction history remain separate from the frozen results.</p><a href="{{ '/dpp-explorer/data/knowledge-graph.json' | relative_url }}" download>Download the current knowledge graph ↓</a></article>
+<article><h3>Atlas research release {{ page.atlas_release_version | default: '0.2.0' }}</h3><p>{{ site.data.dpp_candidate.substantive_records }} substantive records · {{ site.data.dpp_candidate.graph_edges }} graph connections · {{ site.data.dpp_candidate.sources }} source observations. The technically sealed snapshot preserves later observations and correction history separately from the paper’s frozen results. Independent qualified review remains pending.</p><a href="{{ '/dpp-explorer/data/knowledge-graph.json' | relative_url }}" download>Download the current knowledge graph ↓</a></article>
 </div>
 <p>All evidence relationships retain their review status. Machine-assisted source checks and automated artifact tests do not constitute independent legal, scientific or technical review. The source corpus is purposive, with language and access limitations, and does not establish worldwide prevalence. The author participates in W3C’s DPP and Business Wallet task force; this is disclosed experience, not institutional endorsement.</p>
-<p>The supplied PDF is preserved byte for byte. The paper’s architectural proposals, scenarios and planned tests are distinguished from documentary findings and completed artifact checks. Detailed references and methods are in the PDF; the Atlas exposes the relevant source for each record and relationship.</p>
+<p>The PDF’s pages, figures, links and bookmarks remain unchanged; its embedded metadata has been completed for attribution and discovery. The original supplied bytes are retained within the published PDF and verified against the source hash. The paper’s architectural proposals, scenarios and planned tests are distinguished from documentary findings and completed artifact checks. Detailed references and methods are in the PDF; the Atlas exposes the relevant source for each record and relationship.</p>
+<p>The original research data, annotations and compilation in Atlas release 0.2.0 are available under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>, with attribution to Dr. Carsten Stöcker / Spherity GmbH and the release version. This separate grant does not relicense the unchanged 0.1.0 archive, cited standards, laws, source texts or other third-party material. <a href="{{ '/dpp-explorer/rights.html#research-data' | relative_url }}">Read the release’s terms and exclusions</a>.</p>
 <p><a class="dpp-inline-action" href="{{ '/dpp-explorer/' | relative_url }}">Open the Atlas and evidence downloads →</a></p>
 <span id="paper-in-preparation" class="dpp-legacy-anchor" aria-hidden="true"></span><span id="explore-the-atlas" class="dpp-legacy-anchor" aria-hidden="true"></span><span id="atlas-contents" class="dpp-legacy-anchor" aria-hidden="true"></span><span id="reading-the-evidence" class="dpp-legacy-anchor" aria-hidden="true"></span><span id="version-and-status" class="dpp-legacy-anchor" aria-hidden="true"></span>

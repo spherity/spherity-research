@@ -404,14 +404,16 @@ async function start(){
     const data=await loadAtlasData(async path=>{const response=await fetch(path);if(!response.ok)throw new Error(`Could not load ${path} (${response.status})`);return response.json();},historical?'0.1.0':'current');
     d3=window.d3;if(!d3)throw new Error('The local graph library did not load.');
     model=createModel(data.dataset,data.map,data.taxonomy);model.regulatory=createRegulatoryModel(model,data.regulatory);model.historical=historical;document.body.classList.toggle('is-historical',historical);model.timeline=data.timeline;model.calendar=data.calendar;world=data.world;state=parseState(location.search,model);if(historical)state.mapMode='coverage';
-    $('edition-select').value=historical?'0.1.0':'current';$('edition-label').textContent=historical?'FROZEN 0.1.0':'CANDIDATE 0.2.0';$('edition-description').textContent=historical?'Immutable baseline · 23 October 2026':'Candidate · checked 25 October 2026';
+    const editionVersion=model.dataset.metadata.version;
+    const evidenceDate=new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(`${model.dataset.metadata.evidence_cutoff}T00:00:00Z`));
+    $('edition-select').value=historical?'0.1.0':'current';$('edition-label').textContent=historical?'FROZEN 0.1.0':`RESEARCH RELEASE ${editionVersion}`;$('edition-description').textContent=historical?'Immutable baseline · 23 October 2026':`Research release · evidence through ${evidenceDate}`;
     document.querySelectorAll('[data-preset=regulation],[data-preset=aasGlobal]').forEach(button=>button.hidden=historical);
     document.querySelectorAll('a[href="data/knowledge-graph.json"]').forEach(link=>link.href=historical?'data/knowledge-graph-0.1.0.json':'data/knowledge-graph.json');
     if(historical){$('timeline-kind').querySelector('[value=regulatory]').disabled=true;$('timeline-download').href='releases/0.1.0/views/timeline.json';}
     const p=new URLSearchParams(location.search);selected=model.entities.has(p.get('selected'))?p.get('selected'):(!p.get('assertion')?state.jurisdiction:'');selectedAssertion=model.dataset.assertions.some(a=>a.id===p.get('assertion'))?p.get('assertion'):'';
     const complete=graphData(model,model.records);
     $('graph-download-all-count').textContent=`${complete.nodes.length} records · ${complete.edges.length} connections`;
-    $('evidence-current-summary').textContent=`This ${historical?'frozen baseline':'0.2.0 candidate'} contains ${complete.nodes.length} substantive records and ${complete.edges.length} active sourced connections. Evidence cutoff: ${model.dataset.metadata.evidence_cutoff}.`;
+    $('evidence-current-summary').textContent=`This ${historical?'frozen baseline':`research release ${editionVersion}`} contains ${complete.nodes.length} substantive records and ${complete.edges.length} active sourced connections. Evidence cutoff: ${model.dataset.metadata.evidence_cutoff}.`;
     $('phase-items').innerHTML=Object.values(REGULATORY_PHASES).map(phase=>`<div class="phase-legend-item"><i style="--phase-color:${phase.color}" aria-hidden="true">${phase.symbol}</i><span><strong>${esc(phase.label)}</strong><small>${esc(phase.description)}</small></span></div>`).join('');
     fillFilters();initMap();events();render();
     if(state.view==='graph'&&['#graph-outlook','#graph-guide','#semantic-guide'].includes(location.hash))$(location.hash.slice(1)).scrollIntoView({block:'start'});

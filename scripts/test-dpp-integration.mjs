@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import { loadPdfShares } from './lib/pdf-sharing.mjs';
+import { PUBLICATION_STATE, PUBLICATION_VERSION, verifyAtlasPublication } from '../dpp-explorer/scripts/publication-release.mjs';
 import { glob } from 'glob';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -28,6 +29,27 @@ test('every archived release byte matches the frozen manifest and metadata', asy
     assert.deepEqual(await readFile(path.join(atlas, 'releases/0.1.0', file)), await readFile(path.join(sourceRelease, file)), file);
   }
   assert.deepEqual(await readFile(path.join(atlas, 'data/dataset.json')), await readFile(path.join(sourceRelease, 'dataset.json')));
+});
+
+test('the delivered current Atlas points to its sealed, qualified research release without altering the candidate', async () => {
+  const release = await verifyAtlasPublication({
+    atlas_release_state: PUBLICATION_STATE,
+    atlas_release_version: PUBLICATION_VERSION
+  }, { repositoryRoot: root, siteDirectory: site });
+  assert.equal(release.dataset.metadata.release_status, 'research_seed');
+  assert.equal(release.manifest.seal_scope, 'technical_integrity_only');
+  assert.equal(release.dataset.metadata.review_status, 'machine_assisted_unreviewed');
+  assert.equal(release.validation.human_reviewed_assertions, 0);
+  assert.equal(release.publication.independent_review_completed, false);
+  assert.equal(release.publication.license, 'https://creativecommons.org/licenses/by/4.0/');
+  const candidate = await json(path.join(root, 'dpp-research/candidates/0.2.0/dataset.json'));
+  const candidateManifest = await json(path.join(root, 'dpp-research/candidates/0.2.0/manifest.json'));
+  assert.equal(candidate.metadata.release_status, 'candidate');
+  assert.equal(candidateManifest.sealed, false);
+  for (const collection of ['entities', 'assertions', 'sources']) assert.deepEqual(release.dataset[collection], candidate[collection]);
+  for (const [name, expected] of release.outputs) {
+    assert.deepEqual(await readFile(path.join(atlas, 'releases', PUBLICATION_VERSION, name)), expected, name);
+  }
 });
 
 test('delivered atlas still matches its manifest after site optimization', async () => {
@@ -96,7 +118,7 @@ test('static figure assets and all 52 geographic rows survive integration', asyn
 });
 
 test('new pages resolve local assets and internal links beneath the repository base path', async () => {
-  const pages = ['global-digital-product-passport-regulation.html', 'dpp-explorer/index.html', 'dpp-explorer/catalogue.html', 'dpp-explorer/rights.html', 'dpp-explorer/coverage.html'];
+  const pages = ['global-digital-product-passport-regulation.html', 'dpp-explorer/index.html', 'dpp-explorer/catalogue.html', 'dpp-explorer/catalogue-0.1.0.html', 'dpp-explorer/rights.html', 'dpp-explorer/coverage.html'];
   const origin = 'https://spherity.github.io';
   const base = '/spherity-research/';
   for (const page of pages) {
@@ -122,17 +144,31 @@ test('new pages resolve local assets and internal links beneath the repository b
   }
 });
 
-test('the finished paper is discoverable while the candidate atlas remains a review preview', async () => {
+test('the finished paper and all five canonical Atlas pages are discoverable without indexing archive aliases', async () => {
   const sitemap = await read(path.join(site, 'sitemap.xml'));
   const paper = await read(path.join(site,'global-digital-product-passport-regulation.html'));
   assert.match(paper,/name=["']robots["'][^>]*content=["']index,\s*follow/);
   assert.match(sitemap,/global-digital-product-passport-regulation\.html/);
   assert.match(sitemap,/Spherity-Research-Global-DPP-Whitepaper\.pdf/);
-  for (const page of ['dpp-explorer/index.html','dpp-explorer/catalogue.html','dpp-explorer/rights.html','dpp-explorer/coverage.html']) {
+  const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+  const canonical = 'https://spherity.github.io/spherity-research/dpp-explorer/';
+  const routes = [
+    ['dpp-explorer/index.html', ''],
+    ['dpp-explorer/rights.html', 'rights.html'],
+    ['dpp-explorer/coverage.html', 'coverage.html'],
+    ['dpp-explorer/catalogue.html', 'catalogue.html'],
+    ['dpp-explorer/catalogue-0.1.0.html', 'catalogue-0.1.0.html']
+  ];
+  for (const [page, route] of routes) {
     const html=await read(path.join(site,page));
-    assert.match(html,/name=["']robots["'][^>]*content=["']noindex,\s*follow/);
+    assert.match(html,/name=["']robots["'][^>]*content=["']index,\s*follow/);
+    assert.doesNotMatch(html,/name=["']robots["'][^>]*content=["'][^"']*noindex/);
+    const tag=html.match(/<link\b[^>]*rel=["']canonical["'][^>]*>/i)?.[0];
+    assert.equal(tag?.match(/href=["']([^"']+)["']/)?.[1], `${canonical}${route}`, page);
+    assert.equal(locations.filter(location => location === `${canonical}${route}`).length, 1, page);
   }
-  assert.doesNotMatch(sitemap, /dpp-explorer|assets\/dpp-global|\/share\//);
+  assert.deepEqual(locations.filter(location => location.startsWith(canonical)).sort(), routes.map(([, route]) => `${canonical}${route}`).sort());
+  assert.doesNotMatch(sitemap, /dpp-explorer\/(?:releases|candidates|data|vendor)\/|assets\/dpp-global|\/share\//);
 });
 
 test('raw research downloads do not acquire unreviewed HTML aliases during the site build', async () => {
@@ -268,7 +304,7 @@ test('current graph download matches the displayed evidence and preserves the JT
   assert.deepEqual(exported.nodes,records);
   assert.deepEqual(exported.edges.map(e=>e.id),assertions.map(e=>e.id));
   assert.equal(exported.scope.counts.nodes,records.length);
-  assert.ok(records.length>150,'Candidate incorporates the whitepaper evidence');
+  assert.ok(records.length>150,'Published snapshot incorporates the whitepaper evidence');
   assert.equal(exported.scope.counts.edges,assertions.length);
   assert.equal(exported.scope.counts.assertions,dataset.assertions.length);
   assert.equal(exported.scope.counts.sources,dataset.sources.length);
@@ -282,7 +318,8 @@ test('current graph download matches the displayed evidence and preserves the JT
   assert.ok(jtcEdges.some(e=>e.predicate==='coordinates_with'&&e.target==='std-cen-jtc24'));
   assert.ok(!jtcEdges.some(e=>e.source==='std-eclass'||e.target==='std-eclass'));
   assert.equal(exported.metadata.evidence_cutoff,'2026-10-25');
-  assert.equal(exported.metadata.release_status,'candidate');
+  assert.equal(exported.metadata.release_status,'research_seed');
+  assert.equal(exported.metadata.review_status,'machine_assisted_unreviewed');
   assert.equal(exported.metadata.evidence_updates.checked_at,'2026-10-25');
   for(const e of records)assert.ok(catalogue.includes(`id="${e.id}"`),e.id);
   for(const source of dataset.sources)assert.ok(catalogue.includes(`id="source-${source.id}"`),source.id);

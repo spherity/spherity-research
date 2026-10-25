@@ -22,6 +22,8 @@ function references(value, kind, result = new Set()) {
  * records to that graph. Passing records: [] intentionally exports an empty view.
  */
 export function createGraphExport(dataset, { records, filters = {}, layout = null, exportedAt = new Date().toISOString(), regulatoryProfiles = null, includeSemantic = true } = {}) {
+  // Curation belongs to the dataset schema, regardless of publication status.
+  const hasQualifiedHistory = dataset.metadata.schema_version === '0.2.0';
   const entityById = new Map(dataset.entities.map(entity => [entity.id, entity]));
   const sourceById = new Map(dataset.sources.map(source => [source.id, source]));
   const fullGraph = records === undefined;
@@ -58,14 +60,14 @@ export function createGraphExport(dataset, { records, filters = {}, layout = nul
   // so callers can serialize or manipulate it without changing the live model.
   return clone({
     format: 'spherity-dpp-knowledge-graph',
-    schema_version: dataset.metadata.release_status==='candidate'?'1.1.0':'1.0.0',
+    schema_version: hasQualifiedHistory ? '1.1.0' : '1.0.0',
     schema_version_note: 'This version identifies the graph-download wrapper. metadata.schema_version identifies the canonical dataset schema; metadata.version identifies the dataset edition.',
     metadata: { ...dataset.metadata, exported_at: exportedAt },
     scope: {
       kind: fullGraph ? 'full_graph' : 'current_view',
       filters: fullGraph ? {} : filters,
       layout,
-      counts: { nodes: nodes.length, edges: edges.length, context_entities: contextEntities.length, assertions: assertions.length, sources: sources.length, ...(dataset.metadata.release_status==='candidate'?{active_assertions:currentAssertions({assertions}).length}:{}) },
+      counts: { nodes: nodes.length, edges: edges.length, context_entities: contextEntities.length, assertions: assertions.length, sources: sources.length, ...(hasQualifiedHistory ? {active_assertions:currentAssertions({assertions}).length} : {}) },
       node_definition: 'Substantive research records only; jurisdictions, sectors and concepts are supporting context.',
       edge_definition: 'Active sourced entity-to-entity assertions whose two endpoints are present in nodes. Direction runs from source to target. Superseded assertions remain in assertions as history and are not current graph edges.',
       context_definition: 'Reference-only entities needed by the evidence, including structural context and records outside the current view. They are not graph nodes.',

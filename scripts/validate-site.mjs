@@ -5,6 +5,7 @@ import process from "node:process";
 import { glob } from "glob";
 import { parse as parseYaml } from "yaml";
 import { loadPdfShares, publicUrl } from "./lib/pdf-sharing.mjs";
+import { verifyAtlasPublication } from "../dpp-explorer/scripts/publication-release.mjs";
 
 const getArgument = (name, fallback) => {
   const index = process.argv.indexOf(name);
@@ -531,6 +532,13 @@ for (const markdownFile of markdownFiles) {
   if (data.publication_type === "atlas" || isPaperWithAtlas(data)) {
     if (data.publication_type === "atlas" && data.schema_type !== "CreativeWork") errors.push(`${markdownFile}: atlas landing must declare schema_type: CreativeWork.`);
     if (isCandidateAtlasOwner(data) && !allowDrafts) errors.push(`${markdownFile}: accompanying Atlas candidate is unsealed; use --allow-drafts only for review preview validation.`);
+    if (isPaperWithAtlas(data) && !isCandidateAtlasOwner(data)) {
+      try {
+        await verifyAtlasPublication(data, { repositoryRoot: projectDirectory, siteDirectory });
+      } catch (error) {
+        errors.push(`${markdownFile}: Atlas publication verification failed: ${error.message}`);
+      }
+    }
     if (data.publication_state === "draft") {
       if (!isDraftAtlas(data)) errors.push(`${markdownFile}: draft atlas requires noindex, follow and CreativeWork metadata.`);
       else if (!allowDrafts) errors.push(`${markdownFile}: draft atlas is not publication-ready; use --allow-drafts only for review preview validation.`);
