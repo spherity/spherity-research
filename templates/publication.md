@@ -193,6 +193,7 @@ related_publications:
     url: "/related-publication.html"
     context: "Explain the evidence-based relationship in one sentence."
 
+# Navigation renders standalone "and" as "&"; keep headings and anchor IDs unchanged.
 toc_items:
   - title: "Abstract"
     href: "#abstract"

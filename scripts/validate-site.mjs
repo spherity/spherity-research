@@ -1088,7 +1088,7 @@ for (const card of asArray(socialCards)) {
       (!Array.isArray(card.topics) || card.topics.length < 3)
     ) {
       errors.push(
-        `${card.publication_url}: non-catalog series cards require at least three topic labels.`
+        `${card.publication_url}: non-catalog cards require at least three topic labels.`
       );
     }
     if (card.visual && !(await exists(sourcePathFromPublicUrl(card.visual)))) {
@@ -1278,17 +1278,6 @@ for (const publication of publications) {
 const researchPagePermalinks = new Set(
   researchPages.map(({ data }) => data.permalink).filter(Boolean)
 );
-for (const socialCardUrl of socialCardsByUrl.keys()) {
-  if (
-    !publicationCatalogUrls.has(socialCardUrl) &&
-    !researchPagePermalinks.has(socialCardUrl)
-  ) {
-    errors.push(
-      `Social cards: ${socialCardUrl} is neither a catalog publication nor a research sub-page.`
-    );
-  }
-}
-
 const favicon = path.join(
   sourceDirectory,
   decodeURIComponent(config.favicon.replace(/^\/+/, ""))
@@ -1375,6 +1364,66 @@ const anchorUrls = (html, pageUrl) => new Set(htmlTags(html, "a").flatMap(({ hre
     return [];
   }
 }));
+
+// Standalone tools have static HTML rather than publication front matter.
+// Declaring one must still bind its card to a real page and crawler-visible metadata.
+for (const [socialCardUrl, card] of socialCardsByUrl) {
+  const isPublication = publicationCatalogUrls.has(socialCardUrl) || researchPagePermalinks.has(socialCardUrl);
+  if (card.page_type !== undefined && card.page_type !== "website") {
+    errors.push(`${socialCardUrl}: unsupported social-card page_type ${card.page_type}.`);
+  }
+  if (card.page_type !== "website") {
+    if (!isPublication) errors.push(`Social cards: ${socialCardUrl} is neither a catalog publication nor a research sub-page or declared website.`);
+    continue;
+  }
+  if (isPublication) errors.push(`${socialCardUrl}: publication cards cannot be classified as standalone websites.`);
+  if (card.mode !== "generated") errors.push(`${socialCardUrl}: standalone website cards must be generated.`);
+  if (!socialCardUrl.startsWith("/") || socialCardUrl.startsWith("//") || /[\\?#%]/.test(socialCardUrl) || socialCardUrl.split("/").some(part => part === "." || part === "..") || !/(?:\/|\.html)$/.test(socialCardUrl)) {
+    errors.push(`${socialCardUrl}: standalone website card requires a local HTML page URL.`);
+    continue;
+  }
+  const pagePath = shareOutputPath(socialCardUrl.endsWith("/") ? `${socialCardUrl}index.html` : socialCardUrl);
+  if (!(await exists(pagePath)) || !(await stat(pagePath)).isFile()) {
+    errors.push(`${socialCardUrl}: standalone social-card page does not exist in the rendered site.`);
+    continue;
+  }
+  const html = await readFile(pagePath, "utf8");
+  const head = (html.replace(/<!--[\s\S]*?-->/g, "").match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] || "").replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, "");
+  const metadata = htmlTags(head, "meta");
+  const canonicalUrl = sharePublicUrl(socialCardUrl);
+  const imageUrl = card.output ? sharePublicUrl(card.output) : "";
+  const canonicals = htmlTags(head, "link").filter(link => link.rel?.toLowerCase() === "canonical");
+  if (canonicals.length !== 1 || canonicals[0].href !== canonicalUrl) errors.push(`${socialCardUrl}: standalone website canonical must equal ${canonicalUrl}.`);
+  const readMeta = (kind, name) => {
+    const matches = metadata.filter(meta => meta[kind]?.toLowerCase() === name);
+    if (matches.length !== 1 || !matches[0].content?.trim()) errors.push(`${socialCardUrl}: requires exactly one nonempty static ${name} metadata value.`);
+    return matches[0]?.content;
+  };
+  const imageType = /\.jpe?g$/i.test(card.output || "") ? "image/jpeg" : /\.png$/i.test(card.output || "") ? "image/png" : /\.webp$/i.test(card.output || "") ? "image/webp" : "";
+  if (!imageType) errors.push(`${socialCardUrl}: standalone social-card output requires a supported image format.`);
+  for (const [name, value] of Object.entries({
+    "og:type": "website", "og:url": canonicalUrl, "og:site_name": config.title,
+    "og:image": imageUrl, "og:image:secure_url": imageUrl, "og:image:type": imageType,
+    "og:image:width": "1200", "og:image:height": "630"
+  })) if (readMeta("property", name) !== value) errors.push(`${socialCardUrl}: ${name} must equal ${JSON.stringify(value)}.`);
+  if (readMeta("name", "twitter:card") !== "summary_large_image") errors.push(`${socialCardUrl}: Twitter card must be summary_large_image.`);
+  if (readMeta("name", "twitter:image") !== imageUrl) errors.push(`${socialCardUrl}: Twitter image must match the social-card output.`);
+  for (const field of ["title", "description", "image:alt"]) {
+    if (readMeta("property", `og:${field}`) !== readMeta("name", `twitter:${field}`)) errors.push(`${socialCardUrl}: Open Graph and Twitter ${field} must match.`);
+  }
+  if (card.output) {
+    const imagePath = shareOutputPath(card.output);
+    if (!(await exists(imagePath))) errors.push(`${socialCardUrl}: social-card image is missing from the rendered site.`);
+    else {
+      const dimensions = await imageDimensions(imagePath);
+      if (dimensions?.width !== 1200 || dimensions?.height !== 630) errors.push(`${socialCardUrl}: rendered social-card image must be 1200×630 pixels.`);
+      const bytes = await readFile(imagePath);
+      const actualType = bytes.toString("hex", 0, 3) === "ffd8ff" ? "image/jpeg" : bytes.toString("hex", 0, 8) === "89504e470d0a1a0a" ? "image/png" : bytes.toString("ascii", 0, 4) === "RIFF" && bytes.toString("ascii", 8, 12) === "WEBP" ? "image/webp" : "";
+      if (actualType !== imageType) errors.push(`${socialCardUrl}: delivered social-card bytes do not match the declared MIME type.`);
+      if (bytes.length > 250 * 1024) errors.push(`${socialCardUrl}: delivered social-card image exceeds 250 KB.`);
+    }
+  }
+}
 
 for (const [pdfPath] of placeholderDownloads) {
   const target = shareOutputPath(pdfPath);

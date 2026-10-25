@@ -20,6 +20,10 @@ const publicationsByUrl = new Map(
   publications.map((publication) => [publication.links?.[0]?.url, publication])
 );
 const checkOnly = process.argv.includes("--check");
+const selectedUrl = process.argv.find(arg => arg.startsWith("--only="))?.slice(7);
+if (selectedUrl && !manifest.some(card => card.publication_url === selectedUrl)) {
+  throw new Error(`No social card is registered for ${selectedUrl}.`);
+}
 
 const CARD_WIDTH = 1200;
 const CARD_HEIGHT = 630;
@@ -38,6 +42,11 @@ const MAP_CARD = {
   deckGap: 45,
   bylineY: 592,
   label: { x: 105, y: 445, size: 20 }
+};
+const ATLAS_CARD = {
+  textRight: 328,
+  map: { x: 370, y: 138, width: 782, height: 398 },
+  panel: { x: 350, y: 118, width: 822, height: 438 }
 };
 const textWidthCache = new Map();
 
@@ -101,7 +110,38 @@ const topicPills = async (topics) => {
   return { markup: pills.join(""), right: x - 10 };
 };
 
+const prepareAtlasLayout = async (card) => {
+  const problems = [];
+  const titleSize = Number(card.title_size || 50);
+  const linesFit = async (label, lines, size, right, family = "Arial, sans-serif", weight = 400) => {
+    for (const line of lines || []) {
+      const measured = await measureTextWidth(line, {family, size, weight});
+      const allowance = process.platform !== "linux" && family.startsWith("Georgia") ? 1.16 : 1;
+      const textRight = 72 + Math.ceil(measured * allowance);
+      if (textRight > right) problems.push(`${label} “${line}” reaches portable x=${textRight}px; maximum is x=${right}px.`);
+    }
+  };
+  await linesFit("Title", card.title_lines, titleSize, ATLAS_CARD.textRight, "Georgia, serif", 700);
+  await linesFit("Format", [card.format_label], 13, ATLAS_CARD.textRight, "Arial, sans-serif", 700);
+  await linesFit("Description", card.deck_lines, 20, ATLAS_CARD.textRight);
+  await linesFit("Topic", card.topics, 17, ATLAS_CARD.textRight - 18, "Arial, sans-serif", 700);
+  await linesFit("Byline", [card.byline], 16, 720);
+  await linesFit("Scope note", [card.scope_note], 14, 72 + ATLAS_CARD.map.width);
+  await linesFit("Call to action", [card.call_to_action], 18, 72 + 350, "Arial, sans-serif", 700);
+  if (card.title_lines.length !== 2 || titleSize > 50 || card.deck_lines.length > 2 || card.topics.length !== 3) {
+    problems.push("Atlas cards require two title lines, at most two description lines and three topics within their vertical safe areas.");
+  }
+  if (!card.scope_note || !card.call_to_action || !card.output.endsWith('.jpg')) {
+    problems.push("Atlas cards require a scope note, call to action and JPEG output.");
+  }
+  const visual = await sharp(await readFile(publicFile(card.visual))).metadata();
+  if (!visual.width || !visual.height) problems.push("Atlas map must have readable dimensions.");
+  if (problems.length) throw new Error(`${card.publication_url}: social-card layout preflight failed:\n- ${problems.join('\n- ')}`);
+  return {titleSize};
+};
+
 const prepareCardLayout = async (card, publication) => {
+  if (card.layout === "atlas-map") return prepareAtlasLayout(card);
   const titleSize = Number(card.title_size || 48);
   const titleLineHeight = Math.round(titleSize * 1.16);
   const subtitleSize = Number(card.subtitle_size || 30);
@@ -255,7 +295,39 @@ const ebwTimeline = () => Buffer.from(`
     <text x="30" y="470" fill="#0e5f65" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5">LEGAL + OPERATIONAL GATES</text>
   </svg>`);
 
+const renderAtlasCard = async (card, layout) => {
+  const {map, panel} = ATLAS_CARD;
+  const base = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <rect width="1200" height="630" fill="#071b2a"/>
+    <rect width="1200" height="10" fill="#4f98c7"/><rect width="16" height="630" fill="#7be0bd"/>
+    <g stroke="#1c3446" stroke-width="1" opacity=".8">
+      ${Array.from({length:12}, (_, i) => `<path d="M${97+i*96} 10V630"/>`).join('')}
+      ${Array.from({length:6}, (_, i) => `<path d="M16 ${97+i*96}H1200"/>`).join('')}
+    </g>
+    <style>
+      .title{font-family:Georgia,serif;font-size:${layout.titleSize}px;font-weight:700;fill:#f7f9fa}
+      .deck{font:20px Arial,sans-serif;fill:#c6d2da}
+    </style>
+    <path d="M72 65H120" stroke="#7be0bd" stroke-width="2"/>
+    <text x="135" y="71" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing=".5" fill="#7be0bd">SPHERITY RESEARCH</text>
+    <text x="72" y="119" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#b9c6ce">${escapeXml(card.format_label)}</text>
+    ${textLines({lines:card.title_lines,x:72,y:190,lineHeight:58,className:'title'})}
+    ${textLines({lines:card.deck_lines,x:72,y:303,lineHeight:28,className:'deck'})}
+    ${card.topics.map((topic,i)=>`<rect x="72" y="${373+i*46}" width="256" height="34" rx="17" fill="#142e40" stroke="#3d596b"/><text x="90" y="${396+i*46}" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#e8f2f6">${escapeXml(topic)}</text>`).join('')}
+    <rect x="${panel.x+8}" y="${panel.y+8}" width="${panel.width}" height="${panel.height}" rx="14" fill="#02080d" opacity=".6"/>
+    <rect x="${panel.x}" y="${panel.y}" width="${panel.width}" height="${panel.height}" rx="14" fill="#fff"/>
+    <text x="${map.x}" y="578" font-family="Arial,sans-serif" font-size="14" fill="#bdccd5">${escapeXml(card.scope_note)}</text>
+    <text x="72" y="609" font-family="Arial,sans-serif" font-size="16" fill="#b9c6ce">${escapeXml(card.byline)}</text>
+    <text x="1152" y="609" text-anchor="end" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#7be0bd">${escapeXml(card.call_to_action)}</text>
+  </svg>`);
+  const mapPixels = await sharp(await readFile(publicFile(card.visual)))
+    .resize(map.width, map.height, {fit:'contain',background:'#fff'}).flatten({background:'#fff'}).png().toBuffer();
+  return sharp(base).composite([{input:mapPixels,left:map.x,top:map.y}])
+    .jpeg({quality:90,chromaSubsampling:'4:4:4'}).toBuffer();
+};
+
 const renderGeneratedCard = async (card, publication, layout) => {
+  if (card.layout === "atlas-map") return renderAtlasCard(card, layout);
   const {
     titleSize,
     titleLineHeight,
@@ -382,6 +454,7 @@ if (preflightErrors.length) {
 }
 
 for (const { card, publication, layout } of generatedCards) {
+  if (selectedUrl && card.publication_url !== selectedUrl) continue;
   if (checkOnly) {
     console.log(`Validated safe area for ${card.publication_url}.`);
     continue;

@@ -481,7 +481,6 @@ atlas_release_version: "0.2.0"
 
 <h2 id="eu-calendar">The EU calendar: different dates mean different things</h2>
 <p>A deadline for a registry, an application date for a defined product group and a target for adopting a future measure answer different questions. Keep the event type visible when planning a product, implementation or investment.</p>
-<div class="dpp-date-legend" aria-label="Calendar event types"><span class="dpp-date-tag fixed">Fixed legal date</span><span class="dpp-date-tag planned">Indicative adoption</span><span class="dpp-date-tag conditional">Conditional trigger</span><span class="dpp-date-tag adjacent">Adjacent regime</span></div>
 {% assign calendar_figure = page.figure_objects[1] %}
 {% include research-figure.html figure=calendar_figure number=2 %}
 <p class="dpp-figure-download"><a href="{{ '/assets/dpp-global/whitepaper-v1/fig02_regulatory_calendar.pdf' | relative_url }}">Download the original calendar as a vector PDF ↓</a></p>

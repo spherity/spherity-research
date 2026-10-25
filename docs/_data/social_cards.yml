@@ -1,3 +1,26 @@
+- publication_url: /dpp-explorer/
+  page_type: website
+  output: /assets/social/global-dpp-atlas.jpg
+  style: research-grid-v1
+  layout: atlas-map
+  mode: generated
+  format_label: INTERACTIVE DPP RESEARCH
+  title_size: 42
+  title_lines:
+    - Global
+    - DPP Atlas
+  deck_lines:
+    - Regulation, standards
+    - and ecosystems.
+  topics:
+    - World map
+    - Knowledge graph
+    - Evidence & timelines
+  byline: Dr. Carsten Stöcker · Spherity GmbH
+  visual: /assets/dpp-global/whitepaper-v1/regulatory-social-map.png
+  scope_note: Selected measures · Scope and dates matter
+  call_to_action: Explore the evidence →
+
 - publication_url: /global-digital-product-passport-regulation.html
   output: /assets/preview-global-digital-product-passports-atlas.webp
   style: research-grid-v1

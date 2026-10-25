@@ -28,6 +28,12 @@ export async function loadDppImageMetadata(sourceDirectory = 'docs') {
   const map = {...base, title: 'Selected DPP regulatory phases, 25 October 2026', description: 'Country colours represent specifically sourced measures, not national readiness. Stripes indicate territorial scope. Grey means unassessed; Great Britain and Northern Ireland require separate details. Natural Earth geometry is public domain.', keywords: ['Digital Product Passport', 'DPP regulation', 'World map', 'Regulatory phases', 'Global DPP Atlas'], format: 'image/svg+xml'};
   assets['/assets/dpp-global/whitepaper-v1/regulatory-social-map.svg'] = map;
   assets['/assets/dpp-global/whitepaper-v1/regulatory-social-map.png'] = {...map, format: 'image/png'};
+  assets['/assets/social/global-dpp-atlas.jpg'] = {
+    ...base, title: 'Global DPP Atlas — interactive world map and knowledge graph',
+    description: 'Global DPP Atlas with a world map of selected DPP regulatory phases and Spherity Research branding. Colours describe specific sourced measures, not national readiness. Natural Earth geometry is public domain.',
+    source: new URL('dpp-explorer/', origin).href,
+    keywords: map.keywords, format: 'image/jpeg'
+  };
   assets['/assets/pdf-share/Spherity-Research-Global-DPP-Whitepaper.jpg'] = {...assets[page.cover_image], title: `${page.citation_title} — PDF sharing preview`, description: 'Complete first-page screenshot of the whitepaper, fitted within a sharing card without cropping.'};
   return assets;
 }
