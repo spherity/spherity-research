@@ -25,10 +25,10 @@ author_entities:
 author_affiliations:
   - Dr. Carsten Stöcker — Spherity GmbH
 affiliation: Spherity GmbH
-date: 2026-10-25
+date: "2026-10-25"
 date_label: Manuscript prepared
-last_modified_at: 2026-10-25
-research_cutoff: 2026-10-25
+last_modified_at: "2026-10-25"
+research_cutoff: "2026-10-25"
 research_cutoff_label: Manuscript supplement; frozen dataset 0.1.0 retains its 23 October cutoff. Independent qualified review pending.
 lang: en
 permalink: /global-digital-product-passport-regulation.html
