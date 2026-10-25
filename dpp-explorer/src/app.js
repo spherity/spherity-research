@@ -234,6 +234,21 @@ function renderMap(){
   $('scope-buttons').innerHTML=model.jurisdictions.filter(j=>['global','region','supranational'].includes(j.geography.kind)).map(j=>`<button data-scope="${j.jurisdiction_id}" aria-pressed="${state.jurisdiction===j.jurisdiction_id}">${esc(j.label)}<b>${counts.get(j.jurisdiction_id)}</b></button>`).join('');highlight();
 }
 
+function regulatoryScopeButtons(){
+  const featured=['jur-eu','jur-cn','jur-gb','jur-in','jur-us','jur-tw'];
+  // Use explicit assessments: EU member-country display joins are not separate reviews.
+  const reviewed=model.jurisdictions.filter(j=>model.regulatory.profiles.has(j.jurisdiction_id));
+  const territorial=j=>['territory','subnational'].includes(j.geography.kind);
+  const alphabetical=(a,b)=>a.label.localeCompare(b.label,'en');
+  const countries=reviewed.filter(j=>!territorial(j)).sort((a,b)=>{
+    const first=featured.indexOf(a.jurisdiction_id),second=featured.indexOf(b.jurisdiction_id);
+    return (first<0?featured.length:first)-(second<0?featured.length:second)||alphabetical(a,b);
+  });
+  const territories=reviewed.filter(territorial).sort(alphabetical);
+  const button=j=>`<button data-regulatory-scope="${esc(j.jurisdiction_id)}" aria-pressed="${state.jurisdiction===j.jurisdiction_id}"${territorial(j)?` title="${esc(j.label)} · ${esc(names([j.geography.parent_id]))}"`:''}>${esc(j.label)}</button>`;
+  return countries.map(button).join('')+(territories.length?`<div class="scope-territories" role="group" aria-labelledby="territorial-scopes-label"><span id="territorial-scopes-label">Territorial scopes</span><div class="scope-territory-buttons">${territories.map(button).join('')}</div></div>`:'');
+}
+
 function renderRegulationMap(){
   mapScope={active:false,globalCount:0,label:''};
   mapSvg.classed('has-global-scope',false);
@@ -246,7 +261,7 @@ function renderRegulationMap(){
   $('map-inspect-global').disabled=true;$('map-inspect-global').title='Global standards and ecosystems are available through the other exploration presets. This view compares jurisdiction-specific measures.';
   $('map-tooltip').hidden=true;
   $('scope-tray-label').textContent='EXPLORE JURISDICTIONS';
-  $('scope-buttons').innerHTML=['jur-eu','jur-cn','jur-gb','jur-in','jur-us','jur-tw'].filter(id=>regulatoryProfile(model,id)).map(id=>`<button data-scope="${id}" aria-pressed="${state.jurisdiction===id}">${esc(names([id]))}</button>`).join('');
+  $('scope-buttons').innerHTML=regulatoryScopeButtons();
   $('map-note').innerHTML='Phases cover DPP and related product-traceability measures. EU colour denotes shared EU instrument scope. Stripes denote territorial scope. Grey means not assessed or excluded by your filters. <a href="data/current-regulatory-phases.json" download>Phase evidence &amp; sources ↓</a>';
   highlight();
 }
@@ -346,7 +361,7 @@ function events(){
     }
     if(b.dataset.graphAction==='focus'&&selected){state=emptyState();change({view:'graph',focus:selected});document.querySelector('[data-graph-action=focus]')?.focus({preventScroll:true});}
 
-    if(b.dataset.regulatoryScope){openJurisdictionOverview(b.dataset.regulatoryScope,'map');return;}
+    if(b.dataset.regulatoryScope){openJurisdictionOverview(b.dataset.regulatoryScope,'map');revealDetail();return;}
     if(b.dataset.scope){selected=b.dataset.scope;selectedAssertion='';change({jurisdiction:b.dataset.scope});revealDetail();}
     if(b.dataset.focus){selected=b.dataset.focus;selectedAssertion='';state=emptyState();change({view:'graph',focus:b.dataset.focus});}
     if(b.dataset.group){const g=model.groups.find(g=>g.id===b.dataset.group);state=emptyState();change({[g.kind==='standards'?'standards':'ecosystems']:[g.id]});}
