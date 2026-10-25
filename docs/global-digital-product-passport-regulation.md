@@ -68,7 +68,6 @@ navigation_label: Browse this paper page
 key_takeaways:
   - Distinguish a legal obligation, a published specification, a pilot and an independently demonstrated exchange. Each answers a different question.
   - Separate fixed application dates from planned adoption windows and conditional requirements. A registry launch does not establish every operational capability.
-  - AAS has international standards and programme support. Coexistence, mapping and displacement in particular applications remain different scenarios.
   - The proposed evidence infrastructure combines product claims, actor authority and enforced permission. Its integrated benefits require bounded tests and independent review.
 about:
   - Digital Product Passport regulation
@@ -475,13 +474,12 @@ atlas_release_version: "0.2.0"
 <p class="dpp-thesis-kicker">The paper’s architectural proposition</p>
 <h2 id="dpp-thesis-heading">A shared evidence infrastructure for DPPs and AI</h2>
 <blockquote><p>Access-controlled, verifiable evidence graphs for physical products, virtual products and physical AI—built on open international standards and open-world semantics.</p></blockquote>
-<p class="dpp-thesis-outlook">Connect evidence about a product to its source, meaning and version, and connect each requested operation to an actor’s authority and current permission. This is a proposition for shared infrastructure. Its effectiveness, interoperability and institutional acceptance require separate tests.</p>
+<p class="dpp-thesis-outlook">Connect evidence about a product to its source, meaning and version, and connect each requested operation to an actor’s authority and current permission. This is a proposition for shared infrastructure.</p>
 <div class="dpp-thesis-footer"><p>Physical products · Virtual products · Physical AI</p><a href="#convergence-scenarios">Explore the four scenarios <span aria-hidden="true">↓</span></a></div>
 </section>
 
 <h2 id="eu-calendar">The EU calendar: different dates mean different things</h2>
 <p>A deadline for a registry, an application date for a defined product group and a target for adopting a future measure answer different questions. Keep the event type visible when planning a product, implementation or investment.</p>
-<div class="dpp-date-legend" aria-label="Calendar event types"><span class="dpp-date-tag fixed">Fixed legal date</span><span class="dpp-date-tag planned">Indicative adoption</span><span class="dpp-date-tag conditional">Conditional trigger</span><span class="dpp-date-tag adjacent">Adjacent regime</span></div>
 {% assign calendar_figure = page.figure_objects[1] %}
 {% include research-figure.html figure=calendar_figure number=2 %}
 <p class="dpp-figure-download"><a href="{{ '/assets/dpp-global/whitepaper-v1/fig02_regulatory_calendar.pdf' | relative_url }}">Download the original calendar as a vector PDF ↓</a></p>

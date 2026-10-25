@@ -30,7 +30,7 @@ layout: default
       {% if page.toc_items %}
       <ol>
         {% for item in page.toc_items %}
-        <li><a href="{{ item.href }}">{% if item.href == "#explore-the-atlas" %}Using the atlas{% else %}{{ item.title }}{% endif %}</a></li>
+        <li><a href="{{ item.href }}">{% if item.href == "#explore-the-atlas" %}Using the atlas{% else %}{{ item.title | replace: ' and ', ' & ' | escape }}{% endif %}</a></li>
         {% endfor %}
       </ol>
       {% endif %}
@@ -160,7 +160,7 @@ layout: default
         <nav aria-label="Mobile document navigation">
           <ol>
             {% for item in page.toc_items %}
-            <li><a href="{{ item.href }}">{% if item.href == "#explore-the-atlas" %}Using the atlas{% else %}{{ item.title }}{% endif %}</a></li>
+            <li><a href="{{ item.href }}">{% if item.href == "#explore-the-atlas" %}Using the atlas{% else %}{{ item.title | replace: ' and ', ' & ' | escape }}{% endif %}</a></li>
             {% endfor %}
           </ol>
         </nav>

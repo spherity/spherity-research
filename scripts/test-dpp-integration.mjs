@@ -10,6 +10,8 @@ import { promisify } from 'node:util';
 import { loadPdfShares } from './lib/pdf-sharing.mjs';
 import { PUBLICATION_STATE, PUBLICATION_VERSION, verifyAtlasPublication } from '../dpp-explorer/scripts/publication-release.mjs';
 import { glob } from 'glob';
+import sharp from 'sharp';
+import { parse as parseYaml } from 'yaml';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const site = path.join(root, '_site');
@@ -142,6 +144,55 @@ test('new pages resolve local assets and internal links beneath the repository b
       }
     }
   }
+});
+
+test('the delivered Atlas has its own crawler-visible large-image card and a real matching JPEG', async () => {
+  const cards = parseYaml(await read(path.join(root, 'docs/_data/social_cards.yml')));
+  const card = cards.find(entry => entry.publication_url === '/dpp-explorer/');
+  assert.ok(card, 'The Atlas must declare its own social card rather than reuse the paper card');
+  assert.equal(card.page_type, 'website');
+  assert.equal(card.output, '/assets/social/global-dpp-atlas.jpg');
+  const config = parseYaml(await read(path.join(root, 'docs/_config.yml')));
+  const origin = `${config.url}${config.baseurl}`;
+  const canonical = `${origin}/dpp-explorer/`;
+  const imageUrl = `${origin}${card.output}`;
+  const html = await read(path.join(atlas, 'index.html'));
+  const head = html.replace(/<!--[\s\S]*?-->/g, '').match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1]?.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
+  assert.ok(head, 'Social crawlers must receive metadata in the initial HTML head');
+  const tags = name => [...head.matchAll(new RegExp(`<${name}\\b([^>]+)>`, 'gi'))].map(match => Object.fromEntries(
+    [...match[1].matchAll(/([^\s=/>]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)]
+      .map(attribute => [attribute[1].toLowerCase(), (attribute[2] ?? attribute[3] ?? attribute[4]).replaceAll('&amp;', '&')])
+  ));
+  const metadata = tags('meta');
+  const meta = (kind, name) => {
+    const matches = metadata.filter(tag => tag[kind] === name);
+    assert.equal(matches.length, 1, `${name} must occur once in the initial HTML`);
+    assert.ok(matches[0].content?.trim(), `${name} must not be empty`);
+    return matches[0].content;
+  };
+  assert.deepEqual(tags('link').filter(tag => tag.rel === 'canonical').map(tag => tag.href), [canonical]);
+  assert.equal(meta('property', 'og:type'), 'website');
+  assert.equal(meta('property', 'og:url'), canonical);
+  assert.equal(meta('property', 'og:site_name'), config.title);
+  assert.match(meta('property', 'og:title'), /^Global DPP Atlas/);
+  assert.match(meta('property', 'og:description'), /world map and knowledge graph/);
+  assert.equal(meta('property', 'og:image'), imageUrl);
+  assert.equal(meta('property', 'og:image:secure_url'), imageUrl);
+  assert.equal(meta('property', 'og:image:type'), 'image/jpeg');
+  assert.equal(meta('property', 'og:image:width'), '1200');
+  assert.equal(meta('property', 'og:image:height'), '630');
+  assert.equal(meta('name', 'twitter:card'), 'summary_large_image');
+  assert.equal(meta('name', 'twitter:image'), imageUrl);
+  for (const field of ['title', 'description', 'image:alt']) {
+    assert.equal(meta('name', `twitter:${field}`), meta('property', `og:${field}`));
+  }
+  const image = await readFile(path.join(site, card.output.slice(1)));
+  const info = await sharp(image).metadata();
+  assert.equal(info.format, 'jpeg', 'Declared MIME type must match the delivered image bytes');
+  assert.equal(info.width, 1200);
+  assert.equal(info.height, 630);
+  assert.ok(image.length <= 250 * 1024, 'Card must fit the site social-image budget');
+  assert.deepEqual(image, await readFile(path.join(root, 'docs', card.output.slice(1))), 'Build must deliver the reviewed card');
 });
 
 test('the finished paper and all five canonical Atlas pages are discoverable without indexing archive aliases', async () => {

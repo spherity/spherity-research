@@ -1,5 +1,5 @@
 /* Paper-in-preparation presentation; all rules remain within this page. */
-.dpp-paper-page{grid-template-columns:200px minmax(0,1fr);gap:clamp(1.5rem,2.8vw,3rem);width:min(100% - 3rem,1560px)}
+.dpp-paper-page{grid-template-columns:228px minmax(0,1fr);gap:clamp(1.5rem,2.8vw,3rem);width:min(100% - 3rem,1560px)}
 .dpp-paper-page .srespec-main{padding:clamp(1.2rem,2.5vw,2.5rem)}
 .dpp-paper-page .srespec-sidebar{padding-top:.75rem}
 .dpp-paper-page .srespec-logo{max-width:150px}
@@ -90,9 +90,6 @@
 .dpp-paper-page .dpp-learning-grid h3,.dpp-paper-page .dpp-version-grid h3{font-family:inherit;font-size:1rem;line-height:1.45;margin:.6rem 0}
 .dpp-learning-grid p,.dpp-version-grid p{font-size:.85rem;line-height:1.7;margin:.5rem 0}
 .dpp-version-grid a{font-size:.82rem;font-weight:700}
-.dpp-date-legend{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.2rem 0}
-.dpp-date-tag{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .65rem;border:1px solid #b7cbda;border-radius:5px;background:#edf4fc;color:#234e7d;font:650 .74rem/1.4 var(--font-sans,Inter,ui-sans-serif,sans-serif)}
-.dpp-date-tag.planned{background:#fff7e5;color:#77551b;border-color:#ddc382}.dpp-date-tag.conditional{background:#f0eefa;color:#69508a;border-color:#c9bddc}.dpp-date-tag.adjacent{background:#eef2f4;color:#475e6b;border-color:#c7d1d7}
 .dpp-table-wrap{width:100%;overflow:auto;margin:1rem 0 1.3rem;border:1px solid #cedde5;border-radius:10px;scrollbar-color:#8aa5b6 #eef3f7}
 .dpp-table-wrap:focus-visible{outline:3px solid #256ad0;outline-offset:3px}
 .dpp-paper-page .dpp-timeline-table{width:100%;min-width:780px;border-collapse:collapse;margin:0;font-family:var(--font-sans,Inter,ui-sans-serif,sans-serif);font-size:.83rem;line-height:1.6}

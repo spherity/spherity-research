@@ -40,20 +40,25 @@ body {
 /* Left navigation */
 
 .srespec-sidebar {
-  position: sticky;
+  position: static;
   top: 1.25rem;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 3.25rem);
-  height: calc(100dvh - 3.25rem);
+  min-height: calc(100vh - 3.25rem);
+  min-height: calc(100dvh - 3.25rem);
   padding: 1.1rem 1rem 1.25rem 0;
   border-right: 1px solid var(--border-soft);
+}
+
+/* Pin only when every link and action fits; otherwise use ordinary page scrolling. */
+.srespec-sidebar.is-viewport-fit {
+  position: sticky;
 }
 
 .srespec-logo-link {
   display: inline-block;
   flex-shrink: 0;
-  margin-bottom: 1.4rem;
+  margin-bottom: 0.8rem;
 }
 
 .srespec-logo {
@@ -63,17 +68,15 @@ body {
 }
 
 .srespec-toc {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  scrollbar-gutter: stable;
+  flex: 1 0 auto;
+  overflow: visible;
   padding: 0 0.4rem 0.5rem 0.25rem;
   margin-left: -0.25rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .srespec-toc h2 {
-  margin: 0 0 0.85rem 0;
+  margin: 0 0 0.55rem 0;
   padding: 0;
   border: none;
   font-size: 0.88rem;
@@ -91,13 +94,14 @@ body {
 }
 
 .srespec-toc li {
-  margin: 0.42rem 0;
+  margin: 0;
   padding: 0;
 }
 
 .srespec-toc a {
   display: block;
-  padding: 0.28rem 0.4rem 0.28rem 0;
+  padding: 0.22rem 0.4rem 0.22rem 0;
+  min-height: 24px;
   border-radius: 6px;
   color: var(--text-main);
   font-size: 0.9rem;
@@ -178,25 +182,6 @@ body {
   flex-wrap: wrap;
   gap: 0.65rem;
   margin-bottom: 1rem;
-}
-
-/* On very short screens, let the whole sidebar scroll instead of squeezing
-   the contents list between the logo and actions. */
-@media (min-width: 1151px) and (max-height: 520px) {
-  .srespec-sidebar {
-    height: auto;
-    max-height: calc(100vh - 2.5rem);
-    max-height: calc(100dvh - 2.5rem);
-    overflow-y: auto;
-    padding-left: 0.4rem;
-    margin-left: -0.4rem;
-  }
-
-  .srespec-toc {
-    flex: none;
-    overflow: visible;
-    scrollbar-gutter: auto;
-  }
 }
 
 /* Main article */

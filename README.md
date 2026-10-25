@@ -38,6 +38,13 @@ GitHub Actions. The Gartner-
 approved strategy card is a checksum-protected exception and must not be
 changed without a new approval.
 
+The standalone Atlas has its own map-led card in the same manifest, with
+`page_type: website` and `layout: atlas-map`. Its 1200 × 630 JPEG is linked by
+static Open Graph and X metadata in `dpp-explorer/src/index.html`. Validation
+checks the rendered page and image together. To regenerate just this card,
+run `node scripts/generate-social-cards.mjs --only=/dpp-explorer/` after the map
+asset is prepared; all cards still pass safe-area preflight.
+
 Verified author identities are maintained in `docs/_data/authors.yml`. The
 shared page layout reuses those profiles on future papers, while a publication
 can supply an author-specific `url` or `same_as` value when necessary. Reviewed
