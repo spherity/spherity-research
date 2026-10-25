@@ -68,7 +68,6 @@ navigation_label: Browse this paper page
 key_takeaways:
   - Distinguish a legal obligation, a published specification, a pilot and an independently demonstrated exchange. Each answers a different question.
   - Separate fixed application dates from planned adoption windows and conditional requirements. A registry launch does not establish every operational capability.
-  - AAS has international standards and programme support. Coexistence, mapping and displacement in particular applications remain different scenarios.
   - The proposed evidence infrastructure combines product claims, actor authority and enforced permission. Its integrated benefits require bounded tests and independent review.
 about:
   - Digital Product Passport regulation
