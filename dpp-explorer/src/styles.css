@@ -43,6 +43,9 @@
 .dpp-explorer .map-legend small,.dpp-explorer .graph-legend small{font-size:12px;color:#526576}
 .dpp-explorer .scope-tray button{background:#f3f7fb!important}
 .dpp-explorer .scope-tray button b{color:#345c88}
+.dpp-explorer .scope-territories{flex-basis:100%;min-width:0;margin-top:8px;padding-top:12px;border-top:1px solid var(--line)}
+.dpp-explorer .scope-territories>span{display:block;margin-bottom:8px;font-size:12px;font-weight:650;color:#526576}
+.dpp-explorer .scope-territory-buttons{display:flex;flex-wrap:wrap;gap:6px}
 .dpp-explorer .record-card{padding:13px;gap:8px}
 .dpp-explorer .record-card strong{font-size:14px;line-height:1.5}
 .dpp-explorer .card-type{font-size:12px;letter-spacing:.4px}
