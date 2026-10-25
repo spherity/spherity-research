@@ -1,0 +1,216 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile, stat } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { loadPdfShares } from './lib/pdf-sharing.mjs';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const site = path.join(root, '_site');
+const atlas = path.join(site, 'dpp-explorer');
+const sourceRelease = path.join(root, 'dpp-research/releases/0.1.0');
+const read = file => readFile(file, 'utf8');
+const json = async file => JSON.parse(await read(file));
+const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const schemas = html => [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(m => JSON.parse(m[1]));
+
+test('every archived release byte matches the frozen manifest and metadata', async () => {
+  const manifest = await json(path.join(sourceRelease, 'manifest.json'));
+  for (const [file, expected] of Object.entries(manifest.files)) {
+    assert.equal(hash(await readFile(path.join(atlas, 'releases/0.1.0', file))), expected, file);
+  }
+  for (const file of ['manifest.json', 'checksums.sha256']) {
+    assert.deepEqual(await readFile(path.join(atlas, 'releases/0.1.0', file)), await readFile(path.join(sourceRelease, file)), file);
+  }
+  assert.deepEqual(await readFile(path.join(atlas, 'data/dataset.json')), await readFile(path.join(sourceRelease, 'dataset.json')));
+});
+
+test('delivered atlas still matches its manifest after site optimization', async () => {
+  const manifest = await json(path.join(atlas, 'build-manifest.json'));
+  for (const entry of manifest.files) {
+    const bytes = await readFile(path.join(atlas, entry.file));
+    assert.equal(hash(bytes), entry.sha256, entry.file);
+    assert.equal(bytes.length, entry.bytes, entry.file);
+  }
+});
+
+test('finished whitepaper metadata preserves the separate frozen dataset rights', async () => {
+  const html = await read(path.join(site, 'global-digital-product-passport-regulation.html'));
+  const data = schemas(html);
+  const paper = data.find(s => s['@type'] === 'ScholarlyArticle');
+  assert.ok(paper?.datePublished);
+  const dataset = data.find(s => s['@type'] === 'Dataset');
+  assert.equal(dataset?.version, '0.1.0');
+  assert.ok(dataset?.name && dataset?.description && dataset?.copyrightNotice);
+  assert.ok(!Object.hasOwn(dataset, 'license'), 'Frozen data must not inherit manuscript CC BY');
+  for (const file of dataset.distribution) assert.match(file.contentUrl, /\/dpp-explorer\/releases\/0\.1\.0\//);
+  assert.match(html, /name=["']citation_pdf_url["']/);
+  assert.match(html, /name=["']citation_title["']/);
+  assert.match(html, /Manuscript prepared/);
+  assert.match(html, /Not peer reviewed/);
+  assert.doesNotMatch(html, /Paper in preparation|blank PDF placeholder|Research curator/);
+});
+
+test('existing research pages retain their scholarly metadata', async () => {
+  const html = await read(path.join(site, 'verifiable-access-controlled-digital-product-passports.html'));
+  const article = schemas(html).find(s => s['@type'] === 'ScholarlyArticle');
+  assert.ok(article?.datePublished);
+  assert.match(html, /name=["']citation_title["']/);
+  assert.match(html, /name=["']citation_pdf_url["']/);
+});
+
+test('static catalogue retains every substantive record and source anchor', async () => {
+  const dataset = await json(path.join(sourceRelease, 'dataset.json'));
+  const html = await read(path.join(atlas, 'catalogue.html'));
+  const scaffold = new Set(['Jurisdiction', 'Sector', 'Concept']);
+  const records = dataset.entities.filter(e => !scaffold.has(e.type));
+  assert.equal(records.length, 128);
+  for (const record of records) assert.ok(html.includes(`id="${record.id}"`), record.id);
+  for (const source of dataset.sources) assert.ok(html.includes(`id="source-${source.id}"`), source.id);
+});
+
+test('static figure assets and all 52 geographic rows survive integration', async () => {
+  const figures = path.join(root, 'dpp-research/figures/landscape-world-map');
+  const delivered = path.join(site, 'assets/dpp-global/figures/0.1.0');
+  for (const file of ['dpp-world-map.svg', 'dpp-world-map.pdf', 'dpp-world-map-a4-proof.pdf', 'coverage-table.json', 'caption.md', 'provenance.json', 'FONT-LICENSE.txt']) {
+    assert.deepEqual(await readFile(path.join(delivered, file)), await readFile(path.join(figures, file)), file);
+  }
+  const rows = await json(path.join(figures, 'coverage-table.json'));
+  const html = await read(path.join(atlas, 'coverage.html'));
+  assert.equal(rows.length, 52);
+  const baselineTable = html.match(/<table id="baseline-coverage">[\s\S]*?<\/table>/)?.[0];
+  assert.ok(baselineTable, 'The frozen figure table remains separately identifiable');
+  assert.equal([...baselineTable.matchAll(/scope="row"/g)].length, 52);
+  const review = html.match(/<section id="latest-review">[\s\S]*?<\/section>/)?.[0];
+  assert.ok(review, 'The dated coverage review appears alongside the frozen table');
+  assert.equal([...review.matchAll(/scope="row"/g)].length, 4);
+  for (const id of ['jur-gb', 'jur-ch', 'jur-no', 'jur-tw']) assert.ok(review.includes(`jurisdiction=${id}`));
+  for (const row of rows) assert.ok(html.includes(`jurisdiction=${row.id}`), row.id);
+  assert.match(html, /Malta and Singapore/);
+  assert.match(html, /Great Britain and Northern Ireland/);
+});
+
+test('new pages resolve local assets and internal links beneath the repository base path', async () => {
+  const pages = ['global-digital-product-passport-regulation.html', 'dpp-explorer/index.html', 'dpp-explorer/catalogue.html', 'dpp-explorer/rights.html', 'dpp-explorer/coverage.html'];
+  const origin = 'https://spherity.github.io';
+  const base = '/spherity-research/';
+  for (const page of pages) {
+    const html = await read(path.join(site, page));
+    for (const match of html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)) {
+      const value = match[1].replaceAll('&amp;', '&');
+      if (/^(?:mailto:|data:|javascript:)/.test(value)) continue;
+      const url = new URL(value, `${origin}${base}${page}`);
+      if (url.origin !== origin) continue;
+      assert.ok(url.pathname.startsWith(base), `${page}: escaped base path ${value}`);
+      const relative = decodeURIComponent(url.pathname.slice(base.length));
+      let file = path.join(site, relative);
+      const info = await stat(file).catch(() => null);
+      assert.ok(info, `${page}: missing local target ${value}`);
+      if (info.isDirectory()) file = path.join(file, 'index.html');
+      assert.ok((await stat(file)).isFile(), `${page}: missing index ${value}`);
+      if (url.hash && file.endsWith('.html')) {
+        const target = await read(file);
+        const anchor = decodeURIComponent(url.hash.slice(1));
+        assert.ok(target.includes(`id="${anchor}"`) || target.includes(`id='${anchor}'`), `${page}: missing anchor ${value}`);
+      }
+    }
+  }
+});
+
+test('the finished paper is discoverable while the candidate atlas remains a review preview', async () => {
+  const sitemap = await read(path.join(site, 'sitemap.xml'));
+  const paper = await read(path.join(site,'global-digital-product-passport-regulation.html'));
+  assert.match(paper,/name=["']robots["'][^>]*content=["']index,\s*follow/);
+  assert.match(sitemap,/global-digital-product-passport-regulation\.html/);
+  assert.match(sitemap,/Spherity-Research-Global-DPP-Whitepaper\.pdf/);
+  for (const page of ['dpp-explorer/index.html','dpp-explorer/catalogue.html','dpp-explorer/rights.html','dpp-explorer/coverage.html']) {
+    const html=await read(path.join(site,page));
+    assert.match(html,/name=["']robots["'][^>]*content=["']noindex,\s*follow/);
+  }
+  assert.doesNotMatch(sitemap, /dpp-explorer|assets\/dpp-global|\/share\//);
+});
+
+test('supplied manuscript has byte-identical download and its own cover-sharing page', async () => {
+  const pdfPath='/Spherity-Research-Global-DPP-Whitepaper.pdf';
+  const {records,placeholderDownloads}=await loadPdfShares(path.join(root,'docs'));
+  assert.ok(records.some(r=>r.pdfPath===pdfPath));
+  assert.ok(!placeholderDownloads.has('/assets/dpp-global/Global-DPP-Standards-Paper-Placeholder.pdf'));
+  const bytes=await readFile(path.join(site,pdfPath.slice(1)));
+  assert.equal(hash(bytes),'92e535b89ba11b2c3ca2d20835d06dfad0c8a1401d6e00084c54607aa3fc3d87');
+  const html=await read(path.join(site,'global-digital-product-passport-regulation.html'));
+  assert.match(html,/Read the paper/);assert.match(html,/Download PDF/);
+  assert.doesNotMatch(html,/Global-DPP-Standards-Paper-Placeholder/);
+  assert.ok((await stat(path.join(site,'share/Spherity-Research-Global-DPP-Whitepaper.html'))).isFile());
+  assert.ok((await stat(path.join(site,'assets/pdf-share/Spherity-Research-Global-DPP-Whitepaper.jpg'))).isFile());
+});
+
+test('all seven paper figures, all thirteen timeline rows and checkpoint boundaries are visible',async()=>{
+  const html=await read(path.join(site,'global-digital-product-passport-regulation.html'));
+  const figures=['fig01_world_map','fig02_regulatory_calendar','fig03_registry_services','fig04_wallet_evidence','fig05_interoperability_evidence','fig06_product_ai_continuum','fig07_convergence_scenarios'];
+  for(const figure of figures){
+    assert.ok(html.includes(`id="dpp-${figure}-figure"`),figure);
+    assert.ok(html.includes(`${figure}.svg`));
+    assert.ok(html.includes(`${figure}.pdf`));
+  }
+  const table=html.match(/<table class="dpp-timeline-table">[\s\S]*?<\/table>/)?.[0];
+  assert.ok(table);assert.equal([...table.matchAll(/<tbody>[\s\S]*?<\/tbody>/g)][0][0].match(/<tr>/g).length,13);
+  for(const date of ['2027-04-25','2027-10-25','2028-10-25'])assert.ok(html.includes(`datetime="${date}"`));
+  assert.match(table,/11 September 2026/);assert.match(html,/2029/);
+  assert.equal([...html.matchAll(/class="dpp-checkpoint-caveat"/g)].length,4);
+});
+
+test('the paper page puts its interactive map before the detailed research metadata', async () => {
+  const html = await read(path.join(site, 'global-digital-product-passport-regulation.html'));
+  const frame = [...html.matchAll(/<iframe\b[^>]*>/gi)].find(match => /src=["'][^"']*\/dpp-explorer\/\?/.test(match[0]));
+  assert.ok(frame, 'The landing page must contain the embedded map');
+  const frameUrl = new URL(frame[0].match(/src=["']([^"']+)["']/)[1].replaceAll('&amp;', '&'), 'https://example.test');
+  assert.equal(frameUrl.searchParams.get('embed'), 'map');
+  assert.equal(frameUrl.searchParams.get('mapMode'), 'regulation', 'Paper preview must open the reviewed regulatory phase map');
+  assert.match(frame[0], /title=["'][^"']+["']/);
+  assert.match(frame[0], /loading=["']eager["']/);
+  const metadataPosition = html.indexOf('class="srespec-meta"');
+  assert.ok(metadataPosition > frame.index, 'Map must appear before the long version and curator metadata');
+  assert.match(html, /href=["'][^"']*\/dpp-explorer\/coverage\.html["']/);
+  const mapLinks = [...html.matchAll(/href=["']([^"']*\/dpp-explorer\/\?[^"']+)["']/g)].map(match => new URL(match[1].replaceAll('&amp;', '&'), 'https://example.test'));
+  assert.ok(mapLinks.some(url => url.searchParams.get('view') === 'map' && url.searchParams.get('mapMode') === 'regulation'), 'Full-map link must preserve the regulation lens');
+});
+
+test('current graph download matches the displayed evidence and preserves the JTC5 provenance', async () => {
+  const dataset = await json(path.join(atlas,'data/current-dataset.json'));
+  const exported = await json(path.join(atlas,'data/knowledge-graph.json'));
+  const catalogue = await read(path.join(atlas,'catalogue.html'));
+  const scaffold = new Set(['Jurisdiction','Sector','Concept']);
+  const records = dataset.entities.filter(e=>!scaffold.has(e.type));
+  const ids = new Set(records.map(e=>e.id));
+  const assertions = dataset.assertions.filter(a=>a.curation?.status!=='superseded'&&ids.has(a.subject)&&ids.has(a.object?.entity_id));
+  assert.deepEqual(exported.nodes,records);
+  assert.deepEqual(exported.edges.map(e=>e.id),assertions.map(e=>e.id));
+  assert.equal(exported.scope.counts.nodes,records.length);
+  assert.ok(records.length>150,'Candidate incorporates the whitepaper evidence');
+  assert.equal(exported.scope.counts.edges,assertions.length);
+  assert.equal(exported.scope.counts.assertions,dataset.assertions.length);
+  assert.equal(exported.scope.counts.sources,dataset.sources.length);
+  assert.equal(exported.scope.counts.context_entities,dataset.entities.length-records.length);
+  for (const target of ['std-w3c-vc2','std-w3c-did1']) assert.ok(exported.edges.some(edge=>edge.source==='std-en-18219-2026'&&edge.target===target&&edge.predicate==='normatively_references'));
+  assert.ok(exported.edges.some(edge=>edge.source==='std-w3c-dpp-committee-discussion-20260727'&&edge.target==='std-iso-jtc5'&&edge.predicate==='references'));
+  assert.ok(!exported.edges.some(edge=>edge.predicate==='liaison_with'&&/std-w3c-/.test(edge.source+edge.target)));
+  const jtcEdges = exported.edges.filter(e=>e.source==='std-iso-jtc5'||e.target==='std-iso-jtc5');
+  assert.equal(jtcEdges.length,13);
+  assert.equal(jtcEdges.filter(e=>e.predicate==='liaison_with').length,9);
+  assert.ok(jtcEdges.some(e=>e.predicate==='coordinates_with'&&e.target==='std-cen-jtc24'));
+  assert.ok(!jtcEdges.some(e=>e.source==='std-eclass'||e.target==='std-eclass'));
+  assert.equal(exported.metadata.evidence_cutoff,'2026-10-25');
+  assert.equal(exported.metadata.release_status,'candidate');
+  assert.equal(exported.metadata.evidence_updates.checked_at,'2026-10-25');
+  for(const e of records)assert.ok(catalogue.includes(`id="${e.id}"`),e.id);
+  for(const source of dataset.sources)assert.ok(catalogue.includes(`id="source-${source.id}"`),source.id);
+  const app = await read(path.join(atlas,'app.js'));
+  assert.match(app,/loadAtlasData/);
+  const atlasData = await read(path.join(atlas,'atlas-data.js'));
+  assert.match(atlasData,/data\/current-dataset\.json/);
+  assert.match(atlasData,/data\/dataset\.json/);
+  const html = await read(path.join(atlas,'index.html'));
+  assert.match(html,/id="graph-download-all"[^>]*href="data\/knowledge-graph\.json"[^>]*download/);
+  assert.match(html,/id="graph-download-view"/);
+});

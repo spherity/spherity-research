@@ -2,6 +2,11 @@
 publication_template_version: 2
 layout: research-respec
 css: "/assets/spherity-research-respec.css"
+# The shared layout places Contact Spherity at the bottom of the desktop sidebar
+# and in the mobile header. Open atlas appears above it only on the Global DPP
+# paper, which explicitly sets dpp_paper: true.
+# The article footer includes Contact Spherity. Keep this layout and stylesheet;
+# do not add duplicate per-paper action markup or custom contact destinations.
 
 title: "Full publication title"
 # Optional: exact bibliographic title of pdf_url when it differs from the page title.

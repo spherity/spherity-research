@@ -1,3 +1,35 @@
+- title: Global Digital Product Passports
+  publication_type: paper
+  type: Whitepaper · World map and knowledge graph
+  date_label: Version 1.0 · 25 October 2026
+  date_iso: 2026-10-25
+  description: Explore global Digital Product Passport regulation, standards and evidence infrastructure through a research whitepaper, world map, knowledge graph and EU timelines.
+  byline: Dr. Carsten Stöcker · Spherity GmbH
+  topics:
+    - DPP & DBP
+    - Evidence graphs
+    - Identity
+  filters: dpp identity wallets infrastructure
+  search: global digital product passport digital product passports dpp regulation dpp standards regulatory developments battery passport digital battery passport dbp espr ecodesign sustainable products regulation untp cirpass cirpass-2 w3c cen-cenelec jtc 24 iso iec jtc 5 asset administration shell aas gs1 itu catena-x gba global battery alliance rain alliance knowledge graph evidence interoperability world map jurisdiction digitaler produktpass digitale produktpässe batteriepass normen regulierung carsten stöcker carsten stoecker spherity shared evidence infrastructure global regulation calendar timeline eu product act odrl physical ai aas korea china japan us
+  image: /assets/preview-global-digital-product-passports-atlas.webp
+  image_alt: Global Digital Product Passports — a prominent regulatory world map with a vertical DPP Atlas label beside the whitepaper's first page.
+  image_width: 1200
+  image_height: 630
+  media_class: card-media-wide
+  format: HTML overview + PDF + interactive Atlas
+  links:
+    - label: Explore the research
+      url: /global-digital-product-passport-regulation.html
+      arrow: →
+    - label: Download whitepaper
+      url: /Spherity-Research-Global-DPP-Whitepaper.pdf
+      arrow: ↓
+      secondary: true
+    - label: Open Atlas
+      url: /dpp-explorer/
+      arrow: ↗
+      secondary: true
+
 - title: "Governed Memory for Physical AI"
   type: "Research paper · Robot memory and supply chain security"
   date_label: "20 October 2026"
