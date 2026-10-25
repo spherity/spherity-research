@@ -89,7 +89,14 @@ const assertCanonicalSiteUrl = (location) => {
 const files = await glob("**/*.{html,pdf}", {
   cwd: siteDirectory,
   nodir: true,
-  ignore: ["404.html", "google*.html"],
+  ignore: [
+    "404.html",
+    "google*.html",
+    // These directories contain source downloads, not canonical HTML pages.
+    // Also guard against aliases produced by optional Jekyll Markdown plugins.
+    "dpp-explorer/{releases,candidates,data,vendor}/**/*.html",
+    "assets/dpp-global/**/*.html"
+  ],
   windowsPathsNoEscape: true
 });
 

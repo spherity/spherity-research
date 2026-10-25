@@ -1,10 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, stat } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { execFile } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
 import { loadPdfShares } from './lib/pdf-sharing.mjs';
+import { glob } from 'glob';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const site = path.join(root, '_site');
@@ -129,6 +133,55 @@ test('the finished paper is discoverable while the candidate atlas remains a rev
     assert.match(html,/name=["']robots["'][^>]*content=["']noindex,\s*follow/);
   }
   assert.doesNotMatch(sitemap, /dpp-explorer|assets\/dpp-global|\/share\//);
+});
+
+test('raw research downloads do not acquire unreviewed HTML aliases during the site build', async () => {
+  const aliases = await glob([
+    'dpp-explorer/{releases,candidates,data,vendor}/**/*.html',
+    'assets/dpp-global/**/*.html'
+  ], { cwd: site, nodir: true });
+  assert.deepEqual(aliases, [], 'Archive Markdown must remain a download, not a generated HTML page');
+});
+
+test('the sitemap rejects archive HTML aliases without hiding canonical Atlas pages or changing downloads', async context => {
+  const temporaryRoot = path.resolve(tmpdir());
+  const directory = await mkdtemp(path.join(temporaryRoot, 'spherity-sitemap-test-'));
+  context.after(async () => {
+    assert.equal(path.dirname(directory), temporaryRoot);
+    assert.ok(path.basename(directory).startsWith('spherity-sitemap-test-'));
+    await rm(directory, { recursive: true, force: true });
+  });
+  const files = {
+    '_config.yml': 'url: https://example.org\nbaseurl: /research\n',
+    'paper.md': '---\ntitle: Paper\ndescription: Research fixture\npermalink: /paper.html\ncanonical_url: https://example.org/research/paper.html\npdf_url: /Paper.pdf\ncover_image: /cover.jpg\n---\nPaper\n',
+    'cover.jpg': 'Cover fixture; sitemap generation does not decode image bytes',
+    'index.html': '<html><head><title>Research</title></head><body>Research</body></html>',
+    'dpp-explorer/index.html': '<html><head><meta name="robots" content="index, follow"></head></html>',
+    'dpp-explorer/catalogue.html': '<html><head><meta name="robots" content="noindex, follow"></head></html>',
+    'dpp-explorer/releases/0.1.0/index.html': '<h1>Generated README alias</h1>',
+    'dpp-explorer/candidates/0.2.0/research-protocol.html': '<h1>Generated protocol alias</h1>',
+    'dpp-explorer/data/provenance/evidence.html': '<h1>Generated evidence alias</h1>',
+    'dpp-explorer/vendor/NATURAL-EARTH-LICENSE.html': '<h1>Generated license alias</h1>',
+    'assets/dpp-global/figures/0.1.0/caption.html': '<h1>Generated caption alias</h1>',
+    'dpp-explorer/releases/0.1.0/README.md': '# Frozen research download\n',
+    'dpp-explorer/releases/0.1.0/dataset.json': '{"version":"0.1.0"}\n',
+    'Paper.pdf': '%PDF-1.7\nUnchanged download fixture\n%%EOF\n'
+  };
+  for (const [file, content] of Object.entries(files)) {
+    await mkdir(path.dirname(path.join(directory, file)), { recursive: true });
+    await writeFile(path.join(directory, file), content);
+  }
+  await promisify(execFile)(process.execPath, [path.join(root, 'scripts/generate-sitemap.mjs'),
+    '--site-dir', directory, '--source-dir', directory], {
+    cwd: root, env: { ...process.env, SITE_URL: 'https://example.org/research' }
+  });
+  const sitemap = await read(path.join(directory, 'sitemap.xml'));
+  assert.match(sitemap, /<loc>https:\/\/example\.org\/research\/dpp-explorer\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/example\.org\/research\/Paper\.pdf<\/loc>/);
+  assert.doesNotMatch(sitemap, /catalogue|releases|candidates|provenance|vendor|assets\/dpp-global/);
+  for (const [file, content] of Object.entries(files)) {
+    assert.equal(await read(path.join(directory, file)), content, `${file} must remain unchanged`);
+  }
 });
 
 test('metadata-enriched manuscript preserves the supplied PDF and has its own cover-sharing page', async () => {
