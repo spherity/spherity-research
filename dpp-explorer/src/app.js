@@ -169,6 +169,12 @@ function render(){
   saveUrl();
 }
 function change(patch){Object.assign(state,patch);render();}
+function selectView(view){
+  // The first general graph visit starts with all records. Explicit graph links
+  // and connection actions render their requested view directly, so keep those.
+  if(view==='graph'&&!graphView){state=emptyState();selected='';selectedAssertion='';}
+  change({view});
+}
 function reset(){state=historical?emptyState():defaultState();clearDetail();render();}
 
 function renderTimeline(){
@@ -351,7 +357,7 @@ function events(){
     const b=event.target.closest('button');if(!b)return;
     if(b.dataset.entity){showEntity(b.dataset.entity);revealDetail();}
     if(b.dataset.assertion){showAssertion(b.dataset.assertion);revealDetail();}
-    if(b.dataset.view)change({view:b.dataset.view});
+    if(b.dataset.view)selectView(b.dataset.view);
     if(b.dataset.graphLayout){graphMode=b.dataset.graphLayout==='network'?'network':'structured';renderGraph();saveUrl();}
     if('graphExample' in b.dataset){selected=b.dataset.graphExample;selectedAssertion='';state=emptyState();change(b.dataset.graphExample==='std-iso-jtc5'?{view:'graph',standards:['iso-iec-jtc5']}:{view:'graph',focus:b.dataset.graphExample});if(b.hasAttribute('data-semantic-example')){$('graph-stage').scrollIntoView({block:'center'});$('graph-stage').focus({preventScroll:true});}}
     if(b.dataset.graphAction==='inspect')revealDetail();
@@ -375,7 +381,7 @@ function events(){
       mapSvg.call(mapZoom.transform,d3.zoomIdentity);
     }
   });
-  document.querySelector('.tabs').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const views=['map','graph','table','timeline'],i=views.indexOf(state.view),next=event.key==='Home'?0:event.key==='End'?3:(i+(event.key==='ArrowRight'?1:3))%4;change({view:views[next]});$(views[next]+'-tab').focus();});
+  document.querySelector('.tabs').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const views=['map','graph','table','timeline'],i=views.indexOf(state.view),next=event.key==='Home'?0:event.key==='End'?3:(i+(event.key==='ArrowRight'?1:3))%4;selectView(views[next]);$(views[next]+'-tab').focus();});
   $('share').onclick=async()=>{saveUrl();try{await navigator.clipboard.writeText(location.href);toast('View link copied, including filters and selection.');}catch{toast('Copy the address from your browser to share this view.');}};
   window.addEventListener('popstate',()=>{if((new URLSearchParams(location.search).get('release')==='0.1.0')!==historical){location.reload();return;}state=parseState(location.search,model);if(historical)state.mapMode='coverage';const p=new URLSearchParams(location.search);graphMode=p.get('layout')==='network'?'network':'structured';selected=model.entities.has(p.get('selected'))?p.get('selected'):(!p.get('assertion')?state.jurisdiction:'');selectedAssertion=model.dataset.assertions.some(a=>a.id===p.get('assertion'))?p.get('assertion'):'';render();});
   for(const id of ['graph-outlook-jump','graph-guide-jump','semantic-guide-jump'])$(id).onclick=()=>{
@@ -384,7 +390,7 @@ function events(){
   };
   document.addEventListener('click',event=>{
     if(!event.target.closest('[data-semantic-guide]'))return;
-    if(state.view!=='graph')change({view:'graph'});
+    if(state.view!=='graph')selectView('graph');
     $('graph-outlook').open=true;
   });
   $('graph-fullscreen').onclick=toggleGraphFullscreen;
