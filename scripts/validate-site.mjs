@@ -2329,8 +2329,16 @@ if (await exists(path.join(siteDirectory, "sitemap.xml"))) {
   if (sitemap.includes("\u00a0")) {
     errors.push("sitemap.xml: replace non-breaking spaces with ordinary whitespace.");
   }
-  if (!/^<\?xml[^>]+\?>\n<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">[\s\S]*<\/urlset>\n?$/.test(sitemap)) {
+  if (!/^<\?xml[^>]+\?>\n<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"(?: xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1")?>[\s\S]*<\/urlset>\n?$/.test(sitemap)) {
     errors.push("sitemap.xml: malformed XML sitemap envelope.");
+  }
+  if (sitemap.includes('<image:image>') && !sitemap.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"')) {
+    errors.push("sitemap.xml: image entries require the Google image sitemap namespace.");
+  }
+  for (const [, imageLocation] of sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)) {
+    if (!imageLocation.startsWith(`${canonicalOrigin}/assets/`) || !/\.(?:svg|png|jpe?g|webp|avif)$/i.test(imageLocation)) {
+      errors.push(`sitemap.xml: invalid publication image URL ${imageLocation}.`);
+    }
   }
   const sitemapMatches = [
     ...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/gi)

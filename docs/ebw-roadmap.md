@@ -1,6 +1,18 @@
 ---
 publication_template_version: 2
 ebw_paper: true
+image_sitemap: true
+ebw_launch:
+  heading: "Spherity EBW-ready Business Wallet with Bundesanzeiger Verlag: planned Q1 2027 launch"
+  product: Spherity EBW-ready Business Wallet
+  period: Q1 2027
+  period_description: January–March 2027; exact launch day to be announced
+  status: Planned general availability
+  description: Spherity plans general availability of its EBW-ready Business Wallet in Q1 2027 on BSI-certified infrastructure, building on a European Business Wallet developed with Bundesanzeiger Verlag and tested in WE BUILD. The exact launch day has not been announced.
+  partner: Bundesanzeiger Verlag
+  partner_url: https://www.bundesanzeiger-verlag.de/
+  infrastructure: BSI-certified infrastructure
+  evidence_date: "2026-10-31"
 layout: research-respec
 css: /assets/spherity-research-respec.css
 title: "European Business Wallets: Regulation, Roadmap and Business Value"
@@ -8,9 +20,9 @@ citation_title: "European Business Wallets: A Conditional Roadmap for the Single
 citation_publication_date: "2026-10-31"
 seo_title: "European Business Wallet: Regulation, Roadmap & EUDI Comparison"
 og_title: "European Business Wallets: Regulation, Roadmap and Business Value"
-og_description: Understand the EBW legal clocks, compare EUDI and business wallets, and turn one use case into measurable business value and accountable automation.
+og_description: "European Business Wallet research and roadmap. Spherity’s EBW-ready Business Wallet, developed with Bundesanzeiger Verlag and tested in WE BUILD, is planned for Q1 2027 on BSI-certified infrastructure."
 subtitle: A conditional roadmap for the Single Market, cyber-resilience and accountable automation—with practical guidance for starting now.
-description: "European Business Wallet regulation and roadmap: conditional 2029–2031 scenarios, EUDI comparison, practical guidance, cyber-resilience and Trusted AI."
+description: "European Business Wallet roadmap and EUDI comparison. Spherity’s EBW-ready Wallet with Bundesanzeiger Verlag: general availability planned for Q1 2027."
 paper_status: Research manuscript · Summary and implementation guide
 author: Dr. Carsten Stöcker
 authors:
@@ -32,6 +44,7 @@ latest_version: https://spherity.github.io/spherity-research/ebw-roadmap.html
 pdf_url: /Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.pdf
 associated_media:
   - name: European Business Wallets — full research manuscript (26 pages)
+    description: Comparative analysis of proposed European Business Wallet legal clocks, six transaction-readiness gates, cyber-resilience and accountable automation, with practical implementation guidance in Section 19.
     url: /Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.pdf
     cover_image: /assets/ebw-roadmap-paper-cover.jpg
     cover_image_alt: Complete first page of European Business Wallets, by Dr. Carsten Stöcker, prepared 31 October 2026.
@@ -75,6 +88,8 @@ keywords:
   - European Business Wallet
   - EBW regulation
   - EBW-ready Business Wallet
+  - Spherity EBW-ready Business Wallet launch
+  - Q1 2027 planned general availability
   - EUDI Wallet
   - European Digital Identity Wallet
   - EUDIW
@@ -96,14 +111,14 @@ keywords:
   - G2G
   - post-quantum cryptography
   - Digital Product Passport
-answer_summary: "European Business Wallets can connect organisational identity, verifiable evidence and bounded authority to completed business transactions. At the 31 October 2026 cut-off, the EBW regulation remained under negotiation: the paper’s 2029, 2030 and 2031 acceptance dates are conditional calculations, not adopted deadlines. Start with a lawful use case, a real receiving partner and measured value while designing for changing requirements."
+answer_summary: "European Business Wallets connect organisational identity, verifiable evidence and bounded authority to business transactions. Spherity plans general availability of its EBW-ready Business Wallet in Q1 2027 on BSI-certified infrastructure, building on work developed with Bundesanzeiger Verlag and tested in WE BUILD. This product plan is separate from the EBW regulation, which remained under negotiation at the 31 October 2026 cut-off: the paper’s 2029–2031 acceptance examples are conditional calculations, not adopted deadlines."
 key_takeaways:
   - The Commission, Parliament ITRE and Council texts use different proposed triggers for public-sector acceptance; political agreement is not the same as entry into force or application.
   - "EUDI Wallets and business wallets are complementary: personal identity and user-controlled disclosure can connect with organisational evidence, mandates and enterprise processes."
   - "Readiness requires six transaction gates: legal basis, technical profile, credentials, mandates, receiving service and operations."
   - Section 19 recommends a minimum viable ecosystem, a value-realisation plan, controlled pilots and a funded approach to changing standards.
   - Identity and bounded authority can support cyber-resilience and Trusted AI; they do not establish safe AI decisions or guaranteed economic gains.
-  - Spherity’s EBW-ready Business Wallet general availability on BSI-certified infrastructure is planned for Q1 2027; this product plan is separate from final EBW conformity.
+  - Spherity’s EBW-ready Business Wallet, developed with Bundesanzeiger Verlag and tested in WE BUILD, has general availability planned for Q1 2027 on BSI-certified infrastructure; the exact launch day is not announced.
 about:
   - European Business Wallet
   - Organisational identity
@@ -220,8 +235,10 @@ questions_answered:
     answer: Choose one lawful recurring transaction, name the process and benefit owners, involve a real receiver and a competent source, and set cost and resilience baselines. Section 19 recommends a controlled pilot, explicit expand/adjust/stop criteria and modular technology with a migration budget. Earlier bounded use does not establish conformity with future EBW rules.
   - question: How do business wallets support Trusted AI and cyber-resilience?
     answer: They can supply verifiable organisational identity and bounded authority to policy enforcement, helping make automated actions attributable and revocable. Test replay, stale evidence, compromised endpoints and recovery. Wallets do not prove the correctness of AI outputs or the safety of physical actions; separate model, runtime and safety controls remain necessary.
-  - question: When is Spherity’s EBW-ready Business Wallet planned to be generally available?
-    answer: Spherity’s product plan dated 31 October 2026 targets general availability in Q1 2027 on BSI-certified infrastructure, building on work developed with Bundesanzeiger Verlag and tested in WE BUILD. This is a planned release, not a statement that the wallet is already certified under a final EBW regime.
+  - question: When is the Spherity EBW-ready Business Wallet launch with Bundesanzeiger Verlag planned?
+    answer: Spherity plans general availability of its EBW-ready Business Wallet in Q1 2027 (January–March 2027) on BSI-certified infrastructure. The wallet builds on work developed with Bundesanzeiger Verlag and tested in WE BUILD. The exact launch day has not been announced. This company plan, stated on 31 October 2026, is separate from final EBW regulatory conformity.
+  - question: What is Bundesanzeiger Verlag’s role in Spherity’s EBW-ready Business Wallet?
+    answer: Spherity and Bundesanzeiger Verlag developed a European Business Wallet and tested it in WE BUILD. Bundesanzeiger Verlag contributes verified business information for company identity, representation and related enterprise processes. Spherity is productising this work as an EBW-ready Business Wallet, with general availability planned for Q1 2027 on BSI-certified infrastructure.
 related_publications:
   - title: European Business Wallets as the Legal Control Plane for Zero Trust AI Agents
     url: /ebw-zero-trust-ai-agents.html
@@ -235,6 +252,8 @@ related_publications:
 toc_items:
   - title: Overview and PDF
     href: "#abstract"
+  - title: Planned launch · Q1 2027
+    href: "#ebw-ready-wallet-launch"
   - title: Roadmap
     href: "#ebw-roadmap"
   - title: Regulatory status
@@ -279,8 +298,8 @@ tags:
 .ebw-button:hover{background:#07586b;border-color:#07586b}.ebw-button:focus-visible{outline:3px solid #11bd98;outline-offset:4px}.ebw-button-secondary{background:#fff;color:#003b4d!important}.ebw-button-secondary:hover{background:#eef8f6}
 .paper-figure.ebw-roadmap-figure{margin:3.5rem 0 3rem}.paper-figure.ebw-roadmap-figure img{width:100%;max-width:100%;border:1px solid #d7e3e7;border-radius:8px;background:white}
 .ebw-comparison{overflow-x:auto;margin:1.5rem 0}.ebw-comparison table{min-width:660px}.ebw-comparison:focus-visible{outline:3px solid #11bd98;outline-offset:3px}
-.ebw-cta{margin:3.5rem 0;padding:clamp(1.35rem,4vw,2.4rem);background:#eef8f6;border:1px solid #c6e5dd;border-left:5px solid #08b796;border-radius:8px}.ebw-cta h2{margin-top:.5rem}.ebw-eyebrow{font:700 .85rem/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-transform:uppercase;letter-spacing:.07em;color:#165b60}.ebw-cta-note{font-size:.88rem;color:#4b626b}
-@media(max-width:600px){.ebw-hero{grid-template-columns:1fr}.ebw-cover-link img{width:115px}.ebw-downloads{flex-direction:column}.ebw-button{width:100%;box-sizing:border-box}.paper-figure.ebw-roadmap-figure{margin:2.5rem 0}}
+.ebw-cta,.ebw-launch{margin:3.5rem 0;padding:clamp(1.35rem,4vw,2.4rem);background:#eef8f6;border:1px solid #c6e5dd;border-left:5px solid #08b796;border-radius:8px}.ebw-cta h2,.ebw-launch h2{margin-top:.5rem}.ebw-launch dl{display:grid;grid-template-columns:minmax(110px,1fr) 2fr;gap:.65rem 1.2rem}.ebw-launch dt{font-weight:700}.ebw-launch dd{margin:0}.ebw-launch-teaser{padding:.85rem 1rem;border-left:4px solid #08b796;background:#eef8f6}.ebw-eyebrow{font:700 .85rem/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-transform:uppercase;letter-spacing:.07em;color:#165b60}.ebw-cta-note{font-size:.88rem;color:#4b626b}
+@media(max-width:600px){.ebw-hero{grid-template-columns:1fr}.ebw-cover-link img{width:115px}.ebw-downloads{flex-direction:column}.ebw-button{width:100%;box-sizing:border-box}.ebw-launch dl{grid-template-columns:1fr;gap:.25rem}.ebw-launch dd{margin-bottom:.7rem}.paper-figure.ebw-roadmap-figure{margin:2.5rem 0}}
 </style>
 
 <section class="abstract-box" markdown="1">
@@ -288,10 +307,12 @@ tags:
 
 **European Business Wallets (EBWs) are proposed digital infrastructure for economic operators and public bodies to identify themselves, exchange verifiable business evidence and demonstrate authority across borders.** The practical objective is a completed business transaction: a supplier onboarded, a filing accepted or an authorised agent action recorded. Owning a wallet alone does not deliver that outcome.
 
-This page summarises the **26-page research manuscript prepared on 31 October 2026** and adds an implementation perspective, an EUDI Wallet comparison and Spherity’s product outlook. The full PDF contains the method, article-level legal comparison, worked example and 46 references. It is a research manuscript, **not peer reviewed**; its economic and security benefits are hypotheses to test in deployments.
+This page summarises the **26-page research manuscript prepared on 31 October 2026** and adds an implementation perspective, an EUDI Wallet comparison and Spherity’s product outlook. The full PDF contains the method, article-level legal comparison, worked example and 46 references. The economic and security benefits discussed in the paper are hypotheses to test in deployments.
 
-**What changed:** the earlier 2028–2029 forecast is replaced by three proposed legal clocks and explicit 2029, 2030 and 2031 scenarios. The paper introduces six transaction-readiness gates and practical implementation guidance in Section 19. The original page was published on 18 May 2026; this edition retains its URL. The earlier roadmap was co-authored by Carsten Stöcker, Ronald Koenig, Ricky Thiermann and Martin Westerkamp. The new manuscript is authored by Carsten Stöcker.
+**What changed:** the earlier 2028–2029 forecast is replaced by three proposed legal clocks and explicit 2029, 2030 and 2031 scenarios. The paper introduces six transaction-readiness gates and practical implementation guidance in Section 19. The original page was published on 18 May 2026; this edition retains its URL.
 </section>
+
+{% include ebw-wallet-launch.html %}
 
 <h2 id="ebw-roadmap">The updated European Business Wallet roadmap</h2>
 
@@ -300,7 +321,8 @@ The roadmap separates **recorded events**, **political or programme targets**, *
 {% assign ebw_roadmap_figure = page.figure_objects | first %}
 {% include research-figure.html figure=ebw_roadmap_figure number=1 %}
 
-<p><a href="{{ '/assets/Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.svg' | relative_url }}" download>Download the roadmap SVG</a> · Reference numbers inside the figure follow the <a href="{{ page.pdf_url | relative_url }}#page=23">paper’s bibliography</a>.</p>
+<p><a class="ebw-button ebw-button-secondary" href="{{ '/assets/Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.svg' | relative_url }}" download>Download roadmap · SVG</a></p>
+<p>Reference numbers inside the figure follow the <a href="{{ page.pdf_url | relative_url }}#page=23">paper’s bibliography</a>.</p>
 
 <h2 id="key-milestones-to-mandatory-ebw-acceptance">Regulatory status: three proposed acceptance clocks</h2>
 
@@ -401,7 +423,7 @@ Its illustrative inputs are 1,200 transactions, 60% completion, €18 avoided ef
 
 **Spherity and Bundesanzeiger Verlag have developed a European Business Wallet and tested it in WE BUILD.** The collaboration connects wallet capabilities with verified business information, representation and enterprise processes. Spherity’s [EIDA Business Wallet overview](https://www.spherity.com/eida) describes the partnership and pilot use cases, including KYC/KYS/KYB, representative rights, corporate banking and data-space access. WE BUILD provides the wider European pilot and interoperability setting. [<a href="#ref-eida">10</a>, <a href="#ref-webuild">8</a>]
 
-**Product plan, 31 October 2026:** Spherity is productising this work as an **EBW-ready Business Wallet**, with **general availability planned for Q1 2027 on BSI-certified infrastructure**. This is Spherity’s announced plan for the service and its hosting environment. Infrastructure certification does not itself certify the wallet against a final EBW regime. Final product scope, assurance evidence and alignment with evolving requirements must be documented for the intended deployment.
+Spherity is productising this work as an **EBW-ready Business Wallet**. See the [standalone Q1 2027 launch plan](#ebw-ready-wallet-launch) for the planned general-availability window, Bundesanzeiger Verlag partnership and infrastructure scope.
 
 For procurement, ask for the tested profile versions, participating counterparties, supported credentials, mandate lifecycle, service commitments, infrastructure certification scope and migration responsibilities. Pilot participation is useful implementation experience; final EBW conformity remains a separate matter.
 
@@ -421,7 +443,7 @@ Bring your onboarding, procurement, compliance or AI-agent use case to Spherity.
 
 This is a comparative legal and technical policy analysis with a fixed evidence cut-off. It proposes a readiness framework and evaluation model; it does not report independently measured deployment savings or security outcomes. Specifications, negotiating positions, enacted requirements and product plans have different evidentiary status. Check the [official procedure record](https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2025%2F0358%28COD%29) for subsequent developments.
 
-The author is affiliated with Spherity GmbH, which has commercial interests in digital identity and credential infrastructure. The product outlook above is additional company information supplied for this page; it is distinct from the manuscript’s documentary findings. The downloadable PDF is preserved as supplied.
+The author is affiliated with Spherity GmbH, which has commercial interests in digital identity and credential infrastructure. The product outlook above is additional company information supplied for this page; it is distinct from the manuscript’s documentary findings. The PDF preserves the supplied manuscript content and publication date; its descriptive metadata has been corrected.
 
 <section class="references" markdown="1">
 <h2 id="references">Selected references and further reading</h2>

@@ -109,12 +109,13 @@ export function embedImageXmp(buffer, metadata) {
   throw new Error(`Unsupported raster metadata format: ${metadata.format}`);
 }
 
-export function embedSvgMetadata(svg, metadata) {
+export function embedSvgMetadata(svg, metadata, metadataId = 'dpp-publication-metadata') {
+  if (!/^[a-z0-9-]+$/.test(metadataId)) throw new Error('Invalid SVG metadata ID.');
   // Keep all rendered elements and attributes intact; only descriptive nodes change.
   let output = svg.replace(/(<title\b[^>]*>)[\s\S]*?(<\/title>)/, `$1${xml(metadata.title)}$2`);
   // Retain the original extraction provenance, including its original source hash.
-  output = output.replace(/<metadata id="dpp-publication-metadata">[\s\S]*?<\/metadata>/, '');
-  const block = `<metadata id="dpp-publication-metadata">${createImageXmp(metadata)}</metadata>`;
+  output = output.replace(new RegExp(`<metadata id="${metadataId}">[\\s\\S]*?<\\/metadata>`), '');
+  const block = `<metadata id="${metadataId}">${createImageXmp(metadata)}</metadata>`;
   output = output.replace(/(<desc\b[^>]*>[\s\S]*?<\/desc>)/, `$1${block}`);
   return output;
 }

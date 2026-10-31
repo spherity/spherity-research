@@ -616,7 +616,7 @@
     "encoding": { "@id": "{{ page.pdf_url | absolute_url }}#media-object" },
     "associatedMedia": { "@id": "{{ page.pdf_url | absolute_url }}#media-object" }{% endif %}{% if page.figure_objects %},
     "hasPart": [
-      {% for figure in page.figure_objects %}{ "@id": "{{ figure.content_url | absolute_url }}#image-object" }{% unless forloop.last %},{% endunless %}{% endfor %}
+      {% for figure in page.figure_objects %}{ "@id": "{{ figure.content_url | absolute_url }}#image-object" }{% unless forloop.last %},{% endunless %}{% endfor %}{% if page.ebw_launch %}, { "@id": "{{ canonical_url }}#launch-plan" }{% endif %}
     ]{% endif %}
   }
   </script>
@@ -797,7 +797,7 @@
     "url": {{ media.url | absolute_url | jsonify }},
     "contentUrl": {{ media.url | absolute_url | jsonify }},
     "name": {{ media.name | jsonify }},
-    "description": {{ page_description | jsonify }},
+    "description": {{ media.description | default: page_description | jsonify }},
     "encodingFormat": "application/pdf",
     "isAccessibleForFree": true,
     {% if media.license %}"license": {{ media.license | jsonify }},{% elsif page.license_exclusions %}"copyrightNotice": {{ page.license_exclusions | jsonify }},{% else %}"license": {{ content_license | jsonify }},{% endif %}
@@ -843,6 +843,8 @@
     "description": {{ figure.description | jsonify }},
     "caption": {{ figure.caption | jsonify }},
     "encodingFormat": "image/svg+xml",
+    "width": {{ figure.width }},
+    "height": {{ figure.height }},
     "inLanguage": {{ page.lang | default: "en" | jsonify }},
     "isAccessibleForFree": true,
     "license": {{ figure.license | default: content_license | jsonify }},
@@ -876,6 +878,7 @@
   <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
   {% endfor %}
 {% if page.dataset %}{% include research-dataset.html %}{% endif %}
+{% if page.ebw_launch %}{% include ebw-launch-metadata.html %}{% endif %}
 </head>
 <body class="{% if page.schema_type == 'CollectionPage' %}portal-body{% else %}article-body{% endif %}">
   <a class="skip-link" href="#main-content">Skip to main content</a>
