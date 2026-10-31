@@ -494,7 +494,7 @@
   type: Roadmap
   date_label: 31 October 2026
   date_iso: "2026-10-31"
-  description: "European Business Wallet regulation and roadmap: conditional 2029–2031 scenarios, EUDI comparison, practical guidance, cyber-resilience and Trusted AI."
+  description: "European Business Wallet research and roadmap, plus Spherity’s EBW-ready Wallet with Bundesanzeiger Verlag: general availability planned for Q1 2027."
   authors:
     - Dr. Carsten Stöcker
   topics:
@@ -502,7 +502,7 @@
     - eIDAS 2.0
     - Trusted AI
   filters: wallets identity
-  search: european business wallet ebw regulation roadmap eudi wallet eudiw d-you eidas 2.0 digital identity digitale identität unternehmenswallet business wallet mandates vollmacht bundesanzeiger we build cyber resilience trusted ai kyb kys 2029 2030 2031
+  search: european business wallet ebw regulation roadmap eudi wallet eudiw d-you eidas 2.0 digital identity digitale identität unternehmenswallet business wallet mandates vollmacht bundesanzeiger we build cyber resilience trusted ai kyb kys launch general availability q1 2027 planned start bundesanzeiger verlag 2029 2030 2031
   image: /assets/preview-ebw-roadmap.webp
   image_alt: Spherity Research preview for European Business Wallet regulation, conditional roadmap, cyber-resilience and business value.
   image_width: 1200

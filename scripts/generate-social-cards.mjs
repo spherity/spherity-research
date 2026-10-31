@@ -6,6 +6,7 @@ import sharp from "sharp";
 import { parse as parseYaml } from "yaml";
 import { embedImageXmp } from "./lib/image-metadata.mjs";
 import { dppPaperPath, loadDppImageMetadata } from "./lib/dpp-image-metadata.mjs";
+import { ebwPaperPath, loadEbwImageMetadata } from "./lib/ebw-image-metadata.mjs";
 
 const projectDirectory = process.cwd();
 const sourceDirectory = path.join(projectDirectory, "docs");
@@ -15,6 +16,8 @@ const publicationsPath = path.join(sourceDirectory, "_data", "publications.yml")
 const manifest = parseYaml(await readFile(manifestPath, "utf8"));
 const dppImageMetadata = manifest.some(card => card.publication_url === dppPaperPath)
   ? await loadDppImageMetadata(sourceDirectory) : {};
+const imageMetadata = {...dppImageMetadata, ...(manifest.some(card => card.publication_url === ebwPaperPath)
+  ? await loadEbwImageMetadata(sourceDirectory) : {})};
 const publications = parseYaml(await readFile(publicationsPath, "utf8"));
 const publicationsByUrl = new Map(
   publications.map((publication) => [publication.links?.[0]?.url, publication])
@@ -462,8 +465,8 @@ for (const { card, publication, layout } of generatedCards) {
 
   const outputPath = publicFile(card.output);
   const pixels = await renderGeneratedCard(card, publication, layout);
-  const rendered = dppImageMetadata[card.output]
-    ? embedImageXmp(pixels, dppImageMetadata[card.output]) : pixels;
+  const rendered = imageMetadata[card.output]
+    ? embedImageXmp(pixels, imageMetadata[card.output]) : pixels;
   // Preserve unchanged assets (and avoid needless writes to files open in a
   // Windows preview). Preflight and rendering still run before this comparison.
   const previous = await readFile(outputPath).catch((error) => {

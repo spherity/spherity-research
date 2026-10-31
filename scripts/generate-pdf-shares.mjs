@@ -4,6 +4,7 @@ import sharp from "sharp";
 import { loadPdfShares, publicUrl } from "./lib/pdf-sharing.mjs";
 import { embedImageXmp } from "./lib/image-metadata.mjs";
 import { dppPaperPath, loadDppImageMetadata } from "./lib/dpp-image-metadata.mjs";
+import { ebwPaperPath, loadEbwImageMetadata } from "./lib/ebw-image-metadata.mjs";
 
 const option = (key, fallback) => {
   const index = process.argv.indexOf(key);
@@ -14,6 +15,8 @@ const siteDirectory = path.resolve(option("--site-dir", "_site"));
 const { config, records } = await loadPdfShares(sourceDirectory);
 const dppImageMetadata = records.some(record => record.pagePath === dppPaperPath)
   ? await loadDppImageMetadata(sourceDirectory) : {};
+const imageMetadata = {...dppImageMetadata, ...(records.some(record => record.pagePath === ebwPaperPath)
+  ? await loadEbwImageMetadata(sourceDirectory) : {})};
 const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;")
   .replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 const relativeUrl = (value) => `${config.baseurl || ""}${value.split("/").map(encodeURIComponent).join("/")}`;
@@ -34,8 +37,8 @@ for (const record of records) {
   const image = await sharp({ create: { width: 1200, height: 630, channels: 3, background: "#eef3f6" } })
     .composite([{ input: border, left: left - 2, top: top - 2 }, { input: cover.data, left, top }])
     .jpeg({ quality: 90, mozjpeg: true }).toBuffer();
-  const imageWithMetadata = dppImageMetadata[record.imagePath]
-    ? embedImageXmp(image, dppImageMetadata[record.imagePath]) : image;
+  const imageWithMetadata = imageMetadata[record.imagePath]
+    ? embedImageXmp(image, imageMetadata[record.imagePath]) : image;
   if (imageWithMetadata.length > 250 * 1024) throw new Error(`${record.pdfPath}: screenshot preview exceeds 250 KB.`);
   await writeFile(path.join(siteDirectory, record.imagePath.slice(1)), imageWithMetadata);
   const coverMetadata = await sharp(sourceCover).metadata();

@@ -3,6 +3,7 @@ import path from "node:path";
 import process from "node:process";
 import { glob } from "glob";
 import { loadPdfShares } from "./lib/pdf-sharing.mjs";
+import { loadSitemapImages } from "./lib/sitemap-images.mjs";
 
 const DEFAULT_SITE_URL = "https://spherity.github.io/spherity-research";
 
@@ -149,19 +150,20 @@ if (!entries.some(({ location }) => location === `${siteUrl}/`)) {
   throw new Error(`The sitemap is missing the site root ${siteUrl}/`);
 }
 
+const imageUrls = await loadSitemapImages(getArgument("--source-dir", "docs"), siteDirectory, siteUrl);
 const body = entries
   .map(
     ({ location, modified, priority }) => `  <url>
     <loc>${xmlEscape(location)}</loc>
     <lastmod>${modified}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>${priority}</priority>
+    <priority>${priority}</priority>${(imageUrls.get(location) || []).map(image => `\n    <image:image><image:loc>${xmlEscape(image)}</image:loc></image:image>`).join('')}
   </url>`
   )
   .join("\n");
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${body}
 </urlset>
 `;

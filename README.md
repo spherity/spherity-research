@@ -193,6 +193,22 @@ does not establish that a diagram is visible or correctly framed.
 
 ## SEO, AEO and GEO research
 
+The EBW roadmap page opts into image discovery with `image_sitemap: true`.
+The sitemap generator includes its reviewed figure, paper cover and social image;
+it verifies that each local image exists. Run
+`node scripts/update-ebw-image-metadata.mjs` after changing the EBW image metadata.
+Social-card and PDF-share generation retain the embedded creator, source and
+licence information. Keep descriptions faithful to each image's actual content.
+
+The EBW manuscript's metadata was corrected with
+`python scripts/update-ebw-pdf-metadata.py` (PyMuPDF and PyYAML required).
+The incremental update preserves the supplied PDF as an exact byte prefix;
+`scripts/data/ebw-pdf-metadata-provenance.json` records matching text, content
+streams, links, geometry and all 26 rendered pages before and after the update.
+The `ebw_launch` front matter supplies both the visible launch section and its
+structured company plan. Keep the planned quarter distinct from an exact release
+date and from regulatory conformity.
+
 Every publication created from template version 2 records a structured search
 review in its `search_research` front-matter block. Follow
 [`SEO-AEO-GEO-RESEARCH.md`](SEO-AEO-GEO-RESEARCH.md) to compare exact terms and
