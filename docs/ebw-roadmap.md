@@ -55,6 +55,7 @@ figure_objects:
   - id: ebw-conditional-roadmap
     name: European Business Wallet legislative and implementation timeline, 2025–2031
     content_url: /assets/Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.svg
+    raster_url: /assets/Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.png
     alt: Timeline separating recorded EBW legislative events from hypothetical 2029, 2030 and 2031 acceptance calculations, continuing implementation work and separate post-quantum policy targets.
     width: 2540
     height: 1500
@@ -321,7 +322,7 @@ The roadmap separates **recorded events**, **political or programme targets**, *
 {% assign ebw_roadmap_figure = page.figure_objects | first %}
 {% include research-figure.html figure=ebw_roadmap_figure number=1 %}
 
-<p><a class="ebw-button ebw-button-secondary" href="{{ '/assets/Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.svg' | relative_url }}" download>Download roadmap · SVG</a></p>
+<div class="ebw-downloads"><a class="ebw-button ebw-button-secondary" href="{{ '/assets/Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.svg' | relative_url }}" download>Download roadmap · SVG</a><a class="ebw-button ebw-button-secondary" href="{{ '/assets/Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.png' | relative_url }}" download>Download roadmap · PNG</a></div>
 <p>Reference numbers inside the figure follow the <a href="{{ page.pdf_url | relative_url }}#page=23">paper’s bibliography</a>.</p>
 
 <h2 id="key-milestones-to-mandatory-ebw-acceptance">Regulatory status: three proposed acceptance clocks</h2>
