@@ -12,7 +12,7 @@ export async function loadSitemapImages(sourceDirectory, siteDirectory, siteUrl)
     if (!frontmatter) continue;
     const page = parse(frontmatter[1]);
     if (!page.image_sitemap || page.publication_state === 'draft' || /noindex/i.test(page.robots || '')) continue;
-    const images = [...new Set([...(page.figure_objects || []).map(figure => figure.content_url), page.cover_image, page.image].filter(Boolean))];
+    const images = [...new Set([...(page.figure_objects || []).flatMap(figure => [figure.content_url, figure.raster_url]), page.cover_image, page.image].filter(Boolean))];
     const urls = [];
     for (const asset of images) {
       if (!/^\/assets\/[^?#]+\.(?:svg|png|jpe?g|webp|avif)$/i.test(asset)) throw new Error(`Unsupported sitemap image: ${asset}`);

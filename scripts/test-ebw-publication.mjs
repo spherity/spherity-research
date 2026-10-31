@@ -42,7 +42,8 @@ test('roadmap stays a distinct discoverable research image with coherent rights 
   const sitemap = await readFile('_site/sitemap.xml', 'utf8');
   const pageEntry = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].find(match => match[1].includes(`<loc>${origin}/ebw-roadmap.html</loc>`))?.[1];
   assert.ok(pageEntry.includes(`<image:loc>${figure.contentUrl}</image:loc>`));
-  assert.equal((pageEntry.match(/<image:image>/g) || []).length, 3);
+  assert.equal((pageEntry.match(/<image:image>/g) || []).length, 4);
+  assert.ok(pageEntry.includes(figure.contentUrl.replace(/\.svg$/, '.png')));
 });
 
 test('EBW image metadata survives social-card and PDF-sharing generation', async () => {

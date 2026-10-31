@@ -18,6 +18,10 @@ export async function loadEbwImageMetadata(sourceDirectory = 'docs') {
     creator: figure.creator_name, credit: figure.credit_text, keywords: figure.keywords,
     format: 'image/svg+xml'
   }]));
+  for (const figure of page.figure_objects) {
+    if (figure.raster_url) assets[figure.raster_url] = {...assets[figure.content_url],
+      format: 'image/png', source: new URL(figure.content_url.slice(1), baseUrl).href};
+  }
   // Cover and paper-card metadata describe the actual research, not a launch graphic.
   const researchKeywords = ['European Business Wallet', 'EBW regulation', 'EUDI Wallet', 'Conditional roadmap', 'Cyber-resilience', 'Trusted AI'];
   assets[page.cover_image] = {...base, title: `${page.citation_title} — cover`,
