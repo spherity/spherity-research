@@ -78,8 +78,8 @@ layout: default
       <p class="srespec-subtitle">{{ page.subtitle }}</p>
       {% endif %}
 
-      {% if page.paper_in_preparation or page.dpp_paper %}
-      {% if page.dpp_paper %}{% include dpp-whitepaper-hero.html %}{% else %}{% include dpp-paper-hero.html %}{% endif %}
+      {% if page.paper_in_preparation or page.dpp_paper or page.ebw_paper %}
+      {% if page.ebw_paper %}{% include ebw-paper-hero.html %}{% elsif page.dpp_paper %}{% include dpp-whitepaper-hero.html %}{% else %}{% include dpp-paper-hero.html %}{% endif %}
       <details class="dpp-paper-record">
         <summary>Research record and version details</summary>
       {% endif %}
@@ -143,7 +143,7 @@ layout: default
         </div>
         {% endif %}
       </dl>
-      {% if page.paper_in_preparation or page.dpp_paper %}</details>{% endif %}
+      {% if page.paper_in_preparation or page.dpp_paper or page.ebw_paper %}</details>{% endif %}
 
       {% if page.publication_state != "draft" %}
       <div class="article-share">

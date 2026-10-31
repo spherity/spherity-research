@@ -364,21 +364,22 @@
   visual: "/assets/Infochart-Securing-Legal-Person-Digital-Identity-Against-Quantum-Vulnerabilities-Spherity-GmbH-05-2026.png"
   visual_fit: "contain"
 
-- publication_url: "/ebw-roadmap.html"
-  output: "/assets/preview-ebw-roadmap.webp"
-  style: "research-grid-v1"
-  mode: "generated"
-  format_label: "POLICY ROADMAP · EUROPEAN BUSINESS WALLET"
-  title_size: 44
+- publication_url: /ebw-roadmap.html
+  output: /assets/preview-ebw-roadmap.webp
+  style: research-grid-v1
+  mode: generated
+  format_label: RESEARCH PAPER · EUROPEAN BUSINESS WALLET
+  title_size: 43
   title_lines:
-    - "Legal & Operational"
-    - "EBW Roadmap Toward"
-    - "EU-Wide Acceptance"
+    - European Business
+    - "Wallets: Regulation"
+    - and Roadmap
   deck_lines:
-    - "Legal, standards, conformance and adoption"
-    - "gates from 2026 to 2029."
-  byline: "Spherity Research · European policy roadmap"
-  visual_type: "ebw-timeline"
+    - Conditional legal clocks. Practical guidance.
+    - Business value, resilience and Trusted AI.
+  byline: Dr. Carsten Stöcker · Spherity GmbH
+  visual: /assets/ebw-roadmap-paper-cover.jpg
+  visual_fit: contain
 
 - publication_url: "/threat-escalation-model-germany-eu.html"
   output: "/assets/preview-threat-escalation-model-germany-eu.webp"

@@ -490,27 +490,32 @@
       url: "/Securing-Digital-Identity-Quantum-Vulnerabilities.html"
       arrow: "→"
 
-- title: "Legal & Operational EBW Roadmap Toward EU-Wide Acceptance"
-  type: "Roadmap"
-  date_label: "18 May 2026"
-  date_iso: "2026-05-18"
-  description: "Milestones, dependencies, standards, and adoption gates for the European Business Wallet under eIDAS 2.0."
+- title: "European Business Wallets: Regulation, Roadmap and Business Value"
+  type: Roadmap
+  date_label: 31 October 2026
+  date_iso: "2026-10-31"
+  description: "European Business Wallet regulation and roadmap: conditional 2029–2031 scenarios, EUDI comparison, practical guidance, cyber-resilience and Trusted AI."
+  authors:
+    - Dr. Carsten Stöcker
   topics:
-    - "European Business Wallet"
-    - "eIDAS 2.0"
-    - "EU adoption"
-  filters: "wallets identity"
-  search: "legal operational ebw roadmap eu wide acceptance eidas european business wallet compliance data exchange"
-  image: "/assets/preview-ebw-roadmap.webp"
-  image_alt: "Spherity Research preview for the legal and operational European Business Wallet roadmap toward EU-wide acceptance by 2029."
+    - European Business Wallet
+    - eIDAS 2.0
+    - Trusted AI
+  filters: wallets identity
+  search: european business wallet ebw regulation roadmap eudi wallet eudiw d-you eidas 2.0 digital identity digitale identität unternehmenswallet business wallet mandates vollmacht bundesanzeiger we build cyber resilience trusted ai kyb kys 2029 2030 2031
+  image: /assets/preview-ebw-roadmap.webp
+  image_alt: Spherity Research preview for European Business Wallet regulation, conditional roadmap, cyber-resilience and business value.
   image_width: 1200
   image_height: 630
-  media_class: "card-media-wide"
-  format: "HTML"
+  media_class: card-media-wide
+  format: HTML + PDF
   links:
-    - label: "Read roadmap"
-      url: "/ebw-roadmap.html"
-      arrow: "→"
+    - label: Read paper page
+      url: /ebw-roadmap.html
+      arrow: →
+    - label: Download PDF
+      url: /Spherity-Research-European-Business-Wallet-Regulation-And-Roadmap.pdf
+      arrow: ↓
 
 - title: "AI-Cyber, Quantum Risk, Hybrid Warfare, and Physical AI"
   type: "Policy paper"
