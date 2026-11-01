@@ -1267,9 +1267,9 @@ for (const publication of publications) {
         `Publication catalog: "${publication.title}" links a PDF but its format does not include PDF.`
       );
     }
-    if (matchingPage?.data.pdf_url !== link.url) {
+    if (matchingPage?.data.pdf_url !== link.url && !asArray(matchingPage?.data.associated_media).some(media => media.url === link.url)) {
       errors.push(
-        `Publication catalog: PDF link for "${publication.title}" must match pdf_url on its HTML landing page.`
+        `Publication catalog: PDF link for "${publication.title}" must match a declared PDF on its HTML landing page.`
       );
     }
   }
@@ -1713,6 +1713,8 @@ for (const htmlFile of htmlFiles) {
   )?.[1];
   const sourcePageForHtml = researchPages.find(({ data }) => data.canonical_url === canonical);
   const isAtlasLanding = sourcePageForHtml?.data.publication_type === "atlas";
+  const isResearchTopic = sourcePageForHtml?.data.publication_type === "research-topic";
+  const expectedWorkType = isAtlasLanding ? "CreativeWork" : isResearchTopic ? "WebPage" : "ScholarlyArticle";
   const isKnownAtlasRoute = atlasRoutes.has(htmlFile.split(path.sep).join("/"));
   const isAllowedDraft = permitsDraftAtlas(sourcePageForHtml?.data) || draftAtlasPath(htmlFile);
   if (isKnownAtlasRoute) {
@@ -1749,7 +1751,7 @@ for (const htmlFile of htmlFiles) {
     const checks = [
       ['class="answer-summary"', "answer-first summary"],
       ['id="questions-answered"', "direct questions and answers"],
-      ...(!isAtlasLanding ? [
+      ...(!isAtlasLanding && !isResearchTopic ? [
         ['name="citation_title"', "citation title metadata"],
         ['name="citation_author"', "citation author metadata"],
         ['name="citation_license"', "citation license metadata"]
@@ -1763,7 +1765,7 @@ for (const htmlFile of htmlFiles) {
         ['data-share-link="reddit"', "Reddit share action"]
       ] : []),
       ['"@type": "BreadcrumbList"', "BreadcrumbList structured data"],
-      [isAtlasLanding ? '"@type": "CreativeWork"' : '"@type": "ScholarlyArticle"', isAtlasLanding ? "CreativeWork structured data" : "ScholarlyArticle structured data"]
+      [`"@type": "${expectedWorkType}"`, `${expectedWorkType} structured data`]
     ];
 
     for (const [needle, label] of checks) {
@@ -1778,7 +1780,7 @@ for (const htmlFile of htmlFiles) {
         return Array.isArray(type) ? type : type ? [type] : [];
       })
     );
-    for (const type of ["WebSite", isAtlasLanding ? "CreativeWork" : "ScholarlyArticle", "BreadcrumbList", "FAQPage", ...(isAtlasLanding ? ["Dataset"] : [])]) {
+    for (const type of ["WebSite", expectedWorkType, "BreadcrumbList", ...(sourcePageForHtml?.data.faq_schema === false ? [] : ["FAQPage"]), ...(isAtlasLanding ? ["Dataset"] : [])]) {
       if (!topLevelSchemaTypes.has(type)) {
         errors.push(`${htmlFile}: ${type} must be exposed as a top-level JSON-LD block.`);
       }
@@ -1961,12 +1963,24 @@ for (const htmlFile of htmlFiles) {
     }
 
     const articleSchema = parsedSchemas.find(
-      (schema) => schema?.["@type"] === (isAtlasLanding ? "CreativeWork" : "ScholarlyArticle")
+      (schema) => schema?.["@type"] === expectedWorkType
     );
     const sourcePage = researchPages.find(({ data }) => data.canonical_url === canonical);
     const sourceAuthorEntities = new Map(
       asArray(sourcePage?.data?.author_entities).map((author) => [author?.name, author])
     );
+    if (isResearchTopic) {
+      const works = asArray(sourcePage?.data.research_works);
+      if (sourcePage.data.schema_type !== 'WebPage' || sourcePage.data.citation_metadata !== false || /name="citation_/i.test(html)) errors.push(htmlFile+': a multi-work topic must use WebPage and omit single-paper citation tags.');
+      if (works.length < 2 || new Set(works.map(w=>w.id)).size !== works.length || new Set(works.map(w=>w.pdf_url)).size !== works.length) errors.push(htmlFile+': topic requires distinct work identities and PDFs.');
+      for (const work of works) {
+        const actual=parsedSchemas.find(s=>s['@id']===work.id);
+        if (!actual || !['ScholarlyArticle','Article','Report'].includes(actual['@type']) || actual.name!==work.title || actual.version!==work.version || actual.datePublished!==work.date || actual.encoding?.['@id']!==`${config.url}${config.baseurl}${work.pdf_url}`+'#media-object') errors.push(htmlFile+': incomplete or mismatched research work '+work.id);
+        if (!asArray(articleSchema?.mainEntity).some(e=>e['@id']===work.id)) errors.push(htmlFile+': topic must link each work as a main entity.');
+        if (!html.includes(work.title)) errors.push(htmlFile+': work title must be visible.');
+      }
+      if (asArray(articleSchema?.encoding).length) errors.push(htmlFile+': distinct papers are not encodings of the topic page.');
+    }
     const articleAuthors = Array.isArray(articleSchema?.author)
       ? articleSchema.author
       : articleSchema?.author
@@ -2010,7 +2024,7 @@ for (const htmlFile of htmlFiles) {
           `${htmlFile}: author ${author.name} must expose ${expectedOrcid} as its ORCID identifier.`
         );
       }
-      if (!isAtlasLanding && expectedOrcid && !html.includes(`name="citation_author_orcid" content="${expectedOrcid}"`)) {
+      if (!isAtlasLanding && !isResearchTopic && expectedOrcid && !html.includes(`name="citation_author_orcid" content="${expectedOrcid}"`)) {
         errors.push(
           `${htmlFile}: author ${author.name} must expose ${expectedOrcid} in citation metadata.`
         );

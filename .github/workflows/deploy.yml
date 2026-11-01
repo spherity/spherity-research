@@ -43,6 +43,9 @@ jobs:
       - name: Prepare atlas and verify immutable release
         run: pnpm run atlas:prepare
 
+      - name: Generate accessible robot evidence records
+        run: node scripts/generate-robot-evidence.mjs
+
       - name: Build Jekyll site
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
         with:
