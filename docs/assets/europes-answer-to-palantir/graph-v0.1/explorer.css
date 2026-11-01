@@ -2,7 +2,7 @@
 #robot-evidence-explorer{display:flex;flex-direction:column;gap:calc(var(--font-size-base)*1);color:var(--foreground)}
 #robot-evidence-explorer .reg-key{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:4px;background:var(--foreground)}
 #robot-evidence-explorer .reg-support{background:var(--viz-series-1)}
-#robot-evidence-explorer .reg-impact{background:var(--viz-series-2)}
+#robot-evidence-explorer .reg-impact{background:none;border-top:3px dashed var(--viz-series-2);height:0}
 #robot-evidence-explorer #reg-graph{position:relative;width:100%}
 #robot-evidence-explorer .reg-node-wrap{position:absolute;display:flex;align-items:center;justify-content:center}
 #robot-evidence-explorer .reg-mark{display:inline-block;margin-right:4px;color:var(--viz-series-3)}
