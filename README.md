@@ -209,6 +209,23 @@ The `ebw_launch` front matter supplies both the visible launch section and its
 structured company plan. Keep the planned quarter distinct from an exact release
 date and from regulatory conformity.
 
+The paired Palantir/industrial-AI publication retains all 39 approved source
+files in `research-assets/palantir/v1.0/`, outside the published site. Its web
+copies add descriptive and rights metadata. Use
+`node scripts/update-palantir-image-metadata.mjs` for SVG, PNG, cover and card XMP,
+and `python scripts/update-palantir-pdf-metadata.py --write` for incremental PDF
+Info/XMP updates (PyMuPDF and PyYAML required; omit `--write` to audit). The
+provenance records in `scripts/data/palantir-*-metadata-provenance.json` record
+pixel-equivalence checks and published hashes. Original release hashes remain
+in `scripts/data/palantir-release-integrity.json`; do not repin them for metadata
+changes. Social-card and PDF-share generators retain the image metadata.
+
+`image_sitemap: true` includes declared SVG/PNG figures, paper covers, social
+cards and optional `sitemap_images`. Explicit `sitemap_downloads` adds standalone
+PDF figures and research JSON using the publication's source date. The paired
+publication covers both HTML pages, 14 PDFs, 30 images and the graph model.
+Noindex sharing aliases, archived originals, scripts and styles remain excluded.
+
 Every publication created from template version 2 records a structured search
 review in its `search_research` front-matter block. Follow
 [`SEO-AEO-GEO-RESEARCH.md`](SEO-AEO-GEO-RESEARCH.md) to compare exact terms and

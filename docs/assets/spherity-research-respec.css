@@ -769,6 +769,16 @@ body {
   line-height: 1.5;
 }
 
+/* Long bibliographic URLs and related titles must reflow on narrow screens. */
+.citation-copy [data-citation-text] {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .related-research ul {
+    grid-template-columns: 1fr;
+  }
+}
+
 .paper-download {
   display: flex;
   flex-wrap: wrap;

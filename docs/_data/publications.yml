@@ -1,3 +1,34 @@
+- title: Europe’s answer to Palantir
+  type: Two research papers · Interactive evidence graph
+  date_label: Papers 1.0 · 1 November 2026
+  date_iso: "2026-11-01"
+  description: "Explore Europe’s open-standards answer to platform dependence: two research papers, architecture figures and an interactive industrial AI evidence graph."
+  byline: Dr. Carsten Stöcker, Spherity GmbH
+  topics:
+    - Trusted AI
+    - Identity, wallets & data sharing
+    - Resilience
+  filters: ai identity wallets resilience infrastructure
+  search: europe palantir industrial ai operational ontology evidence graph knowledge graph dataspaces open standards semantic interoperability sovereign industrial ai participant exchange gateway global cooperation us asia pacific industrielle ki wissensgraph datenräume digitale souveränität carsten stöcker spherity
+  image: /assets/preview-europes-answer-to-palantir.webp
+  image_alt: Europe’s answer to Palantir — open industrial AI research with the executive brief cover.
+  image_width: 1200
+  image_height: 630
+  media_class: card-media-wide
+  format: HTML + 2 PDFs + interactive graph
+  links:
+    - label: Explore the research
+      url: /europes-answer-to-palantir.html
+      arrow: →
+    - label: Executive Brief
+      url: /European_Industrial_AI_Executive_Brief_v1.0.pdf
+      arrow: ↓
+      secondary: true
+    - label: Academic paper
+      url: /Industrial_AI_Academic_Paper_v1.0.pdf
+      arrow: ↓
+      secondary: true
+
 - title: Global Digital Product Passports
   publication_type: paper
   type: Whitepaper · World map and knowledge graph

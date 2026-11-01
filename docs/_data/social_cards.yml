@@ -1,3 +1,44 @@
+- publication_url: /europes-answer-to-palantir.html
+  output: /assets/preview-europes-answer-to-palantir.webp
+  style: research-grid-v1
+  mode: generated
+  format_label: TWO PAPERS + INTERACTIVE EVIDENCE GRAPH
+  title_size: 46
+  title_lines:
+    - Europe’s answer
+    - to Palantir
+  subtitle_size: 25
+  subtitle_lines:
+    - A globally collaborative model
+  deck_lines:
+    - Open standards. Shared meaning.
+    - Participant-controlled industrial AI.
+  byline: Dr. Carsten Stöcker, Spherity GmbH
+  visual: /assets/europes-answer-to-palantir/v1.0/executive-cover.jpg
+  visual_fit: contain
+- publication_url: /global-cooperation-sovereign-industrial-ai.html
+  output: /assets/preview-global-cooperation-industrial-ai.webp
+  style: research-grid-v1
+  mode: generated
+  format_label: ACADEMIC PAPER · VERSION 1.0
+  title_size: 43
+  title_lines:
+    - Sovereign
+    - Industrial AI
+  subtitle_size: 25
+  subtitle_lines:
+    - A global cooperation model
+  deck_lines:
+    - European dataspaces, open standards
+    - and verifiable evidence.
+  byline: Dr. Carsten Stöcker, Spherity GmbH
+  visual: /assets/europes-answer-to-palantir/v1.0/academic-cover.jpg
+  visual_fit: contain
+  topics:
+    - Industrial AI
+    - Evidence graphs
+    - Open standards
+
 - publication_url: /dpp-explorer/
   page_type: website
   output: /assets/social/global-dpp-atlas.jpg

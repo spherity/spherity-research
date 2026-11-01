@@ -7,6 +7,7 @@ import { parse as parseYaml } from "yaml";
 import { embedImageXmp } from "./lib/image-metadata.mjs";
 import { dppPaperPath, loadDppImageMetadata } from "./lib/dpp-image-metadata.mjs";
 import { ebwPaperPath, loadEbwImageMetadata } from "./lib/ebw-image-metadata.mjs";
+import { palantirPages, loadPalantirImageMetadata } from "./lib/palantir-image-metadata.mjs";
 
 const projectDirectory = process.cwd();
 const sourceDirectory = path.join(projectDirectory, "docs");
@@ -17,7 +18,8 @@ const manifest = parseYaml(await readFile(manifestPath, "utf8"));
 const dppImageMetadata = manifest.some(card => card.publication_url === dppPaperPath)
   ? await loadDppImageMetadata(sourceDirectory) : {};
 const imageMetadata = {...dppImageMetadata, ...(manifest.some(card => card.publication_url === ebwPaperPath)
-  ? await loadEbwImageMetadata(sourceDirectory) : {})};
+  ? await loadEbwImageMetadata(sourceDirectory) : {}), ...(manifest.some(card => palantirPages.includes(card.publication_url))
+  ? await loadPalantirImageMetadata(sourceDirectory) : {})};
 const publications = parseYaml(await readFile(publicationsPath, "utf8"));
 const publicationsByUrl = new Map(
   publications.map((publication) => [publication.links?.[0]?.url, publication])
