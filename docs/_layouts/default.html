@@ -159,7 +159,7 @@
   {% if page.page_end %}
   <meta name="citation_lastpage" content="{{ page.page_end | escape }}">
   {% endif %}
-  <meta name="citation_abstract" content="{{ page.answer_summary | default: page_description | escape }}">
+  <meta name="citation_abstract" content="{{ page.abstract | default: page.answer_summary | default: page_description | escape }}">
   <meta name="citation_language" content="{{ page.lang | default: 'en' | escape }}">
   {% if page_keywords %}
   <meta name="citation_keywords" content="{{ page_keywords | join: '; ' | escape }}">
@@ -473,7 +473,7 @@
         "@value": {{ page.abstract_zh | jsonify }},
         "@language": "zh-Hans"
       }{% endif %}
-    ],{% else %}"abstract": {{ page.answer_summary | default: page_description | jsonify }},{% endif %}
+    ],{% else %}"abstract": {{ page.abstract | default: page.answer_summary | default: page_description | jsonify }},{% endif %}
     "image": {
       "@type": "ImageObject",
       "url": {{ image_url | jsonify }},

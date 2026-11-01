@@ -35,4 +35,9 @@ test('rendered topic has crawlable fallbacks, separate work encodings and no mix
  assert.doesNotMatch(html,/Do not add a live|Preserve that method limit|C:\\Users|openai:set_globals/);
  for(const n of model.nodes)assert.ok(html.includes('id="record-'+n.id+'"'));
  const academic=fs.readFileSync('_site/global-cooperation-sovereign-industrial-ai.html','utf8');assert.equal([...academic.matchAll(/name="citation_title"/g)].length,1);assert.match(academic,/name="citation_author" content="Carsten Stöcker"/);
+ const academicData=page('global-cooperation-sovereign-industrial-ai');
+ const academicSchemas=[...academic.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m=>JSON.parse(m[1]));
+ assert.equal(academicSchemas.find(s=>s['@type']==='ScholarlyArticle').abstract,academicData.abstract);
+ assert.ok(academicData.abstract.length>academicData.answer_summary.length*3);
+ assert.match(academic,/Accelerated investment should fund redesign and testing/);
 });
