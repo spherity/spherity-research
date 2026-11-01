@@ -5,6 +5,7 @@ import process from "node:process";
 import { glob } from "glob";
 import { parse as parseYaml } from "yaml";
 import { loadPdfShares, publicUrl } from "./lib/pdf-sharing.mjs";
+import { loadSitemapDownloads } from "./lib/sitemap-images.mjs";
 import { verifyAtlasPublication } from "../dpp-explorer/scripts/publication-release.mjs";
 
 const getArgument = (name, fallback) => {
@@ -2377,7 +2378,8 @@ if (await exists(path.join(siteDirectory, "sitemap.xml"))) {
     }
   }
 
-  const expectedSitemapUrls = new Set();
+  const sitemapDownloads = await loadSitemapDownloads(sourceDirectory, siteDirectory);
+  const expectedSitemapUrls = new Set([...sitemapDownloads.keys()].map(asset => canonicalOrigin + asset));
   const sitemapFiles = await glob("**/*.{html,pdf}", {
     cwd: siteDirectory,
     nodir: true,
@@ -2386,7 +2388,7 @@ if (await exists(path.join(siteDirectory, "sitemap.xml"))) {
   });
   for (const sitemapFile of sitemapFiles) {
     const normalizedFile = sitemapFile.split(path.sep).join("/");
-    if (figureDownloads.has(`/${normalizedFile}`) || placeholderDownloads.has(`/${normalizedFile}`)) continue;
+    if ((figureDownloads.has(`/${normalizedFile}`) && !sitemapDownloads.has(`/${normalizedFile}`)) || placeholderDownloads.has(`/${normalizedFile}`)) continue;
     let expectedUrl = `${canonicalOrigin}/${normalizedFile}`;
     if (normalizedFile === "index.html") expectedUrl = `${canonicalOrigin}/`;
     if (normalizedFile.endsWith("/index.html")) {

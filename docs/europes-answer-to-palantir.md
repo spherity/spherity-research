@@ -70,6 +70,7 @@ figure_objects:
   - id: figure-01
     name: Ontology engines across ecosystems
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig01_ontology_engine_ecosystems.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig01_ontology_engine_ecosystems.png
     alt: Platform-governed ontology capability compared with independently governed participants connected through shared meaning, discovery, trust and scoped exchange.
     width: 1920
     height: 1080
@@ -102,6 +103,7 @@ figure_objects:
   - id: figure-02
     name: "P1: operational ontology platform architecture"
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig02_platform_architecture.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig02_platform_architecture.png
     alt: Twelve functional responsibilities connect source preparation, ontology model, graph builder, runtime, AI and controlled actions within a logical platform governance scope.
     width: 1920
     height: 1080
@@ -134,6 +136,7 @@ figure_objects:
   - id: figure-03
     name: "P2: participant-controlled cooperation architecture"
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig03_federated_architecture.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig03_federated_architecture.png
     alt: Manufacturer, supplier and laboratory each connect local ontology capabilities to shared meaning, discovery and trust, with scoped exchanges through participant gateways.
     width: 1920
     height: 1080
@@ -166,6 +169,7 @@ figure_objects:
   - id: figure-04
     name: Control, dependence and provider substitution
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig04_control_and_dependencies.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig04_control_and_dependencies.png
     alt: Comparison of operational control and dependency dimensions in platform integration and proposed cooperation across independent implementations.
     width: 1920
     height: 1080
@@ -198,6 +202,7 @@ figure_objects:
   - id: figure-05
     name: From evidence admission to bounded assurance
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig05_evidence_and_assurance.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig05_evidence_and_assurance.png
     alt: An assertion passes interpretation, authority, status and permitted-use checks before supporting an assurance argument; action authorization remains separate.
     width: 1920
     height: 1080
@@ -230,6 +235,7 @@ figure_objects:
   - id: figure-06
     name: "Humanoid H-01: evidence across company boundaries"
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_graph.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_graph.png
     alt: Fictional robot configuration links supplier, laboratory, manufacturer and operator records; withdrawal of report TR42 highlights dependent claims requiring reassessment.
     width: 2400
     height: 1350
@@ -267,6 +273,7 @@ figure_objects:
   - id: figure-07
     name: One evidence foundation, separate assessment views
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_actions.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_actions.png
     alt: Seven distinct assessment lenses reuse selected evidence through permitted retrieval, verification, interpretation, explanation and locally authorized action.
     width: 2400
     height: 1350
@@ -304,6 +311,7 @@ figure_objects:
   - id: figure-08
     name: Global cooperation architecture
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig06_global_cooperation.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig06_global_cooperation.png
     alt: Proposed European, US and Asia-Pacific cooperation through shared exchange contracts while regional participants retain authority and jurisdictional responsibilities.
     width: 1920
     height: 1080
@@ -336,6 +344,7 @@ figure_objects:
   - id: figure-09
     name: Matched decision journey and proposed evaluation
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig07_matched_decision_journey.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig07_matched_decision_journey.png
     alt: Both architecture patterns follow corresponding discovery, authorization, verification, decision, action and update steps in a proposed synthetic experiment.
     width: 1920
     height: 1080
@@ -368,6 +377,7 @@ figure_objects:
   - id: figure-10
     name: From local files to cross-company meaning
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig01_shared_meaning_comparison.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig01_shared_meaning_comparison.png
     alt: Both patterns ingest varied data formats; each ecosystem participant processes its own files before controlled exchange and composition of a permitted cross-company graph view.
     width: 2400
     height: 1350
@@ -400,6 +410,7 @@ figure_objects:
   - id: figure-11
     name: A valve-release decision explained
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig02_evidence_to_decision.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig02_evidence_to_decision.png
     alt: Illustrative valve records connect to a measurement, source and acceptance rule; evidence and policy checks support an accountable decision rather than automatic approval.
     width: 1920
     height: 1080
@@ -432,6 +443,7 @@ figure_objects:
   - id: figure-12
     name: A collaborative global offer
     content_url: /assets/europes-answer-to-palantir/v1.0/figures/fig03_global_cooperation.svg
+    raster_url: /assets/europes-answer-to-palantir/v1.0/figures/fig03_global_cooperation.png
     alt: Europe and international partners contribute standards and interoperability profiles while participants retain authority; connecting lines represent a proposed cooperation model.
     width: 1920
     height: 1080
@@ -654,6 +666,26 @@ og_title: Europe’s answer to Palantir
 og_description: "Explore Europe’s open-standards answer to platform dependence: two research papers, architecture figures and an interactive industrial AI evidence graph."
 author_affiliations:
   - Dr. Carsten Stöcker — Spherity GmbH
+image_sitemap: true
+sitemap_downloads:
+  - /European_Industrial_AI_Executive_Brief_v1.0.pdf
+  - /Industrial_AI_Academic_Paper_v1.0.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig01_ontology_engine_ecosystems.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig02_platform_architecture.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig03_federated_architecture.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig04_control_and_dependencies.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig05_evidence_and_assurance.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_graph.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_actions.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig06_global_cooperation.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig07_matched_decision_journey.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig01_shared_meaning_comparison.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig02_evidence_to_decision.pdf
+  - /assets/europes-answer-to-palantir/v1.0/figures/fig03_global_cooperation.pdf
+  - /assets/europes-answer-to-palantir/graph-v0.1/graph-model.json
+sitemap_images:
+  - /assets/pdf-share/European_Industrial_AI_Executive_Brief_v1.0.jpg
+  - /assets/pdf-share/Industrial_AI_Academic_Paper_v1.0.jpg
 ---
 
 <link rel="stylesheet" href="{{ '/assets/europes-answer-to-palantir/graph-v0.1/explorer.css' | relative_url }}">
@@ -747,7 +779,7 @@ author_affiliations:
 <h2 id="global-cooperation">Europe as a global convener</h2>
 <p>Europe can turn its experience in industrial dataspaces into a globally collaborative offer. The next step is shared implementation profiles, joint testing and accountable recognition arrangements with international partners. W3C work, UNECE traceability initiatives, US innovation and Asia-Pacific programmes provide relevant cooperation channels. Technical interoperability, accepted issuer authority and legal recognition are separate achievements; a technical connection does not establish all three.</p>
 <h2 id="figure-library">Figure library: 12 originals, 14 paper placements</h2>
-<p>All original SVG, vector PDF and PNG files are preserved. The two robot figures appear in both papers and have one public copy each. Open a full-size diagram to inspect small labels.</p><nav class="palantir-gallery-nav" aria-label="Figure library"><a href="#figure-01-figure">01 Ontology engines across ecosystems</a><a href="#figure-02-figure">02 P1: operational ontology platform architecture</a><a href="#figure-03-figure">03 P2: participant-controlled cooperation architecture</a><a href="#figure-04-figure">04 Control, dependence and provider substitution</a><a href="#figure-05-figure">05 From evidence admission to bounded assurance</a><a href="#figure-06-figure">06 Humanoid H-01: evidence across company boundaries</a><a href="#figure-07-figure">07 One evidence foundation, separate assessment views</a><a href="#figure-08-figure">08 Global cooperation architecture</a><a href="#figure-09-figure">09 Matched decision journey and proposed evaluation</a><a href="#figure-10-figure">10 From local files to cross-company meaning</a><a href="#figure-11-figure">11 A valve-release decision explained</a><a href="#figure-12-figure">12 A collaborative global offer</a></nav>
+<p>All 12 figures are available as SVG, vector PDF and PNG. The downloads include descriptive and licensing metadata; the artwork is unchanged. The two robot figures appear in both papers and have one public copy each. Open a full-size diagram to inspect small labels.</p><nav class="palantir-gallery-nav" aria-label="Figure library"><a href="#figure-01-figure">01 Ontology engines across ecosystems</a><a href="#figure-02-figure">02 P1: operational ontology platform architecture</a><a href="#figure-03-figure">03 P2: participant-controlled cooperation architecture</a><a href="#figure-04-figure">04 Control, dependence and provider substitution</a><a href="#figure-05-figure">05 From evidence admission to bounded assurance</a><a href="#figure-06-figure">06 Humanoid H-01: evidence across company boundaries</a><a href="#figure-07-figure">07 One evidence foundation, separate assessment views</a><a href="#figure-08-figure">08 Global cooperation architecture</a><a href="#figure-09-figure">09 Matched decision journey and proposed evaluation</a><a href="#figure-10-figure">10 From local files to cross-company meaning</a><a href="#figure-11-figure">11 A valve-release decision explained</a><a href="#figure-12-figure">12 A collaborative global offer</a></nav>
 {% assign topic_figure = page.figure_objects[6] %}
 {% include research-figure.html figure=topic_figure %}
 <p class="palantir-figure-links">Academic Figure 7, PDF page 25 · Executive Brief Figure 4, PDF page 10<br><a href="{{ '/assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_actions.svg' | relative_url }}">SVG</a> <a href="{{ '/assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_actions.pdf' | relative_url }}">PDF</a> <a href="{{ '/assets/europes-answer-to-palantir/v1.0/figures/fig_robot_evidence_actions.png' | relative_url }}">PNG</a></p>

@@ -5,6 +5,7 @@ import { loadPdfShares, publicUrl } from "./lib/pdf-sharing.mjs";
 import { embedImageXmp } from "./lib/image-metadata.mjs";
 import { dppPaperPath, loadDppImageMetadata } from "./lib/dpp-image-metadata.mjs";
 import { ebwPaperPath, loadEbwImageMetadata } from "./lib/ebw-image-metadata.mjs";
+import { palantirPages, loadPalantirImageMetadata } from "./lib/palantir-image-metadata.mjs";
 
 const option = (key, fallback) => {
   const index = process.argv.indexOf(key);
@@ -16,7 +17,8 @@ const { config, records } = await loadPdfShares(sourceDirectory);
 const dppImageMetadata = records.some(record => record.pagePath === dppPaperPath)
   ? await loadDppImageMetadata(sourceDirectory) : {};
 const imageMetadata = {...dppImageMetadata, ...(records.some(record => record.pagePath === ebwPaperPath)
-  ? await loadEbwImageMetadata(sourceDirectory) : {})};
+  ? await loadEbwImageMetadata(sourceDirectory) : {}), ...(records.some(record => palantirPages.includes(record.pagePath))
+  ? await loadPalantirImageMetadata(sourceDirectory) : {})};
 const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;")
   .replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 const relativeUrl = (value) => `${config.baseurl || ""}${value.split("/").map(encodeURIComponent).join("/")}`;

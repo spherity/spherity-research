@@ -287,6 +287,7 @@ abstract: >-
   remain outcomes to demonstrate together. Accelerated investment should fund
   redesign and testing where needed, rather than assume that existing dataspace
   implementations already satisfy AI-first requirements.
+image_sitemap: true
 ---
 
 <h2 id="abstract">Complete abstract</h2>

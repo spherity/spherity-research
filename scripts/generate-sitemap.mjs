@@ -3,7 +3,7 @@ import path from "node:path";
 import process from "node:process";
 import { glob } from "glob";
 import { loadPdfShares } from "./lib/pdf-sharing.mjs";
-import { loadSitemapImages } from "./lib/sitemap-images.mjs";
+import { loadSitemapImages, loadSitemapDownloads } from "./lib/sitemap-images.mjs";
 
 const DEFAULT_SITE_URL = "https://spherity.github.io/spherity-research";
 
@@ -115,11 +115,16 @@ for (const file of files.filter((candidate) => candidate.toLowerCase().endsWith(
   if (metadata.pdfUrl) lastModifiedByUrl.set(metadata.pdfUrl, date.slice(0, 10));
 }
 
-// Registered figure PDFs and draft placeholders are not paper destinations for indexing.
+// Figure PDFs remain excluded unless the publication explicitly opts them in.
 const { figureDownloads, placeholderDownloads } = await loadPdfShares(getArgument("--source-dir", "docs"));
+const extraDownloads = await loadSitemapDownloads(getArgument("--source-dir", "docs"), siteDirectory);
+for (const [asset, modified] of extraDownloads) {
+  if (!files.some(file => toPublicPath(file) === asset)) files.push(asset.slice(1));
+  lastModifiedByUrl.set(`${siteUrl}${encodePublicPath(asset)}`, modified);
+}
 const entriesByLocation = new Map();
 for (const file of files) {
-  if (figureDownloads.has(toPublicPath(file)) || placeholderDownloads.has(toPublicPath(file))) continue;
+  if ((figureDownloads.has(toPublicPath(file)) && !extraDownloads.has(toPublicPath(file))) || placeholderDownloads.has(toPublicPath(file))) continue;
   const pathname = encodePublicPath(toPublicPath(file));
   const htmlMetadata = htmlMetadataByFile.get(file);
   if (htmlMetadata && /(?:^|,)\s*noindex\b/i.test(htmlMetadata.robots)) continue;
@@ -172,5 +177,5 @@ await writeFile(path.join(siteDirectory, "sitemap.xml"), sitemap, "utf8");
 const htmlCount = entries.filter(({ file }) => file.toLowerCase().endsWith(".html")).length;
 const pdfCount = entries.filter(({ file }) => file.toLowerCase().endsWith(".pdf")).length;
 console.log(
-  `Generated sitemap.xml with ${entries.length} canonical URLs (${htmlCount} HTML pages and ${pdfCount} PDFs).`
+  `Generated sitemap.xml with ${entries.length} canonical URLs (${htmlCount} HTML pages, ${pdfCount} PDFs and ${entries.length-htmlCount-pdfCount} research data downloads).`
 );
