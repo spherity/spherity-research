@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {parse} from 'yaml';
-import {decodeHTML} from 'entities';
 import sharp from 'sharp';
 
 const slug='top-10-global-ai-safety-companies-2026';
@@ -14,6 +13,8 @@ const schemas=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)
 const reference='research-assets/global-ai-safety/reference/';
 const bibliography=fs.readFileSync(reference+'references.tex','utf8');
 const keys=[...bibliography.matchAll(/\\bibitem\{([^}]+)\}/g)].map(m=>m[1]);
+const entityChars={amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' ',ndash:'–',mdash:'—',lsquo:'‘',rsquo:'’',ldquo:'“',rdquo:'”',hellip:'…',bull:'•',copy:'©'};
+const decodeHTML=s=>s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi,(m,key)=>key[0]==='#'?String.fromCodePoint(key[1].toLowerCase()==='x'?parseInt(key.slice(2),16):Number(key.slice(1))):entityChars[key]??m);
 const plain=s=>decodeHTML(s.replace(/<[^>]*>/g,' ')).replace(/[“”]/g,'"').replace(/[‘’]/g,"'").replace(/\s+/g,' ').trim();
 
 test('the unchanged 24-page edition, 98 reference identities and published citation order are preserved',()=>{
