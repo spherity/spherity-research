@@ -40,7 +40,7 @@ figure_objects:
     width: 1280
     height: 640
     description: "The AI agent sits between the measurement and the receiver; everything that would let the receiver judge the result stays inside the lab, and only the verdict travels."
-    caption: "Framing the problem. Today the verifier receives a verdict with a share and a confidence value and has to trust the portal that shows it. To trust the result itself, the verifier must be able to answer six questions about the agent: who is accountable, which agent and model, which set-up, which input, which device, which object, and whether all of that is still valid. None of them has a verifiable answer in today's result."
+    caption: "Framing the problem. In the flow as sketched today, the verifier receives a verdict with a share and a confidence value and has to trust the portal that shows it. To trust the result itself, the verifier must be able to answer six questions about the agent: who is accountable, which agent and model, which set-up, which input, which device, which object, and whether all of that is still valid. None of them has a verifiable answer in today's result."
     credit_text: "Carsten Stöcker / Spherity GmbH"
     copyright_notice: "© 2026 Carsten Stöcker, Spherity GmbH"
     license: "https://creativecommons.org/licenses/by/4.0/"
@@ -210,6 +210,7 @@ citations:
   - "https://www.w3.org/TR/vc-data-model-2.0/"
   - "https://www.w3.org/TR/vc-recognized-entities-1.0/"
   - "https://doi.org/10.1109/VTC2021-Spring51267.2021.9448697"
+  - "https://eur-lex.europa.eu/eli/dir/2025/25/oj"
   - "https://www.qi-digital.de/"
   - "https://netzwerke.bam.de/Netzwerke/Navigation/DE/Netzwerke/QI-Digital/qi-digital.html"
 audiences:
@@ -334,17 +335,17 @@ Laboratory measurements no longer end at the instrument. A raw signal goes to a 
 
 A measurement used to end at the instrument: a spectrum, a chromatogram, an image, read by a trained person who signed a report. Today the instrument is the first step of a pipeline. The raw signal goes to a backend, a model compares it with reference databases, software classifies, quantifies or labels, and a portal delivers the result to someone who was never in the lab. This is the same in materials testing, food and pharma quality control, environmental monitoring, medical diagnostics, recycling sorting and vehicle data analysis.
 
-Four forces drive the trend. **Throughput and cost:** models evaluate in seconds what a specialist did in minutes, and handheld or inline sensors move the measurement from the lab to the field. **Reference data:** spectral and marker libraries grow with every scan, so the model becomes better than any single analyst at recognising a fingerprint. **Demand for machine-readable evidence:** product passports, recycled-content declarations, customs and conformity procedures want results as data, not as PDFs. **Digital quality infrastructure:** calibration certificates, test reports and accreditation symbols are being digitised in initiatives such as QI-Digital, so the surrounding assurance can be checked by software too [7][8].
+Four forces drive the trend. **Throughput and cost:** models can evaluate in seconds what a specialist did in minutes, and handheld or inline sensors move the measurement from the lab to the field. **Reference data:** spectral and marker libraries grow with every scan, so a model can become better than any single analyst at recognising a fingerprint. **Demand for machine-readable evidence:** product passports, recycled-content declarations, customs and conformity procedures want results as data, not as PDFs. **Digital quality infrastructure:** calibration certificates, test reports and accreditation symbols are being digitised in initiatives such as QI-Digital, so the surrounding assurance can be checked by software too [7][8].
 
 The trend creates a trust gap. A human-signed report carried its own accountability: a named person, an accredited lab, a calibrated instrument. An AI result arrives as a verdict with a confidence value. The receiver cannot tell which model produced it, on which input, from which device, under whose authority, and whether any of that was still valid at the time. The further the result travels, the larger the gap.
 
 <h2 id="common-pattern">2. One pattern, many labs</h2>
 
-The Tailorlux flow is a textbook instance of this pattern. Tailorlux marks materials with Tailor-Safe luminescent pigments; a Tailor-Scan handheld reads the VIS/NIR spectrum; the device backend evaluates it with AI against NIR reference and marker databases; a verification portal returns a verdict to the user. Replace the nouns and you have a food lab, a metals lab or a vehicle data chain. Whatever closes the trust gap for this flow closes it for the others.
+The Tailorlux flow is a textbook instance of this pattern. Tailorlux marks materials with Tailor-Safe luminescent pigments and a Tailor-Scan handheld reads the VIS/NIR spectrum; in the set-up considered here, a backend evaluates the spectrum with AI against NIR reference and marker databases and a verification portal returns a verdict to the user. Tailorlux publicly describes on-device checks against a stored verification rule; the backend and portal are taken from the set-up discussed for this note. Replace the nouns and you have a food lab, a metals lab or a vehicle data chain. Whatever closes the trust gap for this flow closes it for the others.
 
 <aside class="evidence-callout" aria-label="Scope of this note">
 <h3>Concept only</h3>
-<p>Everything on this page about Tailorlux is a design proposal for discussion. It is not a description of a Tailorlux product, process or commitment, and no identifier, certificate or partner relationship shown here exists. TÜV SÜD and Bundesanzeiger Verlag appear as examples of the roles a conformity assessment body and a company register play.</p>
+<p>Everything on this page about Tailorlux is a design proposal for discussion. It is not a description of a Tailorlux product, process or commitment, and no identifier, certificate or partner relationship shown here exists. TÜV SÜD and Bundesanzeiger Verlag appear as examples of the roles a conformity assessment body and a company register play. TÜV SÜD today certifies AI management systems under ISO/IEC 42001; a credential that assesses a specific model version, as drawn here, is a role assumed for the concept.</p>
 </aside>
 
 <h2 id="use-case-and-requirements">3. Use case and requirements</h2>
@@ -360,7 +361,7 @@ The Tailorlux flow is a textbook instance of this pattern. Tailorlux marks mater
 
 **Requirements.**
 
-1. Issuer identity rooted in a public register: an EU Company Certificate (EUCC) issued by the register operator, here Bundesanzeiger Verlag.
+1. Issuer identity rooted in a public register: an EU Company Certificate (EUCC, introduced by Directive (EU) 2025/25, applicable from 2028; not to be confused with the EU cybersecurity certification scheme of the same acronym). The EUCC is issued by a qualified trust service provider or a government entity; in this design Bundesanzeiger Verlag, operator of the German Unternehmensregister, takes that role.
 2. Verifiable authority for the AI agent: an identity (Agent Card) and a bounded task mandate (Task Authorization).
 3. Reproducibility: task, set-up, object, reader and input pinned in the result.
 4. Independent assurance of reader and AI system by a conformity assessment body.
@@ -393,7 +394,7 @@ None of the steps requires the previous architecture to change. Each step adds o
 3. **Name the agent and bound its task.** The lab issues an Agent Card for the evaluation service and a Task Authorization per job or per customer. The result now says under whose authority it was produced and for what scope.
 4. **Root the issuer in a register.** The lab obtains a register-backed legal-person identity (an EUCC once available, a register-linked DID until then) and signs certificates with it. A receiver can resolve the legal person without trusting a web page.
 5. **Add independent assurance.** A conformity assessment body certifies the reader type and the AI evaluation system; the certificates are referenced from the reader and set-up assertions. Calibration moves to a Digital Calibration Certificate [8].
-6. **Publish the schemas and a verifier.** Credential schemas, a public verification page and a stapled recognition chain for offline checks. From here on the certificate can be dropped into a product passport or a customs file as evidence.
+6. **Publish the schemas and a verifier.** Credential schemas, a public verification page and a stapled recognition chain for offline checks: the issuer attaches the recognition credentials up to the trust anchor to the certificate itself, so a verifier can validate the chain without network access. From here on the certificate can be dropped into a product passport or a customs file as evidence.
 
 Steps 1 and 2 need no external party. Steps 3 and 4 are mostly governance decisions. Steps 5 and 6 depend on partners and standards timelines.
 
@@ -477,4 +478,5 @@ Three properties make the pattern harder than the material-verification flow, an
 7. QI-Digital (BAM, PTB, DAkkS, DIN, DKE). *Qualitätsinfrastruktur Digital.* <https://www.qi-digital.de/> and the [BAM network page on QI-Digital](https://netzwerke.bam.de/Netzwerke/Navigation/DE/Netzwerke/QI-Digital/qi-digital.html).
 8. PTB. *Digital Calibration Certificate (DCC)* and *Digital Certificate of Conformity (D-CoC)* within QI-Digital. [PTB project group on the digitalisation of the quality infrastructure](https://www.ptb.de/cms/ptb/fachabteilungen/abt9/fb-94/qi-digital.html).
 9. W3C. *Verifiable Credentials Data Model v2.0.* <https://www.w3.org/TR/vc-data-model-2.0/>
-10. Spherity Research, open-access library. <https://spherity.github.io/spherity-research/>
+10. Directive (EU) 2025/25 of 19 December 2024 as regards the further expansion and upgrading of the use of digital tools and processes in company law (EU Company Certificate). <https://eur-lex.europa.eu/eli/dir/2025/25/oj>
+11. Spherity Research, open-access library. <https://spherity.github.io/spherity-research/>

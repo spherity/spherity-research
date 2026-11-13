@@ -78,7 +78,7 @@
           <text font-size="11" fill="#526273" x="1310" y="196" text-anchor="middle">EU Company Certificate · HRB …</text></g>
         <g><rect fill="#EEF4FA" stroke="#183B63" stroke-width="1.2" stroke-dasharray="5 3" x="1200" y="240" width="220" height="70" rx="12"/>
           <text font-size="12.5" font-weight="700" fill="#172536" x="1310" y="262" text-anchor="middle">Bundesanzeiger Verlag</text>
-          <text font-size="11" fill="#526273" x="1310" y="280" text-anchor="middle">register operator</text>
+          <text font-size="11" fill="#526273" x="1310" y="280" text-anchor="middle">EUCC issuer · QTSP or government entity</text>
           <text font-size="11" fill="#526273" x="1310" y="296" text-anchor="middle">trust anchor for legal persons</text></g>
         <g><rect fill="#EEF4FA" stroke="#183B63" stroke-width="1.2" stroke-dasharray="5 3" x="1200" y="340" width="220" height="70" rx="12"/>
           <text font-size="12.5" font-weight="700" fill="#172536" x="1310" y="362" text-anchor="middle">TÜV SÜD</text>
