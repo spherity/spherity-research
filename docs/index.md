@@ -1,4 +1,5 @@
 ---
+extra_css: ["/assets/case-studies.css"]
 layout: default
 title: "Spherity Research"
 description: "Open-access Spherity research by Dr. Carsten Stöcker on DPPs, DBPs, European Business Wallets, Industrial and Trusted AI, data sharing, and resilient trust."
@@ -163,6 +164,7 @@ image_height: 630
     <nav aria-label="Primary navigation">
       <a class="nav-cta contact-spherity" href="https://www.spherity.com/contact" rel="external">Contact Spherity <span aria-hidden="true">↗</span></a>
       <a href="#publications">Publications</a>
+      <a href="{{ "/case-studies/" | relative_url }}">Case studies</a>
       <a href="#research-scope">Research scope</a>
       <a href="#faq">FAQ</a>
       <a href="https://www.spherity.com/" rel="external">Spherity.com <span aria-hidden="true">↗</span></a>
@@ -186,6 +188,7 @@ image_height: 630
         </p>
         <div class="hero-actions">
           <a class="button button-primary" href="#publications">Explore publications <span aria-hidden="true">↓</span></a>
+          <a class="button button-ghost" href="{{ '/case-studies/' | relative_url }}">Explore case studies <span aria-hidden="true">→</span></a>
           <a class="button button-ghost" href="https://github.com/spherity/spherity-research">View source on GitHub <span aria-hidden="true">↗</span></a>
           <a class="button button-contact" href="https://www.spherity.com/contact" rel="external">Contact Spherity <span aria-hidden="true">↗</span></a>
           {% include share.html id="homepage-share" title=page.title text=page.description url=page.url %}
@@ -239,6 +242,13 @@ image_height: 630
   </section>
 
   {% include publication-library.html %}
+
+  <section class="portal-shell case-home-teaser" aria-labelledby="case-study-heading">
+    <p class="eyebrow eyebrow-dark"><span></span>Case studies</p>
+    <h2 id="case-study-heading">See how the research could work in practice.</h2>
+    <p>Explore concrete scenarios, proposed architectures and the evidence needed to test them. Start with verifiable AI lab results: from a scan to an accountable certificate.</p>
+    <a href="{{ "/case-studies/" | relative_url }}">Explore case studies →</a>
+  </section>
 
   <section class="market-position-spotlight portal-shell" aria-labelledby="market-position-title">
     <div class="market-position-heading">

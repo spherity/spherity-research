@@ -1,0 +1,33 @@
+---
+layout: default
+---
+<header class="case-nav">
+  <a href="{{ '/' | relative_url }}" aria-label="Spherity Research home"><img src="{{ '/assets/spherity-logo-horizontal-800.webp' | relative_url }}" alt="Spherity" width="170" height="51"></a>
+  <nav aria-label="Primary navigation"><a href="{{ '/' | relative_url }}#publications">Publications</a><a href="{{ '/case-studies/' | relative_url }}" aria-current="page">Case studies</a><a href="https://www.spherity.com/contact">Contact Spherity ↗</a></nav>
+</header>
+<main id="main-content" class="case-hub">
+  <nav class="case-breadcrumb" aria-label="Breadcrumb"><a href="{{ '/' | relative_url }}">Research</a><span aria-hidden="true"> / </span><span aria-current="page">Case studies</span></nav>
+  <section class="case-hero" aria-labelledby="case-title">
+    <p class="case-eyebrow">Spherity Research · Applied thinking</p>
+    <h1 id="case-title">From a real-world question<br> to a testable architecture.</h1>
+    <div class="case-intro">{{ content }}</div>
+    <a class="case-button" href="#case-library">Explore the case studies <span aria-hidden="true">↓</span></a>
+  </section>
+  <section id="case-library" aria-labelledby="case-library-title">
+    <div class="case-section-head"><h2 id="case-library-title">Case studies</h2><p>{{ site.data.case_studies | size }} case study · Open access</p></div>
+    {% for case in site.data.case_studies %}
+    <article class="case-card">
+      <a class="case-card-image" href="{{ case.url | relative_url }}" tabindex="-1" aria-hidden="true"><img src="{{ case.image | relative_url }}" alt="" width="1200" height="630" loading="lazy"></a>
+      <div class="case-card-copy"><p class="case-eyebrow">{{ case.status | escape }} · {{ case.sector | escape }}</p>
+        <h3><a href="{{ case.url | relative_url }}">{{ case.title | escape }}</a></h3>
+        <p>{{ case.summary | escape }}</p>
+        <p class="case-learning"><strong>What you can learn</strong><br>{{ case.learning | escape }}</p>
+        <ul class="case-tags" aria-label="Topics">{% for topic in case.topics %}<li>{{ topic | escape }}</li>{% endfor %}</ul>
+        <a class="case-button" href="{{ case.url | relative_url }}">Read the case study <span aria-hidden="true">→</span></a>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+  <section class="case-evidence" aria-labelledby="case-evidence-title"><h2 id="case-evidence-title">Read the evidence level first.</h2><p>A <strong>conceptual case study</strong> works through a proposed design. A <strong>pilot</strong> reports a bounded implementation and its test evidence. A <strong>deployment case study</strong> reports operational experience, with its scope and measurement period. The current case is conceptual: it reports no deployment or measured outcomes.</p><p>Research papers develop the broader argument. Case studies show how that argument could be applied, where it might fail and what remains to be demonstrated.</p><a href="{{ '/' | relative_url }}#publications">Browse the research papers →</a></section>
+  <footer class="case-footer" id="content-license"><p>© 2026 Spherity GmbH. Original research content is available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Spherity names and logos and referenced third-party material retain their own terms.</p></footer>
+</main>

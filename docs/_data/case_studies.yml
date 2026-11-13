@@ -1,0 +1,11 @@
+- id: verifiable-ai-lab-results
+  title: "Verifiable AI Lab Results: From Scan to Certificate"
+  url: /case-studies/verifiable-ai-lab-results.html
+  status: Conceptual case study
+  sector: Laboratories and material verification
+  summary: "How can a receiver check the model, input, device and authority behind an AI verdict? A proposed evidence graph connects the result to the credentials that support it."
+  learning: "Separate proof of provenance and authority from proof that a scientific conclusion is correct."
+  image: /assets/preview-verifiable-ai-lab-results.webp
+  image_alt: "Verifiable AI Lab Results — from scan to certificate"
+  date: "2026-11-13"
+  topics: [Verifiable credentials, Trusted AI, Evidence graphs]

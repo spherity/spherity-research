@@ -171,7 +171,9 @@
   {% endif %}
   {% endif %}
 
-  {% if page.schema_type == "CollectionPage" %}
+  {% if page.case_study_collection %}
+  {% include case-study-collection-metadata.html %}
+  {% elsif page.schema_type == "CollectionPage" %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -634,6 +636,7 @@
         "name": "Spherity Research",
         "item": "{{ '/' | absolute_url }}"
       },
+      {% if page.publication_type == "case-study" %}{"@type": "ListItem", "position": 2, "name": "Case studies", "item": "{{ "/case-studies/" | absolute_url }}"},{% endif %}
       {% if page.series_position and page.series_position > 0 %}{
         "@type": "ListItem",
         "position": 2,
@@ -642,7 +645,7 @@
       },{% endif %}
       {
         "@type": "ListItem",
-        "position": {% if page.series_position and page.series_position > 0 %}3{% else %}2{% endif %},
+        "position": {% if page.publication_type == "case-study" %}3{% elsif page.series_position and page.series_position > 0 %}3{% else %}2{% endif %},
         "name": {{ page_title | jsonify }},
         "item": "{{ canonical_url | escape }}"
       }
