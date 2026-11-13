@@ -503,3 +503,23 @@
     - "for Germany and Europe."
   byline: "Dr. Carsten Stöcker · Spherity GmbH"
   visual_type: "risk-orbits"
+
+- publication_url: /verifiable-ai-lab-results-evidence-graph.html
+  output: /assets/preview-verifiable-ai-lab-results.webp
+  style: research-grid-v1
+  mode: generated
+  format_label: CONCEPT NOTE · VERIFIABLE AI RESULTS
+  title_size: 44
+  title_lines:
+    - Verifiable AI
+    - Lab Results
+  subtitle_size: 25
+  subtitle_lines:
+    - From scan to certificate
+  deck_lines:
+    - An evidence graph for AI-evaluated
+    - measurements, labs and vehicle data.
+  byline: Dr. Carsten Stöcker · Spherity GmbH
+  visual: /assets/verifiable-ai-lab-results/figure-2-evidence-graph.svg
+  visual_fit: contain
+  topics: [Trusted AI, Digital identity, Evidence graphs]
