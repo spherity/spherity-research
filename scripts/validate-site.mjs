@@ -1770,7 +1770,7 @@ for (const htmlFile of htmlFiles) {
   const sourcePageForHtml = researchPages.find(({ data }) => data.canonical_url === canonical);
   const isAtlasLanding = sourcePageForHtml?.data.publication_type === "atlas";
   const isResearchTopic = sourcePageForHtml?.data.publication_type === "research-topic";
-  const expectedWorkType = isAtlasLanding ? "CreativeWork" : isResearchTopic ? "WebPage" : "ScholarlyArticle";
+  const expectedWorkType = isAtlasLanding ? "CreativeWork" : isResearchTopic ? "WebPage" : sourcePageForHtml?.data.publication_type === "case-study" ? "TechArticle" : "ScholarlyArticle";
   const isKnownAtlasRoute = atlasRoutes.has(htmlFile.split(path.sep).join("/"));
   const isAllowedDraft = permitsDraftAtlas(sourcePageForHtml?.data) || draftAtlasPath(htmlFile);
   if (isKnownAtlasRoute) {

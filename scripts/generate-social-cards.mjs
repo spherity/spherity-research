@@ -1,3 +1,4 @@
+import {loadCaseStudyImageMetadata} from "./lib/case-study-image-metadata.mjs";
 import {dpp5PaperPath, loadDpp5ImageMetadata} from "./lib/dpp5-image-metadata.mjs";
 import {prepareHomepageCard, renderHomepageCard} from "./lib/homepage-social-card.mjs";
 import { createHash } from "node:crypto";
@@ -20,7 +21,7 @@ const publicationsPath = path.join(sourceDirectory, "_data", "publications.yml")
 const manifest = parseYaml(await readFile(manifestPath, "utf8"));
 const dppImageMetadata = manifest.some(card => card.publication_url === dppPaperPath)
   ? await loadDppImageMetadata(sourceDirectory) : {};
-const imageMetadata = {...dppImageMetadata, ...(manifest.some(card => card.publication_url === dpp5PaperPath) ? await loadDpp5ImageMetadata(sourceDirectory) : {}), ...(manifest.some(card => card.publication_url === ebwPaperPath)
+const imageMetadata = {...await loadCaseStudyImageMetadata(sourceDirectory), ...dppImageMetadata, ...(manifest.some(card => card.publication_url === dpp5PaperPath) ? await loadDpp5ImageMetadata(sourceDirectory) : {}), ...(manifest.some(card => card.publication_url === ebwPaperPath)
   ? await loadEbwImageMetadata(sourceDirectory) : {}), ...(manifest.some(card => palantirPages.includes(card.publication_url))
   ? await loadPalantirImageMetadata(sourceDirectory) : {}), ...(manifest.some(card => card.publication_url === proofsPaperPath)
   ? await loadProofsImageMetadata(sourceDirectory) : {})};
@@ -391,7 +392,9 @@ const renderGeneratedCard = async (card, publication, layout) => {
       </g>
     </svg>`);
 
-  const visual = card.visual_type === "risk-orbits"
+  const visual = card.visual_type === "case-evidence"
+    ? caseEvidenceVisual(card.publication_url === '/case-studies/')
+    : card.visual_type === "risk-orbits"
     ? riskOrbits()
     : card.visual_type === "ebw-timeline"
       ? ebwTimeline()
@@ -419,6 +422,19 @@ const renderGeneratedCard = async (card, publication, layout) => {
     .composite(composite)
     .webp({ quality: 88, effort: 6 })
     .toBuffer();
+};
+
+
+const caseEvidenceVisual = collection => {
+  const labels = collection ? ['QUESTION', 'ARCHITECTURE', 'EVIDENCE'] : ['SIGNED SCAN', 'AI RESULT', 'CERTIFICATE'];
+  const descriptions = collection ? ['Start with the problem', 'Make the design explicit', 'Test what you claim'] : ['Input + device', 'Model + task mandate', 'Verify the evidence'];
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="360" height="510" viewBox="0 0 360 510">
+    <rect width="360" height="510" fill="#edf5f3"/>
+    <text x="30" y="44" fill="#43626a" font-family="Arial" font-size="12" letter-spacing="2">${collection ? 'APPLIED RESEARCH' : 'PROPOSED EVIDENCE FLOW'}</text>
+    <path d="M180 110 V402" stroke="#0c8c7d" stroke-width="3"/>
+    ${labels.map((label,i)=>`<g transform="translate(28 ${75+i*124})"><rect width="304" height="100" rx="9" fill="#fff" stroke="#bad5d0"/><circle cx="29" cy="29" r="13" fill="#0d756c"/><text x="29" y="34" text-anchor="middle" font-family="Arial" font-size="13" fill="#fff">${i+1}</text><text x="53" y="34" font-family="Arial" font-weight="700" font-size="17" fill="#133b43">${label}</text><text x="24" y="73" font-family="Arial" font-size="15" fill="#4a6570">${descriptions[i]}</text></g>`).join('')}
+    <text x="180" y="477" text-anchor="middle" fill="#47646c" font-family="Arial" font-size="13">${collection ? 'Clear scope. Honest evidence.' : 'Conceptual case study'}</text>
+  </svg>`);
 };
 
 const generatedCards = [];

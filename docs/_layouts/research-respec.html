@@ -17,7 +17,7 @@ layout: default
 {% endif %}
 {% assign affiliation = page.affiliation | default: "Spherity GmbH" %}
 
-<div class="srespec-page{% if page.paper_in_preparation or page.dpp_paper %} dpp-paper-page{% endif %}">
+<div class="srespec-page{% if page.publication_type == "case-study" %} case-study-page{% endif %}{% if page.paper_in_preparation or page.dpp_paper %} dpp-paper-page{% endif %}">
   <aside class="srespec-sidebar" aria-label="Document navigation">
     <a class="srespec-logo-link" href="{{ '/' | relative_url }}" aria-label="Spherity Research home">
       <img class="srespec-logo"
@@ -53,6 +53,7 @@ layout: default
         <nav class="article-breadcrumbs" aria-label="Breadcrumb">
           <ol>
             <li><a class="article-home-link" href="{{ '/' | relative_url }}">Research</a></li>
+            {% if page.publication_type == "case-study" %}<li><a href="{{ "/case-studies/" | relative_url }}">Case studies</a></li>{% endif %}
             {% if page.series_position and page.series_position > 0 %}
             <li><a href="{{ page.series_url | relative_url }}">{{ page.series_name }}</a></li>
             {% endif %}
@@ -163,7 +164,7 @@ layout: default
 
       {% if page.toc_items %}
       <details class="mobile-article-nav">
-        <summary>Browse this {% if page.paper_in_preparation or page.dpp_paper %}paper page{% elsif page.publication_type == "atlas" %}atlas{% else %}paper{% endif %}</summary>
+        <summary>Browse this {% if page.paper_in_preparation or page.dpp_paper %}paper page{% elsif page.publication_type == "case-study" %}case study{% elsif page.publication_type == "atlas" %}atlas{% else %}paper{% endif %}</summary>
         <nav aria-label="Mobile document navigation">
           <ol>
             {% for item in page.toc_items %}

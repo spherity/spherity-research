@@ -503,3 +503,36 @@
     - "for Germany and Europe."
   byline: "Dr. Carsten Stöcker · Spherity GmbH"
   visual_type: "risk-orbits"
+
+- publication_url: /case-studies/verifiable-ai-lab-results.html
+  output: /assets/preview-verifiable-ai-lab-results.webp
+  style: research-grid-v1
+  mode: generated
+  format_label: CONCEPTUAL CASE STUDY
+  title_size: 44
+  title_lines:
+    - Verifiable AI
+    - Lab Results
+  subtitle_size: 25
+  subtitle_lines:
+    - From scan to certificate
+  deck_lines:
+    - An evidence graph for AI-evaluated
+    - measurements, labs and vehicle data.
+  byline: Dr. Carsten Stöcker · Spherity GmbH
+  visual_type: case-evidence
+  visual_fit: contain
+  topics: [Trusted AI, Digital identity, Evidence graphs]
+
+- publication_url: /case-studies/
+  output: /assets/preview-case-studies.webp
+  page_type: website
+  style: research-grid-v1
+  mode: generated
+  format_label: CASE STUDIES · SPHERITY RESEARCH
+  title_size: 46
+  title_lines: ["From real-world", "questions to", "testable architectures"]
+  deck_lines: ["Practical scenarios. Explicit evidence.", "Digital identity and trusted AI."]
+  byline: "Spherity Research · Open access"
+  visual_type: case-evidence
+  topics: ["Case studies", "Digital identity", "Trusted AI"]
