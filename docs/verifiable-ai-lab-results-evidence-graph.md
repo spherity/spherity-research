@@ -8,7 +8,7 @@ seo_title: "Verifiable AI Lab Results and Evidence Graphs"
 og_title: "Verifiable AI Lab Results: From Scan to Certificate"
 og_description: "A concept for turning AI-evaluated laboratory results into verifiable certificates backed by an evidence graph, worked through on marker and NIR verification with a vehicle-data variant."
 subtitle: "A concept for AI-evaluated measurements as verifiable credentials, worked through on marker and NIR material verification"
-description: "Concept note: how AI-evaluated lab results become verifiable certificates with an evidence graph, legal-person identity, agent mandates and conformity certificates."
+description: "Concept note: how AI-evaluated lab results become verifiable certificates with an evidence graph, agent mandates and conformity certificates; forensic and vehicle-data variants."
 
 paper_status: "Spherity Research · Concept note"
 authors:
@@ -125,6 +125,30 @@ figure_objects:
       - "data labelling"
       - "verifiable credentials"
       - "AI agent authorisation"
+  - id: "figure-5-forensic-laboratory-variant"
+    name: "Forensic laboratory variant: third-party AI models on lab data"
+    content_url: "/assets/verifiable-ai-lab-results/figure-5-forensic-laboratory-variant.svg"
+    alt: "An exhibit is measured by an instrument with a LIMS gateway that signs raw data, an AI evaluation service running a third-party chemistry model issues an AI Analysis Result credential, and the laboratory's report service issues a Forensic Result Certificate to court, prosecutor or defence expert. The laboratory, a public body accredited by DAkkS, issues instrument identity, Agent Card and Task Authorization; the AI model vendor issues a model credential to the AI service; a calibration laboratory issues a Digital Calibration Certificate to the instrument."
+    width: 1280
+    height: 660
+    description: "The system view with the nouns of a forensic laboratory: exhibit, instrument and LIMS gateway, an AI service running a vendor model, a report service and a court as verifier; the issuer is a public body anchored by accreditation, the model vendor issues its own model credential, and calibration is a Digital Calibration Certificate."
+    caption: "Forensic laboratory variant. Illustrative scenario of a laboratory such as a federal criminal police laboratory: the issuer is a public body whose anchor is accreditation rather than a company register, the AI model comes from an external legal person that issues its own model credential, and the instrument's calibration is a Digital Calibration Certificate. Every identifier is an example; this is not a description of any existing project."
+    credit_text: "Carsten Stöcker / Spherity GmbH"
+    copyright_notice: "© 2026 Carsten Stöcker, Spherity GmbH"
+    license: "https://creativecommons.org/licenses/by/4.0/"
+    creator_type: "Person"
+    creator_name: "Dr. Carsten Stöcker"
+    creator_url: "https://spherity.github.io/spherity-research/#dr-carsten-stoecker"
+    copyright_holder:
+      type: "Person"
+      name: "Dr. Carsten Stöcker"
+      url: "https://spherity.github.io/spherity-research/#dr-carsten-stoecker"
+    keywords:
+      - "forensic laboratory"
+      - "Digital Calibration Certificate"
+      - "model credential"
+      - "chain of custody"
+
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
 license: "https://creativecommons.org/licenses/by/4.0/"
 license_scope: "This concept note and its original figures"
@@ -156,10 +180,13 @@ keywords:
   - "QI-Digital"
   - "vehicle data provenance"
   - "data labelling"
+  - "forensic laboratory"
+  - "chain of custody"
   - "digital product passport"
 
 answer_summary: "AI-evaluated laboratory results travel further than the laboratory's accountability. This concept note proposes issuing each result as a verifiable credential whose certificate is the root of an evidence graph: it hashes the AI result, the result pins task, set-up, object, reader and input, each assertion references the credential that backs it, and every credential ends at a public trust anchor such as a company register or a conformity assessment body. The design is worked through on marker and NIR material verification and transferred to vehicle data labelling. It is a proposal for discussion, not a description of any vendor's product."
 key_takeaways:
+  - "Forensic laboratories that enrich instrument data with third-party chemistry models are the sharpest case: the vendor vouches for its model with a model credential, the laboratory for the agent, accreditation anchors the public body, and the exhibit's chain of custody becomes part of the graph."
   - "Laboratories are becoming sensor-plus-AI pipelines; the receiver of an AI verdict cannot see which model, input, device or authority stood behind it unless the result carries that evidence."
   - "A Verification Certificate as a verifiable credential, with hash links to the AI result and its five assertions, lets brand owners, customs or recyclers verify a result without an account at the issuing lab."
   - "Authority runs along a second chain: company register, legal person, Agent Card and a bounded Task Authorization; conformity certificates for reader and AI system are referenced where they matter."
@@ -170,6 +197,8 @@ about:
   - "Verifiable authority for AI agents"
   - "Material verification with luminescent markers and NIR spectroscopy"
 mentions:
+  - "Forensic laboratories and chain of custody"
+  - "ISO/IEC 17025 accreditation"
   - "W3C Verifiable Credentials Data Model 2.0"
   - "W3C Recognized Entities"
   - "EU Company Certificate"
@@ -189,6 +218,7 @@ audiences:
   - "Credential and wallet architects"
   - "Conformity assessment bodies"
   - "Vehicle data and AI labelling teams"
+  - "Forensic laboratories and their software partners"
 spatial_coverage:
   - "European Union"
   - "Germany"
@@ -239,6 +269,8 @@ questions_answered:
     answer: "Issue the existing result as a signed credential with model and reference versions and the hash of the raw input; give each reader a key; issue an Agent Card and a bounded Task Authorization for the evaluation service; root the issuer in a company register; add third-party conformity certificates; then publish schemas and a verifier. Each step is useful on its own and none requires the previous architecture to change."
   - question: "Does the pattern apply outside material verification?"
     answer: "Yes. Any pipeline of sensor, model, reference library and portal has the same structure. The note shows the vehicle data chain: a gateway signs frames, a labelling agent issues labelled events, and a Data Provenance Certificate attests the labelled dataset. Food and pharma quality control, environmental sampling, diagnostics and recycling sorting map node for node. The vehicle variant adds one element: the data-use mandate of the vehicle owner or OEM inside the Task Authorization."
+  - question: "How does the pattern change for a forensic laboratory that uses AI models from software vendors?"
+    answer: "The evidence graph stays the same, three links change. The AI model is an external legal person's product, so the vendor issues a model credential pinning version and validation status, separate from the laboratory's Agent Card and Task Authorization. The issuer is a public body, so accreditation under ISO/IEC 17025 and the laboratory's official identity anchor the chain instead of a company register. The object is an exhibit with a chain of custody, referenced as its own credential chain, and the instrument's calibration is a Digital Calibration Certificate. Pinned model, library and method versions are what allow a court-ordered re-analysis years later. This is an illustrative scenario, not a description of any existing project."
   - question: "Is this a description of a Tailorlux product?"
     answer: "No. Tailorlux's marker and reader flow is used as a concrete instance of a common pattern. Everything about identities, certificates, partners and identifiers on this page is a design proposal for discussion; no identifier, certificate or partner relationship shown here exists."
 
@@ -271,7 +303,9 @@ toc_items:
     href: "#how-to-start"
   - title: "6. Vehicle data variant"
     href: "#vehicle-data"
-  - title: "7. Outlook"
+  - title: "7. Forensic laboratory variant"
+    href: "#forensic-lab"
+  - title: "8. Outlook"
     href: "#outlook"
   - title: "References"
     href: "#references"
@@ -374,29 +408,45 @@ Vehicle data chains have the same accountability problem as material verificatio
 
 <div class="table-scroll" role="region" aria-label="Node mapping between material verification and vehicle data labelling" tabindex="0">
 <table class="academic-table">
-<caption>Table 1. The evidence graph of Figure 3 mapped to both cases.</caption>
+<caption>Table 1. The evidence graph of Figure 3 mapped to the three cases.</caption>
 <thead>
-<tr><th scope="col">Node in Figure 3</th><th scope="col">Material verification</th><th scope="col">Vehicle data labelling</th></tr>
+<tr><th scope="col">Node in Figure 3</th><th scope="col">Material verification</th><th scope="col">Vehicle data labelling</th><th scope="col">Forensic laboratory (Figure 5)</th></tr>
 </thead>
 <tbody>
-<tr><th scope="row">Certificate</th><td>Verification Certificate for a lot</td><td>Data Provenance Certificate for a labelled dataset</td></tr>
-<tr><th scope="row">AI result</th><td>AI Analysis Result: marker present, share, confidence</td><td>AI Labelling Result: events and labels with confidence</td></tr>
-<tr><th scope="row">Agent Card</th><td>analysis agent, model version</td><td>labelling agent, model version</td></tr>
-<tr><th scope="row">Task assertion</th><td>marker verification of one lot</td><td>labelling job for one trip or time window</td></tr>
-<tr><th scope="row">Set-up assertion</th><td>model, NIR reference database, marker database, rule</td><td>model, label taxonomy version, pipeline version</td></tr>
-<tr><th scope="row">Object assertion</th><td>lot, product, expected marker</td><td>vehicle pseudonym, trip, sensor set</td></tr>
-<tr><th scope="row">Reader assertion</th><td>reader, firmware, calibration</td><td>vehicle gateway, firmware, sensor calibration</td></tr>
-<tr><th scope="row">Input assertion</th><td>spectrum hash, time, operator</td><td>frame hashes, time series, trip</td></tr>
-<tr><th scope="row">Task Authorization</th><td>the lab authorises the agent for the lot</td><td>the processor authorises the agent; plus the data-use mandate of owner or OEM</td></tr>
-<tr><th scope="row">Marker Registration</th><td>marker code to customer product</td><td>gateway onboarding: gateway bound to vehicle</td></tr>
-<tr><th scope="row">Reader Identity</th><td>reader DID and key</td><td>gateway DID and key</td></tr>
-<tr><th scope="row">Conformity certificates</th><td>reader type and calibration; AI system</td><td>gateway type and calibration; AI labelling system</td></tr>
-<tr><th scope="row">Anchors</th><td colspan="2">EU Company Certificate from the register operator for the legal person; the conformity assessment body for certificates</td></tr>
+<tr><th scope="row">Certificate</th><td>Verification Certificate for a lot</td><td>Data Provenance Certificate for a labelled dataset</td><td>Forensic Result Certificate for an exhibit</td></tr>
+<tr><th scope="row">AI result</th><td>AI Analysis Result: marker present, share, confidence</td><td>AI Labelling Result: events and labels with confidence</td><td>AI Analysis Result: substance identified, library match</td></tr>
+<tr><th scope="row">Agent Card</th><td>analysis agent, model version</td><td>labelling agent, model version</td><td>evaluation service running a vendor model</td></tr>
+<tr><th scope="row">Task assertion</th><td>marker verification of one lot</td><td>labelling job for one trip or time window</td><td>analysis order for one exhibit and method</td></tr>
+<tr><th scope="row">Set-up assertion</th><td>model, NIR reference database, marker database, rule</td><td>model, label taxonomy version, pipeline version</td><td>vendor model version, spectral library version, method</td></tr>
+<tr><th scope="row">Object assertion</th><td>lot, product, expected marker</td><td>vehicle pseudonym, trip, sensor set</td><td>exhibit, sample, chain of custody reference</td></tr>
+<tr><th scope="row">Reader assertion</th><td>reader, firmware, calibration</td><td>vehicle gateway, firmware, sensor calibration</td><td>instrument, LIMS gateway, calibration</td></tr>
+<tr><th scope="row">Input assertion</th><td>spectrum hash, time, operator</td><td>frame hashes, time series, trip</td><td>raw-data hashes, time, analyst</td></tr>
+<tr><th scope="row">Task Authorization</th><td>the lab authorises the agent for the lot</td><td>the processor authorises the agent; plus the data-use mandate of owner or OEM</td><td>the laboratory authorises the service; the vendor's model credential covers the model</td></tr>
+<tr><th scope="row">Marker Registration</th><td>marker code to customer product</td><td>gateway onboarding: gateway bound to vehicle</td><td>chain of custody: exhibit bound to case and sample</td></tr>
+<tr><th scope="row">Reader Identity</th><td>reader DID and key</td><td>gateway DID and key</td><td>instrument DID and key</td></tr>
+<tr><th scope="row">Conformity certificates</th><td>reader type and calibration; AI system</td><td>gateway type and calibration; AI labelling system</td><td>DCC for the instrument; model credential and validation from the vendor</td></tr>
+<tr><th scope="row">Anchors</th><td colspan="2">EU Company Certificate from the register operator for the legal person; the conformity assessment body for certificates</td><td>accreditation body for the laboratory; EU Company Certificate for the vendor; PTB-traceable calibration</td></tr>
 </tbody>
 </table>
 </div>
 
-<h2 id="outlook">7. Outlook</h2>
+<h2 id="forensic-lab">7. Forensic laboratories: lab data enriched by third-party AI models</h2>
+
+Forensic laboratories are the sharpest case of the trend in section 1. Their instruments produce spectra and chromatograms, specialised chemistry models from software vendors enrich the raw data with substance identification, structure proposals or similarity scores, and the result ends up as evidence in criminal proceedings. The receiver is a court, the prosecution and the defence, and the result has to survive a re-analysis years later.
+
+Three properties make the pattern harder than the material-verification flow, and the evidence graph answers each of them. The AI models are not the laboratory's own: each vendor is a legal person of its own and has to vouch for its model with a model credential that pins version and validation status, so the laboratory's Agent Card and the vendor's model credential are two separate links in the chain. The issuer is a public body, so the identity anchor is the laboratory's accreditation under ISO/IEC 17025 and its official identity rather than a company register. And the object is an exhibit with a chain of custody, which is itself a credential chain the certificate has to reference. Instrument calibration as a Digital Calibration Certificate is the part that QI-Digital already provides [7][8].
+
+{% assign figure_forensic = page.figure_objects | where: "id", "figure-5-forensic-laboratory-variant" | first %}
+{% include research-figure.html figure=figure_forensic number=5 %}
+
+**Reading Figure 5.** The evidence graph of Figure 3 is unchanged, but the verifier is now a court, which raises the bar on three of the six questions of Figure 1. Question 2 splits in two: the laboratory vouches for the agent (Agent Card, Task Authorization) and the vendor vouches for the model (model credential with version and validation status), so a defence expert can see both without a request to the laboratory. Question 5 points at a Digital Calibration Certificate instead of a type certificate, which is what accreditation under ISO/IEC 17025 already expects. Question 6 adds the chain of custody of the exhibit as its own credential chain. Because proceedings run for years, the pinned model, library and method versions in the set-up assertion are what makes a re-analysis possible later.
+
+<aside class="evidence-callout" aria-label="Scope of the forensic variant">
+<h3>Illustrative scenario</h3>
+<p>The forensic variant describes a laboratory such as a federal criminal police laboratory in general terms. It is not a description of any existing platform or project, and no identifier shown exists.</p>
+</aside>
+
+<h2 id="outlook">8. Outlook</h2>
 
 **Where the pattern pays off for labs.** The pattern is not specific to markers. Any lab that runs an instrument, a model and a reference library can issue its results as certificates with an evidence graph. The gains come from what the receiver no longer has to do.
 
@@ -405,7 +455,7 @@ Vehicle data chains have the same accountability problem as material verificatio
 - **Faster release decisions.** Deviation checks run on structured assertions (model version, calibration date, reference-database version) and the person releasing a batch sees pre-validated inputs, the trusted-release idea applied to lab results.
 - **Reusable evidence.** One certificate feeds a product passport, a customs declaration, a recycled-content claim and an insurance file, with the same hash links, instead of four reports.
 - **Model governance.** Because every result pins the model and reference versions, a recalled model or a corrected reference library identifies exactly the results it affects, and revocation reaches them.
-- **Applies across domains.** Spectroscopy and marker verification, food and pharma quality control, environmental sampling, diagnostics, recycling sorting lines, inspection robots and vehicle data labelling share the graph node for node.
+- **Applies across domains.** Spectroscopy and marker verification, food and pharma quality control, environmental sampling, diagnostics, recycling sorting lines, inspection robots, vehicle data labelling and forensic laboratories with third-party AI models share the graph node for node.
 
 **Next steps for this design.**
 
