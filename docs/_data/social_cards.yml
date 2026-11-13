@@ -520,6 +520,6 @@
     - An evidence graph for AI-evaluated
     - measurements, labs and vehicle data.
   byline: Dr. Carsten Stöcker · Spherity GmbH
-  visual: /assets/verifiable-ai-lab-results/figure-2-evidence-graph.svg
+  visual: /assets/verifiable-ai-lab-results/figure-3-evidence-graph.svg
   visual_fit: contain
   topics: [Trusted AI, Digital identity, Evidence graphs]

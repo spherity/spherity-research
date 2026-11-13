@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="figure-1-problem-framing-title figure-1-problem-framing-desc" font-family="Arial, Liberation Sans, sans-serif">
+<title id="figure-1-problem-framing-title">What a verifier needs to trust an AI test result</title>
+<desc id="figure-1-problem-framing-desc">An AI analysis agent in the centre takes a spectrum and an object description and sends an AI test result to a verifier. Around the agent, six questions the verifier must be able to answer: who is accountable, which agent and model, which set-up, which input, which device, which object and is it still valid. Today only the verdict and a confidence value travel to the verifier.</desc>
+<rect x="0" y="0" width="1280" height="640" fill="#FFFFFF"/>
+<defs>
+          <marker id="ar0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#526273"/></marker>
+          <marker id="ar0-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#167D8D"/></marker>
+        </defs>
+
+        <!-- Six questions -->
+        <g><rect fill="#F5F7F9" stroke="#526273" stroke-width="0.9" x="60" y="40" width="340" height="110" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="230" y="66" text-anchor="middle">1 · Who is accountable?</text>
+          <text font-size="11" fill="#526273" x="230" y="88" text-anchor="middle">the legal person behind the agent</text>
+          <text font-size="11" fill="#526273" x="230" y="104" text-anchor="middle">and its mandate for this task</text>
+          <text font-size="11" fill="#526273" x="230" y="130" text-anchor="middle">today: unknown</text></g>
+        <g><rect fill="#F5F7F9" stroke="#526273" stroke-width="0.9" x="470" y="40" width="340" height="110" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="640" y="66" text-anchor="middle">2 · Which agent and model?</text>
+          <text font-size="11" fill="#526273" x="640" y="88" text-anchor="middle">agent identity · model version</text>
+          <text font-size="11" fill="#526273" x="640" y="104" text-anchor="middle">independent assessment of the AI system</text>
+          <text font-size="11" fill="#526273" x="640" y="130" text-anchor="middle">today: a name on a screen</text></g>
+        <g><rect fill="#F5F7F9" stroke="#526273" stroke-width="0.9" x="880" y="40" width="340" height="110" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="1050" y="66" text-anchor="middle">3 · Which set-up?</text>
+          <text font-size="11" fill="#526273" x="1050" y="88" text-anchor="middle">reference-database versions</text>
+          <text font-size="11" fill="#526273" x="1050" y="104" text-anchor="middle">verification rule · parameters</text>
+          <text font-size="11" fill="#526273" x="1050" y="130" text-anchor="middle">today: not in the result</text></g>
+        <g><rect fill="#F5F7F9" stroke="#526273" stroke-width="0.9" x="60" y="490" width="340" height="110" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="230" y="516" text-anchor="middle">4 · Which input?</text>
+          <text font-size="11" fill="#526273" x="230" y="538" text-anchor="middle">the spectrum actually evaluated</text>
+          <text font-size="11" fill="#526273" x="230" y="554" text-anchor="middle">time · operator · unaltered</text>
+          <text font-size="11" fill="#526273" x="230" y="580" text-anchor="middle">today: stays in the backend</text></g>
+        <g><rect fill="#F5F7F9" stroke="#526273" stroke-width="0.9" x="470" y="490" width="340" height="110" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="640" y="516" text-anchor="middle">5 · Which device?</text>
+          <text font-size="11" fill="#526273" x="640" y="538" text-anchor="middle">reader identity · firmware</text>
+          <text font-size="11" fill="#526273" x="640" y="554" text-anchor="middle">calibration · type conformity</text>
+          <text font-size="11" fill="#526273" x="640" y="580" text-anchor="middle">today: not in the result</text></g>
+        <g><rect fill="#F5F7F9" stroke="#526273" stroke-width="0.9" x="880" y="490" width="340" height="110" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="1050" y="516" text-anchor="middle">6 · Which object, and still valid?</text>
+          <text font-size="11" fill="#526273" x="1050" y="538" text-anchor="middle">lot and expected marker</text>
+          <text font-size="11" fill="#526273" x="1050" y="554" text-anchor="middle">status of certificate, model, references</text>
+          <text font-size="11" fill="#526273" x="1050" y="580" text-anchor="middle">today: no status to check</text></g>
+
+        <!-- Inputs -->
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="60" y="235" width="240" height="70" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="180" y="257" text-anchor="middle">Spectrum</text>
+          <text font-size="11" fill="#526273" x="180" y="275" text-anchor="middle">from the Tailor-Scan reader</text>
+          <text font-size="11" fill="#526273" x="180" y="291" text-anchor="middle">VIS/NIR · lot L-2026-0417</text></g>
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="60" y="335" width="240" height="70" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="180" y="357" text-anchor="middle">Object</text>
+          <text font-size="11" fill="#526273" x="180" y="375" text-anchor="middle">lot L-2026-0417</text>
+          <text font-size="11" fill="#526273" x="180" y="391" text-anchor="middle">expected marker TLX-4711</text></g>
+
+        <!-- Agent in the centre -->
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="480" y="250" width="320" height="140" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="640" y="278" text-anchor="middle">AI Analysis Agent</text>
+          <text font-size="11" fill="#526273" x="640" y="300" text-anchor="middle">model v3.2 · NIR ref DB v14 · marker DB v9</text>
+          <text font-size="11" fill="#526273" x="640" y="318" text-anchor="middle">compares the spectrum with references</text>
+          <text font-size="11" fill="#526273" x="640" y="334" text-anchor="middle">classifies, quantifies, scores</text>
+          <text font-size="11" fill="#526273" x="640" y="364" text-anchor="middle">output: the AI test result</text></g>
+
+        <!-- Verifier -->
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="920" y="250" width="300" height="140" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="1070" y="278" text-anchor="middle">Verifier / Nutzer</text>
+          <text font-size="11" fill="#526273" x="1070" y="300" text-anchor="middle">brand owner, customs, recycler</text>
+          <text font-size="11" fill="#526273" x="1070" y="318" text-anchor="middle">receives the result</text>
+          <text font-size="11" fill="#526273" x="1070" y="334" text-anchor="middle">must decide whether to trust it</text>
+          <text font-size="11" fill="#526273" x="1070" y="364" text-anchor="middle">today: trusts the portal</text></g>
+
+        <!-- Flow -->
+        <path fill="none" stroke="#526273" stroke-width="1.2" d="M300,270 H476" marker-end="url(#ar0)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="388" y="262" text-anchor="middle">signal</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" d="M300,370 H476" marker-end="url(#ar0)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="388" y="362" text-anchor="middle">what to check</text>
+        <path fill="none" stroke="#167D8D" stroke-width="1.8" d="M800,320 H916" marker-end="url(#ar0-acc)"/>
+        <text font-size="10.5" fill="#167D8D" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="858" y="298" text-anchor="middle">AI test result</text>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="858" y="338" text-anchor="middle">verdict · share</text>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="858" y="351" text-anchor="middle">confidence · time</text>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="858" y="364" text-anchor="middle">nothing else</text>
+
+        <!-- Question links -->
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M230,150 L500,250" marker-end="url(#ar0)"/>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M640,150 V246" marker-end="url(#ar0)"/>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M1050,150 L780,250" marker-end="url(#ar0)"/>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M230,490 L500,390" marker-end="url(#ar0)"/>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M640,490 V394" marker-end="url(#ar0)"/>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M1050,490 L780,390" marker-end="url(#ar0)"/>
+      </svg>

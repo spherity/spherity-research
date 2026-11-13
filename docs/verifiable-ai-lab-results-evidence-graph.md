@@ -33,14 +33,37 @@ canonical_url: "https://spherity.github.io/spherity-research/verifiable-ai-lab-r
 latest_version: "https://spherity.github.io/spherity-research/verifiable-ai-lab-results-evidence-graph.html"
 
 figure_objects:
-  - id: "figure-1-system-view"
-    name: "System view: from scan to Verification Certificate"
-    content_url: "/assets/verifiable-ai-lab-results/figure-1-system-view.svg"
-    alt: "A marked object is scanned by a reader, an AI analysis agent issues an AI Analysis Result credential, and a verification portal issues a Verification Certificate to the verifier. Tailorlux GmbH, identified by an EUCC from Bundesanzeiger Verlag, issues device identity, Agent Card and Task Authorization; TÜV SÜD certifies the AI system and the reader."
+  - id: "figure-1-problem-framing"
+    name: "What a verifier needs to trust an AI test result"
+    content_url: "/assets/verifiable-ai-lab-results/figure-1-problem-framing.svg"
+    alt: "An AI analysis agent in the centre takes a spectrum and an object description and sends an AI test result to a verifier. Around the agent, six questions the verifier must be able to answer: who is accountable, which agent and model, which set-up, which input, which device, which object and is it still valid. Today only the verdict and a confidence value travel to the verifier."
     width: 1280
-    height: 600
-    description: "Two chains meet at the portal: the operational chain carries the scan, the AI result and the certificate; the authority chain carries legal-person identity, device identity, agent identity, task mandate and third-party conformity."
-    caption: "System view. Solid arrows carry the scan and its results; dashed arrows carry identity, authorisation and conformity. The verifier needs the certificate and the public trust anchors only. All identifiers are examples; the design is a concept, not a product description."
+    height: 640
+    description: "The AI agent sits between the measurement and the receiver; everything that would let the receiver judge the result stays inside the lab, and only the verdict travels."
+    caption: "Framing the problem. Today the verifier receives a verdict with a share and a confidence value and has to trust the portal that shows it. To trust the result itself, the verifier must be able to answer six questions about the agent: who is accountable, which agent and model, which set-up, which input, which device, which object, and whether all of that is still valid. None of them has a verifiable answer in today's result."
+    credit_text: "Carsten Stöcker / Spherity GmbH"
+    copyright_notice: "© 2026 Carsten Stöcker, Spherity GmbH"
+    license: "https://creativecommons.org/licenses/by/4.0/"
+    creator_type: "Person"
+    creator_name: "Dr. Carsten Stöcker"
+    creator_url: "https://spherity.github.io/spherity-research/#dr-carsten-stoecker"
+    copyright_holder:
+      type: "Person"
+      name: "Dr. Carsten Stöcker"
+      url: "https://spherity.github.io/spherity-research/#dr-carsten-stoecker"
+    keywords:
+      - "AI test result"
+      - "verifier"
+      - "trust gap"
+      - "AI agent accountability"
+  - id: "figure-2-system-view"
+    name: "System view: from scan to Verification Certificate"
+    content_url: "/assets/verifiable-ai-lab-results/figure-2-system-view.svg"
+    alt: "A marked object is scanned by a Tailor-Scan reader, an AI analysis agent issues an AI Analysis Result credential, and a verification portal issues a Verification Certificate credential to the verifier. Tailorlux GmbH, identified by an EUCC from Bundesanzeiger Verlag, issues device identity, Agent Card and Task Authorization. TÜV SÜD issues a reader certificate to the reader and an AI credential to the AI agent. Example identifiers only."
+    width: 1280
+    height: 660
+    description: "Two chains meet at the portal: the operational chain carries the scan, the AI result and the certificate; the authority chain carries legal-person identity, device identity, agent identity, task mandate and third-party conformity, including an AI credential issued to the AI agent."
+    caption: "System view. Solid arrows carry the scan and its results; dashed arrows carry identity, authorisation and conformity. TÜV SÜD issues the reader certificate to the reader and the AI credential to the AI agent. The verifier's six checks answer the six questions of Figure 1. All identifiers are examples; the design is a concept, not a product description."
     credit_text: "Carsten Stöcker / Spherity GmbH"
     copyright_notice: "© 2026 Carsten Stöcker, Spherity GmbH"
     license: "https://creativecommons.org/licenses/by/4.0/"
@@ -56,10 +79,10 @@ figure_objects:
       - "verifiable credentials"
       - "AI agent authorisation"
       - "NIR spectroscopy"
-  - id: "figure-2-evidence-graph"
+  - id: "figure-3-evidence-graph"
     name: "Evidence graph of the Verification Certificate"
-    content_url: "/assets/verifiable-ai-lab-results/figure-2-evidence-graph.svg"
-    alt: "The Verification Certificate links by hash to the AI Analysis Result, which is issued by the agent named in the Agent Card and carries task, object, input, reader and set-up assertions. Each assertion references a supporting credential issued by Tailorlux GmbH or TÜV SÜD, and Tailorlux is identified by an EUCC from Bundesanzeiger Verlag."
+    content_url: "/assets/verifiable-ai-lab-results/figure-3-evidence-graph.svg"
+    alt: "The Verification Certificate links by hash to the AI Analysis Result, which is issued by the agent holding an Agent Card and carries task, object, input, reader and set-up assertions. Each assertion references a supporting credential: Task Authorization, Marker Registration, Reader Identity, TÜV SÜD reader certificate and TÜV SÜD AI certificate, issued by Tailorlux GmbH or TÜV SÜD. Tailorlux is identified by an EUCC issued by Bundesanzeiger Verlag."
     width: 1460
     height: 640
     description: "Every claim in the certificate resolves to a signed credential and ends at a public trust anchor; a verifier walks the arrows and checks proof, status and validity at every node."
@@ -79,13 +102,13 @@ figure_objects:
       - "credential chaining"
       - "W3C Recognized Entities"
       - "EU Company Certificate"
-  - id: "figure-3-vehicle-data-variant"
+  - id: "figure-4-vehicle-data-variant"
     name: "The same set-up for vehicle data processing and labelling"
-    content_url: "/assets/verifiable-ai-lab-results/figure-3-vehicle-data-variant.svg"
-    alt: "A vehicle streams sensor data to a gateway that signs frames, an AI labelling agent issues an AI Labelling Result credential, and a data product portal issues a Data Provenance Certificate to the data consumer. A fictional processor identified by an EUCC issues device identity, Agent Card and Task Authorization; TÜV SÜD certifies the AI labelling system and the gateway."
+    content_url: "/assets/verifiable-ai-lab-results/figure-4-vehicle-data-variant.svg"
+    alt: "A vehicle streams sensor data to a gateway that signs frames, an AI labelling agent issues an AI Labelling Result credential, and a data product portal issues a Data Provenance Certificate credential to the data consumer. A fictional processor identified by an EUCC issues device identity, Agent Card and Task Authorization; TÜV SÜD issues a gateway certificate to the gateway and an AI credential to the labelling agent."
     width: 1280
-    height: 600
-    description: "The system view of Figure 1 with the nouns of a vehicle data chain: vehicle trip, gateway, labelling agent, labelled dataset and data consumer; identity, authority and assurance links are unchanged."
+    height: 660
+    description: "The system view of Figure 2 with the nouns of a vehicle data chain: vehicle trip, gateway, labelling agent, labelled dataset and data consumer; identity, authority and assurance links are unchanged."
     caption: "The same set-up for vehicle data processing and labelling. Only the nouns change: the object is a vehicle trip, the reader is the vehicle gateway, the agent labels events, and the certificate attests the provenance of a labelled dataset. The processor is fictional."
     credit_text: "Carsten Stöcker / Spherity GmbH"
     copyright_notice: "© 2026 Carsten Stöcker, Spherity GmbH"
@@ -102,7 +125,6 @@ figure_objects:
       - "data labelling"
       - "verifiable credentials"
       - "AI agent authorisation"
-
 robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
 license: "https://creativecommons.org/licenses/by/4.0/"
 license_scope: "This concept note and its original figures"
@@ -293,7 +315,12 @@ The Tailorlux flow is a textbook instance of this pattern. Tailorlux marks mater
 
 <h2 id="use-case-and-requirements">3. Use case and requirements</h2>
 
-**Use case.** Today the verdict of the marker and NIR evaluation is a screen or a report. Whoever receives it has to trust the portal and call the lab to confirm it. This is the trust gap of section 1 in one concrete flow.
+**Use case.** Today the verdict of the marker and NIR evaluation is a screen or a report. Whoever receives it has to trust the portal and call the lab to confirm it. This is the trust gap of section 1 in one concrete flow. Figure 1 puts the AI agent in the centre and lists what a verifier would need to trust its result.
+
+{% assign figure_problem = page.figure_objects | first %}
+{% include research-figure.html figure=figure_problem number=1 %}
+
+**Reading Figure 1.** The agent sits between the measurement and the receiver. Everything that would let the receiver judge the result (dashed) stays inside the lab: the mandate, the model and its assessment, the reference versions, the raw spectrum, the device state and the object binding. Only the verdict (solid) travels. The requirements below give each of the six questions a verifiable answer, and the design in section 4 binds those answers to the result.
 
 **Objective.** Turn the result into a **Verifikationszertifikat**, a Verification Certificate, that brand owners, customs, recyclers and auditors can verify on their own, offline if needed, without an account at the issuing lab. Material claims feed into product passports, recycled-content declarations and anti-counterfeiting cases, so an AI verdict has to be accountable: who ran it, under whose authority, with which model, on which input, from which device.
 
@@ -311,17 +338,17 @@ The Tailorlux flow is a textbook instance of this pattern. Tailorlux marks mater
 
 Every event becomes a micro-certificate bound to the scanned object, following the micro-certificate and trusted-release pattern developed for regulated supply chains [1][2]. The certificate is the root of a verifiable evidence graph [3]: it hashes the AI result, the result carries five assertions, each assertion references the credential that backs it, and every credential ends at a public trust anchor. Authority runs along a second chain, EUCC to the legal person to Agent Card to Task Authorization [4], and third-party conformity comes from certificates referenced where they matter. Verification follows the W3C Recognized Entities algorithm [5].
 
-{% assign figure_system_view = page.figure_objects | first %}
-{% include research-figure.html figure=figure_system_view number=1 %}
+{% assign figure_system_view = page.figure_objects | where: "id", "figure-2-system-view" | first %}
+{% include research-figure.html figure=figure_system_view number=2 %}
 
-**Reading Figure 1.** Two chains meet at the portal. The operational chain (solid) carries the scan: the reader signs the raw input, the agent issues the result, the portal issues the certificate. The authority chain (dashed) says who is allowed to do what: the register vouches for the lab as a legal person, the lab equips its reader, its agent and its portal with credentials, and the conformity assessment body vouches for the reader type and the AI system. A verifier never talks to the portal; it needs the certificate and the public anchors only.
+**Reading Figure 2.** Two chains meet at the portal. The operational chain (solid) carries the scan: the reader signs the raw input, the agent issues the result, the portal issues the certificate. The authority chain (dashed) says who is allowed to do what: the register vouches for the lab as a legal person, the lab equips its reader and its agent with credentials and signs the certificate, and the conformity assessment body vouches for the reader type and, with an AI credential bound to the model version, for the AI agent. The verifier's six checks are the six questions of Figure 1. A verifier never talks to the portal; it needs the certificate and the public anchors only.
 
-{% assign figure_evidence_graph = page.figure_objects | where: "id", "figure-2-evidence-graph" | first %}
-{% include research-figure.html figure=figure_evidence_graph number=2 %}
+{% assign figure_evidence_graph = page.figure_objects | where: "id", "figure-3-evidence-graph" | first %}
+{% include research-figure.html figure=figure_evidence_graph number=3 %}
 
-**Reading Figure 2.** The graph is what a verifier walks. Each arrow is a cryptographic link, a hash or a signature, with a stated meaning. Walking left to right answers, in order: what was claimed, by which agent, on what task, about which object, from which input and device, under which set-up, backed by which certificates, issued by which legal persons, recognised by which anchors. The chain validation of the W3C Recognized Entities draft gives two answers, `recognized` (the issuer is in a chain to an anchor) and `actionRecognized` (recognised for this specific action, here issuing a Verification Certificate). Both must hold.
+**Reading Figure 3.** The graph is what a verifier walks. Each arrow is a cryptographic link, a hash or a signature, with a stated meaning. Walking left to right answers, in order: what was claimed, by which agent, on what task, about which object, from which input and device, under which set-up, backed by which certificates, issued by which legal persons, recognised by which anchors. The chain validation of the W3C Recognized Entities draft gives two answers, `recognized` (the issuer is in a chain to an anchor) and `actionRecognized` (recognised for this specific action, here issuing a Verification Certificate). Both must hold.
 
-Two choices in the figures are open for revision. The conformity certificate for the AI system hangs off the set-up assertion rather than the certificate itself, so the chain stays attached to the model version actually used. The portal has no identity of its own and signs as the legal person.
+Two choices in the figures are open for revision. The AI credential issued by the conformity assessment body is bound to the model version and referenced from the set-up assertion rather than from the certificate itself, so the chain stays attached to the model actually used. The portal has no identity of its own and signs as the legal person.
 
 <h2 id="how-to-start">5. How to start: simple first, one step at a time</h2>
 
@@ -338,18 +365,18 @@ Steps 1 and 2 need no external party. Steps 3 and 4 are mostly governance decisi
 
 <h2 id="vehicle-data">6. The same set-up for vehicle data processing and labelling</h2>
 
-Vehicle data chains have the same accountability problem as material verification: a downstream consumer receives labelled data and cannot tell which model produced the labels, from which raw frames, on which device, and with what mandate [6]. The evidence graph of Figure 2 applies node for node.
+Vehicle data chains have the same accountability problem as material verification: a downstream consumer receives labelled data and cannot tell which model produced the labels, from which raw frames, on which device, and with what mandate [6]. The evidence graph of Figure 3 applies node for node.
 
-{% assign figure_vehicle = page.figure_objects | where: "id", "figure-3-vehicle-data-variant" | first %}
-{% include research-figure.html figure=figure_vehicle number=3 %}
+{% assign figure_vehicle = page.figure_objects | where: "id", "figure-4-vehicle-data-variant" | first %}
+{% include research-figure.html figure=figure_vehicle number=4 %}
 
-**Reading Figure 3.** The object is a vehicle trip instead of a marked lot, the reader is the vehicle gateway, the AI agent labels events instead of verifying a marker, and the certificate attests the provenance of a labelled dataset. Identity, authority, assurance and evidence links are the same as in Figures 1 and 2. The labelling example follows the dangerous-driving detection case in [6]. One addition is specific to vehicle data: the Task Authorization has to carry the data-use mandate of the vehicle owner or OEM next to the processor's own authorisation of the agent.
+**Reading Figure 4.** The object is a vehicle trip instead of a marked lot, the reader is the vehicle gateway, the AI agent labels events instead of verifying a marker, and the certificate attests the provenance of a labelled dataset. Identity, authority, assurance and evidence links are the same as in Figures 2 and 3. The labelling example follows the dangerous-driving detection case in [6]. One addition is specific to vehicle data: the Task Authorization has to carry the data-use mandate of the vehicle owner or OEM next to the processor's own authorisation of the agent.
 
 <div class="table-scroll" role="region" aria-label="Node mapping between material verification and vehicle data labelling" tabindex="0">
 <table class="academic-table">
-<caption>Table 1. The evidence graph of Figure 2 mapped to both cases.</caption>
+<caption>Table 1. The evidence graph of Figure 3 mapped to both cases.</caption>
 <thead>
-<tr><th scope="col">Node in Figure 2</th><th scope="col">Material verification</th><th scope="col">Vehicle data labelling</th></tr>
+<tr><th scope="col">Node in Figure 3</th><th scope="col">Material verification</th><th scope="col">Vehicle data labelling</th></tr>
 </thead>
 <tbody>
 <tr><th scope="row">Certificate</th><td>Verification Certificate for a lot</td><td>Data Provenance Certificate for a labelled dataset</td></tr>

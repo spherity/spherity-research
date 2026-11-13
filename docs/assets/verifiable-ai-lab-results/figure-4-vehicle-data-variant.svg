@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="660" viewBox="0 0 1280 660" role="img" aria-labelledby="figure-4-vehicle-data-variant-title figure-4-vehicle-data-variant-desc" font-family="Arial, Liberation Sans, sans-serif">
+<title id="figure-4-vehicle-data-variant-title">The same set-up for vehicle data processing and labelling</title>
+<desc id="figure-4-vehicle-data-variant-desc">A vehicle streams sensor data to a gateway that signs frames, an AI labelling agent issues an AI Labelling Result credential, and a data product portal issues a Data Provenance Certificate credential to the data consumer. A fictional processor identified by an EUCC issues device identity, Agent Card and Task Authorization; TÜV SÜD issues a gateway certificate to the gateway and an AI credential to the labelling agent.</desc>
+<rect x="0" y="0" width="1280" height="660" fill="#FFFFFF"/>
+<defs>
+          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#526273"/></marker>
+          <marker id="ar3-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#167D8D"/></marker>
+        </defs>
+
+        <!-- Row 0: register -->
+        <g><rect fill="#EEF4FA" stroke="#183B63" stroke-width="1.2" stroke-dasharray="5 3" x="310" y="40" width="220" height="60" rx="12"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="420" y="64" text-anchor="middle">Bundesanzeiger Verlag</text>
+          <text font-size="11" fill="#526273" x="420" y="82" text-anchor="middle">register · EUCC issuer</text></g>
+
+        <!-- Row 1: legal person and conformity body -->
+        <g><rect fill="#EEF4FA" stroke="#183B63" stroke-width="1.2" stroke-dasharray="5 3" x="310" y="140" width="340" height="70" rx="12"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="480" y="164" text-anchor="middle">MobilityData GmbH (fictional) · legal person</text>
+          <text font-size="11" fill="#526273" x="480" y="182" text-anchor="middle">Business Wallet · holds EUCC · operates the portal</text>
+          <text font-family="Liberation Mono, Courier New, monospace" font-size="10.5" fill="#526273" x="480" y="198" text-anchor="middle">did:web:mobilitydata.example</text></g>
+        <g><rect fill="#EEF4FA" stroke="#183B63" stroke-width="1.2" stroke-dasharray="5 3" x="760" y="140" width="220" height="70" rx="12"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="870" y="164" text-anchor="middle">TÜV SÜD</text>
+          <text font-size="11" fill="#526273" x="870" y="182" text-anchor="middle">conformity assessment body</text>
+          <text font-size="11" fill="#526273" x="870" y="198" text-anchor="middle">issues gateway and AI credentials</text></g>
+
+        <!-- Trust edges -->
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M420,100 V136" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="428" y="124" text-anchor="start">EUCC · legal person identity</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M870,140 V22 H285 V286" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="580" y="16" text-anchor="middle">gateway certificate · type conformity and calibration</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M800,210 V250 H700 V286" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="808" y="236" text-anchor="start">AI credential</text>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="808" y="250" text-anchor="start">model v1.4 assessed</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M380,210 V286" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="388" y="252" text-anchor="start">device identity</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" stroke-dasharray="5 3" d="M600,210 V286" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="608" y="238" text-anchor="start">Agent Card +</text>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="608" y="252" text-anchor="start">Task Authorization</text>
+
+        <!-- Row 2: operational flow -->
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="40" y="290" width="150" height="80" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="115" y="314" text-anchor="middle">Vehicle</text>
+          <text font-size="11" fill="#526273" x="115" y="332" text-anchor="middle">VIN pseudonym V-7f3a</text>
+          <text font-size="11" fill="#526273" x="115" y="348" text-anchor="middle">trip 2026-11-12 · sensor set S1</text></g>
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="270" y="290" width="190" height="80" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="365" y="314" text-anchor="middle">Vehicle gateway</text>
+          <text font-size="11" fill="#526273" x="365" y="332" text-anchor="middle">telematics + camera feed</text>
+          <text font-size="11" fill="#526273" x="365" y="348" text-anchor="middle">device wallet · signs frames</text></g>
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="540" y="290" width="190" height="80" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="635" y="314" text-anchor="middle">AI Labelling Agent</text>
+          <text font-size="11" fill="#526273" x="635" y="332" text-anchor="middle">event detection + labelling</text>
+          <text font-size="11" fill="#526273" x="635" y="348" text-anchor="middle">agent wallet · model v1.4</text></g>
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="810" y="290" width="190" height="80" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="905" y="314" text-anchor="middle">Data Product Portal</text>
+          <text font-size="11" fill="#526273" x="905" y="332" text-anchor="middle">operated by MobilityData</text>
+          <text font-size="11" fill="#526273" x="905" y="348" text-anchor="middle">signs as legal person</text></g>
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="1080" y="290" width="170" height="80" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="1165" y="314" text-anchor="middle">Data consumer</text>
+          <text font-size="11" fill="#526273" x="1165" y="332" text-anchor="middle">OEM, insurer, authority</text>
+          <text font-size="11" fill="#526273" x="1165" y="348" text-anchor="middle">any VC verifier</text></g>
+
+        <!-- Flow edges -->
+        <path fill="none" stroke="#526273" stroke-width="1.2" d="M190,330 H266" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="229" y="279" text-anchor="middle">sensor stream</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" d="M460,330 H536" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="499" y="266" text-anchor="middle">signed frames</text>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="499" y="279" text-anchor="middle">+ gateway assertion</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" d="M730,330 H806" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="769" y="266" text-anchor="middle">AI Labelling</text>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="769" y="279" text-anchor="middle">Result VC</text>
+        <path fill="none" stroke="#167D8D" stroke-width="1.8" d="M1000,330 H1076" marker-end="url(#ar3-acc)"/>
+        <text font-size="10.5" fill="#167D8D" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="1038" y="266" text-anchor="middle">Data Provenance</text>
+        <text font-size="10.5" fill="#167D8D" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="1038" y="279" text-anchor="middle">Certificate VC</text>
+
+        <!-- Row 3: credentials produced -->
+        <path fill="none" stroke="#526273" stroke-width="1.2" d="M365,370 V446" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="373" y="412" text-anchor="start">signs</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" d="M635,370 V446" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="643" y="412" text-anchor="start">issues</text>
+        <path fill="none" stroke="#167D8D" stroke-width="1.8" d="M905,370 V446" marker-end="url(#ar3-acc)"/>
+        <text font-size="10.5" fill="#167D8D" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="913" y="412" text-anchor="start">issues</text>
+        <path fill="none" stroke="#526273" stroke-width="1.2" d="M1165,370 V446" marker-end="url(#ar3)"/>
+        <text font-size="10.5" fill="#526273" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" x="1173" y="412" text-anchor="start">verifies</text>
+
+        <g><rect fill="#F5F7F9" stroke="#526273" stroke-width="0.9" x="270" y="450" width="190" height="72" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="365" y="472" text-anchor="middle">Frame input</text>
+          <text font-size="11" fill="#526273" x="365" y="490" text-anchor="middle">frame hashes · time · trip</text>
+          <text font-size="11" fill="#526273" x="365" y="506" text-anchor="middle">signed with gateway key</text></g>
+
+        <g><rect fill="#FFFFFF" stroke="#526273" stroke-width="1.3" x="540" y="450" width="190" height="172" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="635" y="472" text-anchor="middle">AI Labelling Result VC</text>
+          <text font-size="11" fill="#526273" x="552" y="494">task assertion</text>
+          <text font-size="11" fill="#526273" x="552" y="510">set-up assertion</text>
+          <text font-size="11" fill="#526273" x="552" y="526">object assertion</text>
+          <text font-size="11" fill="#526273" x="552" y="542">gateway assertion</text>
+          <text font-size="11" fill="#526273" x="552" y="558">input assertion</text>
+          <line x1="552" y1="568" x2="718" y2="568" stroke="#526273" stroke-width="0.8"/>
+          <text font-size="11" fill="#172536" x="552" y="586">result: hard-braking event</text>
+          <text font-size="11" fill="#172536" x="552" y="602">label: dangerous situation · conf 0.91</text></g>
+
+        <g><rect fill="#EAF6F4" stroke="#167D8D" stroke-width="2" x="810" y="450" width="190" height="140" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#167D8D" x="905" y="472" text-anchor="middle">Data Provenance Certificate VC</text>
+          <text font-size="11" fill="#526273" x="822" y="494">issuer: MobilityData GmbH (EUCC)</text>
+          <text font-size="11" fill="#526273" x="822" y="510">subject: dataset DS-2026-1112</text>
+          <text font-size="11" fill="#526273" x="822" y="526">content: labelled trip segments</text>
+          <text font-size="11" fill="#526273" x="822" y="542">evidence root: hash of result</text>
+          <text font-size="11" fill="#526273" x="822" y="558">links: Agent Card, Task Auth.,</text>
+          <text font-size="11" fill="#526273" x="822" y="574">TÜV SÜD credentials</text></g>
+
+        <g><rect fill="#F5F7F9" stroke="#526273" stroke-width="0.9" x="1080" y="450" width="170" height="140" rx="4"/>
+          <text font-size="12.5" font-weight="700" fill="#172536" x="1165" y="472" text-anchor="middle">Verifier checks</text>
+          <text font-size="11" fill="#526273" x="1092" y="494">1 EUCC → MobilityData · mandate</text>
+          <text font-size="11" fill="#526273" x="1092" y="510">2 Agent Card · AI credential</text>
+          <text font-size="11" fill="#526273" x="1092" y="526">3 set-up versions · rule</text>
+          <text font-size="11" fill="#526273" x="1092" y="542">4 input hash · signature</text>
+          <text font-size="11" fill="#526273" x="1092" y="558">5 gateway identity · certificate</text>
+          <text font-size="11" fill="#526273" x="1092" y="574">6 object · status / revocation</text></g>
+      </svg>

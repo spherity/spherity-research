@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1460" height="640" viewBox="0 0 1460 640" role="img" aria-labelledby="figure-2-evidence-graph-title figure-2-evidence-graph-desc" font-family="Arial, Liberation Sans, sans-serif">
-<title id="figure-2-evidence-graph-title">Evidence graph of the Verification Certificate</title>
-<desc id="figure-2-evidence-graph-desc">The Verification Certificate links by hash to the AI Analysis Result, which is issued by the agent holding an Agent Card and carries task, object, input, reader and set-up assertions. Each assertion references a supporting credential: Task Authorization, Marker Registration, Reader Identity, TÜV SÜD reader certificate and TÜV SÜD AI certificate, issued by Tailorlux GmbH or TÜV SÜD. Tailorlux is identified by an EUCC issued by Bundesanzeiger Verlag.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1460" height="640" viewBox="0 0 1460 640" role="img" aria-labelledby="figure-3-evidence-graph-title figure-3-evidence-graph-desc" font-family="Arial, Liberation Sans, sans-serif">
+<title id="figure-3-evidence-graph-title">Evidence graph of the Verification Certificate</title>
+<desc id="figure-3-evidence-graph-desc">The Verification Certificate links by hash to the AI Analysis Result, which is issued by the agent holding an Agent Card and carries task, object, input, reader and set-up assertions. Each assertion references a supporting credential: Task Authorization, Marker Registration, Reader Identity, TÜV SÜD reader certificate and TÜV SÜD AI certificate, issued by Tailorlux GmbH or TÜV SÜD. Tailorlux is identified by an EUCC issued by Bundesanzeiger Verlag.</desc>
 <rect x="0" y="0" width="1460" height="640" fill="#FFFFFF"/>
 <defs>
           <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#526273"/></marker>
