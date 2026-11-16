@@ -268,6 +268,8 @@ entries:
   #   git archive --format=zip --mtime=2026-11-16T12:25:41+00:00 --prefix=harness-v0.4/ -o _zenodo/harness-v0.4.0-source.zip \
   #     ssc-harness-v0.4.0:research-assets/semantic-supply-chain/harness-v0.4
   # Deposit with --new-version: zenodo.record_id below is the latest published version (v0.3.0, production).
+  # Sandbox test 16 Nov 2026: new-version draft 643162 of sandbox record 640912 (concept 640911); metadata, ORCID,
+  # licence, links and both files' SHA-256 verified by read-back; not published.
   - id: ssc-harness-v0-4-0
     upload_type: software
     title: "Semantic supply chain harness: worked examples for securing the meaning of verifiable credentials"
