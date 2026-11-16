@@ -14,6 +14,8 @@
 //   ZENODO_TOKEN=...         node scripts/zenodo-deposit.mjs --entry <id> --production --publish --confirm <id>
 //   add --new-version to deposit a new version of the entry's existing concept record.
 //   add --dry-run to print the request plan without any network call.
+//   add --reserve-only to create the draft and reserve its DOI without uploading files, so that the
+//   reserved DOI can be put on the title pages first; a later run uploads the files to that draft.
 //
 // Tokens need the deposit:write and deposit:actions scopes. They are read from
 // the environment only and never printed or written to disk.
@@ -42,6 +44,8 @@ const production = flag("--production");
 const publish = flag("--publish");
 const newVersion = flag("--new-version");
 const dryRun = flag("--dry-run");
+const reserveOnly = flag("--reserve-only");
+if (reserveOnly && publish) fail("--reserve-only cannot be combined with --publish.");
 const base = production ? "https://zenodo.org/api" : "https://sandbox.zenodo.org/api";
 const environment = production ? "production" : "sandbox";
 // A generic client name: Zenodo asks for an identifying User-Agent, and no
@@ -120,7 +124,7 @@ if (newVersion) {
 }
 
 const uploaded = new Set((deposition.files ?? []).map((file) => file.filename));
-for (const file of facts) {
+for (const file of reserveOnly ? [] : facts) {
   const name = path.basename(file.source);
   if (uploaded.has(name)) continue;
   const result = await call("PUT", `${deposition.links.bucket}/${encodeURIComponent(name)}`, await readFile(path.join(root, file.source)), {
