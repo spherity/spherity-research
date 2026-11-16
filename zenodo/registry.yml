@@ -270,6 +270,8 @@ entries:
   # Deposit with --new-version: zenodo.record_id below is the latest published version (v0.3.0, production).
   # Sandbox test 16 Nov 2026: new-version draft 643162 of sandbox record 640912 (concept 640911); metadata, ORCID,
   # licence, links and both files' SHA-256 verified by read-back; not published.
+  # Production: draft 24281131 verified by read-back; published by the author in the Zenodo interface on 16 Nov 2026,
+  # 12:56 UTC; downloaded files' SHA-256 match; DOI and concept DOI resolve; listed as the latest version.
   - id: ssc-harness-v0-4-0
     upload_type: software
     title: "Semantic supply chain harness: worked examples for securing the meaning of verifiable credentials"
@@ -322,12 +324,13 @@ entries:
       archive is byte-identical to the asset of the GitHub release ssc-harness-v0.4.0 (sha256
       0efbbca122a052246b4b59afb6102f105be47bdda3421815f67b512c7bee3f89).
     files: [_zenodo/harness-v0.4.0-source.zip, _zenodo/SHA256SUMS.tsr]
-    status: deposited
+    status: published
     reason: "GitHub release ssc-harness-v0.4.0 published 16 Nov 2026 12:35 UTC (tag on 2ee3f966). Deposit as a new version requested by the author on 16 Nov 2026; metadata reviewed and approved by the author on 16 Nov 2026."
     zenodo:
-      record_id: 24168347
-      deposition_id: 24281131
-      reserved_doi: 10.5281/zenodo.24281131
+      doi: 10.5281/zenodo.24281131
+      concept_doi: 10.5281/zenodo.24168346
+      record_id: 24281131
+      published: "2026-11-16T12:56Z"
     gates: { confidentiality: pass, disclosure: pass, coauthors: n/a, rights: pass, metadata_review: pass }
 
   # ---- Planned research (no page yet) ---------------------------------------
