@@ -337,10 +337,59 @@ entries:
   # Planned works are registered as "hold" without a page. Do not describe
   # unpublished claims here: this repository is public, and a public commit is
   # a disclosure in the same way as a Zenodo deposit.
+  # Paper A v1.0: executive brief, research article, supplements S1–S5 and two CSV files, deposited as one work.
+  # Built from the reviewed sources after review round 9 (16 Nov 2026). Sandbox test: draft 643382 (not published),
+  # metadata and 9 files verified by read-back. Production: draft 24293613 created with --reserve-only; the reserved
+  # DOI was stamped on every title page and into the PDF metadata before upload; files verified by read-back;
+  # published on the author's instruction on 16 Nov 2026; DOI and concept DOI resolve; all 9 downloaded files'
+  # SHA-256 match the release checksums.
   - id: planned-semantic-supply-chain-assurance
-    status: hold
-    reason: "Manuscript in preparation. Publication policy decided (publish, no patent filing); prior-art ledger required before the first public draft."
-    gates: { confidentiality: open, disclosure: pass, coauthors: open, rights: open, metadata_review: open }
+    page: docs/securing-semantic-supply-chain.md
+    title: "Securing the Semantic Supply Chain: Meaning as a Foundation of Trust Infrastructure"
+    version: "1.0"
+    publication_date: "2026-11-16"
+    publication_type: workingpaper
+    description: "Verifiable credentials are becoming legal and economic infrastructure. With a trusted binding between the signing key and the issuer, a signature authenticates the signed content; it does not by itself fix what that content means to the party that reads it. Meaning reaches a verifier through a supply chain of its own: JSON-LD contexts, vocabularies, ontologies, validation shapes, crosswalks, rulebooks, Type Metadata and codec tables. Each can be substituted, rolled back, frozen, shown differently to different verifiers, or withdrawn without verifiers noticing. W3C Data Integrity already requires approved contexts, or equivalent protections, at each verifier. We show what this leaves open and propose mechanisms to close it.\n\nIn laboratory tests with an open harness on production libraries, changing mutable, decision-relevant context bytes that the verifier did not authenticate independently changed a credential's meaning without invalidating signatures over its JSON text (JCS) or over an envelope. On one CBOR-LD library, a synthetic compact label became unreadable after a routine vocabulary update and, under a profile that signs the compressed bytes, decoded to a different meaning with a valid signature. Unauthenticated input imposed seconds of computation before the signature check when canonicalisation had no work limit; the tested canonicalisation library's default limit stops such input but rejects some legitimate credentials. A formal model of the semantic supply chain states the core results with proof sketches and model-checks the stateful mechanisms in 66 cases on small instances.\n\nFrom these results we derive 30 mechanisms, among them release engineering for meaning, lexical-first proofs that commit to the semantic graph, codec binding for long-lived carriers, receipts that record the meaning a decision applied, attested decision engines whose receipts the proposed profile requires to be attributable to an accountable legal person, and a profile for compliance evidence. We propose 91 requirements as a baseline for a high-assurance profile of W3C VCDM 2.0; no W3C group has adopted them. The problem is not specific to W3C VCDM: SD-JWT VC and ISO mdoc take their meaning from rulebooks and Type Metadata, and we give a first mapping, by design reasoning, of which mechanisms would transfer; none is specified or tested for those formats. The results bind meaning, not its truth; hardware isolation is simulated, not demonstrated, and enrolment for attribution is specified, not implemented."
+    keywords: ["verifiable credentials", "semantic integrity", "JSON-LD", "RDF canonicalisation", "Data Integrity", "supply-chain security", "formal model", "European Digital Identity Wallet", "European Business Wallet", "digital product passport", "attested decisions", "defensive publication"]
+    files:
+      - /Spherity-Research-Semantic-Supply-Chain-Executive-Brief.pdf
+      - /Spherity-Research-Semantic-Supply-Chain-Article.pdf
+      - /Spherity-Research-Semantic-Supply-Chain-S1-Mechanisms.pdf
+      - /Spherity-Research-Semantic-Supply-Chain-S1-claim-register.csv
+      - /Spherity-Research-Semantic-Supply-Chain-S2-Requirements.pdf
+      - /Spherity-Research-Semantic-Supply-Chain-S2-requirements.csv
+      - /Spherity-Research-Semantic-Supply-Chain-S3-Formal-Model.pdf
+      - /Spherity-Research-Semantic-Supply-Chain-S4-Prior-Art.pdf
+      - /Spherity-Research-Semantic-Supply-Chain-S5-Review-Record.pdf
+    related_identifiers:
+      - relation: isSupplementedBy
+        identifier: "10.5281/zenodo.24281131"
+        resource_type: software
+      - relation: references
+        identifier: "10.5281/zenodo.24168347"
+        resource_type: software
+      - relation: references
+        identifier: "https://spherity.github.io/spherity-research/Stoecker-2026-Proofs-over-Statements-v1.3.pdf"
+      - relation: references
+        identifier: "10.5281/zenodo.19239072"
+      - relation: references
+        identifier: "https://arxiv.org/abs/2611.04461"
+      - relation: references
+        identifier: "https://w3id.org/ebwv"
+    notes_for_zenodo: >-
+      Standards, regulation and implementation evidence reviewed to 15 November 2026. The record holds one work: an
+      executive brief, the research article and its supplements S1–S5, with the requirements (S2) and the claim register
+      (S1) also as CSV. Defensive publication: no patent has been or will be filed on the mechanisms described. The
+      reviews recorded in S5 were carried out by AI models and are not peer review. Software: harness v0.4.0,
+      doi:10.5281/zenodo.24281131.
+    status: published
+    zenodo:
+      doi: 10.5281/zenodo.24293613
+      concept_doi: 10.5281/zenodo.24293612
+      record_id: 24293613
+      published: "2026-11-16T21:56Z"
+    reason: "Paper A v1.0 after review round 9. Metadata review: approved by the author on 16 Nov 2026. Confidentiality: scanned, public sources and own work only, no third-party project context. Rights: own text and figures; CC BY badge used as licensed; short quotations attributed."
+    gates: { confidentiality: pass, disclosure: pass, coauthors: n/a, rights: pass, metadata_review: pass }
 
   - id: planned-haip-w3c-profile
     status: hold
