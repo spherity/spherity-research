@@ -260,6 +260,13 @@ entries:
       published: "2026-11-12T16:50Z"
     gates: { confidentiality: pass, disclosure: pass, coauthors: n/a, rights: pass, metadata_review: pass }
 
+  # v0.4.0: GitHub release only so far. A Zenodo deposit, as a new version of concept DOI 10.5281/zenodo.24168346,
+  # runs only on the author's explicit request; its metadata is prepared then.
+  - id: ssc-harness-v0-4-0
+    status: hold
+    reason: "GitHub release ssc-harness-v0.4.0 published 16 Nov 2026 12:35 UTC (tag on 2ee3f966; asset harness-v0.4.0-source.zip sha256 0efbbca122a052246b4b59afb6102f105be47bdda3421815f67b512c7bee3f89; manifest timestamped by FreeTSA 2026-11-16 12:25:22 GMT). Zenodo deposit on request only."
+    gates: { confidentiality: pass, disclosure: pass, coauthors: n/a, rights: open, metadata_review: open }
+
   # ---- Planned research (no page yet) ---------------------------------------
   # Planned works are registered as "hold" without a page. Do not describe
   # unpublished claims here: this repository is public, and a public commit is

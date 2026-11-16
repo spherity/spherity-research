@@ -58,7 +58,22 @@ cd ../harness-v0.3 && sha256sum -c SHA256SUMS
 | Time stamp | **16 November 2026, 12:25:22 GMT**, serial `0x0A0F60CE` |
 | Files | `harness-v0.4-SHA256SUMS.tsq` (request), `harness-v0.4-SHA256SUMS.tsr` (signed response) |
 
-The release record (tag, GitHub release, assets and web-archive captures) is added after publication.
+| Item | Value |
+|---|---|
+| GitHub release | [ssc-harness-v0.4.0](https://github.com/cstoecker/spherity-research/releases/tag/ssc-harness-v0.4.0), published **16 November 2026, 12:35:10 UTC**; `SHA256SUMS.tsr` attached 12:39:29 UTC |
+| Tag | `ssc-harness-v0.4.0` → `2ee3f966aa99ce96e26c67643ff6ed52a6130bb5` (adds this timestamp evidence to `47f258d`; the harness files are byte-identical) |
+| Release assets | `harness-v0.4.0-source.zip`, SHA-256 `0efbbca122a052246b4b59afb6102f105be47bdda3421815f67b512c7bee3f89` (content identical to `research-assets/semantic-supply-chain/harness-v0.4/` at the tag; built with `git archive --mtime=<commit time>`, so the hash can be reproduced from the tag); `SHA256SUMS.tsr`, SHA-256 `4d633b11a2c7d46d5a0c898764b7a7a2daaab2063584e7ddb371e7b07a5d7bed`, byte-identical to `harness-v0.4-SHA256SUMS.tsr` here |
+| Source and tests | those of reviewed candidate `0dd6bc9`; `47f258d` adds only the release metadata and the regenerated manifest |
+| Web archive: release page | [captured 16 November 2026, 12:40:49 UTC](https://web.archive.org/web/20261116124049/https://github.com/cstoecker/spherity-research/releases/tag/ssc-harness-v0.4.0) (after both assets were attached) |
+| Web archive: harness folder at the tag | [captured 16 November 2026, 12:41:39 UTC](https://web.archive.org/web/20261116124139/https://github.com/cstoecker/spherity-research/tree/ssc-harness-v0.4.0/research-assets/semantic-supply-chain/harness-v0.4) |
+
+The timestamp (12:25:22 GMT) predates the release (12:35:10 UTC). It proves that the manifest, and so every file it lists, existed by that time.
+
+Reproduce the release asset from the tag (git 2.43.0):
+
+```bash
+git archive --format=zip --mtime=2026-11-16T12:25:41+00:00 --prefix=harness-v0.4/ -o harness-v0.4.0-source.zip ssc-harness-v0.4.0:research-assets/semantic-supply-chain/harness-v0.4
+```
 
 Verify v0.4.0 (OpenSSL):
 
