@@ -1,9 +1,73 @@
+- title: "Proofs over Statements: Verifiable Evidence Graphs"
+  publication_type: paper
+  type: Research paper and executive brief · Credential formats for industrial graphs
+  date_label: Final version 1.3 · 9 November 2026
+  date_iso: '2026-11-09'
+  description: JSON-LD evidence graphs, Data Integrity and business wallet credentials, with final full paper, executive brief, all figures and validated nested credential examples.
+  byline: Dr. Carsten Stöcker · Spherity GmbH
+  topics:
+  - Evidence graphs
+  - Identity
+  - Trusted AI
+  filters: ai identity wallets infrastructure dpp
+  search: proofs over statements verifiable evidence graphs knowledge graphs assurance graphs json-ld rdf w3c vcdm 2.0 data integrity sd-jwt vc nested credentials eidas 2.0 european business wallet qeaa eaa qualified electronic attestations of attributes trusted ai industrial ai physical ai digital product passport credential verification cryptographic proofs hybrid signatures post quantum pqc wissensgraph verifizierbare nachweise unternehmenswallet industrielle ki digitale identität carsten stöcker spherity
+  image: /assets/proofs-over-statements-social.webp
+  image_alt: Proofs over Statements research on JSON-LD evidence graphs with the final paper cover.
+  image_width: 1200
+  image_height: 630
+  media_class: card-media-wide
+  format: HTML + 2 PDFs + 13 figures + validated examples
+  links:
+  - label: Read the research
+    url: /proofs-over-statements-evidence-graphs.html
+    arrow: →
+  - label: Full paper PDF
+    url: /Stoecker-2026-Proofs-over-Statements-v1.3.pdf
+    arrow: ↓
+    secondary: true
+  - label: Executive brief PDF
+    url: /Stoecker-2026-Proofs-over-Statements-v1.3-executive-brief.pdf
+    arrow: ↓
+    secondary: true
+  - label: Publication ZIP
+    url: /downloads/Stoecker-2026-Proofs-over-Statements-v1.3-publication-package-2026-11-09.zip
+    arrow: ↓
+    secondary: true
+
+- title: Top 10 Global AI Safety Companies
+  publication_type: paper
+  type: Technology Outlook 2026 · AI Safety Atlas
+  date_label: Edition 2.6 · 8 November 2026
+  date_iso: '2026-11-08'
+  description: Ten companies, ten research organizations and an AI Safety Atlas, with verifiable runtime assurance and a strategic outlook on European trust infrastructure.
+  byline: Dr. Carsten Stöcker · Spherity GmbH
+  topics:
+  - Trusted AI
+  - Identity
+  - Resilience
+  filters: ai identity resilience infrastructure
+  search: global ai safety companies research organizations institutes foundations atlas runtime assurance verifiable assurance graphs ai agents governance agent authorization revocation kill switch safety disciplines q e u ipcei-ai business wallets register backed authority semantically interoperable evidence graphs ki sicherheit carsten stöcker spherity verifiable ai safety high-assurance cryptographic verifiability eidas 2.0 european business wallet qualified electronic attestations of attributes ai agent identity european us partnerships trusted ai trusted industrial ai trusted physical ai pace governed robot memory
+  image: /assets/preview-global-ai-safety-2026.webp
+  image_alt: Global AI safety research with the edition 2.6 paper cover.
+  image_width: 1200
+  image_height: 630
+  media_class: card-media-wide
+  format: HTML + 24-page PDF + 5 figures
+  links:
+  - label: Read the research
+    url: /top-10-global-ai-safety-companies-2026.html
+    arrow: →
+  - label: Download full paper
+    url: /top-10-global-ai-safety-companies-2026.pdf
+    arrow: ↓
+    secondary: true
+
 - title: EU DPP Registry, W3C Standards and DPP5.0
   publication_type: paper
   type: Visual research paper · W3C semantic stack and verifiable DPP evidence
   date_label: 3 November 2026
   date_iso: '2026-11-03'
-  description: The EU DPP Registry technical stack, W3C semantics, DPP4.0 / DPP5.0 maturity, and a proposed DPP + EBW trust architecture.
+  description: EU DPP Registry semantics, DPP5.0 evidence and business wallets, with a new analysis of lightweight B2G data spaces and Eclipse implementation options.
   byline: Dr. Carsten Stöcker · Spherity GmbH
   topics:
   - DPP & DBP
@@ -14,7 +78,8 @@
     w3c semantics json-ld rdf skos shacl sparql owl xsd dcat dcat-ap eu digital product passport registry semantic data guide implementing
     regulation 2026/1778 espr digitaler produktpass digitales produktregister europäisches unternehmenswallet ebw european business
     wallet legal person identity verifiable credentials verifiable evidence graph data provenance product passport battery passport
-    policy odrl ai physical ai carsten stöcker carsten stoecker spherity
+    policy odrl ai physical ai data space dataspace b2g government register semantics register semantic hub
+    eclipse dataspace components edc dsp dcp business wallets authentication authorization carsten stöcker carsten stoecker spherity
   image: /assets/preview-eu-dpp-registry-w3c-dpp5.webp
   image_alt: EU DPP Registry and DPP5.0 research with W3C semantic standards and a visual-paper cover.
   image_width: 1200

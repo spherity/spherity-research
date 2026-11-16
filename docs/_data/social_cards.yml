@@ -1,3 +1,33 @@
+- publication_url: /
+  page_type: website
+  style: research-grid-v1
+  layout: research-collection
+  mode: generated
+  output: /assets/spherity-research-home.webp
+  format_label: OPEN RESEARCH · SPHERITY
+  title_lines: [Spherity, Research]
+  deck_lines: [Building trust in the, digital economy.]
+  topics: [Trusted AI, Digital identity, Product passports, Data spaces]
+
+- publication_url: /top-10-global-ai-safety-companies-2026.html
+  output: /assets/preview-global-ai-safety-2026.webp
+  style: research-grid-v1
+  mode: generated
+  format_label: TECHNOLOGY OUTLOOK · EDITION 2.6
+  title_size: 44
+  title_lines:
+  - Top 10 Global
+  - AI Safety Companies
+  subtitle_size: 25
+  subtitle_lines:
+  - Research, controls & assurance
+  deck_lines:
+  - Ten companies. Ten research bodies.
+  - Five disciplines. One global Atlas.
+  byline: Dr. Carsten Stöcker · Spherity GmbH
+  visual: /assets/global-ai-safety/paper-cover.png
+  visual_fit: contain
+
 - publication_url: /eu-dpp-registry-w3c-dpp5.html
   output: /assets/preview-eu-dpp-registry-w3c-dpp5.webp
   style: research-grid-v1
@@ -440,6 +470,23 @@
   byline: Dr. Carsten Stöcker · Spherity GmbH
   visual: /assets/ebw-roadmap-paper-cover.jpg
   visual_fit: contain
+
+- publication_url: "/proofs-over-statements-evidence-graphs.html"
+  output: "/assets/proofs-over-statements-social.webp"
+  style: "research-grid-v1"
+  mode: "generated"
+  format_label: "RESEARCH PAPER · EVIDENCE GRAPHS"
+  title_size: 46
+  title_lines:
+    - "Proofs over Statements"
+    - "Verifiable Evidence"
+    - "Graphs"
+  deck_lines:
+    - "JSON-LD, Data Integrity and business wallets."
+    - "Full paper, brief and validated examples."
+  byline: "Dr. Carsten Stöcker · Spherity GmbH"
+  visual: "/assets/proofs-over-statements/full-paper-cover.jpg"
+  visual_fit: "contain"
 
 - publication_url: "/threat-escalation-model-germany-eu.html"
   output: "/assets/preview-threat-escalation-model-germany-eu.webp"
