@@ -343,6 +343,9 @@ entries:
   # DOI was stamped on every title page and into the PDF metadata before upload; files verified by read-back;
   # published on the author's instruction on 16 Nov 2026; DOI and concept DOI resolve; all 9 downloaded files'
   # SHA-256 match the release checksums.
+  # Metadata edit 16 Nov 2026 (author's request): added isPartOf the series hub
+  # https://spherity.github.io/spherity-research/securing-meaning-in-trust-infrastructure.html; files and DOI unchanged
+  # (9/9 checksums verified after re-publication). New versions derive isPartOf from the page's series_url.
   - id: planned-semantic-supply-chain-assurance
     page: docs/securing-semantic-supply-chain.md
     title: "Securing the Semantic Supply Chain: Meaning as a Foundation of Trust Infrastructure"
