@@ -52,6 +52,7 @@ const authors = parseYaml(
 const site = {
   ...config,
   data: { publications, homepage_faq: homepageFaq, authors,
+    case_studies: parseYaml(await readFile(path.join(sourceDirectory, "_data", "case_studies.yml"), "utf8")),
     dpp_candidate: JSON.parse(await readFile(path.join(sourceDirectory, "_data", "dpp_candidate.json"), "utf8")),
     dpp_calendar: JSON.parse(await readFile(path.join(sourceDirectory, "_data", "dpp_calendar.json"), "utf8"))
   },

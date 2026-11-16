@@ -6,6 +6,9 @@ trusted AI, digital trust infrastructure, and post-quantum resilience.
 
 Live site: <https://spherity.github.io/spherity-research/>
 
+For the case-study collection, evidence levels and the steps to add another case,
+see [Publishing case studies](CASE-STUDIES.md).
+
 ## Publishing with Codex
 
 The repository-local [Spherity Research Publishing skill](.agents/skills/spherity-research-publishing/SKILL.md)
