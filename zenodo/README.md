@@ -127,10 +127,11 @@ paper (`isSupplementTo`). This gives individual claims stable, citable IDs.
 It is the same disclosure as the paper, so it passes the same gates. It
 records priority. It does not establish validity.
 
-## Not yet implemented
+## DOIs on the website
 
-The website does not yet show DOIs. A follow-up change should add a `doi` field
-to the front matter. That field would emit `citation_doi`, a schema.org
-`identifier` / `sameAs` to `https://doi.org/...` and a "Cite as" line. The
-change must be checked with the production Jekyll build, because it touches the
-shared layouts.
+A published page carries its version DOI in the front matter as `doi`
+(for example `doi: "10.5281/zenodo.24293613"`, without `https://doi.org/`) and
+its version as `paper_version`. The shared layouts then emit `citation_doi`, a
+schema.org `sameAs` link to `https://doi.org/...` and a "How to cite" line that
+cites the DOI and the version. Pages without `doi` render as before. Changes to
+these layouts must still be checked with the production Jekyll build.
