@@ -320,11 +320,11 @@ entries:
       archive is byte-identical to the asset of the GitHub release ssc-harness-v0.4.0 (sha256
       0efbbca122a052246b4b59afb6102f105be47bdda3421815f67b512c7bee3f89).
     files: [_zenodo/harness-v0.4.0-source.zip, _zenodo/SHA256SUMS.tsr]
-    status: candidate
-    reason: "GitHub release ssc-harness-v0.4.0 published 16 Nov 2026 12:35 UTC (tag on 2ee3f966). Deposit as a new version requested by the author on 16 Nov 2026; awaiting metadata review."
+    status: cleared
+    reason: "GitHub release ssc-harness-v0.4.0 published 16 Nov 2026 12:35 UTC (tag on 2ee3f966). Deposit as a new version requested by the author on 16 Nov 2026; metadata reviewed and approved by the author on 16 Nov 2026."
     zenodo:
       record_id: 24168347
-    gates: { confidentiality: pass, disclosure: pass, coauthors: n/a, rights: pass, metadata_review: open }
+    gates: { confidentiality: pass, disclosure: pass, coauthors: n/a, rights: pass, metadata_review: pass }
 
   # ---- Planned research (no page yet) ---------------------------------------
   # Planned works are registered as "hold" without a page. Do not describe
