@@ -83,6 +83,7 @@
   {% elsif page.pdf_url %}
   <link rel="alternate" type="application/pdf" href="{{ page.pdf_url | absolute_url | escape }}" title="{{ page_title | escape }} — PDF">
   {% endif %}
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="any">
   <link rel="icon" type="image/png" sizes="336x336" href="{{ favicon_path | relative_url }}">
   <link rel="shortcut icon" type="image/png" href="{{ favicon_path | relative_url }}">
   <link rel="apple-touch-icon" sizes="336x336" href="{{ favicon_path | relative_url }}">
